@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="pojo.Img" table="tb_imgs">
+        <id name="img_id" column="img_id">
+            <generator class="native"></generator>
+        </id>
+        <property name="img_desc" column="img_desc"/>
+        <property name="img_addr" column="img_addr"/>
+    </class>
+</hibernate-mapping>

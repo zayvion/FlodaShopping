@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    <constant name="struts.objectFactory" value="spring"></constant>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.multipart.maxSize" value="10000000"/>
+    <constant name="struts.multipart.saveDir" value="/tmp"/>
+    <constant name="struts.custom.i18n.resources" value="struts"></constant>
+
+    <!-- Struts2在2.5版本后添加strict-method-invocation(严格方法访问)，默认为true，不能使用动态方法调用功能，故需设为false -->
+       <package name="categroy" extends="struts-default" namespace="/" strict-method-invocation="false">
+           <global-results>
+               <result name="success">success.jsp</result>
+               <result name="classify">classify.jsp</result>
+               <result name="input">404.jsp</result>
+               <result name="error">404.jsp</result>
+           </global-results>
+           <action name="addCategroy" class="categroyAction" method="addCategroy"/>
+           <action name="getCategroies" class="categroyAction" method="getCategroies"/>
+           <action name="getCategroy" class="categroyAction" method="getCategroy"/>
+           <action name="updateCategroy" class="categroyAction" method="updateCategroy"/>
+           <action name="delCategroy" class="categroyAction" method="delCategroy"/>
+
+           <action name="user_*" class="action.UserAction" method="{1}">
+
+           </action>
+    </package>
+
+    <package name="product" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <global-results>
+            <result name="prod">product.jsp</result>
+            <result name="input">404.jsp</result>
+            <result name="error">404.jsp</result>
+        </global-results>
+        <action name="getProduct" class="productAction" method="getProductInfo"/>
+        <action name="getProducts" class="productAction" method="getProducts"/>
+        <action name="addProduct" class="productAction" method="addProduct">
+            <interceptor-ref name="basicStack"/>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/jpeg,image/jpg,image/gif</param>
+            </interceptor-ref>
+        </action>
+        <action name="updateProduct" class="productAction" method="updateProduct">
+            <interceptor-ref name="basicStack"/>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="fileUpload">
+                <param name="allowedTypes">image/jpeg,image/jpg,image/gif</param>
+            </interceptor-ref>
+        </action>
+    </package>
+    <package name="img" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <global-results>
+            <result name="input">404.jsp</result>
+            <result name="error">404.jsp</result>
+        </global-results>
+        <action name="getImgUrl" class="imgAction" method="getImgUrl"/>
+    </package>
+
+    <package name="ecaluate" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <global-results>
+            <result name="ecaluate">ecaluate.jsp</result>
+            <result name="input">404.jsp</result>
+            <result name="error">404.jsp</result>
+        </global-results>
+        <action name="getEcaluates" class="ecaluateAction" method="getEcaluates"/>
+    </package>
+</struts>
