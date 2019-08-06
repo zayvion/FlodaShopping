@@ -4,18 +4,19 @@ import com.google.gson.Gson;
 import com.opensymphony.xwork2.ModelDriven;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.User;
 import service.UserService;
-import utils.MD5Util;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.io.IOException;
 
 @Controller
 @Scope("prototype")
 public class UserAction extends BaseAction implements ModelDriven<User> {
 
     private User user = new User();
+    private int userId;
     @Resource
     private UserService userService;
 
@@ -24,28 +25,69 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
      * @return
      */
     public String list(){
-//        List<User> list = userService.getUserList();
-//        String jsonlist = new Gson().toJson(list);
-        System.out.println(userService.getUserList());
+        try {
+            String list = userService.getUserList();
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(list);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return NONE;
     }
 
     /**
-     * 添加用户https://github.com/zayvion/dc-Floda.git
+     * 查询用户详细信息
      * @return
      */
-    public String add(){
-        User u = new User();
-        u.setUsername("admin");
-        u.setPassword(MD5Util.getMD5("admin"));
-        u.setTelphone("18229735193");
-        u.setType(1);
-        System.out.println(u);
+    public String info(){
+        try {
+            String info = userService.info(userId);
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(info);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return NONE;
+    }
+
+    /**
+     * 封号处理`
+     */
+    public String stop(){
+        try {
+            String stopUser = userService.stopUser(userId);
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(stopUser);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return NONE;
+    }
+
+    /**
+     * 解封处理`
+     */
+    public String start(){
+        try {
+            String startUser = userService.startUser(userId);
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(startUser);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return NONE;
     }
 
     @Override
     public User getModel() {
         return user;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

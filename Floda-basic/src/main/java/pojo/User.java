@@ -13,7 +13,7 @@ public class User {
     private String username;
     private  String password;
     private String status;
-    private String telphone;
+    private String tel;
     private  Integer type;
 
     public Integer getUser_id() {
@@ -48,12 +48,12 @@ public class User {
         this.status = status;
     }
 
-    public String getTelphone() {
-        return telphone;
+    public String getTel() {
+        return tel;
     }
 
-    public void setTelphone(String telephone) {
-        this.telphone = telphone;
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 
     public Integer getType() {
@@ -71,7 +71,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", status='" + status + '\'' +
-                ", telphone='" + telphone + '\'' +
+                ", tel='" + tel + '\'' +
                 ", type=" + type +
                 '}';
     }

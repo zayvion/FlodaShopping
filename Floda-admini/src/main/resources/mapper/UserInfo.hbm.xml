@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="pojo.UserInfo" table="tb_userinfo">
+        <id name="userInfo_id" column="userInfo_id">
+            <generator class="native"/>
+        </id>
+        <property name="user_id" column="user_id"/>
+        <property name="name" column="name"/>
+        <property name="email" column="email"/>
+        <property name="sex" column="sex"/>
+        <property name="head" column="head"/>
+    </class>
+</hibernate-mapping>

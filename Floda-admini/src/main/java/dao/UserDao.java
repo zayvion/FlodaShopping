@@ -1,10 +1,16 @@
 package dao;
 
 import pojo.User;
+import pojo.UserInfo;
 
 import java.util.List;
 
 public interface UserDao {
     List<User> getUserList();
-    void addUser(User user);
+
+    UserInfo info(int user_id);
+
+    void stopUser(int user_id);
+
+    void startUser(int user_id);
 }

@@ -6,6 +6,11 @@ import java.util.List;
 
 public interface UserService {
 
-        String getUserList();
-        String addUser(User user);
+    String getUserList();
+
+    String info(int user_id);
+
+    String stopUser(int user_id);
+
+    String startUser(int user_id);
 }
