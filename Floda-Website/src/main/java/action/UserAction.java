@@ -2,56 +2,30 @@ package action;
 
 
 import com.google.gson.Gson;
+import com.opensymphony.xwork2.ModelDriven;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import pojo.User;
 import service.UserService;
+import utils.MD5Util;
 import utils.ResponseResult;
+
+import javax.annotation.Resource;
 
 /**
  * @Auther: Tree
  * @Date: 2019/8/5 15:11
  * @Description:
  */
-public class UserAction extends BaseAction {
+@Controller
+public class UserAction extends BaseAction implements ModelDriven<User> {
 
-    private String jsonSub;
-    private int uid;
-    private String username;
-    private String jsonStr;
-
-    @Autowired
+    @Resource
     private UserService userService;
-    public String getJsonSub() {
-        return jsonSub;
-    }
+    private User user = new User();
+    private String repeat_pwd;
 
-    public void setJsonSub(String jsonSub) {
-        this.jsonSub = jsonSub;
-    }
-
-    public int getUid() {
-        return uid;
-    }
-
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getJsonStr() {
-        return jsonStr;
-    }
-
-    public void setJsonStr(String jsonStr) {
-        this.jsonStr = jsonStr;
-    }
     /**
      * 用户注册
      *
@@ -59,10 +33,15 @@ public class UserAction extends BaseAction {
      * @throws Exception
      */
     public String register()throws Exception{
-        String result = userService.register(new Gson().fromJson(jsonSub,User.class));
-        response.setContentType("application/json;charset=utf-8");
-        this.response.getWriter().write(result);
-        return NONE;
+        try {
+            request.setAttribute("newUser",user);
+            userService.register(user);
+            request.setAttribute("hint","注册成功");
+            return "login";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ERROR;
     }
 
     /**
@@ -71,18 +50,26 @@ public class UserAction extends BaseAction {
      * @throws Exception
      */
     public String login() throws Exception {
-        User user = new Gson().fromJson(jsonSub, User.class);
-        String result = userService.login(user);
-        System.out.println(jsonSub);
-
-        if (result != null) {
-            session.put("users",user.getUsername());
-            response.setContentType("application/json;charset=utf-8");
-            this.response.getWriter().write(ResponseResult.build(200, "登陆成功", result));
-            return NONE;
+        if(userService.login(user) != null){
+            if(userService.login(user).getPassword().equals(MD5Util.getMD5(user.getPassword()))){
+                ServletActionContext.getRequest().getSession().setAttribute("onliner",userService.login(user));
+                return "index";
+            }
         }
-        response.setContentType("application/json;charset=utf-8");
-        this.response.getWriter().write(ResponseResult.build(500, "登陆失败"));
-        return NONE;
+        request.setAttribute("hints","用户名或密码错误!");
+        return "login";
+    }
+
+    @Override
+    public User getModel() {
+        return user;
+    }
+
+    public String getRepeat_pwd() {
+        return repeat_pwd;
+    }
+
+    public void setRepeat_pwd(String repeat_pwd) {
+        this.repeat_pwd = repeat_pwd;
     }
 }

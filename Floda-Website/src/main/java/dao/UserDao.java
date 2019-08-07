@@ -12,12 +12,12 @@ public interface UserDao {
      * 用户注册
      * @param user
      */
-    String register(User user);
+    void register(User user);
 
     /**
      * 用户登陆
      * @param user
      * @return
      */
-    boolean login(User user);
+    User login(User user);
 }

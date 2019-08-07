@@ -1,8 +1,7 @@
-dao/Impl/UserDaoImpl.class
-action/UserAction.class
-action/ProductAction.class
-service/Impl/UserServiceImpl.class
-action/BaseAction.class
-Filter/HeaderFilter.class
-service/UserService.class
-dao/UserDao.class
+dao\Impl\UserDaoImpl.class
+service\Impl\UserServiceImpl.class
+service\UserService.class
+dao\UserDao.class
+action\UserAction.class
+action\BaseAction.class
+Filter\HeaderFilter.class

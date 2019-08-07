@@ -18,7 +18,7 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util.xsd">
 <!-- 注解包扫描 -->
-	<context:component-scan base-package="action,pojo" />
+	<context:component-scan base-package="action,pojo,service,dao" />
 	<!--Spring整合Hibernate -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">

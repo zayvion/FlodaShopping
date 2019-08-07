@@ -2,6 +2,8 @@ package dao.Impl;
 
 import dao.UserDao;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -22,20 +24,18 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
    }
 
     @Override
-    public String register(User user) {
-        Serializable id = this.getHibernateTemplate().save(user);
-        System.out.println("注册的ID："+id);
-        return (String) id;
+    public void register(User user) {
+        this.getHibernateTemplate().save(user);
     }
 
     @Override
-    public boolean login(User user) {
-        User u = new User();
-        Object[] values = {user.getUsername(),user.getPassword()};
-        List<User> users = (List<User>) this.getHibernateTemplate().find("from User where username=? and password=?",values);
-        if (users.get(0) != null){
-            return true;
+    public User login(User user) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
+        criteria.add(Restrictions.eq("username",user.getUsername()));
+        List<User> list = (List<User>)this.getHibernateTemplate().findByCriteria(criteria);
+        if (!list.isEmpty()){
+            return list.get(0);
         }
-        return false;
+        return null;
     }
 }

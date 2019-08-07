@@ -12,7 +12,7 @@ public class User {
     private Integer user_id;
     private String username;
     private  String password;
-    private String status;
+    private Integer status;
     private String tel;
     private  Integer type;
 
@@ -40,11 +40,11 @@ public class User {
         this.password = password;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

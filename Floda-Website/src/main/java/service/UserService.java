@@ -13,12 +13,12 @@ public interface UserService {
      * @param user
      * @return json
      */
-    String register(User user);
+    void register(User user);
 
     /**
      *
      * @param user
      * @return json
      */
-    String login(User user);
+    User login(User user);
 }

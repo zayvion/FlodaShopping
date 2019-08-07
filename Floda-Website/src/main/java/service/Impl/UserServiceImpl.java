@@ -3,6 +3,7 @@ package service.Impl;
 import dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.User;
 import service.UserService;
 import utils.MD5Util;
@@ -19,26 +20,18 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public String register(User user) {
-        try {
-            // 将用户的密码加密成MD5
-            user.setPassword(MD5Util.getMD5(user.getPassword()));
-            user.setStatus("1");
-            userDao.register(user);
-        } catch (Exception e) {
-            e.printStackTrace();
-            ResponseResult.build(500, "注册失败");
-        }
-        return ResponseResult.ok("注册成功");
+    @Transactional
+    public void register(User user) {
+        // 将用户的密码加密成MD5
+        user.setPassword(MD5Util.getMD5(user.getPassword()));
+        user.setStatus(0);
+        user.setType(1);
+        userDao.register(user);
     }
 
     @Override
-    public String login(User user) {
-        boolean login = userDao.login(user);
-        if (login == true){
-            return ResponseResult.ok("登录成功");
-        }else {
-            return ResponseResult.build(500,"登录失败");
-        }
+    public User login(User user) {
+        User exist = userDao.login(user);
+        return exist;
     }
 }

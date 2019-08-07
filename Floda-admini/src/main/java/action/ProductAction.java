@@ -4,6 +4,7 @@ package action;
 import com.google.gson.Gson;
 import dao.ImgDao;
 import dao.ProductDao;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
