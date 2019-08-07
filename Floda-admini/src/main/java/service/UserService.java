@@ -1,9 +1,5 @@
 package service;
 
-import pojo.User;
-
-import java.util.List;
-
 public interface UserService {
 
     String getUserList();
@@ -13,4 +9,6 @@ public interface UserService {
     String stopUser(int user_id);
 
     String startUser(int user_id);
+
+    String LoginUser(String username, String password);
 }

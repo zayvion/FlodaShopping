@@ -48,7 +48,7 @@
                     <!-- start logo area -->
                     <div class="col-lg-3">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="index.jsp">
                                 <img src="assets/img/logo/logo.png" alt="">
                             </a>
                         </div>
@@ -122,7 +122,7 @@
                 <div class="col-12">
                     <div class="mobile-main-header">
                         <div class="mobile-logo">
-                            <a href="index.html">
+                            <a href="index.jsp">
                                 <img src="assets/img/logo/logo.png" alt="Brand Logo">
                             </a>
                         </div>
@@ -181,7 +181,7 @@
                         <nav aria-label="breadcrumb">
                             <h1>商品详情</h1>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="index.jsp"><i class="fa fa-home"></i></a></li>
                                 <li class="breadcrumb-item active" aria-current="page">商品详情</li>
                             </ul>
                         </nav>

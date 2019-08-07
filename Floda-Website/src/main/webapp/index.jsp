@@ -299,7 +299,7 @@
 
                 <div class="col-12">
                     <div class="view-more-btn">
-                        <a class="btn-hero btn-load-more" href="shop.html">查看更多商品 ></a>
+                        <a class="btn-hero btn-load-more" href="shop.jsp">查看更多商品 ></a>
                     </div>
                 </div>
             </div>

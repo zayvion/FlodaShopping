@@ -70,7 +70,8 @@
         <result name="ecaluate">ecaluate.jsp</result>
         <result name="input">404.jsp</result>
         <result name="error">404.jsp</result>
+        <result name="index">index.jsp</result>
     </global-results>
-    <action name="user_*" class="action.UserAction" method="{1}"></action>
+    <action name="user_*" class="userAction" method="{1}"></action>
     </package>
 </struts>

@@ -1,4 +1,12 @@
-pojo/Ecaluate.class
-pojo/ProductShow.class
-pojo/PageHelper.class
-utils/PageUtils.class
+pojo\Product.class
+pojo\Categroy.class
+pojo\Ecaluate.class
+utils\ResponseResult.class
+utils\MD5Util.class
+utils\PageUtils.class
+utils\FtpUtil.class
+pojo\PageHelper.class
+pojo\UserInfo.class
+pojo\Img.class
+pojo\ProductShow.class
+pojo\User.class

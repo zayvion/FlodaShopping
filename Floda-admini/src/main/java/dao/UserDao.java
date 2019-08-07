@@ -13,4 +13,6 @@ public interface UserDao {
     void stopUser(int user_id);
 
     void startUser(int user_id);
+
+    User LoginUser(String username);
 }

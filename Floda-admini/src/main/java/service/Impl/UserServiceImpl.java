@@ -61,4 +61,18 @@ public class UserServiceImpl implements UserService {
         }
         return ResponseResult.build(500,"解封失败");
     }
+
+    @Override
+    public String LoginUser(String username, String password) {
+        User user = userDao.LoginUser("super");
+        if(username.equals("super")){
+            if(user.getPassword().equals(password)){
+                return ResponseResult.build(200,"登录成功");
+            }else {
+                return ResponseResult.build(500,"用户名密码不匹配");
+            }
+        }else {
+            return ResponseResult.build(500,"用户名不存在");
+        }
+    }
 }

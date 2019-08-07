@@ -14,11 +14,26 @@ import java.io.IOException;
 @Controller
 @Scope("prototype")
 public class UserAction extends BaseAction implements ModelDriven<User> {
-
     private User user = new User();
     private int userId;
     @Resource
     private UserService userService;
+
+    /**
+     * 用户登录
+     * @return
+     */
+    public String loginUser(){
+        try {
+            String result = userService.LoginUser(user.getUsername(), user.getPassword());
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(result);
+            return INDEX;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return NONE;
+    }
 
     /**
      * 查询用户列表

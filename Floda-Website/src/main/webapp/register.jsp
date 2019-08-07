@@ -140,12 +140,12 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
-                                            <input type="password" placeholder="密码" required />
+                                            <input type="password" id="Password" placeholder="密码" onchange="checkPassword()" required />
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="single-input-item">
-                                            <input type="password" placeholder="重复密码" required />
+                                            <input type="password" id="Repassword" placeholder="重复密码" onchange="checkPassword()" required />
                                         </div>
                                     </div>
                                 </div>
@@ -369,6 +369,19 @@
 <script src="assets/js/vendor.js"></script>
 <!-- Active Js -->
 <script src="assets/js/active.js"></script>
+
+<script type="text/javascript">
+    function checkPassword() {
+        var pass1 = document.getElementById("Password");
+        var pass2 = document.getElementById("Repassword");
+
+        if (pass1.value != pass2.value){
+            pass2.setCustomValidity("两次输入的密码不匹配");
+        }else {
+            pass2.setCustomValidity("");
+        }
+    }
+</script>
 </body>
 </body>
 </html>

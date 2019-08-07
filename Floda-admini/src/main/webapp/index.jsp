@@ -163,7 +163,7 @@
                         icon: 2,
                     },
                     function () {
-                        location.href = "login.html";
+                        location.href = "login.jsp";
 
                     });
             });

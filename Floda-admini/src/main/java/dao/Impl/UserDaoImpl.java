@@ -58,4 +58,12 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
         user.setStatus("0");
         this.getHibernateTemplate().update(user);
     }
+
+    @Override
+    public User LoginUser(String username) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
+        criteria.add(Restrictions.eq("username",username));
+        List<User> list = (List<User>)this.getHibernateTemplate().findByCriteria(criteria);
+        return list.get(0);
+    }
 }
