@@ -40,9 +40,16 @@ public class ProductDaoImpl extends HibernateDaoSupport implements ProductDao {
 
     @Override
     public List<Product> getProducts() {
+        List<Product> products = (List<Product>) this.getHibernateTemplate().find("from Product where pro_status=0 order by pro_id desc");
+        return products;
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
         List<Product> products = (List<Product>) this.getHibernateTemplate().find("from Product order by pro_id desc");
         return products;
     }
+
 
     @Override
     public int getProductCount() {

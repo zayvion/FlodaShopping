@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import pojo.Product;
+import service.ProductService;
+
+import java.io.IOException;
 
 /**
  * @Auther: zayvion
@@ -17,11 +20,16 @@ import pojo.Product;
 @Controller
 @Scope("prototype")
 public class ProductAction extends BaseAction {
+
+    @Autowired
+    private ProductService productService;
     @Autowired
     private ProductDao productDao;
     @Autowired
     private ImgDao imgDao;
     private int id;
+    private int startPage;
+    private int item;
 
     public String productDetail(){
         Product product = productDao.getProduct(id);
@@ -35,11 +43,34 @@ public class ProductAction extends BaseAction {
         return DETAIL;
     }
 
+    public String getNewProducts() throws IOException {
+        String result = productService.showvalidProducts(startPage , item);
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().write(result);
+        return NONE;
+    }
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getStartPage() {
+        return startPage;
+    }
+
+    public void setStartPage(int startPage) {
+        this.startPage = startPage;
+    }
+
+    public int getItem() {
+        return item;
+    }
+
+    public void setItem(int item) {
+        this.item = item;
     }
 }

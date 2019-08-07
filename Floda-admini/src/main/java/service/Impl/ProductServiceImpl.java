@@ -58,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public String showProducts(int startPage, int item) {
-        List<Product> products = productDao.getProducts();
+        List<Product> products = productDao.getAllProducts();
         List<ProductShow> infos = new ArrayList<>();
 
         for (Product p:products) {
@@ -74,8 +74,40 @@ public class ProductServiceImpl implements ProductService {
             switch (p.getPro_status()){
                 case 0: ps.setPro_status("上架");
                 break;
-                case 1:ps.setPro_status("下架");
+                case 1:ps.setPro_status("<p style='color: red'>下架</p>");
                 break;
+                default:
+                    break;
+            }
+            ps.setPro_numbers(p.getPro_numbers());
+            ps.setPro_id(p.getPro_id());
+            infos.add(ps);
+        }
+        PageHelper data = pageUtils.getData(startPage, item, infos);
+
+        return new Gson().toJson(data);
+    }
+
+    @Override
+    public String showvalidProducts(int startPage, int item) {
+        List<Product> products = productDao.getProducts();
+        List<ProductShow> infos = new ArrayList<>();
+
+        for (Product p:products) {
+            ProductShow ps = new ProductShow();
+            if (p.getPro_imgId() != null){
+                String imgUrl = imgDao.getImgUrl(p.getPro_imgId());
+                ps.setPro_imgUrl(imgUrl);
+            }
+            ps.setPro_cateId(p.getPro_cateId());
+
+            ps.setPro_name(p.getPro_name());
+            ps.setPro_price(p.getPro_price());
+            switch (p.getPro_status()){
+                case 0: ps.setPro_status("上架");
+                    break;
+                case 1:ps.setPro_status("下架");
+                    break;
                 default:
                     break;
             }

@@ -68,10 +68,10 @@
     <package name="user" extends="struts-default" namespace="/" strict-method-invocation="false">
     <global-results>
         <result name="ecaluate">ecaluate.jsp</result>
-        <result name="index">index.jsp</result>
+        <result name="index" >index.jsp</result>
         <result name="input">404.jsp</result>
         <result name="error">404.jsp</result>
-        <result name="main">main.jsp</result>
+        <result name="main" type="redirect">main.jsp</result>
     </global-results>
     <action name="user_*" class="userAction" method="{1}"></action>
     </package>

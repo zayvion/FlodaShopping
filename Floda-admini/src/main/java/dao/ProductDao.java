@@ -26,7 +26,7 @@ public interface ProductDao {
     void updateProduct(Product product);
 
     /**
-     * 展示所有商品
+     * 展示所有商品(不包括下架）
      *
      * @return list
      */
@@ -53,4 +53,12 @@ public interface ProductDao {
      * @param img
      */
     void updateProductImg(Img img);
+
+    /**
+     * 展示所有商品(包括下架）
+     *
+     * @return list
+     */
+    List<Product> getAllProducts();
+
 }

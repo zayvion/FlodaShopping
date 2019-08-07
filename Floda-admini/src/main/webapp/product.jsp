@@ -24,7 +24,6 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/dist/echarts.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-
 </head>
 <body>
 <br><br>
@@ -198,7 +197,7 @@
                 $("#tbody").empty();
                 console.log(result);
                 $.each(result.data, function (index, item) {
-                    $("#tbody").append("<tr><td>" + item.pro_id + "</td><td><img width='80px' height='50px' src='" + item.pro_imgUrl + "'/></td><td>" + item.pro_name + "</td><td>" + item.pro_price + "</td><td>" + item.pro_status + "</td><td>" + item.pro_numbers + "</td><td>" +
+                    $("#tbody").append("<tr><td>" + item.pro_id + "</td><td><img width='80px' height='80px' src='" + item.pro_imgUrl + "'/></td><td>" + item.pro_name + "</td><td>" + item.pro_price + "</td><td>" + item.pro_status + "</td><td>" + item.pro_numbers + "</td><td>" +
                         "<a class='btn btn-warning radius' data-toggle='modal' data-target='#updateModal' onclick='getProduct("+item.pro_id+")'>编辑商品</a></td></tr>");
                 })
                 var span = $("<p>当前第<span class='badge'>"+result.nowPage+"</span>页，总<span class='badge'>"+result.totalPage+"</span>页，总 <span class='badge'>"+result.totalNum+"</span>条记录</p>");

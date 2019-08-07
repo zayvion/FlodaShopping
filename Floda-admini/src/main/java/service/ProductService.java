@@ -26,12 +26,20 @@ public interface ProductService {
     String getProducts(int startPage, int item);
 
     /**
-     * 商品展示用于后台商品管理
+     * 商品展示用于后台商品管理,包括下架商品
      * @param startPage
      * @param item
      * @return
      */
     String showProducts(int startPage, int item);
+
+    /**
+     * 商品展示用于后台商品管理,不包括下架商品
+     * @param startPage
+     * @param item
+     * @return
+     */
+    String showvalidProducts(int startPage, int item);
 
     /**
      * 获取一个商品的信息
