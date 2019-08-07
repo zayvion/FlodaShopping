@@ -26,6 +26,7 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
     public Map<String, Object> session;
     public ServletContext context;
     public final String INDEX = "index";
+    public final String MAIN = "main";
     public final String CLASSIFY = "classify";
     public final String PRODUCT = "prod";
     @Override

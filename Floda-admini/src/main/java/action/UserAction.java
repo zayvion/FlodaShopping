@@ -23,16 +23,14 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
      * 用户登录
      * @return
      */
-    public String loginUser(){
-        try {
-            String result = userService.LoginUser(user.getUsername(), user.getPassword());
-            response.setContentType("application/json;charset=utf-8");
-            response.getWriter().write(result);
-            return INDEX;
-        } catch (IOException e) {
-            e.printStackTrace();
+    public String loginUser() throws IOException {
+        Boolean isLogin = userService.LoginUser(user.getUsername(), user.getPassword());
+        if (isLogin){
+            session.put("userFlag",user.getUsername());
+            return  MAIN;
         }
-        return NONE;
+        request.setAttribute("msg","用户名和密码错误，请重试!");
+        return INDEX;
     }
 
     /**

@@ -10,5 +10,5 @@ public interface UserService {
 
     String startUser(int user_id);
 
-    String LoginUser(String username, String password);
+    Boolean LoginUser(String username, String password);
 }

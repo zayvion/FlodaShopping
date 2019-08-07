@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pojo.User;
 import pojo.UserInfo;
 import service.UserService;
+import utils.MD5Util;
 import utils.ResponseResult;
 
 import javax.annotation.Resource;
@@ -63,16 +64,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String LoginUser(String username, String password) {
+    public Boolean LoginUser(String username, String password) {
         User user = userDao.LoginUser("super");
-        if(username.equals("super")){
-            if(user.getPassword().equals(password)){
-                return ResponseResult.build(200,"登录成功");
-            }else {
-                return ResponseResult.build(500,"用户名密码不匹配");
+        String MD5psw = MD5Util.getMD5(password);
+        if(username.equals("super")) {
+            if (user.getPassword().equals(MD5psw)) {
+                return true;
             }
-        }else {
-            return ResponseResult.build(500,"用户名不存在");
-        }
-    }
-}
+
+  }
+        return false;}}
