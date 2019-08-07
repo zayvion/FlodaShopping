@@ -261,42 +261,11 @@
                 </div>
             </div>
             <div class="row mtn-40">
-                <div id="new_Produt" class="row mtn-40>
-                    <!-- product single item start -->
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="product-item mt-40">
-                            <figure class="product-thumb">
-                                <a href="product-details.jsp">
-                                    <img class="pri-img" src="assets/img/product/product-1.jpg" alt="product">
-                                    <img class="sec-img" src="assets/img/product/product-2.jpg" alt="product">
-                                </a>
-                                <div class="product-badge">
-                                    <div class="product-label new">
-                                        <span>新品</span>
-                                    </div>
-                                </div>
-                                <div class="button-group">
-                                    <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                    <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                    <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
-                                </div>
-                            </figure>
-                            <div class="product-caption">
-                                <p class="product-name">
-                                    <a href="product-details.html">商品名称</a>
-                                </p>
-                                <div class="price-box">
-                                    <span class="price-regular">￥60.00</span>
-                                    <span class="price-old"><del>￥70.00</del></span>
-                                </div>
-                            </div>
-                        </div>
+                <div id="new_Produt" class='row mtn-40'>
+
                     </div>
-                    <!-- product single item end -->
 
                 </div>
-
-
                 <div class="col-12">
                     <div class="view-more-btn">
                         <a class="btn-hero btn-load-more" href="shop.jsp">查看更多商品 ></a>
@@ -516,14 +485,7 @@
     </section>
     <!-- service policy end -->
 
-    <!-- Instagram Feed Area Start -->
-    <div class="instagram-feed-area">
-        <div class="instagram-feed-thumb">
-            <div id="instafeed" class="instagram-carousel" data-userid="6666969077" data-accesstoken="6666969077.1677ed0.d325f406d94c4dfab939137c5c2cc6c2">
-            </div>
-        </div>
-    </div>
-    <!-- Instagram Feed Area End -->
+
 
 </main>
 <!-- main wrapper end -->
@@ -644,57 +606,19 @@
                         <div class="col-lg-5 col-md-5">
                             <div class="product-large-slider">
                                 <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
+                                    <img id="modal_img" src="assets/img/product/product-details-img1.jpg"height="400px" width="400px" alt="product-details" />
                                 </div>
                             </div>
-                            <div class="pro-nav slick-row-10 slick-arrow-style">
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                </div>
-                            </div>
+
                         </div>
                         <div class="col-lg-7 col-md-7">
                             <div class="product-details-des quick-details">
-                                <h3 class="product-name">商品名称</h3>
-                                <div class="ratings d-flex">
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <div class="pro-review">
-                                        <span>1 收藏</span>
-                                    </div>
-                                </div>
+                                <h3 class="product-name" id="model_pro_name">商品名称</h3>
+
                                 <div class="price-box">
-                                    <span class="price-regular">￥70.00</span>
-                                    <span class="price-old"><del>￥90.00</del></span>
+                                    <span class="price-regular" id="model_pro_price">￥70.00</span>
                                 </div>
-                                <!--                                    <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>-->
-                                <!--                                    <div class="product-countdown" data-countdown="2019/08/25"></div>-->
-                                <!--                                    <div class="availability">-->
-                                <!--                                        <i class="fa fa-check-circle"></i>-->
-                                <!--                                        <span>200 in stock</span>-->
-                                <!--                                    </div>-->
-                                <p class="pro-desc">商品描述</p>
+                                <p class="pro-desc"id="model_pro_desc">商品描述</p>
                                 <div class="quantity-cart-box d-flex align-items-center">
                                     <h5>数量:</h5>
                                     <div class="quantity">
@@ -746,7 +670,7 @@
                         <li class="minicart-item">
                             <div class="minicart-thumb">
                                 <a href="product-details.html">
-                                    <img src="assets/img/cart/cart-1.jpg" alt="product">
+                                    <img  src="assets/img/cart/cart-1.jpg" alt="product">
                                 </a>
                             </div>
                             <div class="minicart-content">
@@ -823,15 +747,95 @@
         $.ajax({
             url:" http://localhost:8081/getProducts",
             type:"post",
+            data: {"startPage": 1, "item": 8},
             success:function (result) {
                 console.log(result)
+                $.each(result.data,function (index,item) {
+                    $("#new_Produt").append(" <div class='col-lg-3 col-md-4 col-sm-6'>\n" +
+                        "                        <div class='product-item mt-40'\">\n" +
+                        "                            <figure class='product-thumb'>\n" +
+                        "                                <a href='productDetail?id="+result.pro_id+"'>\n" +
+                        "                                    <img height='270px' width='270px' class='pri-img' src='"+item.pro_imgUrl+"'>\<n></n>" +
+                        "                                     <img class='sec-img'height='270px' width='270px'  src='"+item.pro_imgUrl+"' alt='product'>"+
+                        "                                </a>\n" +
+                        "                                <div class='product-badge'>\n" +
+                        "                                    <div class='product-label new'>\n" +
+                        "                                        <span>新品</span>\n" +
+                        "                                    </div>\n" +
+                        "                                </div>\n" +
+                        "                                <div class='button-group'>\n" +
+                        "                                    <a href='addWish?id="+item.pro_id+"' data-toggle='tooltip' data-placement='left' title='添加收藏'><i class='lnr lnr-heart' ></i></a>\n" +
+                        "                                    <a href='#'onclick='getProduct("+item.pro_id+")' data-toggle='modal' data-target='#quick_view'><span data-toggle='\"tooltip' data-placement='left' title='快速预览'><i class='lnr lnr-magnifier'></i></span></a>\n" +
+                        "                                    <a href='addCart?id="+item.pro_id+"' data-toggle='tooltip' data-placement='left' title='添加购物车'><i class='lnr lnr-cart'></i></a>\n" +
+                        "                                </div>\n" +
+                        "                            </figure>\n" +
+                        "                            <div class='product-caption'>\n" +
+                        "                                <p class='product-name'>\n" +
+                        "                                    <a href='productDetail?id="+result.pro_id+"'"+item.pro_name+"</a>\n" +
+                        "                                </p>\n" +
+                        "                                <div class='price-box'>\n" +
+                        "                                    <span class='pro-title'>"+item.pro_name+"</span>\n" +
+                        "                                    <span class='price-regular'>￥70.00</span>\n" +
+                        "                                </div>\n" +
+                        "                            </div>\n" +
+                        "                        </div>\n" +
+                        "                    </div>")
+                })
             },
             error:function (e) {
 
             }
         })
-        $("#new_Produt")
+
     });
+    function getProduct(id) {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8081/getProduct?id="+id,
+
+            //请求成功
+            success: function (result) {
+                console.log(result)
+                getImg(result.pro_imgId);
+                $("#model_pro_name").empty();
+                $("#model_pro_price").empty();
+                $("#model_pro_desc").empty();
+                $("#model_pro_name").append(result.pro_name);
+                $("#model_pro_price").append("¥"+result.pro_price);
+                $("#model_pro_desc").append(result.pro_desc);
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+    function getImg(id) {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8081/getImgUrl?id="+id,
+
+            //请求成功
+            success: function (result) {
+                $("#modal_img").attr("src",result);
+                return result
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
 </script>
 </body>
 </html>

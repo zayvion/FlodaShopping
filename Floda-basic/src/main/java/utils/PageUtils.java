@@ -43,8 +43,11 @@ public class PageUtils {
             boolean b =totalPage == nowPage;
             System.out.println("进来了"+b);
             if( totalPage == nowPage){
-
-                end = start+(totalNum % item);
+                if (totalNum % item == 0){
+                    end = start+item;
+                }else {
+                    end = start+(totalNum % item);
+                }
             }
             System.out.println("start:" + start);
             System.out.println("end:" + end);

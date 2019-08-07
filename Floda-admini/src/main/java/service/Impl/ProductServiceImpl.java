@@ -67,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
                 String imgUrl = imgDao.getImgUrl(p.getPro_imgId());
                 ps.setPro_imgUrl(imgUrl);
             }
-            ps.setPro_cateId(p.getPro_id());
+            ps.setPro_cateId(p.getPro_cateId());
 
             ps.setPro_name(p.getPro_name());
             ps.setPro_price(p.getPro_price());

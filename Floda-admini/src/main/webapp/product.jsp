@@ -191,7 +191,7 @@
             datatype: "json",
             //请求地址
             url: "getProducts",
-            data: {"startPage": page, "item": 6},
+            data: {"startPage": page, "item": 8},
             //请求成功
             success: function (result) {
                 $("#tbody").empty();

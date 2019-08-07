@@ -6,8 +6,11 @@
     <constant name="struts.objectFactory" value="spring"></constant>
 	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
     <!-- Struts2在2.5版本后添加strict-method-invocation(严格方法访问)，默认为true，不能使用动态方法调用功能，故需设为false -->
-       <package name="show" extends="struts-default" namespace="/" strict-method-invocation="false">
-           <action name="test" class="testAction"/>
+       <package name="product" extends="struts-default" namespace="/" strict-method-invocation="false">
+           <global-results>
+               <result name="detail">product-details.jsp</result>
+           </global-results>
+           <action name="productDetail" class="productAction" method="productDetail"/>
     </package>
 
 </struts>
