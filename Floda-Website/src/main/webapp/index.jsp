@@ -81,9 +81,14 @@
                                             <i class="lnr lnr-user"></i>
                                         </a>
                                         <ul class="dropdown-list">
-                                            <li><a href="login.jsp">登录</a></li>
-                                            <li><a href="register.jsp">注册</a></li>
-                                            <li><a href="javascript:void (0)">${sessionScope.onliner.username}</a></li>
+                                            <c:if test="${sessionScope.onliner.username == ''}">
+                                                <li><a href="login.jsp">登录</a></li>
+                                                <li><a href="register.jsp">注册</a></li>
+                                            </c:if>
+                                            <c:if test="${sessionScope.onliner.username != ''}">
+                                                <li><a href="my_account.jsp">${sessionScope.onliner.username}</a></li>
+                                                <li><a href="user_exit.action">退出</a></li>
+                                            </c:if>
                                         </ul>
                                     </li>
                                     <li>

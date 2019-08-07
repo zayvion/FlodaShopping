@@ -48,14 +48,14 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
     @Override
     public void stopUser(int user_id) {
         User user = this.getHibernateTemplate().get(User.class, user_id);
-        user.setStatus("1");
+        user.setStatus(1);
         this.getHibernateTemplate().update(user);
     }
 
     @Override
     public void startUser(int user_id) {
         User user = this.getHibernateTemplate().get(User.class, user_id);
-        user.setStatus("0");
+        user.setStatus(0);
         this.getHibernateTemplate().update(user);
     }
 
