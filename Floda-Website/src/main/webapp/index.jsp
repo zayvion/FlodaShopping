@@ -261,276 +261,41 @@
                 </div>
             </div>
             <div class="row mtn-40">
-                <!-- product single item start -->
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product-item mt-40">
-                        <figure class="product-thumb">
-                            <a href="product-details.jsp">
-                                <img class="pri-img" src="assets/img/product/product-1.jpg" alt="product">
-                                <img class="sec-img" src="assets/img/product/product-2.jpg" alt="product">
-                            </a>
-                            <div class="product-badge">
-                                <div class="product-label new">
-                                    <span>新品</span>
+                <div id="new_Produt" class="row mtn-40>
+                    <!-- product single item start -->
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="product-item mt-40">
+                            <figure class="product-thumb">
+                                <a href="product-details.jsp">
+                                    <img class="pri-img" src="assets/img/product/product-1.jpg" alt="product">
+                                    <img class="sec-img" src="assets/img/product/product-2.jpg" alt="product">
+                                </a>
+                                <div class="product-badge">
+                                    <div class="product-label new">
+                                        <span>新品</span>
+                                    </div>
                                 </div>
-                                <div class="product-label discount">
-                                    <span>10%</span>
+                                <div class="button-group">
+                                    <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
+                                    <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
                                 </div>
-                            </div>
-                            <div class="button-group">
-                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
-                            </div>
-                        </figure>
-                        <div class="product-caption">
-                            <p class="product-name">
-                                <a href="product-details.html">商品名称</a>
-                            </p>
-                            <div class="price-box">
-                                <span class="price-regular">￥60.00</span>
-                                <span class="price-old"><del>￥70.00</del></span>
+                            </figure>
+                            <div class="product-caption">
+                                <p class="product-name">
+                                    <a href="product-details.html">商品名称</a>
+                                </p>
+                                <div class="price-box">
+                                    <span class="price-regular">￥60.00</span>
+                                    <span class="price-old"><del>￥70.00</del></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- product single item end -->
+                    <!-- product single item end -->
 
-                <!-- product single item start -->
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product-item mt-40">
-                        <figure class="product-thumb">
-                            <a href="product-details.html">
-                                <img class="pri-img" src="assets/img/product/product-3.jpg" alt="product">
-                                <img class="sec-img" src="assets/img/product/product-4.jpg" alt="product">
-                            </a>
-                            <div class="product-badge">
-                                <div class="product-label new">
-                                    <span>新品</span>
-                                </div>
-                            </div>
-                            <div class="button-group">
-                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
-                            </div>
-                        </figure>
-                        <div class="product-caption">
-                            <p class="product-name">
-                                <a href="product-details.html">商品名称</a>
-                            </p>
-                            <div class="price-box">
-                                <span class="price-regular">￥60.00</span>
-                                <span class="price-old"><del>￥70.00</del></span>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <!-- product single item end -->
 
-                <!-- product single item start -->
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product-item mt-40">
-                        <figure class="product-thumb">
-                            <a href="product-details.html">
-                                <img class="pri-img" src="assets/img/product/product-5.jpg" alt="product">
-                                <img class="sec-img" src="assets/img/product/product-6.jpg" alt="product">
-                            </a>
-                            <div class="product-badge">
-                                <div class="product-label new">
-                                    <span>新品</span>
-                                </div>
-                            </div>
-                            <div class="button-group">
-                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
-                            </div>
-                        </figure>
-                        <div class="product-caption">
-                            <p class="product-name">
-                                <a href="product-details.html">商品名称</a>
-                            </p>
-                            <div class="price-box">
-                                <span class="price-regular">￥60.00</span>
-                                <span class="price-old"><del>￥70.00</del></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- product single item end -->
-
-                <!-- product single item start -->
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product-item mt-40">
-                        <figure class="product-thumb">
-                            <a href="product-details.html">
-                                <img class="pri-img" src="assets/img/product/product-7.jpg" alt="product">
-                                <img class="sec-img" src="assets/img/product/product-8.jpg" alt="product">
-                            </a>
-                            <div class="product-badge">
-                                <div class="product-label new">
-                                    <span>新品</span>
-                                </div>
-                                <div class="product-label discount">
-                                    <span>15%</span>
-                                </div>
-                            </div>
-                            <div class="button-group">
-                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
-                            </div>
-                        </figure>
-                        <div class="product-caption">
-                            <p class="product-name">
-                                <a href="product-details.html">商品名称</a>
-                            </p>
-                            <div class="price-box">
-                                <span class="price-regular">￥60.00</span>
-                                <span class="price-old"><del>￥70.00</del></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- product single item end -->
-
-                <!-- product single item start -->
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product-item mt-40">
-                        <figure class="product-thumb">
-                            <a href="product-details.html">
-                                <img class="pri-img" src="assets/img/product/product-9.jpg" alt="product">
-                                <img class="sec-img" src="assets/img/product/product-10.jpg" alt="product">
-                            </a>
-                            <div class="product-badge">
-                                <div class="product-label new">
-                                    <span>新品</span>
-                                </div>
-                                <div class="product-label discount">
-                                    <span>30%</span>
-                                </div>
-                            </div>
-                            <div class="button-group">
-                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
-                            </div>
-                        </figure>
-                        <div class="product-caption">
-                            <p class="product-name">
-                                <a href="product-details.html">商品名称</a>
-                            </p>
-                            <div class="price-box">
-                                <span class="price-regular">￥60.00</span>
-                                <span class="price-old"><del>￥70.00</del></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- product single item end -->
-
-                <!-- product single item start -->
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product-item mt-40">
-                        <figure class="product-thumb">
-                            <a href="product-details.html">
-                                <img class="pri-img" src="assets/img/product/product-11.jpg" alt="product">
-                                <img class="sec-img" src="assets/img/product/product-12.jpg" alt="product">
-                            </a>
-                            <div class="product-badge">
-                                <div class="product-label new">
-                                    <span>新品</span>
-                                </div>
-                                <div class="product-label discount">
-                                    <span>12%</span>
-                                </div>
-                            </div>
-                            <div class="button-group">
-                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
-                            </div>
-                        </figure>
-                        <div class="product-caption">
-                            <p class="product-name">
-                                <a href="product-details.html">商品名称</a>
-                            </p>
-                            <div class="price-box">
-                                <span class="price-regular">￥60.00</span>
-                                <span class="price-old"><del>￥70.00</del></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- product single item end -->
-
-                <!-- product single item start -->
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product-item mt-40">
-                        <figure class="product-thumb">
-                            <a href="product-details.html">
-                                <img class="pri-img" src="assets/img/product/product-2.jpg" alt="product">
-                                <img class="sec-img" src="assets/img/product/product-1.jpg" alt="product">
-                            </a>
-                            <div class="product-badge">
-                                <div class="product-label new">
-                                    <span>新品</span>
-                                </div>
-                                <div class="product-label discount">
-                                    <span>10%</span>
-                                </div>
-                            </div>
-                            <div class="button-group">
-                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
-                            </div>
-                        </figure>
-                        <div class="product-caption">
-                            <p class="product-name">
-                                <a href="product-details.html">商品名称</a>
-                            </p>
-                            <div class="price-box">
-                                <span class="price-regular">￥60.00</span>
-                                <span class="price-old"><del>￥70.00</del></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- product single item end -->
-
-                <!-- product single item start -->
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="product-item mt-40">
-                        <figure class="product-thumb">
-                            <a href="product-details.html">
-                                <img class="pri-img" src="assets/img/product/product-4.jpg" alt="product">
-                                <img class="sec-img" src="assets/img/product/product-3.jpg" alt="product">
-                            </a>
-                            <div class="product-badge">
-                                <div class="product-label discount">
-                                    <span>10%</span>
-                                </div>
-                            </div>
-                            <div class="button-group">
-                                <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
-                            </div>
-                        </figure>
-                        <div class="product-caption">
-                            <p class="product-name">
-                                <a href="product-details.html">商品名称</a>
-                            </p>
-                            <div class="price-box">
-                                <span class="price-regular">￥60.00</span>
-                                <span class="price-old"><del>￥70.00</del></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- product single item end -->
 
                 <div class="col-12">
                     <div class="view-more-btn">
@@ -1053,5 +818,20 @@
 <script src="assets/js/vendor.js"></script>
 <!-- Active Js -->
 <script src="assets/js/active.js"></script>
+<script>
+    $(function () {
+        $.ajax({
+            url:" http://localhost:8081/getProducts",
+            type:"post",
+            success:function (result) {
+                console.log(result)
+            },
+            error:function (e) {
+
+            }
+        })
+        $("#new_Produt")
+    });
+</script>
 </body>
 </html>
