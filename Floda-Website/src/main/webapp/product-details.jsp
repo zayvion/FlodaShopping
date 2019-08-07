@@ -5,6 +5,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags"  prefix="s"%>
 <%@page isELIgnored="false" %>
 <html>
 <%
@@ -203,41 +204,30 @@
                             <div class="col-lg-5">
                                 <div class="product-large-slider">
                                     <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
+                                        <img src="${proImgUrl}" alt="product-details" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
+                                        <img src="${proImgUrl}" alt="product-details" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
+                                        <img src="${proImgUrl}" alt="product-details" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
+                                        <img src="${proImgUrl}" alt="product-details" />
                                     </div>
                                     <div class="pro-large-img img-zoom">
-                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
+                                        <img src="${proImgUrl}" alt="product-details" />
                                     </div>
                                 </div>
 
                             </div>
                             <div class="col-lg-7">
                                 <div class="product-details-des">
-                                    <h3 class="product-name">商品名称</h3>
-                                    <div class="ratings d-flex">
-                                        <span><i class="lnr lnr-star"></i></span>
-                                        <span><i class="lnr lnr-star"></i></span>
-                                        <span><i class="lnr lnr-star"></i></span>
-                                        <span><i class="lnr lnr-star"></i></span>
-                                        <span><i class="lnr lnr-star"></i></span>
-                                        <div class="pro-review">
-                                            <span>1 收藏</span>
-                                        </div>
-                                    </div>
+                                    <h3 class="product-name" style="font-size: 35px">${pro_name}</h3>
                                     <div class="price-box">
-                                        <span class="price-regular">￥70.00</span>
-                                        <span class="price-old"><del>￥￥90.00</del></span>
+                                        <span class="price-regular"style="font-size: 30px">￥${pro_price}</span>
                                     </div>
-                                    <p class="pro-desc">商品描述</p>
+
                                     <div class="quantity-cart-box d-flex align-items-center">
                                         <h5>数量:</h5>
                                         <div class="quantity">
@@ -247,6 +237,7 @@
                                             <a class="btn btn-cart2" href="#">添加购物车</a>
                                         </div>
                                     </div>
+                                    <p class="pro-desc">商品描述:${pro_desc}</p>
                                     <!--<div class="pro-size">
                                         <h5>size :</h5>
                                         <select class="nice-select">
@@ -286,18 +277,10 @@
                                 <div class="product-review-info">
                                     <ul class="nav review-tab">
                                         <li>
-                                            <a class="active" data-toggle="tab" href="#tab_one">商品简介</a>
-                                        </li>
-                                        <li>
                                             <a data-toggle="tab" href="#tab_two">评价 (11)</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content reviews-tab">
-                                        <div class="tab-pane fade show active" id="tab_one">
-                                            <div class="tab-one">
-                                                <p>商品简介</p>
-                                            </div>
-                                        </div>
                                         <div class="tab-pane fade" id="tab_two">
                                             <form action="#" class="review-form">
                                                 <h5>1 review for <span>Chaz Kangeroo</span></h5>

@@ -760,7 +760,7 @@
                     $("#new_Produt").append(" <div class='col-lg-3 col-md-4 col-sm-6'>\n" +
                         "                        <div class='product-item mt-40'\">\n" +
                         "                            <figure class='product-thumb'>\n" +
-                        "                                <a href='productDetail?id="+result.pro_id+"'>\n" +
+                        "                                <a href='productDetail?id="+item.pro_id+"'>\n" +
                         "                                    <img height='270px' width='270px' class='pri-img' src='"+item.pro_imgUrl+"'>\<n></n>" +
                         "                                     <img class='sec-img'height='270px' width='270px'  src='"+item.pro_imgUrl+"' alt='product'>"+
                         "                                </a>\n" +
@@ -777,7 +777,7 @@
                         "                            </figure>\n" +
                         "                            <div class='product-caption'>\n" +
                         "                                <p class='product-name'>\n" +
-                        "                                    <a href='productDetail?id="+result.pro_id+"'"+item.pro_name+"</a>\n" +
+                        "                                    <a href='productDetail?id="+item.pro_id+"'"+item.pro_name+"</a>\n" +
                         "                                </p>\n" +
                         "                                <div class='price-box'>\n" +
                         "                                    <span class='pro-title'>"+item.pro_name+"</span>\n" +

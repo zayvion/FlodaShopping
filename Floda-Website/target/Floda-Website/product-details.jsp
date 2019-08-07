@@ -5,6 +5,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="/struts-tags"  prefix="s"%>
 <%@page isELIgnored="false" %>
 <html>
 <%
@@ -48,7 +49,7 @@
                     <!-- start logo area -->
                     <div class="col-lg-3">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="index.jsp">
                                 <img src="assets/img/logo/logo.png" alt="">
                             </a>
                         </div>
@@ -106,7 +107,6 @@
                         </div>
                     </div>
                     <!-- mini cart area end -->
-
                 </div>
             </div>
         </div>
@@ -122,7 +122,7 @@
                 <div class="col-12">
                     <div class="mobile-main-header">
                         <div class="mobile-logo">
-                            <a href="index.html">
+                            <a href="index.jsp">
                                 <img src="assets/img/logo/logo.png" alt="Brand Logo">
                             </a>
                         </div>
@@ -181,7 +181,7 @@
                         <nav aria-label="breadcrumb">
                             <h1>商品详情</h1>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="index.jsp"><i class="fa fa-home"></i></a></li>
                                 <li class="breadcrumb-item active" aria-current="page">商品详情</li>
                             </ul>
                         </nav>
@@ -219,42 +219,15 @@
                                         <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
                                     </div>
                                 </div>
-                                <div class="pro-nav slick-row-10 slick-arrow-style">
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                    </div>
-                                    <div class="pro-nav-thumb">
-                                        <img src="assets/img/product/product-details-img5.jpg" alt="product-details" />
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="col-lg-7">
                                 <div class="product-details-des">
-                                    <h3 class="product-name">商品名称</h3>
-                                    <div class="ratings d-flex">
-                                        <span><i class="lnr lnr-star"></i></span>
-                                        <span><i class="lnr lnr-star"></i></span>
-                                        <span><i class="lnr lnr-star"></i></span>
-                                        <span><i class="lnr lnr-star"></i></span>
-                                        <span><i class="lnr lnr-star"></i></span>
-                                        <div class="pro-review">
-                                            <span>1 收藏</span>
-                                        </div>
-                                    </div>
+                                    <h3 class="product-name" style="font-size: 35px">${pro_name}</h3>
                                     <div class="price-box">
-                                        <span class="price-regular">￥70.00</span>
-                                        <span class="price-old"><del>￥￥90.00</del></span>
+                                        <span class="price-regular"style="font-size: 30px">￥70.00</span>
                                     </div>
-                                    <p class="pro-desc">商品描述</p>
+
                                     <div class="quantity-cart-box d-flex align-items-center">
                                         <h5>数量:</h5>
                                         <div class="quantity">
@@ -264,6 +237,7 @@
                                             <a class="btn btn-cart2" href="#">添加购物车</a>
                                         </div>
                                     </div>
+                                    <p class="pro-desc">商品描述</p>
                                     <!--<div class="pro-size">
                                         <h5>size :</h5>
                                         <select class="nice-select">
@@ -685,33 +659,9 @@
                     <div class="row">
                         <div class="col-lg-5 col-md-5">
                             <div class="product-large-slider">
-                                <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                </div>
+
                             </div>
-                            <div class="pro-nav slick-row-10 slick-arrow-style">
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                </div>
-                            </div>
+
                         </div>
                         <div class="col-lg-7 col-md-7">
                             <div class="product-details-des quick-details">

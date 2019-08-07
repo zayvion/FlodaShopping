@@ -3061,11 +3061,17 @@ only screen and (max-width: 767.98px) {
 .price-box {
     line-height: 1;
 }
-
+.pro-title{
+    font-size: 18px;
+    line-height: 1;
+    color: #111;
+    font-weight: 500;
+    font-family: "Roboto", sans-serif;
+}
 .price-regular {
     font-size: 17px;
     line-height: 1;
-    color: #111;
+    color: #c53742;
     font-weight: 500;
     font-family: "Roboto", sans-serif;
 }
@@ -4432,6 +4438,7 @@ only screen and (max-width: 767.98px) {
 }
 
 .product-details-des .pro-desc {
+    font-size:20px;
     margin-bottom: 20px;
 }
 

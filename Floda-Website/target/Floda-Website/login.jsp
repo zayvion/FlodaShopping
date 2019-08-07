@@ -73,13 +73,16 @@
                     <!-- Login Content Start -->
                     <div class="col-lg-6" style="margin: 30px auto">
                         <div class="login-reg-form-wrap">
-                            <h2>登录</h2>
-                            <form action="#" method="post">
+                            <h2>登录
+                                <span class="text-success" style="font-size: 12px;margin-left: 50px">${requestScope.hint}</span>
+                                <span class="text-success" style="font-size: 12px;margin-left: 50px">${requestScope.hints}</span>
+                            </h2>
+                            <form action="user_login.action" method="post">
                                 <div class="single-input-item">
-                                    <input type="email" placeholder="用户名/手机号码" required />
+                                    <input type="text" placeholder="用户名" name="username" required value="${requestScope.newUser.username}"/>
                                 </div>
                                 <div class="single-input-item">
-                                    <input type="password" placeholder="密码" required />
+                                    <input type="password" placeholder="密码" name="password" required/>
                                 </div>
                                 <div class="single-input-item">
                                     <div class="login-reg-form-meta d-flex align-items-center justify-content-between">
@@ -93,10 +96,9 @@
                                     </div>
                                 </div>
                                 <div class="single-input-item">
-                                    <a class="btn btn__bg" href="index.jsp">登录</a>
+                                    <button class="btn btn__bg" type="submit">登录</button>
                                     <a href="register.jsp" class="forget-pwd">没有账户?去注册</a>
                                 </div>
-
                             </form>
                         </div>
                     </div>

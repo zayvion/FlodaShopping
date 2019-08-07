@@ -1,7 +1,0 @@
-dao\Impl\UserDaoImpl.class
-service\Impl\UserServiceImpl.class
-service\UserService.class
-dao\UserDao.class
-action\UserAction.class
-action\BaseAction.class
-Filter\HeaderFilter.class
