@@ -311,7 +311,7 @@
                                     <!-- product grid start -->
                                     <div class="product-item">
                                         <figure class="product-thumb">
-                                            <a href="product-details.jsp">
+                                            <a href="productDetail?id=${product.pro_id}">
                                                 <img class="pri-img" src="${product.pro_imgAddr}" alt="product">
                                                 <img class="sec-img" src="${product.pro_imgAddr}" alt="product">
                                             </a>
@@ -323,7 +323,7 @@
                                         </figure>
                                         <div class="product-caption">
                                             <p class="product-name">
-                                                <a href="product-details.html">${product.pro_name}</a>
+                                                <a href="productDetail?id=${product.pro_id}">${product.pro_name}</a>
                                             </p>
                                             <div class="price-box">
                                                 <span class="price-regular">￥${product.pro_price}</span>
@@ -341,7 +341,7 @@
                                             </a>
                                         </figure>
                                         <div class="product-content-list">
-                                            <h5 class="product-name"><a href="product-details.jsp">${product.pro_name}</a></h5>
+                                            <h5 class="product-name"><a href="productDetail?id=${product.pro_id}">${product.pro_name}</a></h5>
                                             <div class="price-box">
                                                 <span class="price-regular">￥${product.pro_price}</span>
                                             </div>
