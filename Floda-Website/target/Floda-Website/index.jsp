@@ -853,7 +853,7 @@
             //请求地址
             url: "http://localhost:8080/addCart",
             //传参
-            data: {"pro_id":pro_id,"pro_number":1,"user_id":1},
+            data: {"pro_id":pro_id,"pro_number":1},
             //请求成功
             success: function (result) {
                 console.log(result);

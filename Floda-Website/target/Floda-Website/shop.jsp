@@ -167,102 +167,6 @@
             </div>
             <!-- search box end -->
 
-            <!-- mobile menu start -->
-            <div class="mobile-navigation">
-
-                <!-- mobile menu navigation start -->
-                <nav>
-                    <ul class="mobile-menu">
-                        <li class="menu-item-has-children"><a href="index.html">Home</a>
-                            <ul class="dropdown">
-                                <li><a href="index.html">Home version 01</a></li>
-                                <li><a href="index-2.html">Home version 02</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children"><a href="#">pages</a>
-                            <ul class="megamenu dropdown">
-                                <li class="mega-title menu-item-has-children"><a href="#">column 01</a>
-                                    <ul class="dropdown">
-                                        <li><a href="shop.html">shop grid left
-                                            sidebar</a></li>
-                                        <li><a href="shop-grid-right-sidebar.html">shop grid right
-                                            sidebar</a></li>
-                                        <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
-                                        <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
-                                    </ul>
-                                </li>
-                                <li class="mega-title menu-item-has-children"><a href="#">column 02</a>
-                                    <ul class="dropdown">
-                                        <li><a href="product-details.html">product details</a></li>
-                                        <li><a href="product-details-affiliate.html">product
-                                            details
-                                            affiliate</a></li>
-                                        <li><a href="product-details-variable.html">product details
-                                            variable</a></li>
-                                        <li><a href="product-details-group.html">product details
-                                            group</a></li>
-                                    </ul>
-                                </li>
-                                <li class="mega-title menu-item-has-children"><a href="#">column 03</a>
-                                    <ul class="dropdown">
-                                        <li><a href="cart.html">cart</a></li>
-                                        <li><a href="checkout.html">checkout</a></li>
-                                        <li><a href="compare.html">compare</a></li>
-                                        <li><a href="wishlist.html">wishlist</a></li>
-                                    </ul>
-                                </li>
-                                <li class="mega-title menu-item-has-children"><a href="#">column 04</a>
-                                    <ul class="dropdown">
-                                        <li><a href="my-account.html">my-account</a></li>
-                                        <li><a href="login-register.html">login-register</a></li>
-                                        <li><a href="contact-us.html">contact us</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children "><a href="#">shop</a>
-                            <ul class="dropdown">
-                                <li class="menu-item-has-children"><a href="#">shop grid layout</a>
-                                    <ul class="dropdown">
-                                        <li><a href="shop.html">shop grid left sidebar</a></li>
-                                        <li><a href="shop-grid-right-sidebar.html">shop grid right sidebar</a></li>
-                                        <li><a href="shop-grid-full-3-col.html">shop grid full 3 col</a></li>
-                                        <li><a href="shop-grid-full-4-col.html">shop grid full 4 col</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children"><a href="#">shop list layout</a>
-                                    <ul class="dropdown">
-                                        <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
-                                        <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
-                                        <li><a href="shop-list-full-width.html">shop list full width</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children"><a href="#">products details</a>
-                                    <ul class="dropdown">
-                                        <li><a href="product-details.html">product details</a></li>
-                                        <li><a href="product-details-affiliate.html">product details affiliate</a></li>
-                                        <li><a href="product-details-variable.html">product details variable</a></li>
-                                        <li><a href="product-details-group.html">product details group</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children "><a href="#">Blog</a>
-                            <ul class="dropdown">
-                                <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
-                                <li><a href="blog-right-sidebar.html">blog right sidebar</a></li>
-                                <li><a href="blog-grid-full-width.html">blog grid no sidebar</a></li>
-                                <li><a href="blog-details.html">blog details</a></li>
-                                <li><a href="blog-details-left-sidebar.html">blog details left sidebar</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="contact-us.html">Contact us</a></li>
-                    </ul>
-                </nav>
-                <!-- mobile menu navigation end -->
-            </div>
-            <!-- mobile menu end -->
-
             <div class="mobile-settings">
                 <ul class="nav">
                     <li>
@@ -355,13 +259,9 @@
                             <h3 class="sidebar-title">商品类别</h3>
                             <div class="sidebar-body">
                                 <ul class="shop-categories">
-                                    <li><a href="#">类别1 <span>1</span></a></li>
-                                    <li><a href="#">类别1 <span>2</span></a></li>
-                                    <li><a href="#">类别1 <span>3</span></a></li>
-                                    <li><a href="#">类别1 <span>4</span></a></li>
-                                    <li><a href="#">类别1 <span>5</span></a></li>
-                                    <li><a href="#">类别1 <span>6</span></a></li>
-
+                                    <c:forEach items="${requestScope.cate_list}" var="cate">
+                                        <li><a href="#">${cate.cate_name}<span>${cate.cate_pronums}</span></a></li>
+                                    </c:forEach>
                                 </ul>
                             </div>
                         </div>
