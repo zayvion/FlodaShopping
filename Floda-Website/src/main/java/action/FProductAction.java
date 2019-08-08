@@ -48,6 +48,7 @@ public class FProductAction extends BaseAction {
         valueStack.set("pro_name",product.getPro_name());
         valueStack.set("pro_price",product.getPro_price());
         valueStack.set("pro_desc",product.getPro_desc());
+        valueStack.set("pro_id",product.getPro_id());
         valueStack.set("proImgUrl",imgDao.getImgUrl(product.getPro_imgId()));
         return DETAIL;
     }

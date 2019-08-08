@@ -32,6 +32,15 @@ public class CartAction extends BaseAction {
         return NONE;
     }
 
+    public String getCartInfos() throws IOException {
+        User user = (User) session.get("onliner");
+        Integer user_id = user.getUser_id();
+        String result = cartService.getCartInfos(user_id);
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().write(result);
+        return NONE;
+    }
+
     public int getPro_id() {
         return pro_id;
     }

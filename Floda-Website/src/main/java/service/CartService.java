@@ -14,4 +14,11 @@ public interface CartService {
      * @return json
      */
     String addCart(int pro_id, int user_id, int pro_number);
+
+    /**
+     * 获取购物车所有商品信息
+     * @param user_id
+     * @return json
+     */
+    String getCartInfos(int user_id);
 }

@@ -1,11 +1,14 @@
 package service.Impl;
 
+import com.google.gson.Gson;
 import dao.CartDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import service.CartService;
 import utils.ResponseResult;
+
+import java.util.List;
 
 /**
  * @Auther: zwf
@@ -28,4 +31,13 @@ public class CartServiceImpl implements CartService {
         }
         return ResponseResult.build(500,"购物车添加失败");
     }
+
+    @Override
+    public String getCartInfos(int user_id) {
+        List cartInfos = cartDao.getCartInfos(user_id);
+        String json = new Gson().toJson(cartInfos);
+        return json;
+    }
+
+
 }

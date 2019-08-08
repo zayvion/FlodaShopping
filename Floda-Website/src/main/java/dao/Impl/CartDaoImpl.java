@@ -7,10 +7,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
-import pojo.Cart;
-import pojo.Product;
-import pojo.User;
+import pojo.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,5 +37,29 @@ public class CartDaoImpl extends HibernateDaoSupport implements CartDao{
         double cart_price = list.get(0).getPro_price()*pro_number;
         cart.setCart_price(cart_price);
         this.getHibernateTemplate().save(cart);
+    }
+
+    @Override
+    public List getCartInfos(int user_id) {
+        //查询购物车信息
+        DetachedCriteria criteria = DetachedCriteria.forClass(Cart.class);
+        criteria.add(Restrictions.eq("user_id",user_id));
+        List<Cart> carts = (List<Cart>)this.getHibernateTemplate().findByCriteria(criteria);
+        List<CartInfo> cartInfos = new ArrayList<CartInfo>();
+        for (int i = 0; i < carts.size(); i++){
+            //根据查出来的商品id：查询商品信息
+            Product pro = this.getHibernateTemplate().get(Product.class, carts.get(i).getProduct_id());
+            //根据查出来的图片id：查询图片信息
+            Img img = this.getHibernateTemplate().get(Img.class, pro.getPro_imgId());
+            //给CartInfo(pojo)赋值
+            CartInfo cartInfo = new CartInfo();
+            cartInfo.setUrl(img.getImg_addr());
+            cartInfo.setPro_name(pro.getPro_name());
+            cartInfo.setPro_price(pro.getPro_price());
+            cartInfo.setPro_number(carts.get(i).getPro_number());
+            cartInfo.setCart_price(carts.get(i).getCart_price());
+            cartInfos.add(cartInfo);
+        }
+        return cartInfos;
     }
 }
