@@ -18,16 +18,6 @@
            <global-results>
                <result name="detail">product-details.jsp</result>
            </global-results>
-           <action name="productDetail" class="productAction" method="productDetail"/>
-           <action name="getNewProducts" class="productAction" method="getNewProducts"/>
-    </package>
-    <package name="Cart" extends="struts-default" namespace="/" strict-method-invocation="false">
-        <global-results>
-            <result name="index">index.jsp</result>
-        </global-results>
-        <action name="addCart" class="cartAction" method="addCart"/>
-           <action name="productDetail" class="productAction" method="productDetail"/>
-           <action name="getNewProducts" class="productAction" method="getNewProducts"/>
            <action name="productDetail" class="FProductAction" method="productDetail"/>
            <action name="moreProduct" class="FProductAction" method="moreProduct">
                <result name="shop">shop.jsp</result>
@@ -36,6 +26,12 @@
            <action name="getProByCate" class="FProductAction" method="getProByCate">
                <result name="shop">shop.jsp</result>
            </action>
+    </package>
+    <package name="Cart" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <global-results>
+            <result name="index">index.jsp</result>
+        </global-results>
+        <action name="addCart" class="cartAction" method="addCart"/>
     </package>
 
 </struts>
