@@ -1,15 +1,12 @@
 package action;
 
 
-import com.google.gson.Gson;
 import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.ServletActionContext;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import pojo.User;
-import service.UserService;
+import service.FUserService;
 import utils.MD5Util;
-import utils.ResponseResult;
 
 import javax.annotation.Resource;
 
@@ -22,7 +19,7 @@ import javax.annotation.Resource;
 public class UserAction extends BaseAction implements ModelDriven<User> {
 
     @Resource
-    private UserService userService;
+    private FUserService userService;
     private User user = new User();
     private String repeat_pwd;
 
@@ -58,6 +55,15 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         }
         request.setAttribute("hints","用户名或密码错误!");
         return "login";
+    }
+
+    /**
+     * 用户退出
+     * @return
+     */
+    public String exit(){
+        session.remove("onliner");
+        return "register";
     }
 
     @Override

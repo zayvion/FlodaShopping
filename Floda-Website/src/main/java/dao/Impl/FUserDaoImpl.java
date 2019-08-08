@@ -1,6 +1,6 @@
 package dao.Impl;
 
-import dao.UserDao;
+import dao.FUserDao;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import pojo.User;
-import java.io.Serializable;
+
 import java.util.List;
 
 /**
@@ -17,7 +17,7 @@ import java.util.List;
  * @Description:
  */
 @Repository
-public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
+public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
     @Autowired
    public void setSF(SessionFactory sessionFactory){
        super.setSessionFactory(sessionFactory);

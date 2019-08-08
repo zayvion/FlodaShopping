@@ -7,7 +7,7 @@ import pojo.User;
  * @Date: 2019/8/5 14:45
  * @Description:
  */
-public interface UserService {
+public interface FUserService {
     /**
      * 用户注册
      * @param user

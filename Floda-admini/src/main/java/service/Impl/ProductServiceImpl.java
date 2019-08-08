@@ -132,4 +132,16 @@ public class ProductServiceImpl implements ProductService {
         productDao.updateProduct(product);
         return ResponseResult.ok();
     }
+
+    @Override
+    public int proCount(int cate_id) {
+        List<Product> products = productDao.getProductCount(cate_id);
+        return products.size();
+    }
+
+    @Override
+    public List<Product> getProByCate(int cate_id) {
+        List<Product> products = productDao.getProductCount(cate_id);
+        return products;
+    }
 }

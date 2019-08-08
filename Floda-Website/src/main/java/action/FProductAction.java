@@ -1,5 +1,7 @@
 package action;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.util.ValueStack;
 import dao.ImgDao;
@@ -7,10 +9,15 @@ import dao.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import pojo.Categroy;
 import pojo.Product;
+import service.CategroyService;
+import service.Impl.ProductServiceImpl;
 import service.ProductService;
 
+import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @Auther: zayvion
@@ -19,10 +26,12 @@ import java.io.IOException;
  */
 @Controller
 @Scope("prototype")
-public class ProductAction extends BaseAction {
+public class FProductAction extends BaseAction {
 
     @Autowired
     private ProductService productService;
+    @Resource
+    private CategroyService categroyService;
     @Autowired
     private ProductDao productDao;
     @Autowired
@@ -30,17 +39,54 @@ public class ProductAction extends BaseAction {
     private int id;
     private int startPage;
     private int item;
+    private int cate_id;
 
     public String productDetail(){
         Product product = productDao.getProduct(id);
-        System.out.println(product);
-
         ValueStack valueStack = ActionContext.getContext().getValueStack();
         valueStack.set("pro_name",product.getPro_name());
         valueStack.set("pro_price",product.getPro_price());
         valueStack.set("pro_desc",product.getPro_desc());
         valueStack.set("proImgUrl",imgDao.getImgUrl(product.getPro_imgId()));
         return DETAIL;
+    }
+
+    /**
+     * 更多商品：分类展示包括分类名称、该分类下的商品数
+     * @return
+     */
+    public String moreProduct(){
+        //默认按照第一个商品分类查询商品
+        String categroies = categroyService.getCategroies();
+        List<Categroy> list = new Gson().fromJson(categroies, new TypeToken<List<Categroy>>() {}.getType());
+        for (Categroy c:list
+             ) {
+            int count = productService.proCount(c.getCate_id());
+            c.setCate_pronums(count);
+        }
+        //根据分类id查询该分类下的所有商品:默认查询第一个分类的商品
+        List<Product> products = productService.getProByCate(list.get(0).getCate_id());
+        for (Product p:products
+        ) {
+            System.out.println("surper"+p);
+        }
+        request.setAttribute("cate_list",list);
+        request.setAttribute("first_pros",products);
+        return SHOP;
+    }
+
+    /**
+     * 根据分类id查询该分类下的所有商品:默认查询第一个分类的商品
+     * @return
+     * @throws IOException
+     */
+    public String getProByCate(){
+        List<Product> products = productService.getProByCate(cate_id);
+        for (Product p:products
+             ) {
+            System.out.println(p);
+        }
+        return NONE;
     }
 
     public String getNewProducts() throws IOException {
@@ -72,5 +118,13 @@ public class ProductAction extends BaseAction {
 
     public void setItem(int item) {
         this.item = item;
+    }
+
+    public int getCate_id() {
+        return cate_id;
+    }
+
+    public void setCate_id(int cate_id) {
+        this.cate_id = cate_id;
     }
 }

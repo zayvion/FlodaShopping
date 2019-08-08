@@ -4438,8 +4438,9 @@ only screen and (max-width: 767.98px) {
 }
 
 .product-details-des .pro-desc {
-    font-size:20px;
+    font-size:16px;
     margin-bottom: 20px;
+    line-height: 30px;
 }
 
 .product-details-des .availability {

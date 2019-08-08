@@ -12,6 +12,7 @@ public class Categroy {
     private Integer cate_id;
     private String cate_name;
     private String cate_desc;
+    private int cate_pronums;
 
     public Integer getCate_id() {
         return cate_id;
@@ -37,12 +38,21 @@ public class Categroy {
         this.cate_desc = cate_desc;
     }
 
+    public int getCate_pronums() {
+        return cate_pronums;
+    }
+
+    public void setCate_pronums(int cate_pronums) {
+        this.cate_pronums = cate_pronums;
+    }
+
     @Override
     public String toString() {
         return "Categroy{" +
                 "cate_id=" + cate_id +
                 ", cate_name='" + cate_name + '\'' +
                 ", cate_desc='" + cate_desc + '\'' +
+                ", cate_pronums=" + cate_pronums +
                 '}';
     }
 }

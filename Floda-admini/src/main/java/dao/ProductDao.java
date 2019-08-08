@@ -40,6 +40,13 @@ public interface ProductDao {
     int getProductCount();
 
     /**
+     * 根据分类id获取该分类下的所有商品
+     *
+     * @return int
+     */
+    List<Product> getProductCount(int cate_id);
+
+    /**
      * 获取一个商品
      *
      * @param id
@@ -60,5 +67,6 @@ public interface ProductDao {
      * @return list
      */
     List<Product> getAllProducts();
+
 
 }

@@ -73,6 +73,8 @@
         <result name="error">404.jsp</result>
         <result name="main" type="redirect">main.jsp</result>
     </global-results>
-    <action name="user_*" class="userAction" method="{1}"></action>
+    <action name="user_*" class="userAction" method="{1}">
+
+    </action>
     </package>
 </struts>

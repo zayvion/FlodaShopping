@@ -33,6 +33,9 @@
         <property name="c3p0.idle_test_period">3000</property>
         <!-- 引入mapper -->
         <mapping resource="mapper/User.hbm.xml"/>
+        <mapping resource="mapper/Product.hbm.xml"/>
+        <mapping resource="mapper/Img.hbm.xml"/>
+        <mapping resource="mapper/Categroy.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

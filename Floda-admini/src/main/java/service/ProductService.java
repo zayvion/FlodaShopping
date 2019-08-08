@@ -3,6 +3,8 @@ package service;
 import pojo.Img;
 import pojo.Product;
 
+import java.util.List;
+
 /**
  * @Auther: zayvion
  * @Date: 2019-08-05 14:50
@@ -56,4 +58,15 @@ public interface ProductService {
      */
     String updateProduct(Product product);
 
+
+    /**
+     * 根据分类id查询当前分类下存在的商品数目
+     */
+    int proCount(int cate_id);
+
+    /**
+     * 根据分类id查询该分类下的所有商品:默认查询第一个分类的商品
+     * @return
+     */
+    List<Product> getProByCate(int cate_id);
 }

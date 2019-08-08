@@ -1,13 +1,12 @@
 package service.Impl;
 
-import dao.UserDao;
+import dao.FUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pojo.User;
-import service.UserService;
+import service.FUserService;
 import utils.MD5Util;
-import utils.ResponseResult;
 
 /**
  * @Auther: Tree
@@ -15,9 +14,9 @@ import utils.ResponseResult;
  * @Description:
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class FUserServiceImpl implements FUserService {
     @Autowired
-    private UserDao userDao;
+    private FUserDao fuserDao;
 
     @Override
     @Transactional
@@ -26,12 +25,12 @@ public class UserServiceImpl implements UserService {
         user.setPassword(MD5Util.getMD5(user.getPassword()));
         user.setStatus(0);
         user.setType(1);
-        userDao.register(user);
+        fuserDao.register(user);
     }
 
     @Override
     public User login(User user) {
-        User exist = userDao.login(user);
+        User exist = fuserDao.login(user);
         return exist;
     }
 }

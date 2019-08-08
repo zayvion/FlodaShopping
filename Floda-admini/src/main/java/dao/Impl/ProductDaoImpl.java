@@ -3,6 +3,7 @@ package dao.Impl;
 import dao.ProductDao;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -50,7 +51,6 @@ public class ProductDaoImpl extends HibernateDaoSupport implements ProductDao {
         return products;
     }
 
-
     @Override
     public int getProductCount() {
         List<?> list = this.getHibernateTemplate().find("from Product");
@@ -67,4 +67,13 @@ public class ProductDaoImpl extends HibernateDaoSupport implements ProductDao {
     public void updateProductImg(Img img) {
       this.getHibernateTemplate().update(img);
     }
+
+    @Override
+    public List<Product> getProductCount(int cate_id) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(Product.class);
+        criteria.add(Restrictions.eq("pro_cateId",cate_id));
+        List<Product> list = (List<Product>)this.getHibernateTemplate().findByCriteria(criteria);
+        return list;
+    }
+
 }
