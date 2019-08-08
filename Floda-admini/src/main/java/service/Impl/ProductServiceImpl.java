@@ -135,13 +135,15 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int proCount(int cate_id) {
-        List<Product> products = productDao.getProductCount(cate_id);
+        List<Product> products = productDao.getProByCate(cate_id);
         return products.size();
     }
 
     @Override
-    public List<Product> getProByCate(int cate_id) {
-        List<Product> products = productDao.getProductCount(cate_id);
-        return products;
+    public PageHelper getProByCate(int cate_id,int startPage) {
+        List<Product> products = productDao.getProByCate(cate_id);
+        PageHelper data = pageUtils.getData(startPage, 9, products);
+        return data;
     }
+
 }

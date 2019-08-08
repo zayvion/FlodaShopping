@@ -283,7 +283,7 @@
                                             <a href="#" data-target="list-view" data-toggle="tooltip" title="列表展示"><i class="fa fa-list"></i></a>
                                         </div>
                                         <div class="product-amount">
-                                            <p>显示 8 条中的 1 - 5</p>
+                                            <p>显示${requestScope.pagelist.totalNum} 条中的 ${requestScope.pagelist.start+1} - ${requestScope.pagelist.end}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -306,19 +306,19 @@
                         <!-- product item list wrapper start -->
                         <div class="shop-product-wrap grid-view row mbn-40">
                             <!-- product single item start -->
-                            <c:forEach items="${requestScope.first_pros}" var="product">
+                            <c:forEach items="${requestScope.pagelist.data}" var="product">
                                 <div class="col-md-4 col-sm-6">
                                     <!-- product grid start -->
                                     <div class="product-item">
                                         <figure class="product-thumb">
                                             <a href="product-details.jsp">
-                                                <img class="pri-img" src="assets/img/product/product-1.jpg" alt="product">
-                                                <img class="sec-img" src="assets/img/product/product-3.jpg" alt="product">
+                                                <img class="pri-img" src="${product.pro_imgAddr}" alt="product">
+                                                <img class="sec-img" src="${product.pro_imgAddr}" alt="product">
                                             </a>
                                             <div class="button-group">
                                                 <a href="wishlist.jsp" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
                                                 <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                                <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
+                                                <a href="cart.jsp" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
                                             </div>
                                         </figure>
                                         <div class="product-caption">
@@ -336,12 +336,12 @@
                                     <div class="product-list-item">
                                         <figure class="product-thumb">
                                             <a href="product-details.jsp">
-                                                <img class="pri-img" src="assets/img/product/product-1.jpg" alt="product">
-                                                <img class="sec-img" src="assets/img/product/product-3.jpg" alt="product">
+                                                <img class="pri-img" src="${product.pro_imgAddr}" alt="product">
+                                                <img class="sec-img" src="${product.pro_imgAddr}" alt="product">
                                             </a>
                                         </figure>
                                         <div class="product-content-list">
-                                            <h5 class="product-name"><a href="product-details.html">${product.pro_name}</a></h5>
+                                            <h5 class="product-name"><a href="product-details.jsp">${product.pro_name}</a></h5>
                                             <div class="price-box">
                                                 <span class="price-regular">￥${product.pro_price}</span>
                                             </div>
@@ -365,11 +365,11 @@
                         <!-- start pagination area -->
                         <div class="paginatoin-area text-center">
                             <ul class="pagination-box">
-                                <li><a class="previous" href="#"><i class="lnr lnr-chevron-left"></i></a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a class="next" href="#"><i class="lnr lnr-chevron-right"></i></a></li>
+                                <li><a class="previous" href="moreProduct?cate_id=${requestScope.pagelist.data[0].pro_cateId}&startPage=${requestScope.pagelist.nowPage-1<=0?requestScope.pagelist.nowPage:requestScope.pagelist.nowPage-1}"><i class="lnr lnr-chevron-left"></i></a></li>
+                                <c:forEach begin="1" end="${requestScope.pagelist.totalPage}" var="page">
+                                    <li ${requestScope.pagelist.nowPage == page ? 'class="active"':''}><a href="moreProduct?cate_id=${requestScope.pagelist.data[0].pro_cateId}&startPage=${page}">${page}</a></li>
+                                </c:forEach>
+                                <li><a class="next" href="moreProduct?cate_id=${requestScope.pagelist.data[0].pro_cateId}&startPage=${requestScope.pagelist.nowPage+1>requestScope.pagelist.totalPage?requestScope.pagelist.nowPage:requestScope.pagelist.nowPage+1}"><i class="lnr lnr-chevron-right"></i></a></li>
                             </ul>
                         </div>
                         <!-- end pagination area -->

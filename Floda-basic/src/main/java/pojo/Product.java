@@ -17,6 +17,7 @@ public class Product {
     private Integer pro_status;
     private Integer pro_numbers;
     private Integer pro_imgId;
+    private String pro_imgAddr;
 
     public Integer getPro_id() {
         return pro_id;
@@ -82,6 +83,14 @@ public class Product {
         this.pro_imgId = pro_imgId;
     }
 
+    public String getPro_imgAddr() {
+        return pro_imgAddr;
+    }
+
+    public void setPro_imgAddr(String pro_imgAddr) {
+        this.pro_imgAddr = pro_imgAddr;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -93,6 +102,7 @@ public class Product {
                 ", pro_status=" + pro_status +
                 ", pro_numbers=" + pro_numbers +
                 ", pro_imgId=" + pro_imgId +
+                ", pro_imgAddr='" + pro_imgAddr + '\'' +
                 '}';
     }
 }

@@ -44,7 +44,7 @@ public interface ProductDao {
      *
      * @return int
      */
-    List<Product> getProductCount(int cate_id);
+    List<Product> getProByCate(int cate_id);
 
     /**
      * 获取一个商品
@@ -67,6 +67,5 @@ public interface ProductDao {
      * @return list
      */
     List<Product> getAllProducts();
-
 
 }

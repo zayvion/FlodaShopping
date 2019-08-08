@@ -69,11 +69,15 @@ public class ProductDaoImpl extends HibernateDaoSupport implements ProductDao {
     }
 
     @Override
-    public List<Product> getProductCount(int cate_id) {
+    public List<Product> getProByCate(int cate_id) {
         DetachedCriteria criteria = DetachedCriteria.forClass(Product.class);
         criteria.add(Restrictions.eq("pro_cateId",cate_id));
         List<Product> list = (List<Product>)this.getHibernateTemplate().findByCriteria(criteria);
+        for (Product p:list
+             ) {
+            Img img = this.getHibernateTemplate().get(Img.class, p.getPro_imgId());
+            p.setPro_imgAddr(img.getImg_addr());
+        }
         return list;
     }
-
 }

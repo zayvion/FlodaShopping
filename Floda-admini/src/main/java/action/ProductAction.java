@@ -60,7 +60,7 @@ public class ProductAction extends BaseAction{
     private int id;
 
 
-    public String getProducts() throws IOException {
+    public String  getProducts() throws IOException {
         String result = productService.showProducts(startPage , item);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);

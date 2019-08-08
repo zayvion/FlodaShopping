@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import pojo.Categroy;
+import pojo.PageHelper;
 import pojo.Product;
 import service.CategroyService;
 import service.Impl.ProductServiceImpl;
@@ -65,24 +66,16 @@ public class FProductAction extends BaseAction {
             c.setCate_pronums(count);
         }
         //根据分类id查询该分类下的所有商品:默认查询第一个分类的商品
-        List<Product> products = productService.getProByCate(list.get(0).getCate_id());
-        request.setAttribute("cate_list",list);
-        request.setAttribute("first_pros",products);
-        return SHOP;
-    }
-
-    /**
-     * 根据分类id查询该分类下的所有商品:默认查询第一个分类的商品
-     * @return
-     * @throws IOException
-     */
-    public String getProByCate(){
-        List<Product> products = productService.getProByCate(cate_id);
-        for (Product p:products
-             ) {
-            System.out.println(p);
+        if (cate_id == 0){
+            cate_id = list.get(0).getCate_id();
         }
-        return NONE;
+        if (startPage == 0){
+            startPage = 1;
+        }
+        PageHelper date = productService.getProByCate(cate_id,startPage);
+        request.setAttribute("cate_list",list);
+        request.setAttribute("pagelist",date);
+        return SHOP;
     }
 
     public String getNewProducts() throws IOException {

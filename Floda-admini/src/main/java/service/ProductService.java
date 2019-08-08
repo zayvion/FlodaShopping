@@ -1,6 +1,7 @@
 package service;
 
 import pojo.Img;
+import pojo.PageHelper;
 import pojo.Product;
 
 import java.util.List;
@@ -68,5 +69,6 @@ public interface ProductService {
      * 根据分类id查询该分类下的所有商品:默认查询第一个分类的商品
      * @return
      */
-    List<Product> getProByCate(int cate_id);
+    PageHelper getProByCate(int cate_id,int startPage);
+
 }
