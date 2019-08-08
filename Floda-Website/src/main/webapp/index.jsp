@@ -132,7 +132,7 @@
                         </div>
                         <div class="mobile-menu-toggler">
                             <div class="mini-cart-wrap">
-                                <a href="cart.html">
+                                <a href="cart.jsp">
                                     <i class="lnr lnr-cart"></i>
                                 </a>
                             </div>
@@ -312,7 +312,7 @@
                                 <div class="button-group">
                                     <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                    <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
+                                    <a href="cart.jsp" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
                                 </div>
                             </figure>
                             <div class="product-caption">
@@ -345,7 +345,7 @@
                                 <div class="button-group">
                                     <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                    <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
+                                    <a href="cart.jsp" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
                                 </div>
                             </figure>
                             <div class="product-caption">
@@ -378,7 +378,7 @@
                                 <div class="button-group">
                                     <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                    <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
+                                    <a href="cart.jsp" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
                                 </div>
                             </figure>
                             <div class="product-caption">
@@ -411,7 +411,7 @@
                                 <div class="button-group">
                                     <a href="wishlist.html" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
                                     <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                    <a href="cart.html" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
+                                    <a href="cart.jsp" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
                                 </div>
                             </figure>
                             <div class="product-caption">
@@ -773,8 +773,8 @@
                         "                                </div>\n" +
                         "                                <div class='button-group'>\n" +
                         "                                    <a href='addWish?id="+item.pro_id+"' data-toggle='tooltip' data-placement='left' title='添加收藏'><i class='lnr lnr-heart' ></i></a>\n" +
-                        "                                    <a href='#'onclick='getProduct("+item.pro_id+")' data-toggle='modal' data-target='#quick_view'><span data-toggle='\"tooltip' data-placement='left' title='快速预览'><i class='lnr lnr-magnifier'></i></span></a>\n" +
-                        "                                    <a href='addCart?id="+item.pro_id+"' data-toggle='tooltip' data-placement='left' title='添加购物车'><i class='lnr lnr-cart'></i></a>\n" +
+                        "                                    <a href='#' onclick='getProduct("+item.pro_id+")' data-toggle='modal' data-target='#quick_view'><span data-toggle='\"tooltip' data-placement='left' title='快速预览'><i class='lnr lnr-magnifier'></i></span></a>\n" +
+                        "                                    <a href='#' onclick='addCart("+item.pro_id+")' data-toggle='tooltip' data-placement='left' title='添加购物车'><i class='lnr lnr-cart'></i></a>\n" +
                         "                                </div>\n" +
                         "                            </figure>\n" +
                         "                            <div class='product-caption'>\n" +
@@ -836,6 +836,27 @@
             success: function (result) {
                 $("#modal_img").attr("src",result);
                 return result
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+    function addCart(pro_id){
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8080/addCart",
+            //传参
+            data: {"pro_id":pro_id,"pro_number":1},
+            //请求成功
+            success: function (result) {
+                console.log(result);
             },
             //请求失败，包含具体的错误信息
             error: function (e) {

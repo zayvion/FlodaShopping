@@ -38,5 +38,6 @@
         <mapping resource="mapper/Ecaluate.hbm.xml"/>
         <mapping resource="mapper/Img.hbm.xml"/>
         <mapping resource="mapper/UserInfo.hbm.xml"/>
+        <mapping resource="mapper/Card.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

@@ -34,6 +34,7 @@ public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
         criteria.add(Restrictions.eq("username",user.getUsername()));
         List<User> list = (List<User>)this.getHibernateTemplate().findByCriteria(criteria);
         if (!list.isEmpty()){
+
             return list.get(0);
         }
         return null;

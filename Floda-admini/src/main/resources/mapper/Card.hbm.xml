@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="pojo.Cart" table="tb_cart">
+        <id name="cart_id" column="cart_id">
+            <generator class="native"></generator>
+        </id>
+        <property name="user_id" column="user_id"/>
+        <property name="product_id" column="product_id"/>
+        <property name="pro_number" column="pro_number"/>
+        <property name="cart_price" column="cart_price"/>
+    </class>
+</hibernate-mapping>

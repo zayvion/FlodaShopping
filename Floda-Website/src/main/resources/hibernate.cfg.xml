@@ -35,6 +35,7 @@
         <mapping resource="mapper/User.hbm.xml"/>
         <mapping resource="mapper/Product.hbm.xml"/>
         <mapping resource="mapper/Img.hbm.xml"/>
+        <mapping resource="mapper/Card.hbm.xml"/>
         <mapping resource="mapper/Categroy.hbm.xml"/>
 
     </session-factory>

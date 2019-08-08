@@ -9,7 +9,6 @@
     <package name="user" extends="struts-default" namespace="/" strict-method-invocation="false">
         <action name="user_*" class="userAction" method="{1}">
             <result name="error">register.jsp</result>
-            <result name="register" type="redirect">register.jsp</result>
             <result name="login">login.jsp</result>
             <result name="index" type="redirect">index.jsp</result>
         </action>
@@ -18,6 +17,14 @@
            <global-results>
                <result name="detail">product-details.jsp</result>
            </global-results>
+           <action name="productDetail" class="productAction" method="productDetail"/>
+           <action name="getNewProducts" class="productAction" method="getNewProducts"/>
+    </package>
+    <package name="Cart" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <global-results>
+            <result name="index">index.jsp</result>
+        </global-results>
+        <action name="addCart" class="cartAction" method="addCart"/>
            <action name="productDetail" class="FProductAction" method="productDetail"/>
            <action name="moreProduct" class="FProductAction" method="moreProduct">
                <result name="shop">shop.jsp</result>

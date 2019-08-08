@@ -27,5 +27,11 @@
                <result name="shop">shop.jsp</result>
            </action>
     </package>
+    <package name="Cart" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <global-results>
+            <result name="index">index.jsp</result>
+        </global-results>
+        <action name="addCart" class="cartAction" method="addCart"/>
+    </package>
 
 </struts>
