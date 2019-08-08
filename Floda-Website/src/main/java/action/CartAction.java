@@ -1,5 +1,6 @@
 package action;
 
+import dao.JedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,7 @@ import java.io.IOException;
 public class CartAction extends BaseAction {
     @Autowired
     private CartService cartService;
-
+;
     private int pro_id;
     private int pro_number;
 

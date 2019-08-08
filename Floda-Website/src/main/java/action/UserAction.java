@@ -2,7 +2,9 @@ package action;
 
 
 import com.opensymphony.xwork2.ModelDriven;
+import dao.JedisClient;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import pojo.User;
 import service.FUserService;
@@ -18,6 +20,8 @@ import javax.annotation.Resource;
 @Controller
 public class UserAction extends BaseAction implements ModelDriven<User> {
 
+    @Autowired
+    private JedisClient jedisClient;
     @Resource
     private FUserService userService;
     private User user = new User();
@@ -63,6 +67,10 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
      */
     public String exit(){
         session.remove("onliner");
+        return "login";
+    }
+    public String jd(){
+        jedisClient.set("12","123");
         return "login";
     }
 
