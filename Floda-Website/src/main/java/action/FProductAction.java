@@ -66,10 +66,6 @@ public class FProductAction extends BaseAction {
         }
         //根据分类id查询该分类下的所有商品:默认查询第一个分类的商品
         List<Product> products = productService.getProByCate(list.get(0).getCate_id());
-        for (Product p:products
-        ) {
-            System.out.println("surper"+p);
-        }
         request.setAttribute("cate_list",list);
         request.setAttribute("first_pros",products);
         return SHOP;
