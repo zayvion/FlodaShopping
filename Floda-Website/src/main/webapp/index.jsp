@@ -94,7 +94,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="wishlist.html">
+                                        <a href="wishlist.jsp">
                                             <i class="lnr lnr-heart"></i>
                                             <div class="notification">0</div>
                                         </a>

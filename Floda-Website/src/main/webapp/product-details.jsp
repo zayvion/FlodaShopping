@@ -85,19 +85,26 @@
                                             <i class="lnr lnr-user"></i>
                                         </a>
                                         <ul class="dropdown-list">
-                                            <li><a href="login-register.html">登录</a></li>
-                                            <li><a href="login-register.html">注册</a></li>
-                                            <li><a href="my-account.html">个人中心</a></li>
+                                            <c:choose>
+                                                <c:when test="${sessionScope.onliner.username == null}">
+                                                    <li><a href="login.jsp">登录</a></li>
+                                                    <li><a href="register.jsp">注册</a></li>
+                                                </c:when>
+                                                <c:when test="${sessionScope.onliner.username != null}">
+                                                    <li><a href="my_account.jsp">${sessionScope.onliner.username}</a></li>
+                                                    <li><a href="user_exit.action">退出</a></li>
+                                                </c:when>
+                                            </c:choose>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="wishlist.html">
+                                        <a href="wishlist.jsp">
                                             <i class="lnr lnr-heart"></i>
                                             <div class="notification">0</div>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" class="minicart-btn">
+                                        <a href="cart.jsp" class="minicart-btn">
                                             <i class="lnr lnr-cart"></i>
                                             <div class="notification">2</div>
                                         </a>

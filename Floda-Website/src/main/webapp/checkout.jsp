@@ -154,9 +154,16 @@
                                             <i class="lnr lnr-user"></i>
                                         </a>
                                         <ul class="dropdown-list">
-                                            <li><a href="login-register.html">登录</a></li>
-                                            <li><a href="login-register.html">注册</a></li>
-                                            <li><a href="my-account.html">个人中心</a></li>
+                                            <c:choose>
+                                                <c:when test="${sessionScope.onliner.username == null}">
+                                                    <li><a href="login.jsp">登录</a></li>
+                                                    <li><a href="register.jsp">注册</a></li>
+                                                </c:when>
+                                                <c:when test="${sessionScope.onliner.username != null}">
+                                                    <li><a href="my_account.jsp">${sessionScope.onliner.username}</a></li>
+                                                    <li><a href="user_exit.action">退出</a></li>
+                                                </c:when>
+                                            </c:choose>
                                         </ul>
                                     </li>
                                 </ul>
