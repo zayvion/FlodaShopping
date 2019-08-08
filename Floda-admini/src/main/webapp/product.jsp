@@ -135,7 +135,7 @@
                 <br>
                 <div class="form-group">
                     <label for="update_pro_img" class="col-form-label">商品图片:</label>
-                    <img id="pro_pic"  height="200" width="300"/>
+                    <img id="pro_pic"  height="200" width="200"/>
                     <input type="file" class="form-control" id="update_pro_img" name="imgFile">
                     <input type="text" class="form-control" id="update_pro_imgdesc" name="img.img_desc" placeholder="图片描述">
                 </div>

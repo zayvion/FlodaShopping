@@ -34,6 +34,7 @@
         </global-results>
         <action name="getProduct" class="productAction" method="getProductInfo"/>
         <action name="getProducts" class="productAction" method="getProducts"/>
+        <action name="delProduct" class="productAction" method="delProduct"/>
         <action name="addProduct" class="productAction" method="addProduct">
             <interceptor-ref name="basicStack"/>
             <interceptor-ref name="defaultStack"/>

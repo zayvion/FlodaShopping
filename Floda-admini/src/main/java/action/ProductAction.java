@@ -115,6 +115,11 @@ public class ProductAction extends BaseAction{
         return NONE;
     }
 
+    public String delProduct(){
+
+        return PRODUCT;
+    }
+
     public String getDate(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String format = sdf.format(new Date());

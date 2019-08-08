@@ -17,6 +17,8 @@
            <global-results>
                <result name="detail">product-details.jsp</result>
            </global-results>
+           <action name="productDetail" class="productAction" method="productDetail"/>
+           <action name="getNewProducts" class="productAction" method="getNewProducts"/>
            <action name="productDetail" class="FProductAction" method="productDetail"/>
            <action name="moreProduct" class="FProductAction" method="moreProduct">
                <result name="shop">shop.jsp</result>
