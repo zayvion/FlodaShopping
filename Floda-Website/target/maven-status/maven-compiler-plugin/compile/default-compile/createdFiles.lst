@@ -1,8 +1,5 @@
-action\FProductAction$1.class
-action\UserAction.class
-service\FUserService.class
-action\BaseAction.class
-action\FProductAction.class
-dao\Impl\FUserDaoImpl.class
-service\Impl\FUserServiceImpl.class
-dao\FUserDao.class
+action/CartAction.class
+service/CartService.class
+dao/Impl/CartDaoImpl.class
+service/Impl/CartServiceImpl.class
+dao/CartDao.class
