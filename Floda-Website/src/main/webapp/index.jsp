@@ -77,7 +77,7 @@
                             <div class="header-configure-area">
                                 <ul class="nav justify-content-end">
                                     <li>
-                                        <a href="#" class="offcanvas-btn">
+                                        <a href="javascript:void(0)" class="offcanvas-btn">
                                             <i class="lnr lnr-magnifier"></i>
                                         </a>
                                     </li>
@@ -656,8 +656,8 @@
         </div>
         <div class="container">
             <div class="offcanvas-search-box">
-                <form class="d-flex bdr-bottom w-100">
-                    <input type="text" placeholder="搜索商品">
+                <form class="d-flex bdr-bottom w-100" action="searchProduct" method="post">
+                    <input type="text" placeholder="搜索商品" name="keyword">
                     <button class="search-btn"><i class="lnr lnr-magnifier"></i>搜索</button>
                 </form>
             </div>

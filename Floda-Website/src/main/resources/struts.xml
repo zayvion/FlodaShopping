@@ -33,6 +33,7 @@
         <action name="addCart" class="cartAction" method="addCart"/>
         <action name="getCartInfos" class="cartAction" method="getCartInfos"/>
         <action name="delCart" class="cartAction" method="delCart"/>
+        <action name="exportUser" class="userWithPoi" method="exportUser"/>
     </package>
 
 </struts>
