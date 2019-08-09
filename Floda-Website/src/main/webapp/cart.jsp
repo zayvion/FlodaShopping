@@ -340,6 +340,20 @@
                     <a href="cart.jsp"><i class="fa fa-share"></i> 去结算</a>
                 </div>
             </div>
+<%--            <tr>--%>
+<%--                <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="'+result[i].url+'" alt="Product" /></a></td>--%>
+<%--                <td class="pro-title"><a href="#">"+result[i].pro_name+"</a></td>--%>
+<%--                <td class="pro-price"><span>￥"+result[i].pro_price+"</span></td>--%>
+<%--                <td class="pro-quantity">--%>
+<%--                <div class="pro-qty">--%>
+<%--                    <span class="dec qtybtn">-</span>--%>
+<%--                    <input type="text" value="'+result[i].pro_number+'">--%>
+<%--                    <span class="inc qtybtn">+</span>--%>
+<%--                </div>--%>
+<%--                </td>--%>
+<%--                <td class="pro-subtotal"><span>￥"+result[i].cart_price+"</span></td>--%>
+<%--                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>--%>
+<%--            </tr>--%>
         </div>
     </div>
 </div>
@@ -356,7 +370,9 @@
 <script src="assets/js/vendor.js"></script>
 <!-- Active Js -->
 <script src="assets/js/active.js"></script>
+
 <script type="text/javascript">
+
     $(function () {
         $.ajax({
             //请求方式
@@ -379,16 +395,37 @@
                     $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
                         "                                            <div class=\"notification\">"+result.length+"</div>");
                     for (var i = 0; i < result.length; i++){
-                        $("#tbody").append("<tr>\n" +
-                            "                                    <td class=\"pro-thumbnail\"><a href=\"#\"><img class=\"img-fluid\" src="+result[i].url+" alt=\"Product\" /></a></td>\n" +
-                            "                                    <td class=\"pro-title\"><a href=\"#\">"+result[i].pro_name+"</a></td>\n" +
-                            "                                    <td class=\"pro-price\"><span>￥"+result[i].pro_price+"</span></td>\n" +
-                            "                                    <td class=\"pro-quantity\">\n" +
-                            "                                        <div class=\"pro-qty\"><input type=\"text\" value="+result[i].pro_number+"></div>\n" +
-                            "                                    </td>\n" +
-                            "                                    <td class=\"pro-subtotal\"><span>￥"+result[i].cart_price+"</span></td>\n" +
-                            "                                    <td class=\"pro-remove\"><a href=\"#\"><i class=\"fa fa-trash-o\"></i></a></td>\n" +
-                            "                                </tr>");
+                        var str = "<tr>\n" +
+                            "                <td class=\"pro-thumbnail\"><a href='productDetail?id="+result[i].pro_id+"'><img class=\"img-fluid\" src="+result[i].url+" alt=\"Product\" /></a></td>\n" +
+                            "                <td class=\"pro-title\"><a href=\"#\">"+result[i].pro_name+"</a></td>\n" +
+                            "                <td class=\"pro-price\"><span>￥"+result[i].pro_price+"</span></td>\n" +
+                            "                <td class=\"pro-quantity\">\n" +
+                            "                <div class=\"pro-qty\">\n" +
+                            "                    <input type=\"text\" value="+result[i].pro_number+">\n" +
+                            "                </div>\n" +
+                            "                </td>\n" +
+                            "                <td class=\"pro-subtotal\"><span>￥"+result[i].cart_price+"</span></td>\n" +
+                            "                <td class=\"pro-remove\"><a href=\"javascript:void(0)\"><i class=\"fa fa-trash-o\" onclick='delCart("+result[i].cart_id+")'></i></a></td>\n" +
+                            "            </tr>"
+                        var row=$(str);
+                        $("#tbody").append(row);
+                        $(row).find(".pro-qty").prepend('<span class="dec qtybtn">-</span>');
+                        $(row).find(".pro-qty").append('<span class="inc qtybtn">+</span>');
+                        $(row).find(".qtybtn").on('click', function () {
+                            var $button = $(this);
+                            var oldValue = $button.parent().find('input').val();
+                            if ($button.hasClass('inc')) {
+                                var newVal = parseFloat(oldValue) + 1;
+                            } else {
+                                // Don't allow decrementing below zero
+                                if (oldValue > 0) {
+                                    var newVal = parseFloat(oldValue) - 1;
+                                } else {
+                                    newVal = 0;
+                                }
+                            }
+                            $button.parent().find('input').val(newVal);
+                        });
                         total += result[i].cart_price;
                     }
                     $("#totalMoney").append("<td>结算金额</td>\n" +
@@ -422,7 +459,7 @@
                     for (var i = 0; i < msg.length; i++){
                         $("#CartInfos").append("<li class=\"minicart-item\">\n" +
                             "                            <div class=\"minicart-thumb\">\n" +
-                            "                                <a href=\"product-details.jsp\">\n" +
+                            "                                <a href='productDetail?id="+msg[i].pro_id+"'>\n" +
                             "                                    <img src="+msg[i].url+" alt=\"product\">\n" +
                             "                                </a>\n" +
                             "                            </div>\n" +
@@ -435,7 +472,7 @@
                             "                                    <span class=\"cart-price\">￥"+msg[i].pro_price+"</span>\n" +
                             "                                </p>\n" +
                             "                            </div>\n" +
-                            "                            <button class=\"minicart-remove\"><i class=\"lnr lnr-cross\"></i></button>\n" +
+                            "                            <button class=\"minicart-remove\"><i class=\"lnr lnr-cross\" onclick='delCart("+msg[i].cart_id+")'></i></button>\n" +
                             "                        </li>");
                         total += msg[i].cart_price;
                     }
@@ -444,6 +481,30 @@
                         "                            <span><strong>￥"+total+"</strong></span>\n" +
                         "                        </li>");
                 }
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+    function delCart(cart_id) {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址+请求参数
+            url: "http://localhost:8080/delCart?cart_id="+cart_id,
+            //请求成功
+            success: function (data) {
+                if(data.status == 200){
+                    location.href = "cart.jsp";
+                }else {
+                    alert("删除失败！")
+                }
+
             },
             //请求失败，包含具体的错误信息
             error: function (e) {

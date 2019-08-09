@@ -27,7 +27,7 @@ public class CategroyServiceImpl implements CategroyService {
     public String addCategroy(Categroy categroy) {
         try {
             categroyDao.addCategroy(categroy);
-            return ResponseResult.ok("添加分类成功");
+            return ResponseResult.build(200,"添加分类成功");
         } catch (Exception e) {
             e.printStackTrace();
         }

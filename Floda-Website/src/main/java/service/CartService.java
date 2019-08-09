@@ -21,4 +21,11 @@ public interface CartService {
      * @return json
      */
     String getCartInfos(int user_id);
+
+    /**
+     * 删除购物车商品
+     * @param cart_id
+     * @return
+     */
+    String delCart(int cart_id);
 }

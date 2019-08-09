@@ -19,7 +19,8 @@ import java.io.IOException;
 public class CartAction extends BaseAction {
     @Autowired
     private CartService cartService;
-;
+
+    private int cart_id;
     private int pro_id;
     private int pro_number;
 
@@ -40,6 +41,22 @@ public class CartAction extends BaseAction {
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);
         return NONE;
+    }
+
+    public String delCart() throws IOException {
+        System.out.println(cart_id);
+        String result = cartService.delCart(cart_id);
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().write(result);
+        return NONE;
+    }
+
+    public int getCart_id() {
+        return cart_id;
+    }
+
+    public void setCart_id(int cart_id) {
+        this.cart_id = cart_id;
     }
 
     public int getPro_id() {

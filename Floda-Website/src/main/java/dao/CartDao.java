@@ -23,4 +23,10 @@ public interface CartDao {
      * @return json
      */
     List getCartInfos(int user_id);
+
+    /**
+     * 删除购物车商品
+     * @param cart_id 购物车ID
+     */
+    void delCart(int cart_id);
 }

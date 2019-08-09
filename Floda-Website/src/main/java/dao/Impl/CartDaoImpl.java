@@ -53,6 +53,8 @@ public class CartDaoImpl extends HibernateDaoSupport implements CartDao{
             Img img = this.getHibernateTemplate().get(Img.class, pro.getPro_imgId());
             //给CartInfo(pojo)赋值
             CartInfo cartInfo = new CartInfo();
+            cartInfo.setCart_id(carts.get(i).getCart_id());
+            cartInfo.setPro_id(pro.getPro_id());
             cartInfo.setUrl(img.getImg_addr());
             cartInfo.setPro_name(pro.getPro_name());
             cartInfo.setPro_price(pro.getPro_price());
@@ -61,5 +63,11 @@ public class CartDaoImpl extends HibernateDaoSupport implements CartDao{
             cartInfos.add(cartInfo);
         }
         return cartInfos;
+    }
+
+    @Override
+    public void delCart(int cart_id) {
+        Cart cart = this.getHibernateTemplate().get(Cart.class, cart_id);
+        this.getHibernateTemplate().delete(cart);
     }
 }

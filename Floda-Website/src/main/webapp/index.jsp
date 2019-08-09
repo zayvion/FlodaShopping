@@ -805,7 +805,11 @@
             data: {"pro_id":pro_id,"pro_number":1},
             //请求成功
             success: function (result) {
-                console.log(result);
+                if (result.status == 200){
+                    location.href = "index.jsp";
+                }else {
+                    alert("添加失败");
+                }
             },
             //请求失败，包含具体的错误信息
             error: function (e) {
@@ -835,7 +839,7 @@
                     for (var i = 0; i < msg.length; i++){
                         $("#CartInfos").append("<li class=\"minicart-item\">\n" +
                             "                            <div class=\"minicart-thumb\">\n" +
-                            "                                <a href=\"product-details.jsp\">\n" +
+                            "                                <a href='productDetail?id="+msg[i].pro_id+"'>\n" +
                             "                                    <img src="+msg[i].url+" alt=\"product\">\n" +
                             "                                </a>\n" +
                             "                            </div>\n" +
@@ -848,7 +852,7 @@
                             "                                    <span class=\"cart-price\">￥"+msg[i].pro_price+"</span>\n" +
                             "                                </p>\n" +
                             "                            </div>\n" +
-                            "                            <button class=\"minicart-remove\"><i class=\"lnr lnr-cross\"></i></button>\n" +
+                            "                            <button class=\"minicart-remove\"><i class=\"lnr lnr-cross\" onclick='delCart("+msg[i].cart_id+")'></i></button>\n" +
                             "                        </li>");
                         total += msg[i].cart_price;
                     }
@@ -875,6 +879,7 @@
             url: "http://localhost:8080/getCartInfos",
             //请求成功
             success: function (data) {
+                console.log(data);
                 if(typeof data == "string"){
                     $("#superscript").empty();
                     $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
@@ -893,6 +898,30 @@
             }
         })
     })
+    function delCart(cart_id) {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址+请求参数
+            url: "http://localhost:8080/delCart?cart_id="+cart_id,
+            //请求成功
+            success: function (data) {
+                if(data.status == 200){
+                    location.href = "index.jsp";
+                }else {
+                    alert("删除失败！")
+                }
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
 </script>
 </body>
 </html>

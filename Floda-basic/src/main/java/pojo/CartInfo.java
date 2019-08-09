@@ -6,11 +6,29 @@ package pojo;
  * @Description:
  */
 public class CartInfo {
+    private int cart_id;
+    private int pro_id;
     private String url;
     private String pro_name;
     private double pro_price;
     private int pro_number;
     private double cart_price;
+
+    public int getCart_id() {
+        return cart_id;
+    }
+
+    public void setCart_id(int cart_id) {
+        this.cart_id = cart_id;
+    }
+
+    public int getPro_id() {
+        return pro_id;
+    }
+
+    public void setPro_id(int pro_id) {
+        this.pro_id = pro_id;
+    }
 
     public String getUrl() {
         return url;
@@ -55,7 +73,9 @@ public class CartInfo {
     @Override
     public String toString() {
         return "CartInfo{" +
-                "url='" + url + '\'' +
+                "cart_id=" + cart_id +
+                ", pro_id=" + pro_id +
+                ", url='" + url + '\'' +
                 ", pro_name='" + pro_name + '\'' +
                 ", pro_price=" + pro_price +
                 ", pro_number=" + pro_number +

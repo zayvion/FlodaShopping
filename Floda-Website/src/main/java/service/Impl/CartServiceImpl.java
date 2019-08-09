@@ -25,7 +25,7 @@ public class CartServiceImpl implements CartService {
     public String addCart(int pro_id, int user_id, int pro_number) {
         try {
             cartDao.addCart(pro_id, user_id, pro_number);
-            return ResponseResult.ok("添加购物车成功");
+            return ResponseResult.build(200,"购物车添加成功");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,6 +37,18 @@ public class CartServiceImpl implements CartService {
         List cartInfos = cartDao.getCartInfos(user_id);
         String json = new Gson().toJson(cartInfos);
         return json;
+    }
+
+    @Transactional
+    @Override
+    public String delCart(int cart_id) {
+        try {
+            cartDao.delCart(cart_id);
+            return ResponseResult.build(200,"删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseResult.build(500,"删除失败");
     }
 
 
