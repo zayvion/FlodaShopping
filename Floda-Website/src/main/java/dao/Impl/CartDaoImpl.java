@@ -70,4 +70,5 @@ public class CartDaoImpl extends HibernateDaoSupport implements CartDao{
         Cart cart = this.getHibernateTemplate().get(Cart.class, cart_id);
         this.getHibernateTemplate().delete(cart);
     }
+
 }

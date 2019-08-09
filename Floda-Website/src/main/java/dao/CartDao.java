@@ -1,6 +1,8 @@
 package dao;
 
 
+import pojo.CartInfo;
+
 import java.util.List;
 
 /**
@@ -29,4 +31,5 @@ public interface CartDao {
      * @param cart_id 购物车ID
      */
     void delCart(int cart_id);
+
 }

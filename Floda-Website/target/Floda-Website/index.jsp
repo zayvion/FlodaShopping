@@ -850,7 +850,7 @@
                             "                            </div>\n" +
                             "                            <div class=\"minicart-content\">\n" +
                             "                                <h3 class=\"product-name\">\n" +
-                            "                                    <a href=\"product-details.jsp\">"+msg[i].pro_name+"</a>\n" +
+                            "                                    <a href='productDetail?id="+msg[i].pro_id+"'>"+msg[i].pro_name+"</a>\n" +
                             "                                </h3>\n" +
                             "                                <p>\n" +
                             "                                    <span class=\"cart-quantity\">"+msg[i].pro_number+"<strong>&times;</strong></span>\n" +

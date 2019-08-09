@@ -4,6 +4,7 @@ import dao.JedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import pojo.CartInfo;
 import pojo.User;
 import service.CartService;
 
@@ -44,7 +45,6 @@ public class CartAction extends BaseAction {
     }
 
     public String delCart() throws IOException {
-        System.out.println(cart_id);
         String result = cartService.delCart(cart_id);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);
@@ -74,5 +74,4 @@ public class CartAction extends BaseAction {
     public void setPro_number(int pro_number) {
         this.pro_number = pro_number;
     }
-
 }

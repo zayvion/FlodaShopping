@@ -383,6 +383,7 @@
             url: "http://localhost:8080/getCartInfos",
             //请求成功
             success: function (result) {
+                console.log(result);
                 var total = 0;
                 if(typeof result == "string"){
                     $("#superscript").empty();
@@ -397,11 +398,11 @@
                     for (var i = 0; i < result.length; i++){
                         var str = "<tr>\n" +
                             "                <td class=\"pro-thumbnail\"><a href='productDetail?id="+result[i].pro_id+"'><img class=\"img-fluid\" src="+result[i].url+" alt=\"Product\" /></a></td>\n" +
-                            "                <td class=\"pro-title\"><a href=\"#\">"+result[i].pro_name+"</a></td>\n" +
+                            "                <td class=\"pro-title\"><a href='productDetail?id="+result[i].pro_id+"'>"+result[i].pro_name+"</a></td>\n" +
                             "                <td class=\"pro-price\"><span>￥"+result[i].pro_price+"</span></td>\n" +
                             "                <td class=\"pro-quantity\">\n" +
-                            "                <div class=\"pro-qty\">\n" +
-                            "                    <input type=\"text\" value="+result[i].pro_number+">\n" +
+                            "                <div>\n" +
+                            "                    <div>"+result[i].pro_number+"</div>\n" +
                             "                </div>\n" +
                             "                </td>\n" +
                             "                <td class=\"pro-subtotal\"><span>￥"+result[i].cart_price+"</span></td>\n" +
@@ -409,23 +410,6 @@
                             "            </tr>"
                         var row=$(str);
                         $("#tbody").append(row);
-                        $(row).find(".pro-qty").prepend('<span class="dec qtybtn">-</span>');
-                        $(row).find(".pro-qty").append('<span class="inc qtybtn">+</span>');
-                        $(row).find(".qtybtn").on('click', function () {
-                            var $button = $(this);
-                            var oldValue = $button.parent().find('input').val();
-                            if ($button.hasClass('inc')) {
-                                var newVal = parseFloat(oldValue) + 1;
-                            } else {
-                                // Don't allow decrementing below zero
-                                if (oldValue > 0) {
-                                    var newVal = parseFloat(oldValue) - 1;
-                                } else {
-                                    newVal = 0;
-                                }
-                            }
-                            $button.parent().find('input').val(newVal);
-                        });
                         total += result[i].cart_price;
                     }
                     $("#totalMoney").append("<td>结算金额</td>\n" +
@@ -465,7 +449,7 @@
                             "                            </div>\n" +
                             "                            <div class=\"minicart-content\">\n" +
                             "                                <h3 class=\"product-name\">\n" +
-                            "                                    <a href=\"product-details.jsp\">"+msg[i].pro_name+"</a>\n" +
+                            "                                    <a href='productDetail?id="+msg[i].pro_id+"'>"+msg[i].pro_name+"</a>\n" +
                             "                                </h3>\n" +
                             "                                <p>\n" +
                             "                                    <span class=\"cart-quantity\">"+msg[i].pro_number+"<strong>&times;</strong></span>\n" +

@@ -104,10 +104,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" class="minicart-btn">
-                                            <i class="lnr lnr-cart"></i>
-                                            <div class="notification">2</div>
-                                        </a>
+                                        <a href="javascript:void(0)" class="minicart-btn" id="superscript" onclick="getCartInfos()"></a>
                                     </li>
                                 </ul>
                             </div>
@@ -475,68 +472,16 @@
             </div>
             <div class="minicart-content-box">
                 <div class="minicart-item-wrapper">
-                    <ul>
-                        <li class="minicart-item">
-                            <div class="minicart-thumb">
-                                <a href="product-details.html">
-                                    <img src="assets/img/cart/cart-1.jpg" alt="product">
-                                </a>
-                            </div>
-                            <div class="minicart-content">
-                                <h3 class="product-name">
-                                    <a href="product-details.html">Flowers bouquet pink for all flower lovers</a>
-                                </h3>
-                                <p>
-                                    <span class="cart-quantity">1 <strong>&times;</strong></span>
-                                    <span class="cart-price">$100.00</span>
-                                </p>
-                            </div>
-                            <button class="minicart-remove"><i class="lnr lnr-cross"></i></button>
-                        </li>
-                        <li class="minicart-item">
-                            <div class="minicart-thumb">
-                                <a href="product-details.html">
-                                    <img src="assets/img/cart/cart-2.jpg" alt="product">
-                                </a>
-                            </div>
-                            <div class="minicart-content">
-                                <h3 class="product-name">
-                                    <a href="product-details.html">Jasmine flowers white for all flower lovers</a>
-                                </h3>
-                                <p>
-                                    <span class="cart-quantity">1 <strong>&times;</strong></span>
-                                    <span class="cart-price">$80.00</span>
-                                </p>
-                            </div>
-                            <button class="minicart-remove"><i class="lnr lnr-cross"></i></button>
-                        </li>
-                    </ul>
+                    <ul id="CartInfos"></ul>
                 </div>
 
                 <div class="minicart-pricing-box">
-                    <ul>
-                        <li>
-                            <span>sub-total</span>
-                            <span><strong>$300.00</strong></span>
-                        </li>
-                        <li>
-                            <span>Eco Tax (-2.00)</span>
-                            <span><strong>$10.00</strong></span>
-                        </li>
-                        <li>
-                            <span>VAT (20%)</span>
-                            <span><strong>$60.00</strong></span>
-                        </li>
-                        <li class="total">
-                            <span>total</span>
-                            <span><strong>$370.00</strong></span>
-                        </li>
-                    </ul>
+                    <ul id="total"></ul>
                 </div>
 
                 <div class="minicart-button">
-                    <a href="cart.html"><i class="fa fa-shopping-cart"></i> view cart</a>
-                    <a href="cart.html"><i class="fa fa-share"></i> checkout</a>
+                    <a href="cart.jsp"><i class="fa fa-shopping-cart"></i>查看购物车</a>
+                    <a href="checkout.jsp"><i class="fa fa-share"></i>去结算</a>
                 </div>
             </div>
         </div>
@@ -603,6 +548,84 @@
                 console.log(e.responseText);
             }
         });
+    }
+    $(function () {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8080/getCartInfos",
+            //请求成功
+            success: function (result) {
+                var total = 0;
+                if(typeof result == "string"){
+                    $("#superscript").empty();
+                    $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
+                        "                                            <div class=\"notification\">0</div>");
+                }else {
+                    $("#superscript").empty();
+                    $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
+                        "                                            <div class=\"notification\">"+result.length+"</div>");
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    })
+    function getCartInfos(){
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8080/getCartInfos",
+            //请求成功
+            success: function (msg) {
+                if(typeof msg == "string"){
+                    $("#CartInfos").empty();
+                    $("#CartInfos").append("<h4>请先登录！</h4>");
+                }else {
+                    var total = 0;
+                    $("#CartInfos").empty();
+                    $("#total").empty();
+                    for (var i = 0; i < msg.length; i++){
+                        $("#CartInfos").append("<li class=\"minicart-item\">\n" +
+                            "                            <div class=\"minicart-thumb\">\n" +
+                            "                                <a href='productDetail?id="+msg[i].pro_id+"'>\n" +
+                            "                                    <img src="+msg[i].url+" alt=\"product\">\n" +
+                            "                                </a>\n" +
+                            "                            </div>\n" +
+                            "                            <div class=\"minicart-content\">\n" +
+                            "                                <h3 class=\"product-name\">\n" +
+                            "                                    <a href='productDetail?id="+msg[i].pro_id+"'>"+msg[i].pro_name+"</a>\n" +
+                            "                                </h3>\n" +
+                            "                                <p>\n" +
+                            "                                    <span class=\"cart-quantity\">"+msg[i].pro_number+"<strong>&times;</strong></span>\n" +
+                            "                                    <span class=\"cart-price\">￥"+msg[i].pro_price+"</span>\n" +
+                            "                                </p>\n" +
+                            "                            </div>\n" +
+                            "                            <button class=\"minicart-remove\"><i class=\"lnr lnr-cross\" onclick='delCart("+msg[i].cart_id+")'></i></button>\n" +
+                            "                        </li>");
+                        total += msg[i].cart_price;
+                    }
+                    $("#total").append("<li>\n" +
+                        "                            <span>总金额</span>\n" +
+                        "                            <span><strong>￥"+total+"</strong></span>\n" +
+                        "                        </li>");
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
     }
 </script>
 </body>

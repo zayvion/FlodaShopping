@@ -6,7 +6,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.util.ValueStack;
 import dao.ImgDao;
 import dao.ProductDao;
-import org.apache.struts2.components.ElseIf;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,6 @@ import pojo.PageHelper;
 import pojo.Product;
 import pojo.ProductShow;
 import service.CategroyService;
-import service.Impl.ProductServiceImpl;
 import service.ProductService;
 
 import javax.annotation.Resource;

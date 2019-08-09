@@ -1,5 +1,7 @@
 package service;
 
+import pojo.CartInfo;
+
 /**
  * @Auther: zwf
  * @Date: 2019/8/8 9:45
@@ -25,7 +27,8 @@ public interface CartService {
     /**
      * 删除购物车商品
      * @param cart_id
-     * @return
+     * @return json
      */
     String delCart(int cart_id);
+
 }

@@ -5,6 +5,7 @@ import dao.CartDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pojo.CartInfo;
 import service.CartService;
 import utils.ResponseResult;
 
@@ -50,6 +51,5 @@ public class CartServiceImpl implements CartService {
         }
         return ResponseResult.build(500,"删除失败");
     }
-
 
 }
