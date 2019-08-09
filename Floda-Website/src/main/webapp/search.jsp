@@ -5,6 +5,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page isELIgnored="false" %>
 <html>
 <%
@@ -214,7 +215,7 @@
                                             <a href="#" data-target="list-view" data-toggle="tooltip" title="列表展示"><i class="fa fa-list"></i></a>
                                         </div>
                                         <div class="product-amount">
-                                            <p>显示${requestScope.pagelist.totalNum} 条中的 ${requestScope.pagelist.start+1} - ${requestScope.pagelist.end}</p>
+                                            <p>共${requestScope.searchProduct.totalNum} 件商品</p>
                                         </div>
                                     </div>
                                 </div>
@@ -236,25 +237,28 @@
 
                         <!-- product item list wrapper start -->
                         <div class="shop-product-wrap grid-view row mbn-40">
+                            <s:if test="#request.msg != null">
+                                <p style="font-size: 20px; margin: 0 auto" >${requestScope.msg}</p>
+                            </s:if>
                             <!-- product single item start -->
-                            <c:forEach items="${requestScope.pagelist.data}" var="product">
+                            <c:forEach items="${requestScope.searchResult.data}" var="product">
                                 <div class="col-md-4 col-sm-6">
                                     <!-- product grid start -->
                                     <div class="product-item">
                                         <figure class="product-thumb">
-                                            <a href="productDetail?id=${product.pro_id}" target="_blank" >
+                                            <a href="productDetail?id=${product.pro_id}">
                                                 <img class="pri-img" src="${product.pro_imgAddr}" alt="product">
                                                 <img class="sec-img" src="${product.pro_imgAddr}" alt="product">
                                             </a>
                                             <div class="button-group">
                                                 <a href="wishlist.jsp" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
                                                 <a href="#" onclick='getProduct(${product.pro_id})'data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                                <a href="cart.jsp" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
+                                                <a href="javascript:void(0)" onclick="addCart(${product.pro_id})" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
                                             </div>
                                         </figure>
                                         <div class="product-caption">
                                             <p class="product-name">
-                                                <a href="productDetail?id=${product.pro_id}" target="_blank">${product.pro_name}</a>
+                                                <a href="productDetail?id=${product.pro_id}">${product.pro_name}</a>
                                             </p>
                                             <div class="price-box">
                                                 <span class="price-regular">￥${product.pro_price}</span>
@@ -272,7 +276,7 @@
                                             </a>
                                         </figure>
                                         <div class="product-content-list">
-                                            <h5 class="product-name"><a target="_blank" href="productDetail?id=${product.pro_id}">${product.pro_name}</a></h5>
+                                            <h5 class="product-name"><a href="productDetail?id=${product.pro_id}">${product.pro_name}</a></h5>
                                             <div class="price-box">
                                                 <span class="price-regular">￥${product.pro_price}</span>
                                             </div>
@@ -296,11 +300,11 @@
                         <!-- start pagination area -->
                         <div class="paginatoin-area text-center">
                             <ul class="pagination-box">
-                                <li><a class="previous" href="moreProduct?cate_id=${requestScope.pagelist.data[0].pro_cateId}&startPage=${requestScope.pagelist.nowPage-1<=0?requestScope.pagelist.nowPage:requestScope.pagelist.nowPage-1}"><i class="lnr lnr-chevron-left"></i></a></li>
+                                <li><a class="previous" href="searchProduct?keyword=${requestScope.keyword}&startPage=${requestScope.searchResult.nowPage-1<=0?requestScope.searchResult.nowPage:requestScope.searchResult.nowPage-1}"><i class="lnr lnr-chevron-left"></i></a></li>
                                 <c:forEach begin="1" end="${requestScope.pagelist.totalPage}" var="page">
-                                    <li ${requestScope.pagelist.nowPage == page ? 'class="active"':''}><a href="moreProduct?cate_id=${requestScope.pagelist.data[0].pro_cateId}&startPage=${page}">${page}</a></li>
+                                    <li ${requestScope.pagelist.nowPage == page ? 'class="active"':''}><a href="searchProduct?keyword=${requestScope.keyword}&startPage=${page}">${page}</a></li>
                                 </c:forEach>
-                                <li><a class="next" href="moreProduct?cate_id=${requestScope.pagelist.data[0].pro_cateId}&startPage=${requestScope.pagelist.nowPage+1>requestScope.pagelist.totalPage?requestScope.pagelist.nowPage:requestScope.pagelist.nowPage+1}"><i class="lnr lnr-chevron-right"></i></a></li>
+                                <li><a class="next" href="searchProduct?keyword=${requestScope.keyword}&startPage=${requestScope.pagelist.nowPage+1>requestScope.searchResult.totalPage?requestScope.searchResult.nowPage:requestScope.searchResult.nowPage+1}"><i class="lnr lnr-chevron-right"></i></a></li>
                             </ul>
                         </div>
                         <!-- end pagination area -->
@@ -596,6 +600,27 @@
             success: function (result) {
                 $("#modal_img").attr("src",result);
                 return result
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+    function addCart(pro_id){
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8080/addCart",
+            //传参
+            data: {"pro_id":pro_id,"pro_number":1},
+            //请求成功
+            success: function (result) {
+                alert("添加成功！");
             },
             //请求失败，包含具体的错误信息
             error: function (e) {

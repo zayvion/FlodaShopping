@@ -17,15 +17,14 @@
        <package name="product" extends="struts-default" namespace="/" strict-method-invocation="false">
            <global-results>
                <result name="detail">product-details.jsp</result>
+               <result name="shop">shop.jsp</result>
+               <result name="search">search.jsp</result>
            </global-results>
            <action name="productDetail" class="FProductAction" method="productDetail"/>
-           <action name="moreProduct" class="FProductAction" method="moreProduct">
-               <result name="shop">shop.jsp</result>
-           </action>
+           <action name="moreProduct" class="FProductAction" method="moreProduct"/>
            <action name="getNewProducts" class="FProductAction" method="getNewProducts"/>
-           <action name="getProByCate" class="FProductAction" method="getProByCate">
-               <result name="shop">shop.jsp</result>
-           </action>
+           <action name="getProByCate" class="FProductAction" method="getProByCate"/>
+           <action name="searchProduct" class="FProductAction" method="searchProduct"/>
     </package>
     <package name="Cart" extends="struts-default" namespace="/" strict-method-invocation="false">
         <global-results>

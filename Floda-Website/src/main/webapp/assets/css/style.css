@@ -2563,11 +2563,13 @@ only screen and (max-width: 767.98px) {
 
 .banner-content .text2 {
     text-transform: capitalize;
+    color: rgb(255, 255, 250);
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991.98px) {
     .banner-content .text2 {
         font-size: 18px;
+        color: rgba(255,101,0,0.24);
     }
 }
 

@@ -31,6 +31,11 @@
     <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .button-group a{
+            padding-top: 11px;
+        }
+    </style>
 </head>
 <body>
 <!-- Start Header Area -->
@@ -45,7 +50,7 @@
                     <!-- start logo area -->
                     <div class="col-lg-3">
                         <div class="logo">
-                            <a href="index.jsp">
+                            <a href="/">
                                 <img src="assets/img/logo/logo.png" alt="">
                             </a>
                         </div>
@@ -161,7 +166,7 @@
             <!-- search box start -->
             <div class="search-box-offcanvas">
                 <form>
-                    <input type="text" placeholder="Search Here...">
+                    <input type="text" placeholder="请输入关键字...">
                     <button class="search-btn"><i class="lnr lnr-magnifier"></i></button>
                 </form>
             </div>
@@ -204,13 +209,13 @@
                 <div class="col-md-4">
                     <div class="banner-item mb-30">
                         <figure class="banner-thumb">
-                            <a href="#">
-                                <img src="assets/img/banner/img1-top-floda1.jpg" alt="">
+                            <a href="moreProduct?cate_id=5">
+                                <img src="assets/img/banner/nanzhuang.png" alt="">
                             </a>
                             <figcaption class="banner-content">
-                                <h2 class="text1">商品分类(英文)</h2>
-                                <h2 class="text2">商品分类(中文)</h2>
-                                <a class="store-link" href="#">购买</a>
+                                <h2 class="text1">MEN's SUIT</h2>
+                                <h2 class="text2">男装</h2>
+                                <a class="store-link" href="moreProduct?cate_id=5">购买</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -221,13 +226,13 @@
                 <div class="col-md-4">
                     <div class="banner-item mb-30">
                         <figure class="banner-thumb">
-                            <a href="#">
-                                <img src="assets/img/banner/img1-top-floda2.jpg" alt="">
+                            <a href="moreProduct?cate_id=3">
+                                <img src="assets/img/banner/flower.jpg" alt="">
                             </a>
                             <figcaption class="banner-content">
-                                <h2 class="text1">商品分类(英文)</h2>
-                                <h2 class="text2">商品分类(中文)</h2>
-                                <a class="store-link" href="#">购买</a>
+                                <h2 class="text1">FLOWER</h2>
+                                <h2 class="text2">花卉</h2>
+                                <a class="store-link" href="moreProduct?cate_id=3">购买</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -238,13 +243,13 @@
                 <div class="col-md-4">
                     <div class="banner-item mb-30">
                         <figure class="banner-thumb">
-                            <a href="#">
-                                <img src="assets/img/banner/img1-top-floda3.jpg" alt="">
+                            <a href="moreProduct?cate_id=4">
+                                <img src="assets/img/banner/shuma.png" alt="">
                             </a>
                             <figcaption class="banner-content">
-                                <h2 class="text1">商品分类(英文)</h2>
-                                <h2 class="text2">商品分类(中文)</h2>
-                                <a class="store-link" href="#">购买</a>
+                                <h2 class="text1">DIGITAL DEVICE</h2>
+                                <h2 class="text2">数码</h2>
+                                <a class="store-link" href="moreProduct?cate_id=4">购买</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -722,8 +727,8 @@
                         "                                </div>\n" +
                         "                                <div class='button-group'>\n" +
                         "                                    <a href='addWish?id="+item.pro_id+"' data-toggle='tooltip' data-placement='left' title='添加收藏'><i class='lnr lnr-heart' ></i></a>\n" +
-                        "                                    <a href='#' onclick='getProduct("+item.pro_id+")' data-toggle='modal' data-target='#quick_view'><span data-toggle='\"tooltip' data-placement='left' title='快速预览'><i class='lnr lnr-magnifier'></i></span></a>\n" +
-                        "                                    <a href='#' onclick='addCart("+item.pro_id+")' data-toggle='tooltip' data-placement='left' title='添加购物车'><i class='lnr lnr-cart'></i></a>\n" +
+                        "                                    <a href='javascript:void(0)' onclick='getProduct("+item.pro_id+")' data-toggle='modal' data-target='#quick_view'><span data-toggle='\"tooltip' data-placement='left' title='快速预览'><i class='lnr lnr-magnifier'></i></span></a>\n" +
+                        "                                    <a href='javascript:void(0)' onclick='addCart("+item.pro_id+")' data-toggle='tooltip' data-placement='left' title='添加购物车'><i class='lnr lnr-cart'></i></a>\n" +
                         "                                </div>\n" +
                         "                            </figure>\n" +
                         "                            <div class='product-caption'>\n" +
@@ -879,7 +884,6 @@
             url: "http://localhost:8080/getCartInfos",
             //请求成功
             success: function (data) {
-                console.log(data);
                 if(typeof data == "string"){
                     $("#superscript").empty();
                     $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
@@ -898,30 +902,6 @@
             }
         })
     })
-    function delCart(cart_id) {
-        $.ajax({
-            //请求方式
-            type: "POST",
-            //请求的媒体类型
-            datatype: "json",
-            //请求地址+请求参数
-            url: "http://localhost:8080/delCart?cart_id="+cart_id,
-            //请求成功
-            success: function (data) {
-                if(data.status == 200){
-                    location.href = "index.jsp";
-                }else {
-                    alert("删除失败！")
-                }
-
-            },
-            //请求失败，包含具体的错误信息
-            error: function (e) {
-                console.log(e.status);
-                console.log(e.responseText);
-            }
-        })
-    }
 </script>
 </body>
 </html>

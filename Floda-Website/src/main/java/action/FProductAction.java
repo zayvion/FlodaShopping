@@ -6,6 +6,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.util.ValueStack;
 import dao.ImgDao;
 import dao.ProductDao;
+import org.apache.struts2.components.ElseIf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -43,73 +44,101 @@ public class FProductAction extends BaseAction {
     private int startPage;
     private int item;
     private int cate_id;
+    private String keyword;//搜索关键字
 
-    public String productDetail(){
+    public String productDetail() {
         Product product = productDao.getProduct(id);
         if (id == 0) {
             return INDEX;
 
         }
         ValueStack valueStack = ActionContext.getContext().getValueStack();
-        valueStack.set("pro_name",product.getPro_name());
-        valueStack.set("pro_price",product.getPro_price());
-        valueStack.set("pro_desc",product.getPro_desc());
-        valueStack.set("pro_id",product.getPro_id());
-        valueStack.set("proImgUrl",imgDao.getImgUrl(product.getPro_imgId()));
+        valueStack.set("pro_name", product.getPro_name());
+        valueStack.set("pro_price", product.getPro_price());
+        valueStack.set("pro_desc", product.getPro_desc());
+        valueStack.set("pro_id", product.getPro_id());
+        valueStack.set("proImgUrl", imgDao.getImgUrl(product.getPro_imgId()));
         /*
             相关产品
          */
         List<Product> proByCate = productDao.getProByCate(product.getPro_cateId());
         //前台只需要6个商品
         List<ProductShow> reusultList = new ArrayList<ProductShow>();
-        for(int i = 0;i < 6; i++){
-            if (i <= proByCate.size()-1){
+        for (int i = 0; i < 6; i++) {
+            if (i <= proByCate.size() - 1) {
                 ProductShow productShow = new ProductShow();
                 productShow.setPro_id(proByCate.get(i).getPro_id());
                 productShow.setPro_name(proByCate.get(i).getPro_name());
                 productShow.setPro_imgUrl(imgDao.getImgUrl(proByCate.get(i).getPro_imgId()));
                 productShow.setPro_price(proByCate.get(i).getPro_price());
                 reusultList.add(productShow);
-            }else {
+            } else {
                 continue;
             }
         }
-        request.setAttribute("relatedPro",reusultList);
+        request.setAttribute("relatedPro", reusultList);
         return DETAIL;
     }
 
     /**
      * 更多商品：分类展示包括分类名称、该分类下的商品数
+     *
      * @return
      */
-    public String moreProduct(){
+    public String moreProduct() {
         //默认按照第一个商品分类查询商品
         String categroies = categroyService.getCategroies();
-        List<Categroy> list = new Gson().fromJson(categroies, new TypeToken<List<Categroy>>() {}.getType());
-        for (Categroy c:list
-             ) {
+        List<Categroy> list = new Gson().fromJson(categroies, new TypeToken<List<Categroy>>() {
+        }.getType());
+        for (Categroy c : list
+        ) {
             int count = productService.proCount(c.getCate_id());
             c.setCate_pronums(count);
         }
         //根据分类id查询该分类下的所有商品:默认查询第一个分类的商品
-        if (cate_id == 0){
+        if (cate_id == 0) {
             cate_id = list.get(0).getCate_id();
         }
-        if (startPage == 0){
+        if (startPage == 0) {
             startPage = 1;
         }
-        PageHelper date = productService.getProByCate(cate_id,startPage);
-        request.setAttribute("cate_list",list);
-        request.setAttribute("pagelist",date);
+        PageHelper date = productService.getProByCate(cate_id, startPage);
+        request.setAttribute("cate_list", list);
+        request.setAttribute("pagelist", date);
         return SHOP;
     }
 
     public String getNewProducts() throws IOException {
-        String result = productService.showvalidProducts(startPage , item);
+        String result = productService.showvalidProducts(startPage, item);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);
         return NONE;
     }
+
+    public String searchProduct() {
+        //默认按照第一个商品分类查询商品
+        String categroies = categroyService.getCategroies();
+        List<Categroy> list = new Gson().fromJson(categroies, new TypeToken<List<Categroy>>() {
+        }.getType());
+        for (Categroy c : list
+        ) {
+            int count = productService.proCount(c.getCate_id());
+            c.setCate_pronums(count);
+        }
+        System.out.println("proByKeyword：" + keyword);
+        if (startPage <= 0) {
+            startPage = 1;
+        }
+        PageHelper proByKeyword = productService.getProByKeyword(keyword, startPage);
+        if (proByKeyword.getData().size() == 0) {
+            request.setAttribute("msg", "无商品结果");
+        }
+        request.setAttribute("cate_list", list);
+        request.setAttribute("keyword", keyword);
+        request.setAttribute("searchResult", proByKeyword);
+        return SREACH;
+    }
+
 
     public int getId() {
         return id;
@@ -141,5 +170,13 @@ public class FProductAction extends BaseAction {
 
     public void setCate_id(int cate_id) {
         this.cate_id = cate_id;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 }

@@ -35,6 +35,11 @@
     <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .button-group a{
+            padding-top: 11px;
+        }
+    </style>
 </head>
 <body>
 <!-- Start Header Area -->
@@ -49,7 +54,7 @@
                     <!-- start logo area -->
                     <div class="col-lg-3">
                         <div class="logo">
-                            <a href="index.jsp">
+                            <a href="/">
                                 <img src="assets/img/logo/logo.png" alt="">
                             </a>
                         </div>
@@ -75,11 +80,6 @@
                         <div class="header-configure-wrapper">
                             <div class="header-configure-area">
                                 <ul class="nav justify-content-end">
-                                    <li>
-                                        <a href="#" class="offcanvas-btn">
-                                            <i class="lnr lnr-magnifier"></i>
-                                        </a>
-                                    </li>
                                     <li class="user-hover">
                                         <a href="#">
                                             <i class="lnr lnr-user"></i>
@@ -129,7 +129,7 @@
                 <div class="col-12">
                     <div class="mobile-main-header">
                         <div class="mobile-logo">
-                            <a href="index.jsp">
+                            <a href="/">
                                 <img src="assets/img/logo/logo.png" alt="Brand Logo">
                             </a>
                         </div>
@@ -163,16 +163,6 @@
             <i class="lnr lnr-cross"></i>
         </div>
 
-        <div class="off-canvas-inner">
-            <!-- search box start -->
-            <div class="search-box-offcanvas">
-                <form>
-                    <input type="text" placeholder="Search Here...">
-                    <button class="search-btn"><i class="lnr lnr-magnifier"></i></button>
-                </form>
-            </div>
-            <!-- search box end -->
-        </div>
     </div>
 </aside>
 <!-- off-canvas menu end -->
@@ -188,7 +178,7 @@
                         <nav aria-label="breadcrumb">
                             <h1>商品详情</h1>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.jsp"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a></li>
                                 <li class="breadcrumb-item active" aria-current="page">商品详情</li>
                             </ul>
                         </nav>

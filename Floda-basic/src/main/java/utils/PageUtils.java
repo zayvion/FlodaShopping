@@ -53,8 +53,10 @@ public class PageUtils {
             System.out.println("end:" + end);
             List<Object> newList = new ArrayList<Object>();
             for(int i = start;i<end;i++){
-                if (i<= list.size()){
+                if (i <= list.size()-1){
                     newList.add(list.get(i));
+                }else {
+                    break;
                 }
             }
             pageHelper.setTotalNum(totalNum);

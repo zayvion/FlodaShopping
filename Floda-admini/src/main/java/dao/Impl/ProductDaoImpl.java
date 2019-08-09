@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import pojo.Img;
 import pojo.Product;
 
+import java.beans.Expression;
 import java.util.List;
 
 /**
@@ -48,6 +49,19 @@ public class ProductDaoImpl extends HibernateDaoSupport implements ProductDao {
     @Override
     public List<Product> getAllProducts() {
         List<Product> products = (List<Product>) this.getHibernateTemplate().find("from Product order by pro_id desc");
+        return products;
+    }
+
+    @Override
+    public List<Product> getSearchResult(String keyword) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(Product.class);
+        criteria.add(Restrictions.like("pro_name","%"+keyword+"%"));
+        List<Product> products = (List<Product>) this.getHibernateTemplate().findByCriteria(criteria);
+        for (Product p:products
+        ) {
+            Img img = this.getHibernateTemplate().get(Img.class, p.getPro_imgId());
+            p.setPro_imgAddr(img.getImg_addr());
+        }
         return products;
     }
 

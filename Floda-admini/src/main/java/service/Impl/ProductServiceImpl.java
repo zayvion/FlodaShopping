@@ -146,4 +146,11 @@ public class ProductServiceImpl implements ProductService {
         return data;
     }
 
+    @Override
+    public PageHelper getProByKeyword(String keyword, int startPage) {
+        List<Product> searchResult = productDao.getSearchResult(keyword);
+        PageHelper data = pageUtils.getData(startPage, 9, searchResult);
+        return data;
+    }
+
 }

@@ -31,6 +31,8 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
     public final String PRODUCT = "prod";
     public final String DETAIL = "detail";
     public final String SHOP = "shop";
+    public final String SREACH = "search";
+
     @Override
     public void setServletRequest(HttpServletRequest httpServletRequest) {
         this.request = httpServletRequest;

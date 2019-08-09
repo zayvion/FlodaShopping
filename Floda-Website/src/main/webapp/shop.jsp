@@ -34,6 +34,11 @@
     <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .button-group a{
+            padding-top: 11px;
+        }
+    </style>
 
 </head>
 <body>
@@ -51,7 +56,7 @@
                     <!-- start logo area -->
                     <div class="col-lg-3">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="index.jsp">
                                 <img src="assets/img/logo/logo.png" alt="">
                             </a>
                         </div>
@@ -75,11 +80,6 @@
                         <div class="header-configure-wrapper">
                             <div class="header-configure-area">
                                 <ul class="nav justify-content-end">
-                                    <li>
-                                        <a href="#" class="offcanvas-btn">
-                                            <i class="lnr lnr-magnifier"></i>
-                                        </a>
-                                    </li>
                                     <li class="user-hover">
                                         <a href="#">
                                             <i class="lnr lnr-user"></i>
@@ -167,7 +167,7 @@
                         <nav aria-label="breadcrumb">
                             <h1>购物</h1>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a></li>
                                 <li class="breadcrumb-item active" aria-current="page">购物</li>
                             </ul>
                         </nav>
@@ -242,19 +242,19 @@
                                     <!-- product grid start -->
                                     <div class="product-item">
                                         <figure class="product-thumb">
-                                            <a href="productDetail?id=${product.pro_id}">
+                                            <a href="productDetail?id=${product.pro_id}" target="_blank" >
                                                 <img class="pri-img" src="${product.pro_imgAddr}" alt="product">
                                                 <img class="sec-img" src="${product.pro_imgAddr}" alt="product">
                                             </a>
                                             <div class="button-group">
                                                 <a href="wishlist.jsp" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                                <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
+                                                <a href="#" onclick='getProduct(${product.pro_id})'data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
                                                 <a href="cart.jsp" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
                                             </div>
                                         </figure>
                                         <div class="product-caption">
                                             <p class="product-name">
-                                                <a href="productDetail?id=${product.pro_id}">${product.pro_name}</a>
+                                                <a href="productDetail?id=${product.pro_id}" target="_blank">${product.pro_name}</a>
                                             </p>
                                             <div class="price-box">
                                                 <span class="price-regular">￥${product.pro_price}</span>
@@ -272,7 +272,7 @@
                                             </a>
                                         </figure>
                                         <div class="product-content-list">
-                                            <h5 class="product-name"><a href="productDetail?id=${product.pro_id}">${product.pro_name}</a></h5>
+                                            <h5 class="product-name"><a target="_blank" href="productDetail?id=${product.pro_id}">${product.pro_name}</a></h5>
                                             <div class="price-box">
                                                 <span class="price-regular">￥${product.pro_price}</span>
                                             </div>
@@ -431,57 +431,19 @@
                         <div class="col-lg-5 col-md-5">
                             <div class="product-large-slider">
                                 <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
+                                    <img id="modal_img" src="assets/img/product/product-details-img1.jpg"height="400px" width="400px" alt="product-details" />
                                 </div>
                             </div>
-                            <div class="pro-nav slick-row-10 slick-arrow-style">
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                </div>
-                            </div>
+
                         </div>
                         <div class="col-lg-7 col-md-7">
                             <div class="product-details-des quick-details">
-                                <h3 class="product-name">商品名称</h3>
-                                <div class="ratings d-flex">
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <div class="pro-review">
-                                        <span>1 收藏</span>
-                                    </div>
-                                </div>
+                                <h3 class="product-name" id="model_pro_name">商品名称</h3>
+
                                 <div class="price-box">
-                                    <span class="price-regular">￥70.00</span>
-                                    <span class="price-old"><del>￥90.00</del></span>
+                                    <span class="price-regular" id="model_pro_price">￥70.00</span>
                                 </div>
-                                <!--                                    <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>-->
-                                <!--                                    <div class="product-countdown" data-countdown="2019/08/25"></div>-->
-                                <!--                                    <div class="availability">-->
-                                <!--                                        <i class="fa fa-check-circle"></i>-->
-                                <!--                                        <span>200 in stock</span>-->
-                                <!--                                    </div>-->
-                                <p class="pro-desc">商品描述</p>
+                                <p class="pro-desc"id="model_pro_desc">商品描述</p>
                                 <div class="quantity-cart-box d-flex align-items-center">
                                     <h5>数量:</h5>
                                     <div class="quantity">
@@ -501,23 +463,7 @@
 </div>
 <!-- Quick view modal end -->
 
-<!-- offcanvas search form start -->
-<div class="offcanvas-search-wrapper">
-    <div class="offcanvas-search-inner">
-        <div class="offcanvas-close">
-            <i class="lnr lnr-cross"></i>
-        </div>
-        <div class="container">
-            <div class="offcanvas-search-box">
-                <form class="d-flex bdr-bottom w-100">
-                    <input type="text" placeholder="Search entire storage here...">
-                    <button class="search-btn"><i class="lnr lnr-magnifier"></i>search</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- offcanvas search form end -->
+
 
 <!-- offcanvas mini cart start -->
 <div class="offcanvas-minicart-wrapper">
@@ -609,5 +555,55 @@
 <script src="assets/js/vendor.js"></script>
 <!-- Active Js -->
 <script src="assets/js/active.js"></script>
+<script>
+    function getProduct(id) {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8081/getProduct?id="+id,
+
+            //请求成功
+            success: function (result) {
+                console.log(result)
+                getImg(result.pro_imgId);
+                $("#model_pro_name").empty();
+                $("#model_pro_price").empty();
+                $("#model_pro_desc").empty();
+                $("#model_pro_name").append(result.pro_name);
+                $("#model_pro_price").append("¥"+result.pro_price);
+                $("#model_pro_desc").append(result.pro_desc);
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+    function getImg(id) {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8081/getImgUrl?id="+id,
+
+            //请求成功
+            success: function (result) {
+                $("#modal_img").attr("src",result);
+                return result
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+</script>
 </body>
 </html>

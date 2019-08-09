@@ -71,4 +71,12 @@ public interface ProductService {
      */
     PageHelper getProByCate(int cate_id,int startPage);
 
+    /**
+     * 根据关键字查商品
+     * @param keyword 关键字
+     * @param startPage 开始页数
+     * @return
+     */
+    PageHelper getProByKeyword(String keyword ,int startPage);
+
 }

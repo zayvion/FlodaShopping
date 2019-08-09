@@ -68,4 +68,11 @@ public interface ProductDao {
      */
     List<Product> getAllProducts();
 
+    /**
+     * 根据关键字查商品
+     * @param keyword
+     * @return
+     */
+    List<Product> getSearchResult(String keyword);
+
 }
