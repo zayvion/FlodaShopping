@@ -72,6 +72,7 @@ public class ProductDaoImpl extends HibernateDaoSupport implements ProductDao {
     public List<Product> getProByCate(int cate_id) {
         DetachedCriteria criteria = DetachedCriteria.forClass(Product.class);
         criteria.add(Restrictions.eq("pro_cateId",cate_id));
+        criteria.add((Restrictions.eq("pro_status",0)));
         List<Product> list = (List<Product>)this.getHibernateTemplate().findByCriteria(criteria);
         for (Product p:list
              ) {

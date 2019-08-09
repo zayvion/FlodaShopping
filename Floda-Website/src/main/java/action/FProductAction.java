@@ -12,12 +12,14 @@ import org.springframework.stereotype.Controller;
 import pojo.Categroy;
 import pojo.PageHelper;
 import pojo.Product;
+import pojo.ProductShow;
 import service.CategroyService;
 import service.Impl.ProductServiceImpl;
 import service.ProductService;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,12 +46,35 @@ public class FProductAction extends BaseAction {
 
     public String productDetail(){
         Product product = productDao.getProduct(id);
+        if (id == 0) {
+            return INDEX;
+
+        }
         ValueStack valueStack = ActionContext.getContext().getValueStack();
         valueStack.set("pro_name",product.getPro_name());
         valueStack.set("pro_price",product.getPro_price());
         valueStack.set("pro_desc",product.getPro_desc());
         valueStack.set("pro_id",product.getPro_id());
         valueStack.set("proImgUrl",imgDao.getImgUrl(product.getPro_imgId()));
+        /*
+            相关产品
+         */
+        List<Product> proByCate = productDao.getProByCate(product.getPro_cateId());
+        //前台只需要6个商品
+        List<ProductShow> reusultList = new ArrayList<ProductShow>();
+        for(int i = 0;i < 6; i++){
+            if (i <= proByCate.size()-1){
+                ProductShow productShow = new ProductShow();
+                productShow.setPro_id(proByCate.get(i).getPro_id());
+                productShow.setPro_name(proByCate.get(i).getPro_name());
+                productShow.setPro_imgUrl(imgDao.getImgUrl(proByCate.get(i).getPro_imgId()));
+                productShow.setPro_price(proByCate.get(i).getPro_price());
+                reusultList.add(productShow);
+            }else {
+                continue;
+            }
+        }
+        request.setAttribute("relatedPro",reusultList);
         return DETAIL;
     }
 
