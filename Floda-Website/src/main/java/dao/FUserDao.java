@@ -1,7 +1,9 @@
 package dao;
 
+import pojo.Address;
 import pojo.Product;
 import pojo.User;
+import pojo.UserAddr;
 
 import java.util.List;
 
@@ -24,4 +26,15 @@ public interface FUserDao {
      */
     User login(User user);
 
+    /**
+     * 查询用户地址
+     * @param user_id
+     * @return
+     */
+    List<UserAddr> getAddress(int user_id);
+
+    /**
+     * 省市区联动
+     */
+    List<Address> getArea(int parent_id);
 }

@@ -7,10 +7,12 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import pojo.User;
+import pojo.UserAddr;
 import service.FUserService;
 import utils.MD5Util;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 
 /**
  * @Auther: Tree
@@ -26,6 +28,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     private FUserService userService;
     private User user = new User();
     private String repeat_pwd;
+    private int parent_id;
 
     /**
      * 用户注册
@@ -74,6 +77,35 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         return "login";
     }
 
+    /**
+     * 查询当前用户的所有地址
+     * @return
+     */
+    public String getAddress(){
+        try {
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(userService.getAddress(user.getUser_id()));
+            System.out.println(userService.getAddress(user.getUser_id()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return NONE;
+    }
+
+    /**
+     * 省市区联动
+     * @return
+     */
+    public String getArea(){
+        try {
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(userService.getArea(parent_id));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return NONE;
+    }
+
     @Override
     public User getModel() {
         return user;
@@ -85,5 +117,13 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 
     public void setRepeat_pwd(String repeat_pwd) {
         this.repeat_pwd = repeat_pwd;
+    }
+
+    public int getParent_id() {
+        return parent_id;
+    }
+
+    public void setParent_id(int parent_id) {
+        this.parent_id = parent_id;
     }
 }

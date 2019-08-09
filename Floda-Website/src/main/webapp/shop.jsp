@@ -289,7 +289,6 @@
                             <!-- product single item start -->
                         </div>
                         <!-- product item list wrapper end -->
-
                         <!-- start pagination area -->
                         <div class="paginatoin-area text-center">
                             <ul class="pagination-box">

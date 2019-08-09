@@ -92,7 +92,7 @@
                                                     <li><a href="register.jsp">注册</a></li>
                                                 </c:when>
                                                 <c:when test="${sessionScope.onliner.username != null}">
-                                                    <li><a href="my_account.jsp">${sessionScope.onliner.username}</a></li>
+                                                    <li><a href="my-account.jsp">${sessionScope.onliner.username}</a></li>
                                                     <li><a href="user_exit.action">退出</a></li>
                                                 </c:when>
                                             </c:choose>
@@ -153,25 +153,6 @@
     <!-- mobile header end -->
 </header>
 <!-- end Header Area -->
-
-<!-- off-canvas menu start -->
-<aside class="off-canvas-wrapper">
-    <div class="off-canvas-overlay"></div>
-    <div class="off-canvas-inner-content">
-        <div class="btn-close-off-canvas">
-            <i class="lnr lnr-cross"></i>
-        </div>
-
-        <div class="off-canvas-inner">
-            <!-- search box start -->
-            <div class="search-box-offcanvas">
-                <form>
-                    <input type="text" placeholder="请输入关键字...">
-                    <button class="search-btn"><i class="lnr lnr-magnifier"></i></button>
-                </form>
-            </div>
-            <!-- search box end -->
-
         </div>
     </div>
 </aside>

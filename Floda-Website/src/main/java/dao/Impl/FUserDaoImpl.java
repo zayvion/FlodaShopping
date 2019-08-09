@@ -7,7 +7,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+import pojo.Address;
 import pojo.User;
+import pojo.UserAddr;
 
 import java.util.List;
 
@@ -34,9 +36,24 @@ public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
         criteria.add(Restrictions.eq("username",user.getUsername()));
         List<User> list = (List<User>)this.getHibernateTemplate().findByCriteria(criteria);
         if (!list.isEmpty()){
-
             return list.get(0);
         }
         return null;
+    }
+
+    @Override
+    public List<UserAddr> getAddress(int user_id) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(UserAddr.class);
+        criteria.add(Restrictions.eq("userId",user_id));
+        List<UserAddr> list = (List<UserAddr>)this.getHibernateTemplate().findByCriteria(criteria);
+        return list;
+    }
+
+    @Override
+    public List<Address> getArea(int parent_id) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(Address.class);
+        criteria.add(Restrictions.eq("parent_id",parent_id));
+        List<Address> list = (List<Address>)this.getHibernateTemplate().findByCriteria(criteria);
+        return list;
     }
 }

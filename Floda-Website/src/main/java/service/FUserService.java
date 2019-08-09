@@ -1,6 +1,9 @@
 package service;
 
+import pojo.Address;
 import pojo.User;
+
+import java.util.List;
 
 /**
  * @Auther: Tree
@@ -21,4 +24,14 @@ public interface FUserService {
      * @return json
      */
     User login(User user);
+
+    /**
+     * 查询用户地址
+     */
+    String getAddress(int user_id);
+
+    /**
+     * 省市区联动
+     */
+    String getArea(int parent_id);
 }

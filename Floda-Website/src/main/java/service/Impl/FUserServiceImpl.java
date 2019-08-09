@@ -1,5 +1,6 @@
 package service.Impl;
 
+import com.google.gson.Gson;
 import dao.FUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,15 @@ public class FUserServiceImpl implements FUserService {
     public User login(User user) {
         User exist = fuserDao.login(user);
         return exist;
+    }
+
+    @Override
+    public String getAddress(int user_id) {
+        return new Gson().toJson(fuserDao.getAddress(user_id));
+    }
+
+    @Override
+    public String getArea(int parent_id) {
+        return new Gson().toJson(fuserDao.getArea(parent_id));
     }
 }

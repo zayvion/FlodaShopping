@@ -37,6 +37,8 @@
         <mapping resource="mapper/Img.hbm.xml"/>
         <mapping resource="mapper/Card.hbm.xml"/>
         <mapping resource="mapper/Categroy.hbm.xml"/>
+        <mapping resource="mapper/UserAddr.hbm.xml"/>
+        <mapping resource="mapper/Address.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

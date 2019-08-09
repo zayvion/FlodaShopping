@@ -1,0 +1,14 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="pojo.Address" table="tb_address">
+        <id name="address_id" column="address_id">
+            <generator class="native"/>
+        </id>
+        <property name="area_name" column="area_name"/>
+        <property name="parent_id" type="integer" column="parent_id"/>
+        <property name="is_parent" column="is_parent"/>
+    </class>
+</hibernate-mapping>
