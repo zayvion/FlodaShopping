@@ -1,6 +1,7 @@
 package dao.Impl;
 
 import dao.FUserDao;
+import org.apache.commons.lang3.ArrayUtils;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -11,6 +12,7 @@ import pojo.Address;
 import pojo.User;
 import pojo.UserAddr;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -46,6 +48,19 @@ public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
         DetachedCriteria criteria = DetachedCriteria.forClass(UserAddr.class);
         criteria.add(Restrictions.eq("userId",user_id));
         List<UserAddr> list = (List<UserAddr>)this.getHibernateTemplate().findByCriteria(criteria);
+        for (UserAddr u:list
+             ) {
+            String[] addr = u.getReceiver_addr().split(",");
+            StringBuffer buffer = new StringBuffer();
+            for (int i = 0; i < addr.length-1; i++) {
+                if (!addr[i].equals("")){
+                    System.out.println(addr[i]);
+                    Address address = this.getHibernateTemplate().get(Address.class, Integer.parseInt(addr[i]));
+                    buffer.append(address.getArea_name());
+                }
+            }
+           u.setReceiver_addr(buffer.append(addr[addr.length-1]).toString());
+        }
         return list;
     }
 
@@ -55,5 +70,28 @@ public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
         criteria.add(Restrictions.eq("parent_id",parent_id));
         List<Address> list = (List<Address>)this.getHibernateTemplate().findByCriteria(criteria);
         return list;
+    }
+
+    @Override
+    public void addAddress(UserAddr userAddr) {
+        this.getHibernateTemplate().save(userAddr);
+    }
+
+    @Override
+    public void removeAddr(int user_addr_id) {
+        UserAddr userAddr = this.getHibernateTemplate().get(UserAddr.class, user_addr_id);
+        this.getHibernateTemplate().delete(userAddr);
+    }
+
+    @Override
+    public UserAddr getAddrById(int user_addr_id) {
+        UserAddr userAddr = this.getHibernateTemplate().get(UserAddr.class, user_addr_id);
+        return userAddr;
+    }
+
+    @Override
+    public void updateAddress(UserAddr userAddr) {
+        System.out.println(userAddr);
+        this.getHibernateTemplate().update(userAddr);
     }
 }

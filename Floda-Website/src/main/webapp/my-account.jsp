@@ -1,4 +1,4 @@
-<%--
+<%@ page import="pojo.User" %><%--
   User: dc
   Date: 2019/8/9
   Time: 12:48
@@ -10,8 +10,10 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-%><base href="<%=basePath%>">
+    User onliner = (User) request.getSession().getAttribute("onliner");
+%>
 <head>
+    <base href="<%=basePath%>">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -286,13 +288,7 @@
                                                 </h3>
                                                 <div id="addr-container">
                                                     <div class="address_card">
-                                                        <address>
-                                                            <p><strong>邓超</strong></p>
-                                                            <p>湖南省张家界市永定区大庸桥街道</p>
-                                                            <p>电话: 18229735193</p>
-                                                        </address>
-                                                        <a href="#" class="btn btn__bg"><i class="fa fa-edit"></i>
-                                                            修改地址</a>
+
                                                     </div>
 
                                                 </div>
@@ -592,39 +588,83 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <form>
+                <form action="user_addAddress.action" onsubmit="return false" method="post" id="addrForm">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="receiver_name" name="receiver_name" placeholder="收件人">
+                        <input type="text" class="form-control" id="receiver_name" name="userAddr.receiver_name" placeholder="收件人">
                     </div>
                     <div class="form-group">
-                        <input type="tel" class="form-control" id="receiver_tel" name="receiver_tel" placeholder="电话号码">
+                        <input type="tel" class="form-control" id="receiver_tel" name="userAddr.receiver_tel" placeholder="电话号码">
                     </div>
-                    <div class="form-group" style="display: flex">
-                        <select class="form-control" style="width: 120px" id="pro" onchange="getChilren(this)">
+                    <div id="selects" class="form-group" style="display: flex">
+                        <select class="form-control" style="width: 120px" id="pro" name="userAddr.pro" onchange="getChilren(this)">
                             <option disabled selected>省份/自治区</option>
                         </select>
-                        <select class="form-control" style="width: 120px" id="city" onchange="getChilren(this)">
+                        <select class="form-control" style="width: 120px" id="city" name="userAddr.city" onchange="getChilren(this)">
                             <option disabled selected>城市/地区</option>
                         </select>
-                        <select class="form-control" style="width: 120px" id="area" onchange="getChilren(this)">
+                        <select class="form-control" style="width: 120px" id="area" name="userAddr.area" onchange="getChilren(this)">
                             <option disabled selected>区/县</option>
                         </select>
-                        <select class="form-control" style="width: 120px" id="street">
+                        <select class="form-control" style="width: 120px" id="street" name="userAddr.street">
                             <option disabled selected>配送区域</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <textarea class="form-control" rows="3" id="receiver_addr" name="receiver_addr" placeholder="详细地址"></textarea>
+                        <textarea class="form-control" rows="3" id="receiver_addr" name="userAddr.receiver_addr" placeholder="详细地址"></textarea>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="zip" name="zip" placeholder="邮政编码">
+                        <input type="text" class="form-control" id="zip" name="userAddr.zip" placeholder="邮政编码">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="exit">取消</button>
+                        <button type="button" data-dismiss="modal" class="save" onclick="subAddress(${sessionScope.onliner.user_id})">保存</button>
                     </div>
                 </form>
-                <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="exit">取消</button>
-                    <button type="submit" class="save">保存</button>
-                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%--修改地址模态框--%>
+<div class="modal fade" style="width: 500px;margin: 100px 0 0 500px" id="updaterAddr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="user_addAddress.action" onsubmit="return false" method="post" id="updateForm">
+                    <div class="form-group">
+                        <input type="hidden" id="up_user_addr_id" name="userAddr.user_addr_id" value="">
+                        <input type="text" class="form-control" id="up_receiver_name" name="userAddr.receiver_name" placeholder="收件人">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" class="form-control" id="up_receiver_tel" name="userAddr.receiver_tel" placeholder="电话号码">
+                    </div>
+                    <div id="up_selects" class="form-group" style="display: flex">
+                        <select class="form-control" style="width: 120px" id="up_pro" name="userAddr.pro" onchange="getChilren(this)">
+                            <option disabled selected>省份/自治区</option>
+                        </select>
+                        <select class="form-control" style="width: 120px"  name="userAddr.city" onchange="getChilren(this)">
+                            <option disabled selected>城市/地区</option>
+                        </select>
+                        <select class="form-control" style="width: 120px" name="userAddr.area" onchange="getChilren(this)">
+                            <option disabled selected>区/县</option>
+                        </select>
+                        <select class="form-control" style="width: 120px" name="userAddr.street">
+                            <option disabled selected>配送区域</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3" id="up_receiver_addr" name="userAddr.receiver_addr" placeholder="详细地址"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="up_zip" name="userAddr.zip" placeholder="邮政编码">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="exit">取消</button>
+                        <button type="button" data-dismiss="modal" class="save" onclick="editAddress(${sessionScope.onliner.user_id})">保存</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -638,6 +678,53 @@
 <script src="assets/js/active.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script>
+    var userId = <%=onliner.getUser_id()%>
+
+    //添加地址表单提交
+    function subAddress(user_id) {
+        $.post("user_addAddress.action",$("#addrForm").serialize(),function (data,status) {
+            if (data.status == 200){
+                getAddress(user_id);
+            }else {
+                alert(data.msg);
+            }
+        });
+    };
+
+    //删除地址
+    function removeAddr(user_addr_id) {
+        $.post("user_removeAddr.action",{user_addr_id:user_addr_id},function (data,status) {
+            if (data.status == 200){
+                getAddress(userId);
+            }else {
+                alert(data.msg);
+            }
+        })
+    };
+
+    //编辑地址
+    function getAddrById(user_addr_id) {
+        $.get("user_getAddrById.action",{user_addr_id:user_addr_id},function (data,status) {
+            $("#up_user_addr_id").val(data.user_addr_id);
+            $("#up_receiver_name").val(data.receiver_name);
+            $("#up_receiver_tel").val(data.receiver_tel);
+            var addrs = data.receiver_addr.split(",");
+            $("#up_receiver_addr").val(addrs[addrs.length-1]);
+            $("#up_zip").val(data.zip);
+        })
+    }
+
+    //修改地址表单提交
+    function editAddress(user_id) {
+        $.post("user_updateAddress.action",$("#updateForm").serialize(),function (data,status) {
+            if (data.status == 200){
+                getAddress(user_id);
+            }else {
+                alert(data.msg);
+            }
+        });
+    };
+
     //js上传图片预览
     function changepic(obj){
         //console.log(obj.files[0]);//这里可以获取上传文件的name
@@ -649,7 +736,7 @@
         var url = null ;
         // 下面函数执行的效果是一样的，只是需要针对不同的浏览器执行不同的 js 函数而已
         if (window.createObjectURL != undefined) { // basic
-            url = window.createObjectURL(file) ;
+            url = window.createObjectURL(file);
         } else if (window.URL != undefined) { // mozilla(firefox)
             url = window.URL.createObjectURL(file) ;
         } else if (window.webkitURL != undefined) { // webkit or chrome
@@ -671,8 +758,10 @@
                     "<p>"+item.receiver_addr+"</p>\n" +
                     "<p>电话: "+item.receiver_tel+"</p>\n" +
                     "</address>\n" +
-                    "<a href=\"#\" class=\"btn btn__bg\"><i class=\"fa fa-edit\"></i>\n" +
+                    "<a href='javascript:void(0)' data-toggle='modal' data-target='#updaterAddr' onclick='getAddrById("+item.user_addr_id+")' class=\"btn btn__bg\"><i class=\"fa fa-edit\"></i>\n" +
                     "修改地址</a>\n" +
+                    "<a href='javascript:void(0)' onclick='removeAddr("+item.user_addr_id+")' class=\"btn btn__bg\"><i class=\"fa fa-trash\"></i>\n" +
+                    "移除地址</a>\n" +
                     "</div>";
                 $("#addr-container").append(addr);
             })
@@ -686,11 +775,12 @@
         $.get("user_getArea.action",{parent_id:0},function (data,status) {
             $.each(data,function (index,item) {
                 $('#pro').append("<option value='"+item.address_id+"'>"+item.area_name+"</option>");
+                $('#up_pro').append("<option value='"+item.address_id+"'>"+item.area_name+"</option>");
             })
-        })
+        });
     });
 
-
+    //获取下一级区域菜单
     function getChilren(obj) {
         var vs = $(obj).children("option:selected").val();
         $.post("user_getArea.action",{parent_id:vs},function (data,status) {

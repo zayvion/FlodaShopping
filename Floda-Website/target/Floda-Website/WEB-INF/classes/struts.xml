@@ -13,6 +13,8 @@
             <result name="login" type="redirect">login.jsp</result>
             <result name="index" type="redirect">index.jsp</result>
         </action>
+        <action name="exportUser" class="userWithPoi" method="exportUser"/>
+        <action name="sendSMS" class="smsAction" method="sendSMS"/>
     </package>
        <package name="product" extends="struts-default" namespace="/" strict-method-invocation="false">
            <global-results>
@@ -33,7 +35,6 @@
         <action name="addCart" class="cartAction" method="addCart"/>
         <action name="getCartInfos" class="cartAction" method="getCartInfos"/>
         <action name="delCart" class="cartAction" method="delCart"/>
-        <action name="exportUser" class="userWithPoi" method="exportUser"/>
     </package>
 
 </struts>

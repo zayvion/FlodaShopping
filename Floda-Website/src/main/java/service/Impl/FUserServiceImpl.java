@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pojo.User;
+import pojo.UserAddr;
 import service.FUserService;
 import utils.MD5Util;
+import utils.ResponseResult;
 
 /**
  * @Auther: Tree
@@ -43,5 +45,47 @@ public class FUserServiceImpl implements FUserService {
     @Override
     public String getArea(int parent_id) {
         return new Gson().toJson(fuserDao.getArea(parent_id));
+    }
+
+    @Override
+    @Transactional
+    public String addAddress(UserAddr userAddr) {
+        try {
+            fuserDao.addAddress(userAddr);
+            return ResponseResult.build(200,"添加成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseResult.build(500,"添加失败");
+    }
+
+    @Override
+    @Transactional
+    public String removeAddr(int user_addr_id) {
+        try {
+            fuserDao.removeAddr(user_addr_id);
+            return ResponseResult.build(200,"删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseResult.build(500,"删除失败");
+    }
+
+    @Override
+    public String getAddrById(int user_addr_id) {
+        UserAddr addrById = fuserDao.getAddrById(user_addr_id);
+        return new Gson().toJson(addrById);
+    }
+
+    @Override
+    @Transactional
+    public String updateAddress(UserAddr userAddr) {
+        try {
+            fuserDao.updateAddress(userAddr);
+            return ResponseResult.build(200,"修改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseResult.build(200,"修改失败");
     }
 }

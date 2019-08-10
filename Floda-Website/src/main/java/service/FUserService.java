@@ -2,6 +2,7 @@ package service;
 
 import pojo.Address;
 import pojo.User;
+import pojo.UserAddr;
 
 import java.util.List;
 
@@ -34,4 +35,28 @@ public interface FUserService {
      * 省市区联动
      */
     String getArea(int parent_id);
+
+    /**
+     * 添加用户地址
+     * @param userAddr
+     */
+    String addAddress(UserAddr userAddr);
+    /**
+     * 删除用户地址
+     * @param user_addr_id
+     */
+    String removeAddr(int user_addr_id);
+
+    /**
+     * 根据地址id获取地址
+     * @param user_addr_id
+     * @return
+     */
+    String getAddrById(int user_addr_id);
+
+    /**
+     * 修改用户地址
+     * @param userAddr
+     */
+    String updateAddress(UserAddr userAddr);
 }

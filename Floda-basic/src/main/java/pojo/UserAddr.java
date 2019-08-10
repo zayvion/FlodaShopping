@@ -10,6 +10,10 @@ public class UserAddr {
     private int userId;
     private String receiver_name;
     private String receiver_tel;
+    private String pro;
+    private String city;
+    private String area;
+    private String street;
     private String receiver_addr;
     private String zip;
 
@@ -53,16 +57,36 @@ public class UserAddr {
         this.receiver_addr = receiver_addr;
     }
 
-    @Override
-    public String toString() {
-        return "UserAddr{" +
-                "user_addr_id=" + user_addr_id +
-                ", userId=" + userId +
-                ", receiver_name='" + receiver_name + '\'' +
-                ", receiver_tel='" + receiver_tel + '\'' +
-                ", receiver_addr='" + receiver_addr + '\'' +
-                ", zip='" + zip + '\'' +
-                '}';
+    public String getPro() {
+        return pro;
+    }
+
+    public void setPro(String pro) {
+        this.pro = pro;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public String getZip() {
@@ -71,5 +95,21 @@ public class UserAddr {
 
     public void setZip(String zip) {
         this.zip = zip;
+    }
+
+    @Override
+    public String toString() {
+        return "UserAddr{" +
+                "user_addr_id=" + user_addr_id +
+                ", userId=" + userId +
+                ", receiver_name='" + receiver_name + '\'' +
+                ", receiver_tel='" + receiver_tel + '\'' +
+                ", pro='" + pro + '\'' +
+                ", city='" + city + '\'' +
+                ", area='" + area + '\'' +
+                ", street='" + street + '\'' +
+                ", receiver_addr='" + receiver_addr + '\'' +
+                ", zip='" + zip + '\'' +
+                '}';
     }
 }

@@ -37,4 +37,29 @@ public interface FUserDao {
      * 省市区联动
      */
     List<Address> getArea(int parent_id);
+
+    /**
+     * 添加用户地址
+     * @param userAddr
+     */
+    void addAddress(UserAddr userAddr);
+
+    /**
+     * 删除用户地址
+     * @param user_addr_id
+     */
+    void removeAddr(int user_addr_id);
+
+    /**
+     * 根据地址id获取地址
+     * @param user_addr_id
+     * @return
+     */
+    UserAddr getAddrById(int user_addr_id);
+
+    /**
+     * 修改用户地址
+     * @param userAddr
+     */
+    void updateAddress(UserAddr userAddr);
 }

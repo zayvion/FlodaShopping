@@ -29,7 +29,74 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     private User user = new User();
     private String repeat_pwd;
     private int parent_id;
+    private UserAddr userAddr;
+    private int user_addr_id;
     private String code;
+
+    /**
+     * 添加用户地址
+     * @return
+     */
+    public String addAddress(){
+        User onliner = (User) session.get("onliner");
+        userAddr.setUserId(onliner.getUser_id());
+        userAddr.setReceiver_addr(userAddr.getPro()+","+userAddr.getCity()+","+userAddr.getArea()+","+userAddr.getStreet()+","+userAddr.getReceiver_addr());
+        try {
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(userService.addAddress(userAddr));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return NONE;
+    }
+
+    /**
+     * 添加用户地址
+     * @return
+     */
+    public String updateAddress(){
+        User onliner = (User) session.get("onliner");
+        userAddr.setUserId(onliner.getUser_id());
+        userAddr.setReceiver_addr(userAddr.getPro()+","+userAddr.getCity()+","+userAddr.getArea()+","+userAddr.getStreet()+","+userAddr.getReceiver_addr());
+        try {
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(userService.updateAddress(userAddr));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return NONE;
+    }
+
+    /**
+     * 删除用户地址
+     * @return
+     */
+    public String removeAddr(){
+        try {
+            String addrJson = userService.removeAddr(user_addr_id);
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(addrJson);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return NONE;
+    }
+
+    /**
+     * 根据地址id获取地址
+     * @return
+     */
+    public String getAddrById(){
+        try {
+            String addrById = userService.getAddrById(user_addr_id);
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(addrById);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return NONE;
+    }
+
 
     /**
      * 用户注册
@@ -87,7 +154,6 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         try {
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(userService.getAddress(user.getUser_id()));
-            System.out.println(userService.getAddress(user.getUser_id()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -135,6 +201,22 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public UserAddr getUserAddr() {
+        return userAddr;
+    }
+
+    public void setUserAddr(UserAddr userAddr) {
+        this.userAddr = userAddr;
+    }
+
+    public int getUser_addr_id() {
+        return user_addr_id;
+    }
+
+    public void setUser_addr_id(int user_addr_id) {
+        this.user_addr_id = user_addr_id;
     }
 }
 
