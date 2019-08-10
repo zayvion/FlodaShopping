@@ -89,6 +89,7 @@ public class UserWithPoi extends BaseAction {
         sheet.autoSizeColumn(2, true);
         sheet.autoSizeColumn(3, true);
         sheet.autoSizeColumn(4, true);
+        sheet.autoSizeColumn(5, true);
         //保存
         //wb.write(new FileOutputStream(new File("/Users/zayvion/Desktop/poi.xls")));、
         String downFileName = new String("userexport_" + getDate() + ".xls");

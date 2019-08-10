@@ -29,6 +29,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     private User user = new User();
     private String repeat_pwd;
     private int parent_id;
+    private String code;
 
     /**
      * 用户注册
@@ -37,6 +38,11 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
      * @throws Exception
      */
     public String register()throws Exception{
+        if (!session.get("code").equals(code)){
+            session.remove("code");
+            request.setAttribute("hint","验证码错误，请重新输入！");
+            return ERROR;
+        }
         try {
             request.setAttribute("newUser",user);
             userService.register(user);
@@ -70,10 +76,6 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
      */
     public String exit(){
         session.remove("onliner");
-        return "login";
-    }
-    public String jd(){
-        jedisClient.set("12","123");
         return "login";
     }
 
@@ -126,4 +128,13 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     public void setParent_id(int parent_id) {
         this.parent_id = parent_id;
     }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 }
+

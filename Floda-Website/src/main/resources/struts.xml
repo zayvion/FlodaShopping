@@ -10,10 +10,11 @@
         <action name="user_*" class="userAction" method="{1}">
             <result name="error">register.jsp</result>
             <result name="register">register.jsp</result>
-            <result name="login" type="redirect">login.jsp</result>
+            <result name="login">login.jsp</result>
             <result name="index" type="redirect">index.jsp</result>
         </action>
         <action name="exportUser" class="userWithPoi" method="exportUser"/>
+        <action name="sendRegSMS" class="smsAction" method="sendSMS"/>
     </package>
        <package name="product" extends="struts-default" namespace="/" strict-method-invocation="false">
            <global-results>
