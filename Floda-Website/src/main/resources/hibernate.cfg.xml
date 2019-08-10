@@ -39,6 +39,6 @@
         <mapping resource="mapper/Categroy.hbm.xml"/>
         <mapping resource="mapper/UserAddr.hbm.xml"/>
         <mapping resource="mapper/Address.hbm.xml"/>
-
+        <mapping resource="mapper/Wishlist.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

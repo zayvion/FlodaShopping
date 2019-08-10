@@ -98,10 +98,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="wishlist.jsp">
-                                            <i class="lnr lnr-heart"></i>
-                                            <div class="notification">0</div>
-                                        </a>
+                                        <a href="wishlist.jsp" id="wish"></a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)" class="minicart-btn" id="superscript" onclick="getCartInfos()"></a>
@@ -132,7 +129,7 @@
                         </div>
                         <div class="mobile-menu-toggler">
                             <div class="mini-cart-wrap">
-                                <a href="cart.html">
+                                <a href="cart.jsp">
                                     <i class="lnr lnr-cart"></i>
                                 </a>
                             </div>
@@ -307,8 +304,8 @@
                                         <img class='sec-img' src='<s:property value="#item.pro_imgUrl"/>' alt='product'/>
                                     </a>
                                     <div class="button-group">
-                                        <a href='addWish?id=<s:property value="#item.pro_id"/>' data-toggle='tooltip' data-placement='left' title='添加收藏'><i class='lnr lnr-heart'></i></a>
-                                        <a href="#" onclick='getProduct(<s:property value="#item.pro_id"/>)' data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
+                                        <a href='javascript:void(0)' onclick='addWishlist(<s:property value="#item.pro_id"/>)' data-toggle='tooltip' data-placement='left' title='添加收藏'><i class='lnr lnr-heart'></i></a>
+                                        <a href="javascript:void(0)" onclick='getProduct(<s:property value="#item.pro_id"/>)' data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
                                     </div>
                                 </figure>
                                 <div class="product-caption">
@@ -667,6 +664,82 @@
             }
         });
     }
+    function delCart(cart_id) {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址+请求参数
+            url: "http://localhost:8080/delCart?cart_id="+cart_id,
+            //请求成功
+            success: function (data) {
+                if(data.status == 200){
+                    location.href = "product_details.jsp";
+                }else {
+                    alert("删除失败！")
+                }
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+    function addWishlist(pro_id){
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址+请求参数
+            url: "http://localhost:8080/addWishlist?pro_id="+pro_id,
+            //请求成功
+            success: function (data) {
+                if(data.status == 200){
+                    alert("添加成功！")
+                }else {
+                    alert("添加失败！")
+                }
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+    $(function () {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8080/getWishlistInfos",
+            //请求成功
+            success: function (data) {
+                if(typeof data == "string"){
+                    $("#wish").empty();
+                    $("#wish").append("<i class=\"lnr lnr-heart\"></i>\n" +
+                        "                                            <div class=\"notification\">0</div>");
+                }else {
+                    $("#wish").empty();
+                    $("#wish").append("<i class=\"lnr lnr-heart\"></i>\n" +
+                        "                                            <div class=\"notification\">"+data.length+"</div>");
+                }
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    })
 </script>
 </body>
 </html>

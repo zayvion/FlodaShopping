@@ -97,7 +97,7 @@
                     <!-- start logo area -->
                     <div class="col-lg-3">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="index.jsp">
                                 <img src="assets/img/logo/logo.png" alt="">
                             </a>
                         </div>
@@ -178,7 +178,7 @@
                         <nav aria-label="breadcrumb">
                             <h1>个人中心</h1>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="index.jsp"><i class="fa fa-home"></i></a></li>
                                 <li class="breadcrumb-item active" aria-current="page">个人中心</li>
                             </ul>
                         </nav>
@@ -207,7 +207,7 @@
                                         <a href="#address-edit" data-toggle="tab" onclick="getAddress(${sessionScope.onliner.user_id})"><i class="fa fa-map-marker"></i>
                                             地址管理</a>
                                         <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> 个人信息</a>
-                                        <a href="login-register.html"><i class="fa fa-sign-out"></i> 退出登录</a>
+                                        <a href="login-register.jsp"><i class="fa fa-sign-out"></i> 退出登录</a>
                                     </div>
                                 </div>
                                 <!-- My Account Tab Menu End -->
@@ -221,7 +221,7 @@
                                                 <h3>Dashboard</h3>
                                                 <div class="welcome">
                                                     <p>Hello, <strong>Erik Jhonson</strong> (If Not <strong>Jhonson
-                                                        !</strong><a href="login-register.html" class="logout"> Logout</a>)</p>
+                                                        !</strong><a href="login-register.jsp" class="logout"> Logout</a>)</p>
                                                 </div>
                                                 <p class="mb-0">From your account dashboard. you can easily check &
                                                     view your recent orders, manage your shipping and billing addresses
@@ -251,7 +251,7 @@
                                                             <td>Aug 22, 2019</td>
                                                             <td>Pending</td>
                                                             <td>$3000</td>
-                                                            <td><a href="cart.html" class="btn btn__bg">View</a>
+                                                            <td><a href="cart.jsp" class="btn btn__bg">View</a>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -259,7 +259,7 @@
                                                             <td>July 22, 2019</td>
                                                             <td>Approved</td>
                                                             <td>$200</td>
-                                                            <td><a href="cart.html" class="btn btn__bg">View</a>
+                                                            <td><a href="cart.jsp" class="btn btn__bg">View</a>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -267,7 +267,7 @@
                                                             <td>June 12, 2019</td>
                                                             <td>On Hold</td>
                                                             <td>$990</td>
-                                                            <td><a href="cart.html" class="btn btn__bg">View</a>
+                                                            <td><a href="cart.jsp" class="btn btn__bg">View</a>
                                                             </td>
                                                         </tr>
                                                         </tbody>

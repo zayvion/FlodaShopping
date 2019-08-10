@@ -69,11 +69,6 @@
                         <div class="header-configure-wrapper">
                             <div class="header-configure-area">
                                 <ul class="nav justify-content-end">
-                                    <li>
-                                        <a href="#" class="offcanvas-btn">
-                                            <i class="lnr lnr-magnifier"></i>
-                                        </a>
-                                    </li>
                                     <li class="user-hover">
                                         <a href="#">
                                             <i class="lnr lnr-user"></i>
@@ -92,10 +87,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="wishlist.jsp">
-                                            <i class="lnr lnr-heart"></i>
-                                            <div class="notification">0</div>
-                                        </a>
+                                        <a href="wishlist.jsp" id="wish"></a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)" class="minicart-btn" id="superscript" onclick="getCartInfos()"></a>
@@ -340,20 +332,6 @@
                     <a href="cart.jsp"><i class="fa fa-share"></i> 去结算</a>
                 </div>
             </div>
-<%--            <tr>--%>
-<%--                <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="'+result[i].url+'" alt="Product" /></a></td>--%>
-<%--                <td class="pro-title"><a href="#">"+result[i].pro_name+"</a></td>--%>
-<%--                <td class="pro-price"><span>￥"+result[i].pro_price+"</span></td>--%>
-<%--                <td class="pro-quantity">--%>
-<%--                <div class="pro-qty">--%>
-<%--                    <span class="dec qtybtn">-</span>--%>
-<%--                    <input type="text" value="'+result[i].pro_number+'">--%>
-<%--                    <span class="inc qtybtn">+</span>--%>
-<%--                </div>--%>
-<%--                </td>--%>
-<%--                <td class="pro-subtotal"><span>￥"+result[i].cart_price+"</span></td>--%>
-<%--                <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>--%>
-<%--            </tr>--%>
         </div>
     </div>
 </div>
@@ -497,6 +475,34 @@
             }
         })
     }
+    $(function () {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8080/getWishlistInfos",
+            //请求成功
+            success: function (data) {
+                if(typeof data == "string"){
+                    $("#wish").empty();
+                    $("#wish").append("<i class=\"lnr lnr-heart\"></i>\n" +
+                        "                                            <div class=\"notification\">0</div>");
+                }else {
+                    $("#wish").empty();
+                    $("#wish").append("<i class=\"lnr lnr-heart\"></i>\n" +
+                        "                                            <div class=\"notification\">"+data.length+"</div>");
+                }
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    })
 </script>
 </body>
 </html>

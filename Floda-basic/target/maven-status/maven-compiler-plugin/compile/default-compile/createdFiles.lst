@@ -1,2 +1,4 @@
 pojo\Address.class
+pojo\WishlistInfo.class
 pojo\UserAddr.class
+pojo\Wishlist.class

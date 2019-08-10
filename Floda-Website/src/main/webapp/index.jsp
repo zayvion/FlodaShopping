@@ -99,10 +99,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="wishlist.jsp">
-                                            <i class="lnr lnr-heart"></i>
-                                            <div class="notification">0</div>
-                                        </a>
+                                        <a href="wishlist.jsp" id="wish"></a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)" class="minicart-btn" id="superscript" onclick="getCartInfos()"></a>
@@ -153,12 +150,6 @@
     <!-- mobile header end -->
 </header>
 <!-- end Header Area -->
-        </div>
-    </div>
-</aside>
-<!-- off-canvas menu end -->
-
-
 
 <!-- main wrapper start -->
 <main>
@@ -294,7 +285,7 @@
                                 </div>
                                 <div class="button-group">
                                     <a href="wishlist.jsp" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                    <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
+                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
                                     <a href="cart.jsp" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
                                 </div>
                             </figure>
@@ -327,7 +318,7 @@
                                 </div>
                                 <div class="button-group">
                                     <a href="wishlist.jsp" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                    <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
+                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
                                     <a href="cart.jsp" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
                                 </div>
                             </figure>
@@ -360,7 +351,7 @@
                                 </div>
                                 <div class="button-group">
                                     <a href="wishlist.jsp" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                    <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
+                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
                                     <a href="cart.jsp" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
                                 </div>
                             </figure>
@@ -393,7 +384,7 @@
                                 </div>
                                 <div class="button-group">
                                     <a href="wishlist.jsp" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                    <a href="#" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
+                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
                                     <a href="cart.jsp" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
                                 </div>
                             </figure>
@@ -707,7 +698,7 @@
                         "                                    </div>\n" +
                         "                                </div>\n" +
                         "                                <div class='button-group'>\n" +
-                        "                                    <a href='addWish?id="+item.pro_id+"' data-toggle='tooltip' data-placement='left' title='添加收藏'><i class='lnr lnr-heart' ></i></a>\n" +
+                        "                                    <a href='javascript:void(0)' onclick='addWishlist("+item.pro_id+")' data-toggle='tooltip' data-placement='left' title='添加收藏'><i class='lnr lnr-heart' ></i></a>\n" +
                         "                                    <a href='javascript:void(0)' onclick='getProduct("+item.pro_id+")' data-toggle='modal' data-target='#quick_view'><span data-toggle='\"tooltip' data-placement='left' title='快速预览'><i class='lnr lnr-magnifier'></i></span></a>\n" +
                         "                                    <a href='javascript:void(0)' onclick='addCart("+item.pro_id+")' data-toggle='tooltip' data-placement='left' title='添加购物车'><i class='lnr lnr-cart'></i></a>\n" +
                         "                                </div>\n" +
@@ -804,7 +795,6 @@
             }
         });
     }
-
     function getCartInfos(){
         $.ajax({
             //请求方式
@@ -883,6 +873,84 @@
             }
         })
     })
+    $(function () {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8080/getWishlistInfos",
+            //请求成功
+            success: function (data) {
+                if(typeof data == "string"){
+                    $("#wish").empty();
+                    $("#wish").append("<i class=\"lnr lnr-heart\"></i>\n" +
+                        "                                            <div class=\"notification\">0</div>");
+                }else {
+                    $("#wish").empty();
+                    $("#wish").append("<i class=\"lnr lnr-heart\"></i>\n" +
+                        "                                            <div class=\"notification\">"+data.length+"</div>");
+                }
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    })
+    function delCart(cart_id) {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址+请求参数
+            url: "http://localhost:8080/delCart?cart_id="+cart_id,
+            //请求成功
+            success: function (data) {
+                if(data.status == 200){
+                    location.href = "index.jsp";
+                }else {
+                    alert("删除失败！")
+                }
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+    function addWishlist(pro_id){
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址+请求参数
+            url: "http://localhost:8080/addWishlist?pro_id="+pro_id,
+            //请求成功
+            success: function (data) {
+                console.log(data);
+                if(data.status == 200){
+                    alert("添加成功！");
+                    location.href = "index.jsp";
+                }else {
+                    alert("添加失败！");
+                }
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
 </script>
 </body>
 </html>

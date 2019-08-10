@@ -1,6 +1,11 @@
 action\UserWithPoi.class
-action\FProductAction$2.class
 action\UserAction.class
 action\SMSAction.class
-dao\Impl\JedisClientSingle.class
+dao\WishlistDao.class
+service\Impl\WishlistServiceImpl.class
 dao\JedisClient.class
+action\FProductAction$2.class
+dao\Impl\WishlistDaoImpl.class
+action\WishlistAction.class
+service\WishlistService.class
+dao\Impl\JedisClientSingle.class

@@ -123,7 +123,7 @@
                     <!-- start logo area -->
                     <div class="col-lg-3">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="index.jsp">
                                 <img src="assets/img/logo/logo.png" alt="">
                             </a>
                         </div>
@@ -187,13 +187,13 @@
                 <div class="col-12">
                     <div class="mobile-main-header">
                         <div class="mobile-logo">
-                            <a href="index.html">
+                            <a href="index.jsp">
                                 <img src="assets/img/logo/logo.png" alt="Brand Logo">
                             </a>
                         </div>
                         <div class="mobile-menu-toggler">
                             <div class="mini-cart-wrap">
-                                <a href="cart.html">
+                                <a href="cart.jsp">
                                     <i class="lnr lnr-cart"></i>
                                 </a>
                             </div>
@@ -237,7 +237,7 @@
                         <nav aria-label="breadcrumb">
                             <h1>订单结算</h1>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"><i class="fa fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="index.jsp"><i class="fa fa-home"></i></a></li>
                                 <li class="breadcrumb-item active" aria-current="page">订单结算</li>
                             </ul>
                         </nav>
@@ -351,17 +351,17 @@
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td><a href="product-details.html">商品名称 <strong> × 1</strong></a>
+                                        <td><a href="product-details.jsp">商品名称 <strong> × 1</strong></a>
                                         </td>
                                         <td>￥165.00</td>
                                     </tr>
                                     <tr>
-                                        <td><a href="product-details.html">商品名称 <strong> × 4</strong></a>
+                                        <td><a href="product-details.jsp">商品名称 <strong> × 4</strong></a>
                                         </td>
                                         <td>￥165.00</td>
                                     </tr>
                                     <tr>
-                                        <td><a href="product-details.html">商品名称 <strong> × 2</strong></a>
+                                        <td><a href="product-details.jsp">商品名称 <strong> × 2</strong></a>
                                         </td>
                                         <td>￥165.00</td>
                                     </tr>
