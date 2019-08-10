@@ -383,6 +383,7 @@
             url: "http://localhost:8080/getCartInfos",
             //请求成功
             success: function (result) {
+                console.log(result);
                 var total = 0;
                 if(typeof result == "string"){
                     $("#superscript").empty();
@@ -409,23 +410,6 @@
                             "            </tr>"
                         var row=$(str);
                         $("#tbody").append(row);
-                        $(row).find(".pro-qty").prepend('<span class="dec qtybtn">-</span>');
-                        $(row).find(".pro-qty").append('<span class="inc qtybtn">+</span>');
-                        $(row).find(".qtybtn").on('click', function () {
-                            var $button = $(this);
-                            var oldValue = $button.parent().find('input').val();
-                            if ($button.hasClass('inc')) {
-                                var newVal = parseFloat(oldValue) + 1;
-                            } else {
-                                // Don't allow decrementing below zero
-                                if (oldValue > 0) {
-                                    var newVal = parseFloat(oldValue) - 1;
-                                } else {
-                                    newVal = 0;
-                                }
-                            }
-                            $button.parent().find('input').val(newVal);
-                        });
                         total += result[i].cart_price;
                     }
                     $("#totalMoney").append("<td>结算金额</td>\n" +

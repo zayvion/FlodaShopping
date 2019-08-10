@@ -1,3 +1,2 @@
-pojo\CartInfo.class
-pojo\Address.class
-pojo\UserAddr.class
+pojo/UserAddr.class
+pojo/Address.class

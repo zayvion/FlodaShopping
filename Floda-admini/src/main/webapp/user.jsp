@@ -28,7 +28,7 @@
 </head>
 <body>
 <br><br><h1 style="text-align: center;">用户管理</h1><br><br>
-
+<div style="margin-left: 130px;margin-bottom: 20px"><a class="btn btn-primary" href="http://localhost:8080/exportUser" target="_blank">导出到Excel</a></div>
 <table class="table table-border table-bordered table-striped table-hover"
        style="width: 80%;text-align:center;margin: 0 auto;">
     <tr>

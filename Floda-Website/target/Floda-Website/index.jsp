@@ -31,6 +31,11 @@
     <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .button-group a{
+            padding-top: 11px;
+        }
+    </style>
 </head>
 <body>
 <!-- Start Header Area -->
@@ -45,7 +50,7 @@
                     <!-- start logo area -->
                     <div class="col-lg-3">
                         <div class="logo">
-                            <a href="index.jsp">
+                            <a href="/">
                                 <img src="assets/img/logo/logo.png" alt="">
                             </a>
                         </div>
@@ -72,7 +77,7 @@
                             <div class="header-configure-area">
                                 <ul class="nav justify-content-end">
                                     <li>
-                                        <a href="#" class="offcanvas-btn">
+                                        <a href="javascript:void(0)" class="offcanvas-btn">
                                             <i class="lnr lnr-magnifier"></i>
                                         </a>
                                     </li>
@@ -148,6 +153,13 @@
     <!-- mobile header end -->
 </header>
 <!-- end Header Area -->
+        </div>
+    </div>
+</aside>
+<!-- off-canvas menu end -->
+
+
+
 <!-- main wrapper start -->
 <main>
     <!-- slider area start -->
@@ -178,13 +190,13 @@
                 <div class="col-md-4">
                     <div class="banner-item mb-30">
                         <figure class="banner-thumb">
-                            <a href="#">
-                                <img src="assets/img/banner/img1-top-floda1.jpg" alt="">
+                            <a href="moreProduct?cate_id=5">
+                                <img src="assets/img/banner/nanzhuang.png" alt="">
                             </a>
                             <figcaption class="banner-content">
-                                <h2 class="text1">商品分类(英文)</h2>
-                                <h2 class="text2">商品分类(中文)</h2>
-                                <a class="store-link" href="#">购买</a>
+                                <h2 class="text1">MEN's SUIT</h2>
+                                <h2 class="text2">男装</h2>
+                                <a class="store-link" href="moreProduct?cate_id=5">购买</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -195,13 +207,13 @@
                 <div class="col-md-4">
                     <div class="banner-item mb-30">
                         <figure class="banner-thumb">
-                            <a href="#">
-                                <img src="assets/img/banner/img1-top-floda2.jpg" alt="">
+                            <a href="moreProduct?cate_id=3">
+                                <img src="assets/img/banner/flower.jpg" alt="">
                             </a>
                             <figcaption class="banner-content">
-                                <h2 class="text1">商品分类(英文)</h2>
-                                <h2 class="text2">商品分类(中文)</h2>
-                                <a class="store-link" href="#">购买</a>
+                                <h2 class="text1">FLOWER</h2>
+                                <h2 class="text2">花卉</h2>
+                                <a class="store-link" href="moreProduct?cate_id=3">购买</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -212,13 +224,13 @@
                 <div class="col-md-4">
                     <div class="banner-item mb-30">
                         <figure class="banner-thumb">
-                            <a href="#">
-                                <img src="assets/img/banner/img1-top-floda3.jpg" alt="">
+                            <a href="moreProduct?cate_id=4">
+                                <img src="assets/img/banner/shuma.png" alt="">
                             </a>
                             <figcaption class="banner-content">
-                                <h2 class="text1">商品分类(英文)</h2>
-                                <h2 class="text2">商品分类(中文)</h2>
-                                <a class="store-link" href="#">购买</a>
+                                <h2 class="text1">DIGITAL DEVICE</h2>
+                                <h2 class="text2">数码</h2>
+                                <a class="store-link" href="moreProduct?cate_id=4">购买</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -625,8 +637,8 @@
         </div>
         <div class="container">
             <div class="offcanvas-search-box">
-                <form class="d-flex bdr-bottom w-100">
-                    <input type="text" placeholder="搜索商品">
+                <form class="d-flex bdr-bottom w-100" action="searchProduct" method="post">
+                    <input type="text" placeholder="搜索商品" name="keyword">
                     <button class="search-btn"><i class="lnr lnr-magnifier"></i>搜索</button>
                 </form>
             </div>
@@ -696,8 +708,8 @@
                         "                                </div>\n" +
                         "                                <div class='button-group'>\n" +
                         "                                    <a href='addWish?id="+item.pro_id+"' data-toggle='tooltip' data-placement='left' title='添加收藏'><i class='lnr lnr-heart' ></i></a>\n" +
-                        "                                    <a href='#' onclick='getProduct("+item.pro_id+")' data-toggle='modal' data-target='#quick_view'><span data-toggle='\"tooltip' data-placement='left' title='快速预览'><i class='lnr lnr-magnifier'></i></span></a>\n" +
-                        "                                    <a href='#' onclick='addCart("+item.pro_id+")' data-toggle='tooltip' data-placement='left' title='添加购物车'><i class='lnr lnr-cart'></i></a>\n" +
+                        "                                    <a href='javascript:void(0)' onclick='getProduct("+item.pro_id+")' data-toggle='modal' data-target='#quick_view'><span data-toggle='\"tooltip' data-placement='left' title='快速预览'><i class='lnr lnr-magnifier'></i></span></a>\n" +
+                        "                                    <a href='javascript:void(0)' onclick='addCart("+item.pro_id+")' data-toggle='tooltip' data-placement='left' title='添加购物车'><i class='lnr lnr-cart'></i></a>\n" +
                         "                                </div>\n" +
                         "                            </figure>\n" +
                         "                            <div class='product-caption'>\n" +
@@ -779,7 +791,11 @@
             data: {"pro_id":pro_id,"pro_number":1},
             //请求成功
             success: function (result) {
-                console.log(result);
+                if (result.status == 200){
+                    location.href = "index.jsp";
+                }else {
+                    alert("添加失败");
+                }
             },
             //请求失败，包含具体的错误信息
             error: function (e) {
@@ -809,20 +825,20 @@
                     for (var i = 0; i < msg.length; i++){
                         $("#CartInfos").append("<li class=\"minicart-item\">\n" +
                             "                            <div class=\"minicart-thumb\">\n" +
-                            "                                <a href=\"product-details.jsp\">\n" +
+                            "                                <a href='productDetail?id="+msg[i].pro_id+"'>\n" +
                             "                                    <img src="+msg[i].url+" alt=\"product\">\n" +
                             "                                </a>\n" +
                             "                            </div>\n" +
                             "                            <div class=\"minicart-content\">\n" +
                             "                                <h3 class=\"product-name\">\n" +
-                            "                                    <a href=\"product-details.jsp\">"+msg[i].pro_name+"</a>\n" +
+                            "                                    <a href='productDetail?id="+msg[i].pro_id+"'>"+msg[i].pro_name+"</a>\n" +
                             "                                </h3>\n" +
                             "                                <p>\n" +
                             "                                    <span class=\"cart-quantity\">"+msg[i].pro_number+"<strong>&times;</strong></span>\n" +
                             "                                    <span class=\"cart-price\">￥"+msg[i].pro_price+"</span>\n" +
                             "                                </p>\n" +
                             "                            </div>\n" +
-                            "                            <button class=\"minicart-remove\"><i class=\"lnr lnr-cross\"></i></button>\n" +
+                            "                            <button class=\"minicart-remove\"><i class=\"lnr lnr-cross\" onclick='delCart("+msg[i].cart_id+")'></i></button>\n" +
                             "                        </li>");
                         total += msg[i].cart_price;
                     }
