@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.Set;
+
 /**
  * @Auther: zayvion
  * @Date: 2019-08-08 21:56
@@ -84,6 +86,16 @@ public class JedisClientSingle implements JedisClient {
         Long result = jedis.hdel(hkey,key);
         jedis.close();
         return result;
+    }
+
+    @Override
+    public void cleanCache() {
+        Jedis jedis = jedisPool.getResource();
+        Set<String> keys = jedis.keys("*");
+        for (String key:keys) {
+            jedis.del(key);
+        }
+
     }
 
 }

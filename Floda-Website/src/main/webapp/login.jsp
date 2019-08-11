@@ -33,7 +33,13 @@
     <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<style>
+    .back_login{
+        color: #CC2121;
+        font-size: 12px;
+        margin-top: -6px;
+    }
+</style>
 </head>
 <body>
 
@@ -97,7 +103,7 @@
                                 </div>
                                 <div class="single-input-item">
                                     <button class="btn btn__bg" type="submit">登录</button>
-                                    <a href="register.jsp" class="forget-pwd">没有账户?去注册</a>
+                                    <a href="register.jsp" class="back_login">没有账户?去注册</a>
                                 </div>
                             </form>
                         </div>

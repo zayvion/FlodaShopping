@@ -37,6 +37,10 @@ public class CartAction extends BaseAction {
 
     public String getCartInfos() throws IOException {
         User user = (User) session.get("onliner");
+        //若用户没登录直接返回null
+        if (user == null){
+            return NONE;
+        }
         Integer user_id = user.getUser_id();
         String result = cartService.getCartInfos(user_id);
         response.setContentType("application/json;charset=utf-8");

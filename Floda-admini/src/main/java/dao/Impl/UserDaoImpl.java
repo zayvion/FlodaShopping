@@ -42,7 +42,10 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
         DetachedCriteria criteria = DetachedCriteria.forClass(UserInfo.class);
         criteria.add(Restrictions.eq("user_id",user_id));
         List<UserInfo> list = (List<UserInfo>)this.getHibernateTemplate().findByCriteria(criteria);
-        return list.get(0);
+        if (list.size()>0){
+            return list.get(0);
+        }
+        return null;
     }
 
     @Override

@@ -1,10 +1,12 @@
 package action;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.util.ValueStack;
 import dao.ImgDao;
+import dao.JedisClient;
 import dao.ProductDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,11 @@ public class FProductAction extends BaseAction {
     private ProductDao productDao;
     @Autowired
     private ImgDao imgDao;
+    @Autowired
+    private JedisClient jedisClient;
+    private static String KEY_GETNEWPRODUCTS = "getNewProducts";
+    private static String KEY_PRODUCTDETAIL = "productDetail";
+    private static String KEY_GETPROBYCATE = "getProByCate";
     private int id;
     private int startPage;
     private int item;
@@ -46,7 +53,42 @@ public class FProductAction extends BaseAction {
     private String keyword;//搜索关键字
 
     public String productDetail() {
+        try {
+            String json = jedisClient.hget(KEY_PRODUCTDETAIL, "pro_id=" + id);
+            if (json != null){
+                Product redisProduct = new Gson().fromJson(json, Product.class);
+                ValueStack valueStack = ActionContext.getContext().getValueStack();
+                valueStack.set("pro_name", redisProduct.getPro_name());
+                valueStack.set("pro_price", redisProduct.getPro_price());
+                valueStack.set("pro_desc", redisProduct.getPro_desc());
+                valueStack.set("pro_id", redisProduct.getPro_id());
+                valueStack.set("proImgUrl", imgDao.getImgUrl(redisProduct.getPro_imgId()));
+                 /*
+                     相关产品
+                */
+                List<Product> proByCate = productDao.getProByCate(redisProduct.getPro_cateId());
+                //前台只需要6个商品
+                List<ProductShow> reusultList = new ArrayList<ProductShow>();
+                for (int i = 0; i < 6; i++) {
+                    if (i <= proByCate.size() - 1) {
+                        ProductShow productShow = new ProductShow();
+                        productShow.setPro_id(proByCate.get(i).getPro_id());
+                        productShow.setPro_name(proByCate.get(i).getPro_name());
+                        productShow.setPro_imgUrl(imgDao.getImgUrl(proByCate.get(i).getPro_imgId()));
+                        productShow.setPro_price(proByCate.get(i).getPro_price());
+                        reusultList.add(productShow);
+                    } else {
+                        continue;
+                    }
+                }
+                request.setAttribute("relatedPro", reusultList);
+                return DETAIL;
+            }
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+        }
         Product product = productDao.getProduct(id);
+        jedisClient.hset(KEY_PRODUCTDETAIL,"pro_id="+id,new Gson().toJson(product));
         if (id == 0) {
             return INDEX;
 
@@ -101,14 +143,43 @@ public class FProductAction extends BaseAction {
         if (startPage == 0) {
             startPage = 1;
         }
+       /* try {
+            String json = jedisClient.hget(KEY_GETPROBYCATE, "cate_id:"+cate_id+",startPage="+startPage);
+            if (json != null){
+                PageHelper pageHelper = new Gson().fromJson(json, PageHelper.class);
+                request.setAttribute("cate_list", list);
+                request.setAttribute("pagelist", pageHelper);
+                return SHOP;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
         PageHelper date = productService.getProByCate(cate_id, startPage);
+        //jedisClient.hset(KEY_GETPROBYCATE,"cate_id:"+cate_id+",startPage="+startPage,new Gson().toJson(date));
         request.setAttribute("cate_list", list);
         request.setAttribute("pagelist", date);
         return SHOP;
     }
 
+    /**
+     * 新品上市
+     *
+     * @return
+     * @throws IOException
+     */
     public String getNewProducts() throws IOException {
+        try {
+            String redisResult = jedisClient.get(KEY_GETNEWPRODUCTS);
+            if (redisResult != null) {
+                response.setContentType("application/json;charset=utf-8");
+                response.getWriter().write(redisResult);
+                return NONE;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String result = productService.showvalidProducts(startPage, item);
+        jedisClient.set(KEY_GETNEWPRODUCTS, result);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);
         return NONE;

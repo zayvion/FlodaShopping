@@ -125,6 +125,7 @@
                                 </div>
                                 <div class="single-input-item">
                                     <button class="btn btn__bg" type="submit">注册</button>
+                                    <a href="login.jsp" class="forget-pwd">返回登录</a>
                                 </div>
                             </form>
                         </div>
@@ -161,7 +162,10 @@
     });
     $("#btn_code").click(function () {
         let tel = $("#tel").val();
-        console.log(tel);
+        if($('#tel').val()==''||$('#tel').val().length<11){
+            alert("手机号码格式错误")
+            return;
+        }
         $.post('sendRegSMS?phoneNumber='+tel, function () {
             console.log('验证码发送成功');
         })

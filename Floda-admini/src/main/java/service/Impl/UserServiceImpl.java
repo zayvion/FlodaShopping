@@ -35,8 +35,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public String info(int user_id) {
         UserInfo userInfo = userDao.info(user_id);
-        userInfo.setHead(this.IMG_BASE_PATH+userInfo.getHead());
-        return new Gson().toJson(userInfo);
+        if (userInfo !=  null){
+            userInfo.setHead(this.IMG_BASE_PATH+userInfo.getHead());
+            return new Gson().toJson(userInfo);
+        }
+        return null;
     }
 
     @Transactional

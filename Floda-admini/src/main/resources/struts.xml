@@ -75,7 +75,9 @@
         <result name="main" type="redirect">main.jsp</result>
     </global-results>
     <action name="user_*" class="userAction" method="{1}">
-
     </action>
+    </package>
+    <package name="clean" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <action name="cleanCache" class="cleanCacheAction" method="cleanCache"/>
     </package>
 </struts>

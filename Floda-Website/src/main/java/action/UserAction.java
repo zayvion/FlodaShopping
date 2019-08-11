@@ -22,8 +22,6 @@ import java.io.IOException;
 @Controller
 public class UserAction extends BaseAction implements ModelDriven<User> {
 
-    @Autowired
-    private JedisClient jedisClient;
     @Resource
     private FUserService userService;
     private User user = new User();

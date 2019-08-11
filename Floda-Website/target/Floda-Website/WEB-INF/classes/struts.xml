@@ -10,13 +10,11 @@
         <action name="user_*" class="userAction" method="{1}">
             <result name="error">register.jsp</result>
             <result name="register">register.jsp</result>
-            <result name="login" type="redirect">login.jsp</result>
+            <result name="login">login.jsp</result>
             <result name="index" type="redirect">index.jsp</result>
         </action>
         <action name="exportUser" class="userWithPoi" method="exportUser"/>
         <action name="sendRegSMS" class="smsAction" method="sendSMS"/>
-        <action name="exportUser" class="userWithPoi" method="exportUser"/>
-        <action name="sendSMS" class="smsAction" method="sendSMS"/>
     </package>
        <package name="product" extends="struts-default" namespace="/" strict-method-invocation="false">
            <global-results>
@@ -38,13 +36,22 @@
         <action name="getCartInfos" class="cartAction" method="getCartInfos"/>
         <action name="delCart" class="cartAction" method="delCart"/>
     </package>
-    <package name="wishlist" extends="struts-default" namespace="/" strict-method-invocation="false">
+    <package name="Wwishlist" extends="struts-default" namespace="/" strict-method-invocation="false">
         <global-results>
             <result name="index">index.jsp</result>
         </global-results>
         <action name="getWishlistInfos" class="wishlistAction" method="getWishlistInfos"/>
         <action name="addWishlist" class="wishlistAction" method="addWishlist"/>
         <action name="delWishlist" class="wishlistAction" method="delWishlist"/>
+    </package>
+
+    <package name="pay" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <global-results>
+            <result name="pay">pay.jsp</result>
+            <result name="paysuccess">Paysuccess.jsp</result>
+        </global-results>
+        <action name="pay" class="payAction" method="pay"/>
+        <action name="successPay" class="payAction" method="successPay"/>
     </package>
 
 </struts>

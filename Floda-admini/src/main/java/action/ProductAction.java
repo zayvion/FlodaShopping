@@ -3,6 +3,7 @@ package action;
 
 import com.google.gson.Gson;
 import dao.ImgDao;
+import dao.JedisClient;
 import dao.ProductDao;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,8 @@ public class ProductAction extends BaseAction{
     private ImgDao imgDao;
     @Autowired
     private ProductDao productDao;
+    @Autowired
+    private JedisClient jedisClient;
     private Product product;
     private Img img;
     private File imgFile;
@@ -58,10 +61,25 @@ public class ProductAction extends BaseAction{
     private int startPage;
     private int item;
     private int id;
+    private static String KEY_GETPRODUCTS = "getProducts";
+    private static String KEY_GETNEWPRODUCTS = "getNewProducts";
+    private static String KEY_GETPRODUCTINFO = "getProductInfo";
+    private static String KEY_GETPROBYCATE = "getProByCate";
 
 
     public String  getProducts() throws IOException {
+        try {
+            String redisResult = jedisClient.hget(KEY_GETPRODUCTS,"startPage="+startPage+"&item="+item);
+            if (redisResult != null){
+                response.setContentType("application/json;charset=utf-8");
+                response.getWriter().write(redisResult);
+                return NONE;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String result = productService.showProducts(startPage , item);
+        jedisClient.hset(KEY_GETPRODUCTS,"startPage="+startPage+"&item="+item,result);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);
         return NONE;
@@ -75,6 +93,9 @@ public class ProductAction extends BaseAction{
         FtpUtil.uploadFile(FTP_ADDRESS, FTP_PORT, FTP_USERNAME, FTP_PASSWORD, FTP_BASE_PATH, imgPath, newName, new FileInputStream(imgFile.getAbsoluteFile()));
         img.setImg_addr(IMG_BASE_PATH+imgPath+"/"+newName);
         productService.addProduct(product,img);
+        jedisClient.del(KEY_GETPRODUCTS);
+        jedisClient.del(KEY_GETNEWPRODUCTS);
+        jedisClient.del(KEY_GETPROBYCATE);
         return PRODUCT;
     }
     public String updateProduct() throws FileNotFoundException,IOException{
@@ -85,6 +106,10 @@ public class ProductAction extends BaseAction{
                 String result = productService.updateProduct(product);
                 response.setContentType("application/json;charset=utf-8");
                 response.getWriter().write(result);
+                jedisClient.del(KEY_GETPRODUCTS);
+                jedisClient.del(KEY_GETNEWPRODUCTS);
+                jedisClient.hdel(KEY_GETPRODUCTINFO,"pro_id="+id);
+                jedisClient.del(KEY_GETPROBYCATE);
                 return PRODUCT;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -104,12 +129,30 @@ public class ProductAction extends BaseAction{
             Img img = imgDao.getImg(p.getPro_imgId());
             img.setImg_addr(IMG_BASE_PATH+imgPath+"/"+newName);
             imgDao.updateImg(img);
+            jedisClient.del(KEY_GETPRODUCTS);
+            jedisClient.del(KEY_GETNEWPRODUCTS);
+            jedisClient.hdel(KEY_GETPRODUCTINFO,"pro_id="+id);
+            jedisClient.del(KEY_GETPROBYCATE);
             return PRODUCT;
         }
     }
 
     public String getProductInfo() throws IOException{
+        if (id == 0){
+            return NONE;
+        }
+        try {
+            String redisResult = jedisClient.hget(KEY_GETPRODUCTINFO,"pro_id="+id);
+            if (redisResult != null){
+                response.setContentType("application/json;charset=utf-8");
+                response.getWriter().write(redisResult);
+                return NONE;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String result = productService.getProduct(id);
+        jedisClient.hset(KEY_GETPRODUCTINFO,"pro_id="+id,result);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);
         return NONE;

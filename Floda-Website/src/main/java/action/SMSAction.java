@@ -25,7 +25,7 @@ public class SMSAction extends BaseAction{
     // 需要发送短信的手机号码
     private String phoneNumber;
     // 短信模板 ID，需要在短信应用中申请
-    private int templateId = 393141;
+    private int templateId = 393265;
     // 签名
     private String smsSign = "lzllzlcn";
 

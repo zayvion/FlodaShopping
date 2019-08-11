@@ -1,6 +1,7 @@
 package action;
 
 import com.opensymphony.xwork2.ModelDriven;
+import dao.JedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,13 @@ import java.io.IOException;
 @Controller
 @Scope("prototype")
 public class CategroyAction extends BaseAction {
+    private static String KEY_GETCATEGROIES = "getCategroies";
     private int id;
     private Categroy cate ;
     @Autowired
     private CategroyService categroyService;
+    @Autowired
+    private JedisClient jedisClient;
 
     /**
      * 增加商品类别
@@ -29,6 +33,7 @@ public class CategroyAction extends BaseAction {
      */
     public String addCategroy() throws IOException {
         String result = categroyService.addCategroy(cate);
+        jedisClient.del(KEY_GETCATEGROIES);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);
         return CLASSIFY;
@@ -40,7 +45,18 @@ public class CategroyAction extends BaseAction {
      * @throws IOException
      */
     public String getCategroies() throws IOException{
+        try {
+            String redisResult = jedisClient.get(KEY_GETCATEGROIES);
+            if (redisResult != null){
+                response.setContentType("application/json;charset=utf-8");
+                response.getWriter().write(redisResult);
+                return NONE;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         String result = categroyService.getCategroies();
+        jedisClient.set(KEY_GETCATEGROIES,result);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);
         return NONE;
@@ -53,6 +69,7 @@ public class CategroyAction extends BaseAction {
      */
     public String updateCategroy() throws IOException{
         String result = categroyService.updateCategroy(cate);
+        jedisClient.del(KEY_GETCATEGROIES);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);
         return CLASSIFY;
@@ -76,6 +93,7 @@ public class CategroyAction extends BaseAction {
     public String delCategroy() throws IOException{
         System.out.println("传过来的id是："+id);
         String result = categroyService.delCategroy(id);
+        jedisClient.del(KEY_GETCATEGROIES);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);
         return NONE;

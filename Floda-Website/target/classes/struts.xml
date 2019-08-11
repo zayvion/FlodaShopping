@@ -45,4 +45,13 @@
         <action name="delWishlist" class="wishlistAction" method="delWishlist"/>
     </package>
 
+    <package name="pay" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <global-results>
+            <result name="pay">pay.jsp</result>
+            <result name="paysuccess">Paysuccess.jsp</result>
+        </global-results>
+        <action name="pay" class="payAction" method="pay"/>
+        <action name="successPay" class="payAction" method="successPay"/>
+    </package>
+
 </struts>
