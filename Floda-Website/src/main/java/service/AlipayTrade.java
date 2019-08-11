@@ -3,6 +3,7 @@ package service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -63,7 +64,7 @@ public class AlipayTrade {
         alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
 
         //商户订单号，商户网站订单系统中唯一订单号，必填
-        String out_trade_no = new String("243ss4343");
+        String out_trade_no = new String(UUID.randomUUID().toString().substring(0,10));
         //付款金额，必填
         String total_amount = new String("3323");
         //订单名称，必填

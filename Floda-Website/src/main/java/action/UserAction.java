@@ -24,12 +24,15 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 
     @Resource
     private FUserService userService;
+    @Autowired
+    private JedisClient jedisClient;
     private User user = new User();
     private String repeat_pwd;
     private int parent_id;
     private UserAddr userAddr;
     private int user_addr_id;
     private String code;
+    private static String KEY_USERLIST = "userList";
 
     /**
      * 添加用户地址
@@ -111,6 +114,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         try {
             request.setAttribute("newUser",user);
             userService.register(user);
+            jedisClient.del(KEY_USERLIST);
             request.setAttribute("hint","注册成功");
             return "login";
         } catch (Exception e) {

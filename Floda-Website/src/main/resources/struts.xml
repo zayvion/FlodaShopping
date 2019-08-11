@@ -14,7 +14,7 @@
             <result name="index" type="redirect">index.jsp</result>
         </action>
         <action name="exportUser" class="userWithPoi" method="exportUser"/>
-        <action name="sendRegSMS" class="smsAction" method="sendSMS"/>
+        <action name="sendRegSMS" class="smsAction" method="sendRegSMS"/>
     </package>
        <package name="product" extends="struts-default" namespace="/" strict-method-invocation="false">
            <global-results>
