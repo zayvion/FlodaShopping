@@ -27,8 +27,9 @@ public class ImgDaoImpl extends HibernateDaoSupport implements ImgDao {
         Serializable id = this.getHibernateTemplate().save(img);
         return (int) id;
     }
-    @Transactional
+
     @Override
+    @Transactional
     public void updateImg(Img img) {
         this.getHibernateTemplate().update(img);
 

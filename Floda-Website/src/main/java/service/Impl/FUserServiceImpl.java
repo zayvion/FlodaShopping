@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pojo.User;
 import pojo.UserAddr;
+import pojo.UserInfo;
 import service.FUserService;
 import utils.MD5Util;
 import utils.ResponseResult;
@@ -87,5 +88,22 @@ public class FUserServiceImpl implements FUserService {
             e.printStackTrace();
         }
         return ResponseResult.build(200,"修改失败");
+    }
+
+    @Override
+    public String getUserInfo(int user_id) {
+        return new Gson().toJson(fuserDao.getUserInfo(user_id));
+    }
+
+    @Override
+    @Transactional
+    public String updateUserInfo(UserInfo userInfo) {
+        try {
+            fuserDao.updateUserInfo(userInfo);
+            return ResponseResult.build(200,"修改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseResult.build(500,"修改失败");
     }
 }

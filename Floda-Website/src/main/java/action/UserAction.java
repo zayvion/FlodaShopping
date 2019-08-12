@@ -5,14 +5,24 @@ import com.opensymphony.xwork2.ModelDriven;
 import dao.JedisClient;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import pojo.Img;
 import pojo.User;
 import pojo.UserAddr;
+import pojo.UserInfo;
 import service.FUserService;
+import utils.FtpUtil;
 import utils.MD5Util;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * @Auther: Tree
@@ -22,6 +32,20 @@ import java.io.IOException;
 @Controller
 public class UserAction extends BaseAction implements ModelDriven<User> {
 
+    @Value("${${FTP_ADDRESS}")
+    private String FTP_ADDRESS;
+    @Value("${FTP_PORT}")
+    private Integer FTP_PORT;
+    @Value("${FTP_USERNAME}")
+    private String FTP_USERNAME;
+    @Value("${FTP_PASSWORD}")
+    private String FTP_PASSWORD;
+    @Value("${FTP_BASE_PATH}")
+    private String FTP_BASE_PATH;
+    @Value("${IMG_BASE_PATH}")
+    private String IMG_BASE_PATH;
+    @Autowired
+    private JedisClient jedisClient;
     @Resource
     private FUserService userService;
     @Autowired
@@ -30,18 +54,25 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     private String repeat_pwd;
     private int parent_id;
     private UserAddr userAddr;
+    private UserInfo info;
     private int user_addr_id;
     private String code;
+    private int user_id;
+    private Img img;
+    private File imgFile;
+    private String imgFileContentType;
+    private String imgFileFileName;
+    private String current_pwd;
     private static String KEY_USERLIST = "userList";
 
     /**
      * 添加用户地址
      * @return
      */
-    public String addAddress(){
+    public String addAddress() {
         User onliner = (User) session.get("onliner");
         userAddr.setUserId(onliner.getUser_id());
-        userAddr.setReceiver_addr(userAddr.getPro()+","+userAddr.getCity()+","+userAddr.getArea()+","+userAddr.getStreet()+","+userAddr.getReceiver_addr());
+        userAddr.setReceiver_addr(userAddr.getPro() + "," + userAddr.getCity() + "," + userAddr.getArea() + "," + userAddr.getStreet() + "," + userAddr.getReceiver_addr());
         try {
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(userService.addAddress(userAddr));
@@ -52,13 +83,14 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     }
 
     /**
-     * 添加用户地址
+     * 更新用户地址
+     *
      * @return
      */
-    public String updateAddress(){
+    public String updateAddress() {
         User onliner = (User) session.get("onliner");
         userAddr.setUserId(onliner.getUser_id());
-        userAddr.setReceiver_addr(userAddr.getPro()+","+userAddr.getCity()+","+userAddr.getArea()+","+userAddr.getStreet()+","+userAddr.getReceiver_addr());
+        userAddr.setReceiver_addr(userAddr.getPro() + "," + userAddr.getCity() + "," + userAddr.getArea() + "," + userAddr.getStreet() + "," + userAddr.getReceiver_addr());
         try {
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(userService.updateAddress(userAddr));
@@ -72,7 +104,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
      * 删除用户地址
      * @return
      */
-    public String removeAddr(){
+    public String removeAddr() {
         try {
             String addrJson = userService.removeAddr(user_addr_id);
             response.setContentType("application/json;charset=utf-8");
@@ -87,7 +119,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
      * 根据地址id获取地址
      * @return
      */
-    public String getAddrById(){
+    public String getAddrById() {
         try {
             String addrById = userService.getAddrById(user_addr_id);
             response.setContentType("application/json;charset=utf-8");
@@ -105,10 +137,10 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
      * @return json
      * @throws Exception
      */
-    public String register()throws Exception{
-        if (!session.get("code").equals(code)){
+    public String register() throws Exception {
+        if (!session.get("code").equals(code)) {
             session.remove("code");
-            request.setAttribute("hint","验证码错误，请重新输入！");
+            request.setAttribute("hint", "验证码错误，请重新输入！");
             return ERROR;
         }
         try {
@@ -146,6 +178,54 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     public String exit(){
         session.remove("onliner");
         return "login";
+    }
+
+    /**
+     * 根据用户id查询详细信息
+     * @return
+     */
+    public String getUserInfo() {
+        try {
+            User onliner = (User) session.get("onliner");
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(userService.getUserInfo(onliner.getUser_id()));
+            System.out.println(userService.getUserInfo(onliner.getUser_id()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return NONE;
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @return
+     */
+    public String updateUserInfo() {
+        User onliner = (User) session.get("onliner");
+        info.setUser_id(onliner.getUser_id());
+//        String oldFileName = imgFileFileName;
+//        String extension = oldFileName.substring(oldFileName.indexOf("."));
+//        String newName = oldFileName.substring(0,oldFileName.indexOf("."))+ UUID.randomUUID().toString().substring(0,5)+extension;
+//        String imgPath = getDate();
+//        try {
+//            FtpUtil.uploadFile(FTP_ADDRESS, FTP_PORT, FTP_USERNAME, FTP_PASSWORD, FTP_BASE_PATH, imgPath, newName, new FileInputStream(imgFile.getAbsoluteFile()));
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+        try {
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(userService.updateUserInfo(info));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return NONE;
+    }
+
+    public String getDate(){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String format = sdf.format(new Date());
+        return format;
     }
 
     /**
@@ -220,5 +300,31 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     public void setUser_addr_id(int user_addr_id) {
         this.user_addr_id = user_addr_id;
     }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public UserInfo getInfo() {
+        return info;
+    }
+
+    public void setInfo(UserInfo info) {
+        this.info = info;
+    }
+
+
+    public String getCurrent_pwd() {
+        return current_pwd;
+    }
+
+    public void setCurrent_pwd(String current_pwd) {
+        this.current_pwd = current_pwd;
+    }
+
 }
 

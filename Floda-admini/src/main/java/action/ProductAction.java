@@ -66,7 +66,6 @@ public class ProductAction extends BaseAction{
     private static String KEY_GETPRODUCTINFO = "getProductInfo";
     private static String KEY_GETPROBYCATE = "getProByCate";
 
-
     public String  getProducts() throws IOException {
         try {
             String redisResult = jedisClient.hget(KEY_GETPRODUCTS,"startPage="+startPage+"&item="+item);

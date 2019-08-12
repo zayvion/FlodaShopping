@@ -1,9 +1,6 @@
 package dao;
 
-import pojo.Address;
-import pojo.Product;
-import pojo.User;
-import pojo.UserAddr;
+import pojo.*;
 
 import java.util.List;
 
@@ -62,4 +59,17 @@ public interface FUserDao {
      * @param userAddr
      */
     void updateAddress(UserAddr userAddr);
+
+    /**
+     * 根据用户id查询用户详细信息
+     * @param user_id
+     * @return
+     */
+    UserInfo getUserInfo(int user_id);
+
+    /**
+     * 更新用户信息
+     * @param userInfo
+     */
+    void updateUserInfo(UserInfo userInfo);
 }

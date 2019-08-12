@@ -40,5 +40,6 @@
         <mapping resource="mapper/UserAddr.hbm.xml"/>
         <mapping resource="mapper/Address.hbm.xml"/>
         <mapping resource="mapper/Wishlist.hbm.xml"/>
+        <mapping resource="mapper/UserInfo.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

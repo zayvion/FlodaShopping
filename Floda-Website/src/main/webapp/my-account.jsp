@@ -206,7 +206,7 @@
                                             我的订单</a>
                                         <a href="#address-edit" data-toggle="tab" onclick="getAddress(${sessionScope.onliner.user_id})"><i class="fa fa-map-marker"></i>
                                             地址管理</a>
-                                        <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> 个人信息</a>
+                                        <a href="#account-info" data-toggle="tab" onclick="getUserInfo()"><i class="fa fa-user"></i> 个人信息</a>
                                         <a href="login-register.jsp"><i class="fa fa-sign-out"></i> 退出登录</a>
                                     </div>
                                 </div>
@@ -302,17 +302,18 @@
                                             <div class="myaccount-content">
                                                 <h3>个人信息</h3>
                                                 <div class="account-details-form">
-                                                    <form action="#">
+                                                    <form action="#" onsubmit="return false" method="post" id="updateUserInfoForm">
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 <div class="single-input-item">
-                                                                    <label for="first-name" class="required">姓名</label>
-                                                                    <input type="text" id="first-name" placeholder="姓名" />
+                                                                    <label for="name" class="required">姓名</label>
+                                                                    <input type="text" id="name" name="info.name" placeholder="姓名" />
+                                                                    <input type="hidden" id="userInfo_id" name="info.userInfo_id">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <img id="show" src="http://image.lzllzl.cn/img/2019-08-08/3ewsb48a4.jpg" class="img-thumbnail" style="margin:30px 0 0 120px;width: 230px;height: 250px">
-                                                                <input type="file" id="file" name="head" accept="image/png, image/jpeg, image/gif, image/jpg" onchange="changepic(this)">
+                                                                <img id="show"  class="img-thumbnail" style="margin:30px 0 0 120px;width: 230px;height: 250px">
+                                                                <input type="file" id="file" name="img" accept="image/png, image/jpeg, image/gif, image/jpg" onchange="changepic(this)">
                                                                 <div id="clone">图片上传</div>
                                                             </div>
                                                         </div>
@@ -320,18 +321,18 @@
                                                             <div class="clearfix visible-xs-block"></div>
                                                             <div class="col-lg-6">
                                                                 <div class="single-input-item">
-                                                                    <label for="display-name" class="required">邮箱</label>
-                                                                    <input type="email" id="display-name" placeholder="邮箱" />
+                                                                    <label for="email" class="required">邮箱</label>
+                                                                    <input type="email" id="email" name="info.email" placeholder="邮箱" />
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 <div class="single-input-item">
-                                                                    <label for="display-name" class="required">性别</label>
-                                                                    <select class="form-control">
-                                                                        <option>男</option>
-                                                                        <option>女</option>
+                                                                    <label class="required">性别</label>
+                                                                    <select class="form-control" id="sex" name="info.sex">
+                                                                        <option value="0">男</option>
+                                                                        <option value="1">女</option>
                                                                     </select>
                                                                 </div>
                                                             </div>
@@ -340,7 +341,7 @@
                                                             <legend>修改密码</legend>
                                                             <div class="single-input-item">
                                                                 <label for="current-pwd" class="required">原始密码</label>
-                                                                <input type="password" id="current-pwd" placeholder="原始密码" />
+                                                                <input type="password" id="current-pwd" name="current_pwd" placeholder="原始密码" />
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-lg-6">
@@ -358,7 +359,7 @@
                                                             </div>
                                                         </fieldset>
                                                         <div class="single-input-item">
-                                                            <button class="btn btn__bg">保存修改</button>
+                                                            <button class="btn btn__bg" onclick="updateUserInfo()">保存修改</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -677,8 +678,21 @@
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/active.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.form.min.js"></script>
 <script>
-    var userId = <%=onliner.getUser_id()%>
+    var userId = <%=onliner.getUser_id()%>;
+
+    //查询当前登录用户的个人详细信息
+    function getUserInfo(){
+        $.get("user_getUserInfo.action",function (data,status) {
+            console.log(data);
+            $("#name").val(data.name);
+            $("#userInfo_id").val(data.userInfo_id);
+            $("#show").attr("src",data.head);
+            $("#email").val(data.email);
+            $("#sex").find("option[value="+data.sex+"]").attr("selected","selected");
+        });
+    }
 
     //添加地址表单提交
     function subAddress(user_id) {
@@ -690,6 +704,28 @@
             }
         });
     };
+
+    //修改用户个人信息
+    function updateUserInfo() {
+        var $current_pwd = $("#current-pwd").val();
+
+        var options = {
+            url: "user_updateUserInfo.action", //提交地址：默认是form的action,如果申明,则会覆盖
+            type: "post",   //默认是form的method（get or post），如果申明，则会覆盖
+            //success: getUserInfo(),  //提交成功后的回调函数
+            dataType: "json" //html(默认), xml, script, json...接受服务端返回的类型
+        };
+
+        if ($current_pwd != ""){
+            if ($("#new-pwd").val().trim() !== $("#confirm-pwd").val().trim()){
+                alert("两次输入的密码不一致,请重新输入!");
+                return;
+            }
+        }
+
+        $("#updateUserInfoForm").ajaxSubmit(options);
+
+    }
 
     //删除地址
     function removeAddr(user_addr_id) {
@@ -767,7 +803,7 @@
             })
         });
     }
-    
+
     /**
      * ajax加载省市联动
      */

@@ -5,6 +5,10 @@
 <struts>
     <constant name="struts.objectFactory" value="spring"></constant>
 	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+    <constant name="struts.multipart.maxSize" value="10000000"/>
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.multipart.saveDir" value="/tmp"/>
+    <constant name="struts.custom.i18n.resources" value="struts"></constant>
     <!-- Struts2在2.5版本后添加strict-method-invocation(严格方法访问)，默认为true，不能使用动态方法调用功能，故需设为false -->
     <package name="user" extends="struts-default" namespace="/" strict-method-invocation="false">
         <action name="user_*" class="userAction" method="{1}">

@@ -17,7 +17,9 @@
     http://www.springframework.org/schema/aop/spring-aop.xsd
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util.xsd">
-<!-- 注解包扫描 -->
+	<!-- 加载配置文件 -->
+	<context:property-placeholder location="classpath:*.properties" />
+	<!-- 注解包扫描 -->
 	<context:component-scan base-package="utils,action,pojo,service,dao" />
 	<!--Spring整合Hibernate -->
 	<bean id="sessionFactory"

@@ -3,6 +3,7 @@ package service;
 import pojo.Address;
 import pojo.User;
 import pojo.UserAddr;
+import pojo.UserInfo;
 
 import java.util.List;
 
@@ -59,4 +60,18 @@ public interface FUserService {
      * @param userAddr
      */
     String updateAddress(UserAddr userAddr);
+
+    /**
+     * 根据用户id查询用户详细信息
+     * @param user_id
+     * @return
+     */
+    String getUserInfo(int user_id);
+
+    /**
+     * 更新用户信息
+     * @param userInfo
+     * @return
+     */
+    String updateUserInfo(UserInfo userInfo);
 }

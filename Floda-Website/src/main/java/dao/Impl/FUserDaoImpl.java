@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import pojo.Address;
 import pojo.User;
 import pojo.UserAddr;
+import pojo.UserInfo;
 
 import java.io.Serializable;
 import java.util.List;
@@ -91,7 +92,22 @@ public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
 
     @Override
     public void updateAddress(UserAddr userAddr) {
-        System.out.println(userAddr);
         this.getHibernateTemplate().update(userAddr);
+    }
+
+    @Override
+    public UserInfo getUserInfo(int user_id) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(UserInfo.class);
+        criteria.add(Restrictions.eq("user_id",user_id));
+        List<UserInfo> list = (List<UserInfo>)this.getHibernateTemplate().findByCriteria(criteria);
+        if (!list.isEmpty()){
+            return list.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public void updateUserInfo(UserInfo userInfo) {
+        this.getHibernateTemplate().update(userInfo);
     }
 }
