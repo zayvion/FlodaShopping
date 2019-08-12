@@ -18,7 +18,9 @@ public class MailAction extends BaseAction {
     private String mailBox;
 
     public String sendMail() {
-        MailUtil.sendMail(mailBox,getNumber(4));
+        String code = getNumber(4);
+        MailUtil.sendMail(mailBox,code);
+        session.put("mailcode",code);
         return NONE;
     }
 

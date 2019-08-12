@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import pojo.*;
+import utils.MD5Util;
 
 import java.io.Serializable;
 import java.util.List;
@@ -129,7 +130,7 @@ public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
     @Override
     public void changePwd(String current_pwd,int user_id) {
         User user = this.getHibernateTemplate().get(User.class, user_id);
-        user.setPassword(current_pwd);
+        user.setPassword(MD5Util.getMD5(current_pwd));
         System.err.println(user+"更新后的用户密码");
         this.getHibernateTemplate().update(user);
     }

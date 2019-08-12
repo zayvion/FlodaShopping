@@ -1,6 +1,7 @@
 package action;
 
 
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ModelDriven;
 import dao.ImgDao;
 import dao.JedisClient;
@@ -17,6 +18,7 @@ import service.FUserService;
 import service.ImgService;
 import utils.FtpUtil;
 import utils.MD5Util;
+import utils.ResponseResult;
 
 import javax.annotation.Resource;
 import java.io.File;
@@ -67,6 +69,9 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     private String imgFileFileName;
     private String new_pwd;
     private static String KEY_USERLIST = "userList";
+    private String current_pwd;
+
+
 
     /**
      * 添加用户地址
@@ -216,7 +221,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         info.setUser_id(onliner.getUser_id());
 
         //如果用户上传了头像，就更新头像，否则只更新基本信息
-        if (imgFileFileName != null){
+        if (imgFile != null){
             System.out.println(imgFileFileName);
             String oldFileName = imgFileFileName;
             String extension = oldFileName.substring(oldFileName.indexOf("."));
@@ -236,21 +241,26 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            try {
+                response.setContentType("application/json;charset=utf-8");
+                response.getWriter().write(userService.updateUserInfo(info));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return NONE;
+        }else {
+            try {
+                response.setContentType("application/json;charset=utf-8");
+                response.getWriter().write(userService.updateUserInfo(info));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return NONE;
         }
 
-        //判断用户是否更新了密码
-        if (!new_pwd.trim().equals("")){
-            userService.changePwd(MD5Util.getMD5(new_pwd), onliner.getUser_id());
-        }
 
-        try {
-            response.setContentType("application/json;charset=utf-8");
-            response.getWriter().write(userService.updateUserInfo(info));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return NONE;
     }
 
     public String getDate() {
@@ -286,6 +296,19 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return NONE;
+    }
+
+    public String changePsw() throws IOException {
+        User user = (User) session.get("onliner");
+        if (user.getPassword().equals(MD5Util.getMD5(current_pwd)) && code.equals(session.get("mailcode"))){
+            String result = userService.changePwd(new_pwd, user.getUser_id());
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(result);
+            return NONE;
+        }
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().write(new Gson().toJson(ResponseResult.build(501,"原密码不正确")));
         return NONE;
     }
 
@@ -383,5 +406,12 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         this.imgFileFileName = imgFileFileName;
     }
 
+    public String getCurrent_pwd() {
+        return current_pwd;
+    }
+
+    public void setCurrent_pwd(String current_pwd) {
+        this.current_pwd = current_pwd;
+    }
 }
 
