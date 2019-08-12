@@ -91,7 +91,7 @@
                                                     <li><a href="register.jsp">注册</a></li>
                                                 </c:when>
                                                 <c:when test="${sessionScope.onliner.username != null}">
-                                                    <li><a href="my_account.jsp">${sessionScope.onliner.username}</a></li>
+                                                    <li><a href="my-account.jsp">${sessionScope.onliner.username}</a></li>
                                                     <li><a href="user_exit.action">退出</a></li>
                                                 </c:when>
                                             </c:choose>
@@ -515,6 +515,10 @@
 
 <script type="text/javascript">
     $(function () {
+        getCartNum();
+        getWishNum();
+    })
+    function getCartNum() {
         $.ajax({
             //请求方式
             type: "POST",
@@ -542,7 +546,7 @@
                 console.log(e.responseText);
             }
         })
-    })
+    }
     function getCartInfos(){
         $.ajax({
             //请求方式
@@ -608,6 +612,7 @@
             success: function (result) {
                 if(result.status == 200){
                     alert("添加成功！");
+                    getCartNum();
                 }else {
                     alert("添加失败！");
                 }
@@ -680,6 +685,7 @@
             success: function (data) {
                 if(data.status == 200){
                     alert("删除成功！");
+                    getCartNum();
                 }else {
                     alert("删除失败！");
                 }
@@ -703,7 +709,8 @@
             //请求成功
             success: function (data) {
                 if(data.status == 200){
-                    alert("添加成功！")
+                    alert("添加成功！");
+                    getWishNum();
                 }else {
                     alert("添加失败！")
                 }
@@ -716,7 +723,7 @@
             }
         })
     }
-    $(function () {
+    function getWishNum() {
         $.ajax({
             //请求方式
             type: "POST",
@@ -743,7 +750,7 @@
                 console.log(e.responseText);
             }
         })
-    })
+    }
 </script>
 </body>
 </html>

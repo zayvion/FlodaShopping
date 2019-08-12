@@ -80,7 +80,7 @@
                                                     <li><a href="register.jsp">注册</a></li>
                                                 </c:when>
                                                 <c:when test="${sessionScope.onliner.username != null}">
-                                                    <li><a href="my_account.jsp">${sessionScope.onliner.username}</a></li>
+                                                    <li><a href="my-account.jsp">${sessionScope.onliner.username}</a></li>
                                                     <li><a href="user_exit.action">退出</a></li>
                                                 </c:when>
                                             </c:choose>
@@ -88,9 +88,6 @@
                                     </li>
                                     <li>
                                         <a href="wishlist.jsp" id="wish"></a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0)" class="minicart-btn" id="superscript" onclick="getCartInfos()"></a>
                                     </li>
                                 </ul>
                             </div>
@@ -348,6 +345,7 @@
 <script type="text/javascript">
 
     $(function () {
+        getWishNum();
         $.ajax({
             //请求方式
             type: "POST",
@@ -360,14 +358,10 @@
                 console.log(result);
                 var total = 0;
                 if(typeof result == "string"){
-                    $("#superscript").empty();
-                    $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
-                        "                                            <div class=\"notification\">0</div>");
+
                 }else {
-                    $("#superscript").empty();
                     $("#tbody").empty();
                     $("#totalMoney").empty();
-
                     for (var i = 0; i < result.length; i++){
                         var str = "<tr>\n" +
                             "                <td class=\"pro-thumbnail\"><a href='productDetail?id="+result[i].pro_id+"'><img class=\"img-fluid\" src="+result[i].url+" alt=\"Product\" /></a></td>\n" +
@@ -396,8 +390,31 @@
             }
         })
     })
+    function delCart(cart_id) {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址+请求参数
+            url: "http://localhost:8080/delCart?cart_id="+cart_id,
+            //请求成功
+            success: function (data) {
+                if(data.status == 200){
+                    alert("删除成功！");
+                }else {
+                    alert("删除失败！")
+                }
 
-    $(function () {
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+    function getWishNum() {
         $.ajax({
             //请求方式
             type: "POST",
@@ -424,7 +441,7 @@
                 console.log(e.responseText);
             }
         })
-    })
+    }
 </script>
 </body>
 </html>
