@@ -42,6 +42,11 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
     }
 
     @Override
+    public List<Order> getOrders() {
+        return null;
+    }
+
+    @Override
     public List<Order> getOrders(int user_id) {
         DetachedCriteria criteria = DetachedCriteria.forClass(Order.class);
         criteria.add(Restrictions.eq("user_id",user_id));
