@@ -36,4 +36,5 @@ public interface OrderDao {
      * @param order
      */
     void updateOrder(Order order);
+    List<Order> getOrders(int user_id);
 }

@@ -2,6 +2,7 @@ package action;
 
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
+import com.google.gson.Gson;
 import dao.CartDao;
 import dao.OrderDao;
 import dao.OrderDetailDao;
@@ -17,6 +18,7 @@ import service.CartService;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -42,6 +44,7 @@ public class PayAction extends BaseAction {
     private String total_amount;
     private int addr_id;
     private float total;
+    private int user_id;
 
     /**
      * 创建订单
@@ -131,6 +134,13 @@ public class PayAction extends BaseAction {
     }
 
     public String getOrders(){
+        try {
+            List<Order> orders = orderDao.getOrders(user_id);
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(new Gson().toJson(orders));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return NONE;
     };
 
@@ -164,5 +174,13 @@ public class PayAction extends BaseAction {
 
     public void setTotal(float total) {
         this.total = total;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 }

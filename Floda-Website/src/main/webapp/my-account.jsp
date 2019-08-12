@@ -196,7 +196,7 @@
                                     <div class="myaccount-tab-menu nav" role="tablist">
                                         <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>
                                             我的中心</a>
-                                        <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
+                                        <a href="#orders" data-toggle="tab" onclick="getOrderes(${sessionScope.onliner.user_id})"><i class="fa fa-cart-arrow-down"></i>
                                             我的订单</a>
                                         <a href="#address-edit" data-toggle="tab" onclick="getAddress(${sessionScope.onliner.user_id})"><i class="fa fa-map-marker"></i>
                                             地址管理</a>
@@ -239,15 +239,7 @@
                                                             <th>订单操作</th>
                                                         </tr>
                                                         </thead>
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Aug 22, 2019</td>
-                                                            <td>Pending</td>
-                                                            <td>$3000</td>
-                                                            <td><a href="cart.jsp" class="btn btn__bg">View</a>
-                                                            </td>
-                                                        </tr>
+                                                        <tbody id="order_body">
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -597,6 +589,23 @@
 <script src="assets/js/jquery.form.min.js"></script>
 <script>
     var userId = <%=onliner.getUser_id()%>;
+
+    //查询所有订单
+    function getOrderes(user_id) {
+        $.post("getOrders.action",{user_id:user_id},function (data,status) {
+            $.each(data,function (index,item) {
+                var _tr = "<tr>\n" +
+                    "<td>"+item.order_id+"</td>\n" +
+                    "<td>"+item.creattime+"</td>\n" +
+                    "<td>"+item.type+"</td>\n" +
+                    "<td>￥"+item.order_money+".00</td>\n" +
+                    "<td><a href=\"javascript:void(0)\" class=\"btn btn__bg\">View</a>\n" +
+                    "</td>\n" +
+                    "</tr>";
+                $("#order_body").append(_tr);
+            })
+        })
+    }
 
     //查询当前登录用户的个人详细信息
     function getUserInfo(){

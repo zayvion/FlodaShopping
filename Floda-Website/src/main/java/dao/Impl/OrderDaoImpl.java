@@ -2,6 +2,8 @@ package dao.Impl;
 
 import dao.OrderDao;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pojo.Order;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -39,9 +42,11 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
     }
 
     @Override
-    public List<Order> getOrders() {
-
-        return null;
+    public List<Order> getOrders(int user_id) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(Order.class);
+        criteria.add(Restrictions.eq("user_id",user_id));
+        List<Order> list = (List<Order>)this.getHibernateTemplate().findByCriteria(criteria);
+        return list;
     }
 
     @Transactional

@@ -12,7 +12,4 @@ dao\OrderDetailDao.class
 dao\Impl\WishlistDaoImpl.class
 action\WishlistAction.class
 service\AlipayConfig.class
-service\Impl\ImgServiceImpl.class
-action\MailAction.class
 service\WishlistService.class
-service\ImgService.class

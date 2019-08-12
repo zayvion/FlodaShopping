@@ -57,6 +57,7 @@
         </global-results>
         <action name="createOrder" class="payAction" method="createOrder"/>
         <action name="successPay" class="payAction" method="successPay"/>
+        <action name="getOrders" class="payAction" method="getOrders"/>
     </package>
     <package name="checkout" extends="struts-default" namespace="/" strict-method-invocation="false">
         <global-results>
