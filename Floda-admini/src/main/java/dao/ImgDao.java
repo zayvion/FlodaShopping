@@ -14,6 +14,7 @@ public interface ImgDao {
      * @return 返回主键
      */
     int addImg(Img img);
+
     /**
      * 修改(更新)图片
      * @param img

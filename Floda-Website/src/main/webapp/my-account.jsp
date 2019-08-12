@@ -313,6 +313,7 @@
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <img id="show"  class="img-thumbnail" style="margin:30px 0 0 120px;width: 230px;height: 250px">
+                                                                <input id="head" type="hidden" name="info.head">
                                                                 <input type="file" id="file" name="imgFile" accept="image/png, image/jpeg, image/gif, image/jpg" onchange="changepic(this)">
                                                                 <div id="clone">图片上传</div>
                                                             </div>
@@ -339,15 +340,25 @@
                                                         </div>
                                                         <fieldset>
                                                             <legend>修改密码</legend>
-                                                            <div class="single-input-item">
-                                                                <label for="current-pwd" class="required">原始密码</label>
-                                                                <input type="password" id="current-pwd" name="current_pwd" placeholder="原始密码" />
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <label for="current-pwd" class="required">原始密码</label>
+                                                                        <input type="password" id="current-pwd" name="current_pwd" placeholder="原始密码" />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="single-input-item">
+                                                                        <label for="code" class="required">邮箱验证码</label>
+                                                                        <input type="text" id="code" name="code" placeholder="邮箱验证码" />
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-lg-6">
                                                                     <div class="single-input-item">
                                                                         <label for="new-pwd" class="required">新密码</label>
-                                                                        <input type="password" id="new-pwd" placeholder="新密码" />
+                                                                        <input type="password" id="new-pwd" name="new_pwd" placeholder="新密码" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-lg-6">
@@ -685,12 +696,12 @@
     //查询当前登录用户的个人详细信息
     function getUserInfo(){
         $.get("user_getUserInfo.action",function (data,status) {
-            console.log(data);
             $("#name").val(data.name);
             $("#userInfo_id").val(data.userInfo_id);
-            $("#show").attr("src",data.head);
+            $("#show").attr("src",data.headAddr);
             $("#email").val(data.email);
             $("#sex").find("option[value="+data.sex+"]").attr("selected","selected");
+            $("#head").val(data.head);
         });
     }
 
@@ -717,7 +728,11 @@
         };
 
         if ($current_pwd != ""){
-            if ($("#new-pwd").val().trim() !== $("#confirm-pwd").val().trim()){
+            if ($("#new-pwd").val().trim() == "" || $("#confirm-pwd").val().trim() == ""){
+                alert("新密码不能为空！");
+                return;
+            }
+            if ($("#new-pwd").val().trim() != $("#confirm-pwd").val().trim()){
                 alert("两次输入的密码不一致,请重新输入!");
                 return;
             }

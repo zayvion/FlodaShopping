@@ -1,3 +1,3 @@
-pojo/WishlistInfo.class
-pojo/Wishlist.class
-utils/IDUtils.class
+utils\IDUtils.class
+pojo\WishlistInfo.class
+pojo\Wishlist.class

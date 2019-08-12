@@ -74,4 +74,11 @@ public interface FUserService {
      * @return
      */
     String updateUserInfo(UserInfo userInfo);
+
+    /**
+     * 修改用户密码
+     * @param current_pwd
+     * @return
+     */
+    String changePwd(String current_pwd,int user_id);
 }

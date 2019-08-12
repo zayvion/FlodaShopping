@@ -106,4 +106,16 @@ public class FUserServiceImpl implements FUserService {
         }
         return ResponseResult.build(500,"修改失败");
     }
+
+    @Override
+    @Transactional
+    public String changePwd(String current_pwd,int user_id) {
+        try {
+            fuserDao.changePwd(current_pwd,user_id);
+            return ResponseResult.build(200,"密码修改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseResult.build(500,"密码修改失败");
+    }
 }

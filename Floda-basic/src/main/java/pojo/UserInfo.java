@@ -6,7 +6,8 @@ public class UserInfo {
     private String name; //用户姓名（真实姓名）
     private String email; //NULL邮箱
     private int sex; //性别
-    private String head; //头像地址
+    private int head; //头像地址id
+    private String headAddr;//头像地址
 
     public int getUserInfo_id() {
         return userInfo_id;
@@ -48,12 +49,20 @@ public class UserInfo {
         this.sex = sex;
     }
 
-    public String getHead() {
+    public int getHead() {
         return head;
     }
 
-    public void setHead(String head) {
+    public void setHead(int head) {
         this.head = head;
+    }
+
+    public String getHeadAddr() {
+        return headAddr;
+    }
+
+    public void setHeadAddr(String headAddr) {
+        this.headAddr = headAddr;
     }
 
     @Override
@@ -64,7 +73,8 @@ public class UserInfo {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", sex=" + sex +
-                ", head='" + head + '\'' +
+                ", head=" + head +
+                ", headAddr='" + headAddr + '\'' +
                 '}';
     }
 }

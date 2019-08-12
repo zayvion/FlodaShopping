@@ -16,6 +16,7 @@ import java.io.Serializable;
  * @Description:图片dao的实现类
  */
 @Repository
+@Transactional
 public class ImgDaoImpl extends HibernateDaoSupport implements ImgDao {
     @Autowired
     public void setSF(SessionFactory sessionFactory){
@@ -32,7 +33,6 @@ public class ImgDaoImpl extends HibernateDaoSupport implements ImgDao {
     @Transactional
     public void updateImg(Img img) {
         this.getHibernateTemplate().update(img);
-
     }
 
     @Override

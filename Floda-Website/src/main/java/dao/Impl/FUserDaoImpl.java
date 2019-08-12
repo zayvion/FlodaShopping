@@ -8,10 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
-import pojo.Address;
-import pojo.User;
-import pojo.UserAddr;
-import pojo.UserInfo;
+import pojo.*;
 
 import java.io.Serializable;
 import java.util.List;
@@ -101,6 +98,10 @@ public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
         criteria.add(Restrictions.eq("user_id",user_id));
         List<UserInfo> list = (List<UserInfo>)this.getHibernateTemplate().findByCriteria(criteria);
         if (!list.isEmpty()){
+            Img img = this.getHibernateTemplate().get(Img.class, list.get(0).getHead());
+            if (img != null){
+                list.get(0).setHeadAddr(img.getImg_addr());
+            }
             return list.get(0);
         }
         return null;
@@ -108,6 +109,26 @@ public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
 
     @Override
     public void updateUserInfo(UserInfo userInfo) {
-        this.getHibernateTemplate().update(userInfo);
+        UserInfo info = this.getHibernateTemplate().get(UserInfo.class, userInfo.getUserInfo_id());
+        if (info == null){
+            System.out.println("添加个人信息");
+            this.getHibernateTemplate().save(userInfo);
+        }else {
+//            this.getHibernateTemplate().update(userInfo);
+            info.setUser_id(userInfo.getUser_id());
+            info.setName(userInfo.getName());
+            info.setEmail(userInfo.getEmail());
+            info.setSex(userInfo.getSex());
+            info.setHead(userInfo.getHead());
+            System.out.println("修改个人信息");
+        }
+    }
+
+    @Override
+    public void changePwd(String current_pwd,int user_id) {
+        User user = this.getHibernateTemplate().get(User.class, user_id);
+        user.setPassword(current_pwd);
+        System.err.println(user+"更新后的用户密码");
+        this.getHibernateTemplate().update(user);
     }
 }

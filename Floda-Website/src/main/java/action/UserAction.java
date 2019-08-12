@@ -2,7 +2,9 @@ package action;
 
 
 import com.opensymphony.xwork2.ModelDriven;
+import dao.ImgDao;
 import dao.JedisClient;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +14,7 @@ import pojo.User;
 import pojo.UserAddr;
 import pojo.UserInfo;
 import service.FUserService;
+import service.ImgService;
 import utils.FtpUtil;
 import utils.MD5Util;
 
@@ -32,7 +35,7 @@ import java.util.UUID;
 @Controller
 public class UserAction extends BaseAction implements ModelDriven<User> {
 
-    @Value("${${FTP_ADDRESS}")
+    @Value("${FTP_ADDRESS}")
     private String FTP_ADDRESS;
     @Value("${FTP_PORT}")
     private Integer FTP_PORT;
@@ -48,6 +51,8 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     private JedisClient jedisClient;
     @Resource
     private FUserService userService;
+    @Resource
+    private ImgService imgService;
     private User user = new User();
     private String repeat_pwd;
     private int parent_id;
@@ -60,7 +65,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     private File imgFile;
     private String imgFileContentType;
     private String imgFileFileName;
-    private String current_pwd;
+    private String new_pwd;
     private static String KEY_USERLIST = "userList";
 
     /**
@@ -130,7 +135,6 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         }
         return NONE;
     }
-
 
     /**
      * 用户注册
@@ -206,24 +210,45 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
      * @return
      */
     public String updateUserInfo() {
+
         User onliner = (User) session.get("onliner");
         info.setUser_id(onliner.getUser_id());
-        System.out.println("filename=" + imgFileFileName);
-        String oldFileName = imgFileFileName;
-        String extension = oldFileName.substring(oldFileName.indexOf("."));
-        String newName = oldFileName.substring(0, oldFileName.indexOf(".")) + UUID.randomUUID().toString().substring(0, 5) + extension;
-        String imgPath = getDate();
-        try {
-            FtpUtil.uploadFile(FTP_ADDRESS, FTP_PORT, FTP_USERNAME, FTP_PASSWORD, FTP_BASE_PATH, imgPath, newName, new FileInputStream(imgFile.getAbsoluteFile()));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
+        //如果用户上传了头像，就更新头像，否则只更新基本信息
+        if (imgFileFileName != null){
+            System.out.println(imgFileFileName);
+            String oldFileName = imgFileFileName;
+            String extension = oldFileName.substring(oldFileName.indexOf("."));
+            String newName = oldFileName.substring(0, oldFileName.indexOf(".")) + UUID.randomUUID().toString().substring(0, 5) + extension;
+            String imgPath = getDate();
+            try {
+                Img img = new Img();
+                img.setImg_addr(IMG_BASE_PATH+imgPath+"/"+newName);
+                if(info.getHead() == 0){
+                    int i = imgService.addImg(img);
+                    info.setHead(i);
+                }else {
+                    img.setImg_id(info.getHead());
+                    imgService.updateImg(img);
+                }
+                FtpUtil.uploadFile(FTP_ADDRESS, FTP_PORT, FTP_USERNAME, FTP_PASSWORD, FTP_BASE_PATH, imgPath, newName, new FileInputStream(imgFile.getAbsoluteFile()));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+
+        //判断用户是否更新了密码
+        if (!new_pwd.trim().equals("")){
+            userService.changePwd(MD5Util.getMD5(new_pwd), onliner.getUser_id());
+        }
+
         try {
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(userService.updateUserInfo(info));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return NONE;
     }
 
@@ -324,12 +349,12 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         this.info = info;
     }
 
-    public String getCurrent_pwd() {
-        return current_pwd;
+    public String getNew_pwd() {
+        return new_pwd;
     }
 
-    public void setCurrent_pwd(String current_pwd) {
-        this.current_pwd = current_pwd;
+    public void setNew_pwd(String new_pwd) {
+        this.new_pwd = new_pwd;
     }
 
     public File getImgFile() {

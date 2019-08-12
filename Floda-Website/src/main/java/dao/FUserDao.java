@@ -72,4 +72,11 @@ public interface FUserDao {
      * @param userInfo
      */
     void updateUserInfo(UserInfo userInfo);
+
+    /**
+     * 修改用户密码
+     * @param current_pwd
+     * @return
+     */
+    void changePwd(String current_pwd,int user_id);
 }
