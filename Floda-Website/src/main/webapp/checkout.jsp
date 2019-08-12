@@ -5,6 +5,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page isELIgnored="false" %>
 <html>
 <%
@@ -17,11 +18,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="meta description">
-    <title>Floda</title>
+    <title>订单结算-Floda</title>
     <!--=== Favicon ===-->
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon"/>
     <!-- Google fonts include -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,900%7CYesteryear" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,900%7CYesteryear"
+          rel="stylesheet">
     <!-- All Vendor & plugins CSS include -->
     <link href="assets/css/vendor.css" rel="stylesheet">
     <!-- Main Style CSS -->
@@ -31,7 +33,7 @@
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
-        .fr{
+        .fr {
             text-decoration: underline;
             font-size: 12px;
             float: right;
@@ -39,6 +41,7 @@
             color: #262626;
             line-height: 30px;
         }
+
         .addre.on {
             border: 2px solid #C10000;
         }
@@ -51,23 +54,28 @@
             font-size: 12px;
             float: left;
         }
+
         .fl {
             float: left;
         }
+
         .addre .tit {
             height: 45px;
             line-height: 45px;
             padding: 0 10px;
             border-bottom: 1px solid #dbdbdb;
         }
+
         .addre .addCon {
             padding: 0 10px;
             background: #f5f5f5;
         }
+
         .addre .addCon p {
             line-height: 50px;
         }
-        .addre .tit .fr a,span{
+
+        .addre .tit .fr a, span {
             text-decoration: none;
             font-size: 12px;
             float: right;
@@ -75,27 +83,32 @@
             color: #262626;
             line-height: 45px;
         }
-        .order-summary-details a{
+
+        .order-summary-details a {
             text-decoration: underline;
             font-size: 12px;
             outline: none;
             color: #262626;
             line-height: 30px;
         }
-        .addre .tit .fr span{
+
+        .addre .tit .fr span {
             padding-left: 10px;
             padding-right: 10px;
         }
-        .checkout-billing-details-wrap img{
+
+        .checkout-billing-details-wrap img {
             float: left;
             border: 2px solid #dbdbdb;
             margin: 0px 20px 30px 0;
             cursor: pointer;
         }
+
         .checkout-billing-details-wrap img.on {
             border: 2px solid #C10000;
         }
-        .checkout-billing-details-wrap.shipping span{
+
+        .checkout-billing-details-wrap.shipping span {
             width: 136px;
             height: 38px;
             text-align: center;
@@ -105,8 +118,12 @@
             margin: 0px 20px 30px 0;
             cursor: pointer;
         }
-        .checkout-billing-details-wrap.shipping span.on{
+
+        .checkout-billing-details-wrap.shipping span.on {
             border: 2px solid #C10000;
+        }
+        #btn_gopay{
+            width: 140px;
         }
     </style>
 </head>
@@ -135,7 +152,7 @@
                         <div class="main-menu-area">
                             <div class="main-menu">
                                 <!-- main menu navbar start -->
-                                <nav class="desktop-menu"  style="height: 100px">
+                                <nav class="desktop-menu" style="height: 100px">
 
                                 </nav>
                                 <!-- main menu navbar end -->
@@ -160,7 +177,8 @@
                                                     <li><a href="register.jsp">注册</a></li>
                                                 </c:when>
                                                 <c:when test="${sessionScope.onliner.username != null}">
-                                                    <li><a href="my_account.jsp">${sessionScope.onliner.username}</a></li>
+                                                    <li><a href="my_account.jsp">${sessionScope.onliner.username}</a>
+                                                    </li>
                                                     <li><a href="user_exit.action">退出</a></li>
                                                 </c:when>
                                             </c:choose>
@@ -225,7 +243,6 @@
 <!-- off-canvas menu end -->
 
 
-
 <!-- main wrapper start -->
 <main>
     <!-- breadcrumb area start -->
@@ -253,145 +270,72 @@
         <div class="container">
             <div class="row">
                 <!-- Checkout Billing Details -->
-                <div class="col-lg-7">
+                <div class="col-lg-11">
                     <div class="checkout-billing-details-wrap">
-                        <h2>收件信息<a href="#" class="fr">新增地址</a></h2>
-                        <div class="addre fl on">
-                            <div class="tit clearfix">
-                                <p class="fl">张三1
-                                    <span class="default">[默认地址]</span>
-                                </p>
-                                <p class="fr">
-                                    <a href="#">删除</a>
-                                    <span>|</span>
-                                    <a href="#" class="edit">编辑</a>
-                                </p>
-                            </div>
-                            <div class="addCon">
-                                <p>河北省&nbsp;唐山市&nbsp;路北区&nbsp;大学生公寓村</p>
-                                <p>15732570937</p>
-                            </div>
-                        </div>
-                        <div class="addre fl">
-                            <div class="tit clearfix">
-                                <p class="fl">张三1
-                                    <span class="default"></span>
-                                </p>
-                                <p class="fr">
-                                    <a href="#">删除</a>
-                                    <span>|</span>
-                                    <a href="#" class="edit">编辑</a>
-                                </p>
-                            </div>
-                            <div class="addCon">
-                                <p>河北省&nbsp;唐山市&nbsp;路北区&nbsp;大学生公寓村</p>
-                                <p>15732570937</p>
-                            </div>
-                        </div>
-                        <div class="addre fl">
-                            <div class="tit clearfix">
-                                <p class="fl">张三1
-                                    <span class="default"></span>
-                                </p>
-                                <p class="fr">
-                                    <a href="#">删除</a>
-                                    <span>|</span>
-                                    <a href="#" class="edit">编辑</a>
-                                </p>
-                            </div>
-                            <div class="addCon">
-                                <p>河北省&nbsp;唐山市&nbsp;路北区&nbsp;大学生公寓村</p>
-                                <p>15732570937</p>
-                            </div>
-                        </div>
-                        <div class="addre fl">
-                            <div class="tit clearfix">
-                                <p class="fl">张三1
-                                    <span class="default"></span>
-                                </p>
-                                <p class="fr">
-                                    <a href="#">删除</a>
-                                    <span>|</span>
-                                    <a href="#" class="edit">编辑</a>
-                                </p>
-                            </div>
-                            <div class="addCon">
-                                <p>河北省&nbsp;唐山市&nbsp;路北区&nbsp;大学生公寓村</p>
-                                <p>15732570937</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="checkout-billing-details-wrap">
-                        <h2>支付方式</h2>
-                        <img class="on" src="assets/img/way/way01.jpg">
-                        <img src="assets/img/way/way04.jpg">
-                    </div>
-                    <div class="checkout-billing-details-wrap shipping" style="margin-top: 102px">
-                        <h2>快递信息</h2>
-                        <span class="on">顺风快递</span>
-                        <span>百世汇通</span>
-                        <span>圆通快递</span>
-                        <span>中通快递</span>
-                    </div>
-                </div>
-
-                <!-- Order Summary Details -->
-                <div class="col-lg-5">
-                    <div class="order-summary-details">
-                        <h2>订单内容<a href="#" class="fr">返回购物车</a></h2>
-                        <div class="order-summary-content">
-                            <!-- Order Summary Table -->
-                            <div class="order-summary-table table-responsive text-center">
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th><strong>商品名称</strong></th>
-                                        <th><strong>金额</strong></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td><a href="product-details.jsp">商品名称 <strong> × 1</strong></a>
-                                        </td>
-                                        <td>￥165.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="product-details.jsp">商品名称 <strong> × 4</strong></a>
-                                        </td>
-                                        <td>￥165.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="product-details.jsp">商品名称 <strong> × 2</strong></a>
-                                        </td>
-                                        <td>￥165.00</td>
-                                    </tr>
-                                    </tbody>
-                                    <tfoot>
-                                    <tr>
-                                        <td>商品金额</td>
-                                        <td>￥400</td>
-                                    </tr>
-                                    <tr>
-                                        <td>优惠金额</td>
-                                        <td>￥50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>运费</td>
-                                        <td>免运费</td>
-                                    </tr>
-                                    <tr>
-                                        <td>合计</td>
-                                        <td style="color: #c10000;font-weight: bold;font-size: 22px">￥350</td>
-                                    </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <!-- Order Payment Method -->
-                            <div class="order-payment-method">
-                                <div class="summary-footer-area">
-                                    <button type="submit" class="btn btn__bg" style="width: 100%">去支付</button>
+                        <h2>收件信息</h2>
+                        <s:iterator value="#request.address" var="item">
+                            <div class="addre fl on">
+                                <input type='hidden' name='addresss_id' id='addresss_id' value="${item.user_addr_id}"/>
+                                <div class="tit clearfix">
+                                    <p class="fl" style="font-size: 16px"><b>${receiver_name}</b>
+                                    </p>
+                                </div>
+                                <div class="addCon">
+                                    <p style="font-size: 14px">${receiver_addr}</p>
+                                    <p style="font-size: 14px">${receiver_tel}</p>
                                 </div>
                             </div>
+                        </s:iterator>
+                    </div>
+                    <!-- Order Summary Details -->
+                    <div class="row col-lg-12">
+                        <div class="checkout-billing-details-wrap">
+                            <h2>订单预览<a href="#" class="fr"></a></h2>
+                            <div class="cart-table table-responsive">
+                                <table class="table table-bordered" style="margin-bottom: 30px">
+                                    <thead>
+                                    <tr>
+                                        <th class="pro-thumbnail">商品展示</th>
+                                        <th class="pro-title">产品名称</th>
+                                        <th class="pro-price">价格</th>
+                                        <th class="pro-quantity">数量</th>
+                                        <th class="pro-subtotal">结算</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="tbody"></tbody>
+                                </table>
+                            </div>
+                            <div class="offcanvas-minicart-wrapper">
+                                <div class="minicart-inner">
+                                    <div class="offcanvas-overlay"></div>
+                                    <div class="minicart-inner-content">
+                                        <div class="minicart-close">
+                                            <i class="lnr lnr-cross"></i>
+                                        </div>
+                                        <div class="minicart-content-box">
+                                            <div class="minicart-item-wrapper">
+                                                <ul id="CartInfos"></ul>
+                                            </div>
+
+                                            <div class="minicart-pricing-box">
+                                                <ul id="total"></ul>
+                                            </div>
+
+                                            <div class="minicart-button">
+                                                <a href="cart.jsp"><i class="fa fa-shopping-cart"></i> 查看购物车</a>
+                                                <a href="cart.jsp"><i class="fa fa-share"></i> 去结算</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="checkout-billing-details-wrap">
+                            <h2>支付方式</h2>
+                            <img class="on" src="assets/img/way/way01.jpg">
+                            <img src="assets/img/way/way04.jpg">
                         </div>
                     </div>
                 </div>
@@ -518,9 +462,60 @@
 <script src="assets/js/jquery.min.js"></script>
 <script>
     $(function () {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8080/getCartInfos",
+            //请求成功
+            success: function (result) {
+                console.log(result);
+                var total = 0;
+                for (var i = 0; i < result.length; i++) {
+                    var str = "<tr>\n" +
+                        "                <td class=\"pro-thumbnail\"><a href='productDetail?id=" + result[i].pro_id + "'><img class=\"img-fluid\" src=" + result[i].url + " alt=\"Product\" /></a></td>\n" +
+                        "                <td class=\"pro-title\"><a href='productDetail?id=" + result[i].pro_id + "'>" + result[i].pro_name + "</a></td>\n" +
+                        "                <td class=\"pro-price\"><span>￥" + result[i].pro_price + "</span></td>\n" +
+                        "                <td class=\"pro-quantity\">\n" +
+                        "                <div>\n" +
+                        "                    <div>" + result[i].pro_number + "</div>\n" +
+                        "                </div>\n" +
+                        "                </td>\n" +
+                        "                <td class=\"pro-subtotal\"><span>￥" + result[i].cart_price + "</span></td>\n" +
+                        "            </tr>"
+                    var row = $(str);
+                    $("#tbody").append(row);
+                    total += result[i].cart_price;
+                }
+                var total = $("<div class='cart-calculator-wrapper' style='position: absolute;right: 100px'>\n" +
+                    "                            <div class='cart-calculate-items'>\n" +
+                    "                                <h3 style='text-align: center'>结算</h3>\n" +
+                    "                                <div class='table-responsive'>\n" +
+                    "                                    <table class='table-danger'>\n" +
+                    "                                        <tbody><tr class='total' id='totalMoney'><td>金额</td>\n" +
+                    "                                            <td class='total-amount'>￥"+total+"</td></tr>\n" +
+                    "                                    </tbody></table>\n" +
+                    "                                </div>\n" +
+                    "                            </div>\n" +
+                    "<form action='createOrder' id='form_createOrder' method='post'>" +
+                    "<input type='hidden' name='addr_id' id='form_addr_id' value=''><input type='hidden' name='total' id='form_total' value=''>" +
+                    "                           </form><button class='btn btn__bg d-block' id='btn_gopay' onclick='submit()'>去付款</button>\n" +
+                    "                        </div>");
+                $("#tbody").append(total);
+
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
         $(".addre").click(function () {
             var $addr = $(".addre");
-            for (var i = 0;i < $addr.length;i ++){
+            for (var i = 0; i < $addr.length; i++) {
                 $addr.eq(i).removeClass('on');
             }
             $(this).toggleClass('on');
@@ -528,7 +523,7 @@
 
         $(".checkout-billing-details-wrap img").click(function () {
             var $addr = $(".checkout-billing-details-wrap img");
-            for (var i = 0;i < $addr.length;i ++){
+            for (var i = 0; i < $addr.length; i++) {
                 $addr.eq(i).removeClass('on');
             }
             $(this).toggleClass('on');
@@ -536,12 +531,23 @@
 
         $(".checkout-billing-details-wrap.shipping span").click(function () {
             var $addr = $(".checkout-billing-details-wrap.shipping span");
-            for (var i = 0;i < $addr.length;i ++){
+            for (var i = 0; i < $addr.length; i++) {
                 $addr.eq(i).removeClass('on');
             }
             $(this).toggleClass('on');
         });
+
+
     })
+    function submit () {
+        var addr_id = $(".on #addresss_id ").val();
+        var total = $(".total-amount").text().substr(1);
+        console.log(total);
+        console.log("进来了")
+        $("#form_addr_id").val(addr_id);
+        $("#form_total").val(total);
+        $('#form_createOrder').submit();
+    }
 </script>
 </body>
 </html>

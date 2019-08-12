@@ -54,7 +54,7 @@ public class AlipayTrade {
         return result;
     }
 
-    public String Pagepay(HttpServletRequest request) throws UnsupportedEncodingException, AlipayApiException {
+    public String Pagepay(HttpServletRequest request,float totalMoney,int trade_no ) throws UnsupportedEncodingException, AlipayApiException {
         //获得初始化的AlipayClient
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
 
@@ -64,13 +64,13 @@ public class AlipayTrade {
         alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
 
         //商户订单号，商户网站订单系统中唯一订单号，必填
-        String out_trade_no = new String(UUID.randomUUID().toString().substring(0,10));
+        String out_trade_no = new String(String.valueOf(trade_no));
         //付款金额，必填
-        String total_amount = new String("3323");
+        String total_amount = new String(String.valueOf(totalMoney));
         //订单名称，必填
         String subject = new String("Floda订单");
         //商品描述，可空
-        String body = new String("描述");
+        String body = new String("付款后商品将发货。");
 
         alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","
                 + "\"total_amount\":\""+ total_amount +"\","

@@ -2,17 +2,22 @@ package action;
 
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
+import dao.CartDao;
+import dao.OrderDao;
+import dao.OrderDetailDao;
+import dao.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import pojo.*;
 import service.AlipayConfig;
 import service.AlipayTrade;
+import service.CartService;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.sql.Timestamp;
+import java.util.*;
 
 /**
  * @Auther: zayvion
@@ -22,32 +27,51 @@ import java.util.Map;
 @Component
 @Scope("prototype")
 public class PayAction extends BaseAction {
+
+    @Autowired
+    private CartDao cartDao;
+    @Autowired
+    private ProductDao productDao;
     @Autowired
     private AlipayTrade alipayTrade;
+    @Autowired
+    private OrderDao orderDao;
+    @Autowired
+    private OrderDetailDao orderDetailDao;
     private String out_trade_no;
     private String total_amount;
+    private int addr_id;
+    private float total;
 
-    public String pay() throws IOException, AlipayApiException {
-        String pagepay = alipayTrade.Pagepay(super.request);
+    /**
+     * 创建订单
+     *
+     * @return
+     * @throws IOException
+     * @throws AlipayApiException
+     */
+    public String createOrder() throws IOException, AlipayApiException {
+        User user = (User) session.get("onliner");
+        Order order = new Order();
+        order.setCreattime(new Timestamp(new Date().getTime()));
+        order.setType(1);
+        order.setUser_id(user.getUser_id());
+        int orderId = orderDao.addOrder(order);
+        List<CartInfo> cartInfos = cartDao.getCartInfos(user.getUser_id());
+        for (CartInfo c : cartInfos) {
+            OrderDetail orderDetail = new OrderDetail();
+            Product product = productDao.getProduct(c.getPro_id());
+            orderDetail.setPro_name(product.getPro_name());
+            orderDetail.setPro_number(c.getPro_number());
+            orderDetail.setPro_price(product.getPro_price());
+            orderDetail.setOrder_id(orderId);
+            orderDetailDao.addOrderDetail(orderDetail);
+            //cartDao.delCart(c.getCart_id());
+        }
+        String pagepay = alipayTrade.Pagepay(super.request,total,orderId);
         request.setAttribute("result", pagepay);
 
         return PAY;
-    }
-
-    public String getOut_trade_no() {
-        return out_trade_no;
-    }
-
-    public void setOut_trade_no(String out_trade_no) {
-        this.out_trade_no = out_trade_no;
-    }
-
-    public String getTotal_amount() {
-        return total_amount;
-    }
-
-    public void setTotal_amount(String total_amount) {
-        this.total_amount = total_amount;
     }
 
     public String successPay() throws UnsupportedEncodingException, AlipayApiException {
@@ -69,14 +93,6 @@ public class PayAction extends BaseAction {
 
         boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.alipay_public_key, AlipayConfig.charset, AlipayConfig.sign_type); //调用SDK验证签名
 
-        //——请在这里编写您的程序（以下代码仅作参考）——
-
-	/* 实际验证过程建议商户务必添加以下校验：
-	1、需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号，
-	2、判断total_amount是否确实为该订单的实际金额（即商户订单创建时的金额），
-	3、校验通知中的seller_id（或者seller_email) 是否为out_trade_no这笔单据的对应的操作方（有的时候，一个商户可能有多个seller_id/seller_email）
-	4、验证app_id是否为该商户本身。
-	*/
         if (signVerified) {//验证成功
             //商户订单号
             String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"), "UTF-8");
@@ -89,16 +105,9 @@ public class PayAction extends BaseAction {
             String trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"), "UTF-8");
             request.setAttribute("out_trade_no", out_trade_no);
             request.setAttribute("total_amount", total_amount);
-            //request.setAttribute("subject",subject);
-            // request.setAttribute("body",body);
 
             if (trade_status.equals("TRADE_FINISHED")) {
-                //判断该笔订单是否在商户网站中已经做过处理
-                //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                //如果有做过处理，不执行商户的业务程序
 
-                //注意：
-                //退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
             } else if (trade_status.equals("TRADE_SUCCESS")) {
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
@@ -107,19 +116,45 @@ public class PayAction extends BaseAction {
                 //注意：
                 //付款完成后，支付宝系统发送该交易状态通知
             }
-
             System.out.println("success");
 
         } else {//验证失败
             System.out.println("fail");
 
-            //调试用，写文本函数记录程序运行情况是否正常
-            //String sWord = AlipaySignature.getSignCheckContentV1(params);
-            //AlipayConfig.logResult(sWord);
         }
-
+        System.out.println("付款完成！！！");
         return "paysuccess";
 
     }
+    public String getOut_trade_no() {
+        return out_trade_no;
+    }
 
+    public void setOut_trade_no(String out_trade_no) {
+        this.out_trade_no = out_trade_no;
+    }
+
+    public String getTotal_amount() {
+        return total_amount;
+    }
+
+    public void setTotal_amount(String total_amount) {
+        this.total_amount = total_amount;
+    }
+
+    public int getAddr_id() {
+        return addr_id;
+    }
+
+    public void setAddr_id(int addr_id) {
+        this.addr_id = addr_id;
+    }
+
+    public float getTotal() {
+        return total;
+    }
+
+    public void setTotal(float total) {
+        this.total = total;
+    }
 }

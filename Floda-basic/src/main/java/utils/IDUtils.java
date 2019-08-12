@@ -9,7 +9,7 @@ import java.util.Random;
  */
 public class IDUtils {
     /**
-     * 商品id生成
+     * 订单ID生成
      */
 
     public static long genItemId() {

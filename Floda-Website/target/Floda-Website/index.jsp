@@ -181,13 +181,13 @@
                 <div class="col-md-4">
                     <div class="banner-item mb-30">
                         <figure class="banner-thumb">
-                            <a href="moreProduct?cate_id=5">
+                            <a target="_blank" href="moreProduct?cate_id=5">
                                 <img src="assets/img/banner/nanzhuang.png" alt="">
                             </a>
                             <figcaption class="banner-content">
                                 <h2 class="text1">MEN's SUIT</h2>
                                 <h2 class="text2">男装</h2>
-                                <a class="store-link" href="moreProduct?cate_id=5">购买</a>
+                                <a target="_blank" class="store-link" href="moreProduct?cate_id=5">购买</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -198,13 +198,13 @@
                 <div class="col-md-4">
                     <div class="banner-item mb-30">
                         <figure class="banner-thumb">
-                            <a href="moreProduct?cate_id=3">
+                            <a target="_blank" href="moreProduct?cate_id=3">
                                 <img src="assets/img/banner/flower.jpg" alt="">
                             </a>
                             <figcaption class="banner-content">
                                 <h2 class="text1">FLOWER</h2>
                                 <h2 class="text2">花卉</h2>
-                                <a class="store-link" href="moreProduct?cate_id=3">购买</a>
+                                <a target="_blank" class="store-link" href="moreProduct?cate_id=3">购买</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -215,13 +215,13 @@
                 <div class="col-md-4">
                     <div class="banner-item mb-30">
                         <figure class="banner-thumb">
-                            <a href="moreProduct?cate_id=4">
+                            <a target="_blank" href="moreProduct?cate_id=4">
                                 <img src="assets/img/banner/shuma.png" alt="">
                             </a>
                             <figcaption class="banner-content">
                                 <h2 class="text1">DIGITAL DEVICE</h2>
                                 <h2 class="text2">数码</h2>
-                                <a class="store-link" href="moreProduct?cate_id=4">购买</a>
+                                <a target="_blank" class="store-link" href="moreProduct?cate_id=4">购买</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -678,6 +678,8 @@
 <script src="assets/js/active.js"></script>
 <script>
     $(function () {
+        getWishNum();
+        getCartNum();
         $.ajax({
             url:" http://localhost:8080/getNewProducts",
             type:"post",
@@ -783,7 +785,8 @@
             //请求成功
             success: function (result) {
                 if (result.status == 200){
-                    location.href = "index.jsp";
+                    alert("添加成功!");
+                   getCartNum();
                 }else {
                     alert("添加失败");
                 }
@@ -845,62 +848,6 @@
             }
         })
     }
-    $(function () {
-        $.ajax({
-            //请求方式
-            type: "POST",
-            //请求的媒体类型
-            datatype: "json",
-            //请求地址
-            url: "http://localhost:8080/getCartInfos",
-            //请求成功
-            success: function (data) {
-                if(typeof data == "string"){
-                    $("#superscript").empty();
-                    $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
-                        "                                            <div class=\"notification\">0</div>");
-                }else {
-                    $("#superscript").empty();
-                    $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
-                        "                                            <div class=\"notification\">"+data.length+"</div>");
-                }
-
-            },
-            //请求失败，包含具体的错误信息
-            error: function (e) {
-                console.log(e.status);
-                console.log(e.responseText);
-            }
-        })
-    })
-    $(function () {
-        $.ajax({
-            //请求方式
-            type: "POST",
-            //请求的媒体类型
-            datatype: "json",
-            //请求地址
-            url: "http://localhost:8080/getWishlistInfos",
-            //请求成功
-            success: function (data) {
-                if(typeof data == "string"){
-                    $("#wish").empty();
-                    $("#wish").append("<i class=\"lnr lnr-heart\"></i>\n" +
-                        "                                            <div class=\"notification\">0</div>");
-                }else {
-                    $("#wish").empty();
-                    $("#wish").append("<i class=\"lnr lnr-heart\"></i>\n" +
-                        "                                            <div class=\"notification\">"+data.length+"</div>");
-                }
-
-            },
-            //请求失败，包含具体的错误信息
-            error: function (e) {
-                console.log(e.status);
-                console.log(e.responseText);
-            }
-        })
-    })
     function delCart(cart_id) {
         $.ajax({
             //请求方式
@@ -938,7 +885,8 @@
                 console.log(data);
                 if(data.status == 200){
                     alert("添加成功！");
-                    location.href = "index.jsp";
+                    //location.href = "index.jsp";
+                    getWishNum();
                 }else {
                     alert("添加失败！");
                 }
@@ -951,6 +899,63 @@
             }
         })
     }
+
+       function getWishNum() {
+           $.ajax({
+               //请求方式
+               type: "POST",
+               //请求的媒体类型
+               datatype: "json",
+               //请求地址
+               url: "http://localhost:8080/getWishlistInfos",
+               //请求成功
+               success: function (data) {
+                   if(typeof data == "string"){
+                       $("#wish").empty();
+                       $("#wish").append("<i class=\"lnr lnr-heart\"></i>\n" +
+                           "                                            <div class=\"notification\">0</div>");
+                   }else {
+                       $("#wish").empty();
+                       $("#wish").append("<i class=\"lnr lnr-heart\"></i>\n" +
+                           "                                            <div class=\"notification\">"+data.length+"</div>");
+                   }
+
+               },
+               //请求失败，包含具体的错误信息
+               error: function (e) {
+                   console.log(e.status);
+                   console.log(e.responseText);
+               }
+           })
+       }
+       function getCartNum() {
+           $.ajax({
+               //请求方式
+               type: "POST",
+               //请求的媒体类型
+               datatype: "json",
+               //请求地址
+               url: "http://localhost:8080/getCartInfos",
+               //请求成功
+               success: function (data) {
+                   if(typeof data == "string"){
+                       $("#superscript").empty();
+                       $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
+                           "                                            <div class=\"notification\">0</div>");
+                   }else {
+                       $("#superscript").empty();
+                       $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
+                           "                                            <div class=\"notification\">"+data.length+"</div>");
+                   }
+
+               },
+               //请求失败，包含具体的错误信息
+               error: function (e) {
+                   console.log(e.status);
+                   console.log(e.responseText);
+               }
+           })
+       }
 </script>
 </body>
 </html>

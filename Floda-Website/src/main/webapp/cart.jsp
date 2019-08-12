@@ -16,7 +16,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="meta description">
-    <title>Floda</title>
+    <title>我的购物车-Floda</title>
     <!--=== Favicon ===-->
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
     <!-- Google fonts include -->
@@ -197,7 +197,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <a href="checkout.jsp" class="btn btn__bg d-block">去结算</a>
+                            <a href="checkout" class="btn btn__bg d-block">去结算</a>
                         </div>
                     </div>
                 </div>

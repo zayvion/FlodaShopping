@@ -49,7 +49,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     private String IMG_BASE_PATH;
     @Autowired
     private JedisClient jedisClient;
-    @Resource
+    @Autowired
     private FUserService userService;
     @Resource
     private ImgService imgService;
@@ -142,6 +142,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
      * @return json
      * @throws Exception
      */
+
     public String register() throws Exception {
         if (!session.get("code").equals(code)) {
             session.remove("code");
@@ -169,7 +170,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     public String login() throws Exception {
         if (userService.login(user) != null) {
             if (userService.login(user).getPassword().equals(MD5Util.getMD5(user.getPassword()))) {
-                ServletActionContext.getRequest().getSession().setAttribute("onliner", userService.login(user));
+                request.getSession().setAttribute("onliner", userService.login(user));
                 return "index";
             }
         }

@@ -18,7 +18,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="meta description">
-    <title>Floda</title>
+    <title>商品详情-Floda</title>
 
     <!--=== Favicon ===-->
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
@@ -494,7 +494,7 @@
 
                 <div class="minicart-button">
                     <a href="cart.jsp"><i class="fa fa-shopping-cart"></i>查看购物车</a>
-                    <a href="checkout.jsp"><i class="fa fa-share"></i>去结算</a>
+                    <a href="createOrder"><i class="fa fa-share"></i>去结算</a>
                 </div>
             </div>
         </div>

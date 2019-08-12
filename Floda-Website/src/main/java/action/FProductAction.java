@@ -45,7 +45,6 @@ public class FProductAction extends BaseAction {
     private JedisClient jedisClient;
     private static String KEY_GETNEWPRODUCTS = "getNewProducts";
     private static String KEY_PRODUCTDETAIL = "productDetail";
-    private static String KEY_GETPROBYCATE = "getProByCate";
     private int id;
     private int startPage;
     private int item;
@@ -143,19 +142,7 @@ public class FProductAction extends BaseAction {
         if (startPage == 0) {
             startPage = 1;
         }
-       /* try {
-            String json = jedisClient.hget(KEY_GETPROBYCATE, "cate_id:"+cate_id+",startPage="+startPage);
-            if (json != null){
-                PageHelper pageHelper = new Gson().fromJson(json, PageHelper.class);
-                request.setAttribute("cate_list", list);
-                request.setAttribute("pagelist", pageHelper);
-                return SHOP;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
         PageHelper date = productService.getProByCate(cate_id, startPage);
-        //jedisClient.hset(KEY_GETPROBYCATE,"cate_id:"+cate_id+",startPage="+startPage,new Gson().toJson(date));
         request.setAttribute("cate_list", list);
         request.setAttribute("pagelist", date);
         return SHOP;

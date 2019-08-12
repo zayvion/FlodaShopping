@@ -2,6 +2,7 @@ package service.Impl;
 
 import com.google.gson.Gson;
 import dao.ImgDao;
+import dao.JedisClient;
 import dao.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import utils.PageUtils;
 import utils.ResponseResult;
 
 import javax.annotation.Resource;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,12 +27,15 @@ import java.util.List;
  */
 @Service
 public class ProductServiceImpl implements ProductService {
+    private static String KEY_GETPROBYCATE = "getProByCate";
     @Autowired
     private ProductDao productDao;
     @Autowired
     private ImgDao imgDao;
     @Autowired
     private PageUtils pageUtils;
+    @Autowired
+    private JedisClient jedisClient;
 
     @Transactional
     @Override
@@ -141,7 +146,18 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public PageHelper getProByCate(int cate_id,int startPage) {
+          try {
+            String json = jedisClient.hget(KEY_GETPROBYCATE, "cate_id:"+cate_id+",startPage="+startPage);
+            if (json != null){
+                List<Product> products = new Gson().fromJson(json, (Type) Product.class);
+                PageHelper data = pageUtils.getData(startPage, 9,products );
+                return data;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         List<Product> products = productDao.getProByCate(cate_id);
+        jedisClient.hset(KEY_GETPROBYCATE,"cate_id:"+cate_id+",startPage="+startPage,new Gson().toJson(products));
         PageHelper data = pageUtils.getData(startPage, 9, products);
         return data;
     }

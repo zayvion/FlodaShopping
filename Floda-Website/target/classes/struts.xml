@@ -54,8 +54,14 @@
             <result name="pay">pay.jsp</result>
             <result name="paysuccess">Paysuccess.jsp</result>
         </global-results>
-        <action name="pay" class="payAction" method="pay"/>
+        <action name="createOrder" class="payAction" method="createOrder"/>
         <action name="successPay" class="payAction" method="successPay"/>
+    </package>
+    <package name="checkout" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <global-results>
+            <result name="checkout">checkout.jsp</result>
+        </global-results>
+        <action name="checkout" class="checkoutrAction" method="checkout"/>
     </package>
 
 </struts>

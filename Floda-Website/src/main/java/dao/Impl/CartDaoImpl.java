@@ -7,6 +7,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.*;
 
 import java.util.ArrayList;
@@ -23,7 +24,6 @@ public class CartDaoImpl extends HibernateDaoSupport implements CartDao{
    public void setSF(SessionFactory sessionFactory){
        super.setSessionFactory(sessionFactory);
    }
-
 
     @Override
     public void addCart(int pro_id, int user_id, int pro_number) {
@@ -65,6 +65,7 @@ public class CartDaoImpl extends HibernateDaoSupport implements CartDao{
         return cartInfos;
     }
 
+    @Transactional
     @Override
     public void delCart(int cart_id) {
         Cart cart = this.getHibernateTemplate().get(Cart.class, cart_id);

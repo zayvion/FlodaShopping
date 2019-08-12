@@ -20,10 +20,11 @@ import java.util.List;
  */
 @Repository
 public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
+
     @Autowired
-   public void setSF(SessionFactory sessionFactory){
-       super.setSessionFactory(sessionFactory);
-   }
+    public void setSF(SessionFactory sessionFactory) {
+        super.setSessionFactory(sessionFactory);
+    }
 
     @Override
     public void register(User user) {
@@ -33,9 +34,9 @@ public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
     @Override
     public User login(User user) {
         DetachedCriteria criteria = DetachedCriteria.forClass(User.class);
-        criteria.add(Restrictions.eq("username",user.getUsername()));
-        List<User> list = (List<User>)this.getHibernateTemplate().findByCriteria(criteria);
-        if (!list.isEmpty()){
+        criteria.add(Restrictions.eq("username", user.getUsername()));
+        List<User> list = (List<User>) this.getHibernateTemplate().findByCriteria(criteria);
+        if (!list.isEmpty()) {
             return list.get(0);
         }
         return null;
@@ -44,20 +45,20 @@ public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
     @Override
     public List<UserAddr> getAddress(int user_id) {
         DetachedCriteria criteria = DetachedCriteria.forClass(UserAddr.class);
-        criteria.add(Restrictions.eq("userId",user_id));
-        List<UserAddr> list = (List<UserAddr>)this.getHibernateTemplate().findByCriteria(criteria);
-        for (UserAddr u:list
-             ) {
+        criteria.add(Restrictions.eq("userId", user_id));
+        List<UserAddr> list = (List<UserAddr>) this.getHibernateTemplate().findByCriteria(criteria);
+        for (UserAddr u : list
+        ) {
             String[] addr = u.getReceiver_addr().split(",");
             StringBuffer buffer = new StringBuffer();
-            for (int i = 0; i < addr.length-1; i++) {
-                if (!addr[i].equals("")){
+            for (int i = 0; i < addr.length - 1; i++) {
+                if (!addr[i].equals("")) {
                     System.out.println(addr[i]);
                     Address address = this.getHibernateTemplate().get(Address.class, Integer.parseInt(addr[i]));
                     buffer.append(address.getArea_name());
                 }
             }
-           u.setReceiver_addr(buffer.append(addr[addr.length-1]).toString());
+            u.setReceiver_addr(buffer.append(addr[addr.length - 1]).toString());
         }
         return list;
     }
@@ -65,8 +66,8 @@ public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
     @Override
     public List<Address> getArea(int parent_id) {
         DetachedCriteria criteria = DetachedCriteria.forClass(Address.class);
-        criteria.add(Restrictions.eq("parent_id",parent_id));
-        List<Address> list = (List<Address>)this.getHibernateTemplate().findByCriteria(criteria);
+        criteria.add(Restrictions.eq("parent_id", parent_id));
+        List<Address> list = (List<Address>) this.getHibernateTemplate().findByCriteria(criteria);
         return list;
     }
 

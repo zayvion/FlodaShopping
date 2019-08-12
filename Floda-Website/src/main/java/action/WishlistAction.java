@@ -25,6 +25,7 @@ public class WishlistAction extends BaseAction {
     public String addWishlist() throws IOException {
         User user = (User) session.get("onliner");
         Integer user_id = user.getUser_id();
+
         System.out.println(user_id + "-----" + pro_id);
         String result = wishlistService.addWishlist(pro_id, user_id);
         response.setContentType("application/json;charset=utf-8");

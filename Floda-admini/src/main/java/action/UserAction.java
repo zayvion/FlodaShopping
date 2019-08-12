@@ -18,7 +18,7 @@ import java.io.IOException;
 public class UserAction extends BaseAction implements ModelDriven<User> {
     private User user = new User();
     private int userId;
-    @Resource
+    @Autowired
     private UserService userService;
     private static String KEY_USERLIST = "userList";
     private static String KEY_USERINFO = "userInfo";

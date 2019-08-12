@@ -27,10 +27,17 @@ public class WishlistDaoImpl extends HibernateDaoSupport implements WishlistDao 
 
     @Override
     public void addWishlist(int pro_id, int user_id) {
-        Wishlist wishlist = new Wishlist();
-        wishlist.setProduct_id(pro_id);
-        wishlist.setUser_id(user_id);
-        this.getHibernateTemplate().save(wishlist);
+        //先查是否之前存过
+        DetachedCriteria criteria = DetachedCriteria.forClass(Wishlist.class);
+        criteria.add(Restrictions.eq("user_id",user_id));
+        criteria.add(Restrictions.eq("product_id",pro_id));
+        List<Wishlist> list = (List<Wishlist>) this.getHibernateTemplate().findByCriteria(criteria);
+       if (list.size()==0){
+           Wishlist wishlist = new Wishlist();
+           wishlist.setProduct_id(pro_id);
+           wishlist.setUser_id(user_id);
+           this.getHibernateTemplate().save(wishlist);
+       }
     }
 
     @Override
@@ -42,6 +49,7 @@ public class WishlistDaoImpl extends HibernateDaoSupport implements WishlistDao 
         for (int i = 0; i < wishlists.size(); i++){
             //根据查出来的商品id：查询商品信息
             Product pro = this.getHibernateTemplate().get(Product.class, wishlists.get(i).getProduct_id());
+            System.out.println("aaaaaaa"+wishlists.get(i).getProduct_id());
             //根据查出来的图片id：查询图片信息
             Img img = this.getHibernateTemplate().get(Img.class, pro.getPro_imgId());
             //给wishlistInfo(pojo)赋值
