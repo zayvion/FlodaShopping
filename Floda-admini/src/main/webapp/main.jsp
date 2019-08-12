@@ -248,6 +248,7 @@
                                             class="iframeurl"><i class="icon-double-angle-right"></i>查看评论</a></li>
                     </ul>
                 </li>
+                <li><a class="dropdown-toggle" data-toggle="modal" data-target="#myModal"><img src="assets/avatars/material-delete.svg" style="width: 24px;margin-left: 3px"/><span class="menu-text" style="margin-left: 5px"> 清除缓存</span></li>
             </ul>
             <div class="sidebar-collapse" id="sidebar-collapse">
                 <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
@@ -279,6 +280,49 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">清除缓存</h4>
+                </div>
+                <div class="modal-body">
+                    是否清除缓存？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="CleanCacheAction()">确定清除</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<script type="text/javascript">
+    function CleanCacheAction() {
+        $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "json",
+            //请求地址
+            url : "http://localhost:8081/cleanCache",
+            //请求成功
+            success : function(result) {
+                console.log(result);
+                alert("清除缓存成功！");
+                $('#myModal').modal('hide');//隐藏modal
+                $('.modal fade').remove();//去掉遮罩层
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+</script>
+
 </body>
 </html>

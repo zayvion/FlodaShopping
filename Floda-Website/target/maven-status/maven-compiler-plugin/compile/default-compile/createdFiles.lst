@@ -7,6 +7,4 @@ service\Impl\WishlistServiceImpl.class
 dao\Impl\WishlistDaoImpl.class
 action\WishlistAction.class
 service\AlipayConfig.class
-service\Impl\ImgServiceImpl.class
 service\WishlistService.class
-service\ImgService.class
