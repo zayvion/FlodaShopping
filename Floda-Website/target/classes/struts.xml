@@ -19,6 +19,7 @@
         </action>
         <action name="exportUser" class="userWithPoi" method="exportUser"/>
         <action name="sendRegSMS" class="smsAction" method="sendRegSMS"/>
+        <action name="sendMail" class="mailAction" method="sendMail"/>
     </package>
        <package name="product" extends="struts-default" namespace="/" strict-method-invocation="false">
            <global-results>

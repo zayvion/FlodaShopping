@@ -43,4 +43,10 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 
         return null;
     }
+
+    @Transactional
+    @Override
+    public void updateOrder(Order order) {
+        this.getHibernateTemplate().update(order);
+    }
 }

@@ -2,6 +2,7 @@ service/AlipayTrade.class
 service/WishlistService.class
 service/AlipayConfig.class
 dao/Impl/WishlistDaoImpl.class
+service/ImgService.class
 action/CheckoutrAction.class
 dao/Impl/OrderDetailDaoImpl.class
 action/WishlistAction.class
@@ -11,5 +12,7 @@ action/UserAction.class
 dao/WishlistDao.class
 dao/Impl/OrderDaoImpl.class
 dao/OrderDetailDao.class
+action/MailAction.class
 action/PayAction.class
 action/SMSAction.class
+service/Impl/ImgServiceImpl.class

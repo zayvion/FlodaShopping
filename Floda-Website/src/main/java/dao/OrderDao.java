@@ -30,4 +30,10 @@ public interface OrderDao {
      * @return
      */
     List<Order> getOrders();
+
+    /**
+     * 更新订单信息
+     * @param order
+     */
+    void updateOrder(Order order);
 }

@@ -56,6 +56,7 @@ public class PayAction extends BaseAction {
         order.setCreattime(new Timestamp(new Date().getTime()));
         order.setType(1);
         order.setUser_id(user.getUser_id());
+        order.setAddr_id(addr_id);
         int orderId = orderDao.addOrder(order);
         List<CartInfo> cartInfos = cartDao.getCartInfos(user.getUser_id());
         for (CartInfo c : cartInfos) {
@@ -66,7 +67,7 @@ public class PayAction extends BaseAction {
             orderDetail.setPro_price(product.getPro_price());
             orderDetail.setOrder_id(orderId);
             orderDetailDao.addOrderDetail(orderDetail);
-            //cartDao.delCart(c.getCart_id());
+            cartDao.delCart(c.getCart_id());
         }
         String pagepay = alipayTrade.Pagepay(super.request,total,orderId);
         request.setAttribute("result", pagepay);
@@ -122,8 +123,10 @@ public class PayAction extends BaseAction {
             System.out.println("fail");
 
         }
-        System.out.println("付款完成！！！");
-        return "paysuccess";
+        Order order = orderDao.getOrder(Integer.parseInt(out_trade_no));
+        order.setType(2);
+        orderDao.updateOrder(order);
+        return PAYSUCCESS;
 
     }
 

@@ -494,7 +494,6 @@
 
                 <div class="minicart-button">
                     <a href="cart.jsp"><i class="fa fa-shopping-cart"></i>查看购物车</a>
-                    <a href="checkout.jsp"><i class="fa fa-share"></i>去结算</a>
                 </div>
             </div>
         </div>

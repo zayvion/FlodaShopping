@@ -34,6 +34,7 @@ public class BaseAction extends ActionSupport implements ServletRequestAware, Se
     public final String SREACH = "search";
     public final String PAY ="pay";
     public final String CHECKOUT ="checkout";
+    public final String PAYSUCCESS = "paysuccess";
 
     @Override
     public void setServletRequest(HttpServletRequest httpServletRequest) {

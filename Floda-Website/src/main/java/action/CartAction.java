@@ -4,7 +4,6 @@ import dao.JedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import pojo.CartInfo;
 import pojo.User;
 import service.CartService;
 
@@ -26,10 +25,9 @@ public class CartAction extends BaseAction {
     private int pro_number;
 
     public String addCart() throws IOException {
-        User user = (User) session.get("onliner");
-        Integer user_id = user.getUser_id();
-        System.out.println("userid"+user_id);
-        String result = cartService.addCart(pro_id, user_id, pro_number);
+        User onliner = (User) this.request.getSession().getAttribute("onliner");
+        System.out.println("usersssss"+onliner);
+        String result = cartService.addCart(pro_id, onliner.getUser_id(), pro_number);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);
         return NONE;

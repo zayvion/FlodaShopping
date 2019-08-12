@@ -27,8 +27,6 @@ public class MailUtil {
             senderImpl.setHost("smtp.qq.com");
 
             // 设置收件人，寄件人 用数组发送多个邮件
-            // String[] array = new String[]    {"sun111@163.com","sun222@sohu.com"};    
-            // mailMessage.setTo(array);  
 
             mailMessage.setTo(to); 
             mailMessage.setFrom( "davy199766@vip.qq.com" );
@@ -47,7 +45,7 @@ public class MailUtil {
             //发送邮件
             senderImpl.send(mailMessage);
 
-            System.out.println("发送邮件成功");
+            System.out.println("发送邮件成功,邮箱验证码是："+code);
 
             return true;
         }catch (Exception e) {

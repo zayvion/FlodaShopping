@@ -170,7 +170,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     public String login() throws Exception {
         if (userService.login(user) != null) {
             if (userService.login(user).getPassword().equals(MD5Util.getMD5(user.getPassword()))) {
-                request.getSession().setAttribute("onliner", userService.login(user));
+                session.put("onliner", userService.login(user));
                 return "index";
             }
         }
@@ -289,6 +289,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         return NONE;
     }
 
+
     @Override
     public User getModel() {
         return user;
@@ -381,5 +382,6 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     public void setImgFileFileName(String imgFileFileName) {
         this.imgFileFileName = imgFileFileName;
     }
+
 }
 

@@ -123,7 +123,8 @@
             border: 2px solid #C10000;
         }
         #btn_gopay{
-            width: 140px;
+            width: 168px;
+            height: 30px;
         }
     </style>
 </head>
@@ -167,7 +168,7 @@
                             <div class="header-configure-area">
                                 <ul class="nav justify-content-end">
                                     <li class="user-hover">
-                                        <a href="#">
+                                        <a href="javascript:void(0)">
                                             <i class="lnr lnr-user"></i>
                                         </a>
                                         <ul class="dropdown-list">
