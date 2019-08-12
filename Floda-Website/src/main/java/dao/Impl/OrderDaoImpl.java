@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pojo.Order;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @Auther: zayvion
@@ -35,5 +36,11 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
     public Order getOrder(int id) {
         Order order = this.getHibernateTemplate().get(Order.class, id);
         return order;
+    }
+
+    @Override
+    public List<Order> getOrders() {
+
+        return null;
     }
 }

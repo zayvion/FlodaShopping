@@ -2,6 +2,8 @@ package dao;
 
 import pojo.Order;
 
+import java.util.List;
+
 /**
  * @Auther: zayvion
  * @Date: 2019-08-12 14:51
@@ -22,4 +24,10 @@ public interface OrderDao {
      * @return
      */
     Order getOrder(int id);
+
+    /**
+     * 查询所有订单
+     * @return
+     */
+    List<Order> getOrders();
 }

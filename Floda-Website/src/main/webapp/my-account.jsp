@@ -233,16 +233,16 @@
                                         <!-- Single Tab Content Start -->
                                         <div class="tab-pane fade" id="orders" role="tabpanel">
                                             <div class="myaccount-content">
-                                                <h3>Orders</h3>
+                                                <h3>订单列表</h3>
                                                 <div class="myaccount-table table-responsive text-center">
                                                     <table class="table table-bordered">
                                                         <thead class="thead-light">
                                                         <tr>
-                                                            <th>Order</th>
-                                                            <th>Date</th>
-                                                            <th>Status</th>
-                                                            <th>Total</th>
-                                                            <th>Action</th>
+                                                            <th>订单编号</th>
+                                                            <th>订单日期</th>
+                                                            <th>订单状态</th>
+                                                            <th>订单金额</th>
+                                                            <th>订单操作</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -251,22 +251,6 @@
                                                             <td>Aug 22, 2019</td>
                                                             <td>Pending</td>
                                                             <td>$3000</td>
-                                                            <td><a href="cart.jsp" class="btn btn__bg">View</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>July 22, 2019</td>
-                                                            <td>Approved</td>
-                                                            <td>$200</td>
-                                                            <td><a href="cart.jsp" class="btn btn__bg">View</a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>June 12, 2019</td>
-                                                            <td>On Hold</td>
-                                                            <td>$990</td>
                                                             <td><a href="cart.jsp" class="btn btn__bg">View</a>
                                                             </td>
                                                         </tr>
@@ -491,103 +475,6 @@
 
 </footer>
 <!-- End Footer Area Wrapper -->
-
-<!-- Quick view modal start -->
-<div class="modal" id="quick_view">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <!-- product details inner end -->
-                <div class="product-details-inner">
-                    <div class="row">
-                        <div class="col-lg-5 col-md-5">
-                            <div class="product-large-slider">
-                                <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-large-img">
-                                    <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                </div>
-                            </div>
-                            <div class="pro-nav slick-row-10 slick-arrow-style">
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img1.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img2.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img3.jpg" alt="product-details" />
-                                </div>
-                                <div class="pro-nav-thumb">
-                                    <img src="assets/img/product/product-details-img4.jpg" alt="product-details" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-7 col-md-7">
-                            <div class="product-details-des quick-details">
-                                <h3 class="product-name">Orchid flower white stick</h3>
-                                <div class="ratings d-flex">
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <span><i class="lnr lnr-star"></i></span>
-                                    <div class="pro-review">
-                                        <span>1 Reviews</span>
-                                    </div>
-                                </div>
-                                <div class="price-box">
-                                    <span class="price-regular">$70.00</span>
-                                    <span class="price-old"><del>$90.00</del></span>
-                                </div>
-                                <h5 class="offer-text"><strong>Hurry up</strong>! offer ends in:</h5>
-                                <div class="product-countdown" data-countdown="2019/08/25"></div>
-                                <div class="availability">
-                                    <i class="fa fa-check-circle"></i>
-                                    <span>200 in stock</span>
-                                </div>
-                                <p class="pro-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                    eirmod tempor invidunt ut labore et dolore magna aliquyam erat.</p>
-                                <div class="quantity-cart-box d-flex align-items-center">
-                                    <h5>qty:</h5>
-                                    <div class="quantity">
-                                        <div class="pro-qty"><input type="text" value="1"></div>
-                                    </div>
-                                    <div class="action_link">
-                                        <a class="btn btn-cart2" href="#">Add to cart</a>
-                                    </div>
-                                </div>
-                                <div class="useful-links">
-                                    <a href="#" data-toggle="tooltip" title="Compare"><i
-                                            class="lnr lnr-sync"></i>compare</a>
-                                    <a href="#" data-toggle="tooltip" title="Wishlist"><i
-                                            class="lnr lnr-heart"></i>wishlist</a>
-                                </div>
-                                <div class="like-icon">
-                                    <a class="facebook" href="#"><i class="fa fa-facebook"></i>like</a>
-                                    <a class="twitter" href="#"><i class="fa fa-twitter"></i>tweet</a>
-                                    <a class="pinterest" href="#"><i class="fa fa-pinterest"></i>save</a>
-                                    <a class="google" href="#"><i class="fa fa-google-plus"></i>share</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- product details inner end -->
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Quick view modal end -->
 
 <!-- Scroll to top start -->
 <div class="scroll-top not-visible">

@@ -126,6 +126,11 @@ public class PayAction extends BaseAction {
         return "paysuccess";
 
     }
+
+    public String getOrders(){
+        return NONE;
+    };
+
     public String getOut_trade_no() {
         return out_trade_no;
     }
