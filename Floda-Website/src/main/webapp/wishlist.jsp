@@ -253,7 +253,7 @@
                     </div>
                     <!-- footer widget item end -->
 
-                    <!-- footer widget item start -->
+                    <!-- footer widget item start -- 去结算>
                     <div class="col-lg-2 offset-lg-1 col-md-6 col-sm-6">
                         <div class="footer-widget-item mb-30">
                             <div class="footer-widget-title">
@@ -427,7 +427,6 @@
 
                 <div class="minicart-button">
                     <a href="cart.jsp"><i class="fa fa-shopping-cart"></i>查看购物车</a>
-                    <a href="createOrder"><i class="fa fa-share"></i>去结算</a>
                 </div>
             </div>
         </div>
@@ -545,6 +544,7 @@
             //请求成功
             success: function (data) {
                 if(data.status == 200){
+                    alert("删除成功！");
                     location.href = "wishlist.jsp";
                 }else {
                     alert("删除失败！")
@@ -569,7 +569,7 @@
             //请求成功
             success: function (data) {
                 if(data.status == 200){
-                    alert("删除成功！")
+                    alert("删除成功！");
                     location.href = "wishlist.jsp";
                 }else {
                     alert("删除失败！")

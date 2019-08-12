@@ -81,7 +81,7 @@
                             <div class="header-configure-area">
                                 <ul class="nav justify-content-end">
                                     <li class="user-hover">
-                                        <a href="#">
+                                        <a href="javascript:void(0)">
                                             <i class="lnr lnr-user"></i>
                                         </a>
                                         <ul class="dropdown-list">
@@ -477,7 +477,6 @@
 
                 <div class="minicart-button">
                     <a href="cart.jsp"><i class="fa fa-shopping-cart"></i>查看购物车</a>
-                    <a href="createOrder"><i class="fa fa-share"></i>去结算</a>
                 </div>
             </div>
         </div>
@@ -615,7 +614,6 @@
             success: function (result) {
                 if (result.status == 200){
                     alert("添加成功");
-                    location.href = "index.jsp";
                 }else {
                     alert("添加失败");
                 }
@@ -688,7 +686,7 @@
             //请求成功
             success: function (data) {
                 if(data.status == 200){
-                    location.href = "cart.jsp";
+                    alert("删除成功！")
                 }else {
                     alert("删除失败！")
                 }

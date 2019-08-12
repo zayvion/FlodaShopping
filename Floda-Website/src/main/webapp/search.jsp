@@ -92,7 +92,7 @@
                                                     <li><a href="register.jsp">注册</a></li>
                                                 </c:when>
                                                 <c:when test="${sessionScope.onliner.username != null}">
-                                                    <li><a href="my_account.jsp">${sessionScope.onliner.username}</a></li>
+                                                    <li><a href="my-account.jsp">${sessionScope.onliner.username}</a></li>
                                                     <li><a href="user_exit.action">退出</a></li>
                                                 </c:when>
                                             </c:choose>
@@ -245,7 +245,7 @@
                                                 <img class="sec-img" src="${product.pro_imgAddr}" alt="product">
                                             </a>
                                             <div class="button-group">
-                                                <a href="wishlist.jsp" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
+                                                <a href="javascript:void(0)" data-toggle="tooltip" data-placement="left" title="添加收藏" onclick="addWishlist(${product.pro_id})"><i class="lnr lnr-heart"></i></a>
                                                 <a href="#" onclick='getProduct(${product.pro_id})'data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
                                                 <a href="javascript:void(0)" onclick="addCart(${product.pro_id})" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
                                             </div>
@@ -482,7 +482,6 @@
 
                 <div class="minicart-button">
                     <a href="cart.jsp"><i class="fa fa-shopping-cart"></i>查看购物车</a>
-                    <a href="checkout.jsp"><i class="fa fa-share"></i>去结算</a>
                 </div>
             </div>
         </div>
@@ -613,6 +612,7 @@
             //请求成功
             success: function (result) {
                 alert("添加成功！");
+                getCartNum();
             },
             //请求失败，包含具体的错误信息
             error: function (e) {
@@ -621,34 +621,7 @@
             }
         });
     }
-    $(function () {
-        $.ajax({
-            //请求方式
-            type: "POST",
-            //请求的媒体类型
-            datatype: "json",
-            //请求地址
-            url: "http://localhost:8080/getCartInfos",
-            //请求成功
-            success: function (data) {
-                if(typeof data == "string"){
-                    $("#superscript").empty();
-                    $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
-                        "                                            <div class=\"notification\">0</div>");
-                }else {
-                    $("#superscript").empty();
-                    $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
-                        "                                            <div class=\"notification\">"+data.length+"</div>");
-                }
 
-            },
-            //请求失败，包含具体的错误信息
-            error: function (e) {
-                console.log(e.status);
-                console.log(e.responseText);
-            }
-        })
-    })
     function delCart(cart_id) {
         $.ajax({
             //请求方式
@@ -660,7 +633,8 @@
             //请求成功
             success: function (data) {
                 if(data.status == 200){
-                    location.href = "cart.jsp";
+                    alert("删除成功！");
+                    getCartNum();
                 }else {
                     alert("删除失败！")
                 }
@@ -673,7 +647,8 @@
             }
         })
     }
-    $(function () {
+
+    function getWishNum() {
         $.ajax({
             //请求方式
             type: "POST",
@@ -700,6 +675,64 @@
                 console.log(e.responseText);
             }
         })
+    }
+    function getCartNum() {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8080/getCartInfos",
+            //请求成功
+            success: function (data) {
+                if(typeof data == "string"){
+                    $("#superscript").empty();
+                    $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
+                        "                                            <div class=\"notification\">0</div>");
+                }else {
+                    $("#superscript").empty();
+                    $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
+                        "                                            <div class=\"notification\">"+data.length+"</div>");
+                }
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+    function addWishlist(pro_id){
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址+请求参数
+            url: "http://localhost:8080/addWishlist?pro_id="+pro_id,
+            //请求成功
+            success: function (data) {
+                console.log(data);
+                if(data.status == 200){
+                    alert("添加成功！");
+                    getWishNum();
+                }else {
+                    alert("添加失败！");
+                }
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+    $(function () {
+        getWishNum();
+        getCartNum();
     })
 </script>
 </body>

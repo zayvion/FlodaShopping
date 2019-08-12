@@ -178,7 +178,7 @@
                                                     <li><a href="register.jsp">注册</a></li>
                                                 </c:when>
                                                 <c:when test="${sessionScope.onliner.username != null}">
-                                                    <li><a href="my_account.jsp">${sessionScope.onliner.username}</a>
+                                                    <li><a href="my-account.jsp">${sessionScope.onliner.username}</a>
                                                     </li>
                                                     <li><a href="user_exit.action">退出</a></li>
                                                 </c:when>

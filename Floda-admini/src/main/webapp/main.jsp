@@ -237,7 +237,7 @@
                     <a href="#" class="dropdown-toggle"><i class="icon-shopping-cart"></i><span class="menu-text">
 								订单管理 </span><b class="arrow icon-angle-down"></b></a>
                     <ul class="submenu">
-                        <li class="home"><a href="javascript:void(0)" name="Orderform.html" title="订单类型分类"
+                        <li class="home"><a href="javascript:void(0)" name="Orderform.jsp" title="订单类型分类"
                                             class="iframeurl"><i class="icon-double-angle-right"></i>订单类型分类</a></li>
                     </ul>
                 </li>
@@ -248,7 +248,7 @@
                                             class="iframeurl"><i class="icon-double-angle-right"></i>查看评论</a></li>
                     </ul>
                 </li>
-                <li><a class="dropdown-toggle" data-toggle="modal" data-target="#myModal"><img src="assets/avatars/material-delete.svg" style="width: 24px;margin-left: 3px"/><span class="menu-text" style="margin-left: 5px"> 清除缓存</span></li>
+                <li><a class="dropdown-toggle" data-toggle="modal" data-target="#myModal" style="cursor:hand;"><img src="assets/avatars/material-delete.svg" style="width: 24px;margin-left: 3px"/><span class="menu-text" style="margin-left: 5px"> 清除缓存</span></li>
             </ul>
             <div class="sidebar-collapse" id="sidebar-collapse">
                 <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"

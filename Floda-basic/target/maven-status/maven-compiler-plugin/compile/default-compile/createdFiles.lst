@@ -1,5 +1,5 @@
-pojo/WishlistInfo.class
-pojo/OrderDetail.class
-pojo/Wishlist.class
-pojo/Order.class
-utils/IDUtils.class
+pojo\OrderDetail.class
+utils\IDUtils.class
+pojo\WishlistInfo.class
+pojo\Order.class
+pojo\Wishlist.class

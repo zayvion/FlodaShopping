@@ -606,7 +606,12 @@
             data: {"pro_id":pro_id,"pro_number":pro_number},
             //请求成功
             success: function (result) {
-                console.log(result);
+                if(result.status == 200){
+                    alert("添加成功！");
+                }else {
+                    alert("添加失败！");
+                }
+
             },
             //请求失败，包含具体的错误信息
             error: function (e) {
@@ -674,9 +679,9 @@
             //请求成功
             success: function (data) {
                 if(data.status == 200){
-                    location.href = "product_details.jsp";
+                    alert("删除成功！");
                 }else {
-                    alert("删除失败！")
+                    alert("删除失败！");
                 }
 
             },

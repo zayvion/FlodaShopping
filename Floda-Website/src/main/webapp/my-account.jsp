@@ -141,16 +141,10 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="wishlist.jsp">
-                                            <i class="lnr lnr-heart"></i>
-                                            <div class="notification">0</div>
-                                        </a>
+                                        <a href="wishlist.jsp" id="wish"></a>
                                     </li>
                                     <li>
-                                        <a href="#" class="minicart-btn">
-                                            <i class="lnr lnr-cart"></i>
-                                            <div class="notification">2</div>
-                                        </a>
+                                        <a href="javascript:void(0)" class="minicart-btn" id="superscript" onclick="getCartInfos()"></a>
                                     </li>
                                 </ul>
                             </div>
@@ -475,7 +469,31 @@
 
 </footer>
 <!-- End Footer Area Wrapper -->
+<!-- offcanvas mini cart start -->
+<div class="offcanvas-minicart-wrapper">
+    <div class="minicart-inner">
+        <div class="offcanvas-overlay"></div>
+        <div class="minicart-inner-content">
+            <div class="minicart-close">
+                <i class="lnr lnr-cross"></i>
+            </div>
+            <div class="minicart-content-box">
+                <div class="minicart-item-wrapper">
+                    <ul id="CartInfos"></ul>
+                </div>
 
+                <div class="minicart-pricing-box">
+                    <ul id="total"></ul>
+                </div>
+
+                <div class="minicart-button">
+                    <a href="cart.jsp"><i class="fa fa-shopping-cart"></i> 查看购物车</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- offcanvas mini cart end -->
 <!-- Scroll to top start -->
 <div class="scroll-top not-visible">
     <i class="fa fa-angle-up"></i>
@@ -727,6 +745,141 @@
             $.each(data,function (index,item) {
                 $(obj).next().append("<option value='"+item.address_id+"'>"+item.area_name+"</option>");
             })
+        })
+    }
+    $(function () {
+        getWishNum();
+        getCartNum();
+    })
+    function getWishNum() {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8080/getWishlistInfos",
+            //请求成功
+            success: function (data) {
+                if(typeof data == "string"){
+                    $("#wish").empty();
+                    $("#wish").append("<i class=\"lnr lnr-heart\"></i>\n" +
+                        "                                            <div class=\"notification\">0</div>");
+                }else {
+                    $("#wish").empty();
+                    $("#wish").append("<i class=\"lnr lnr-heart\"></i>\n" +
+                        "                                            <div class=\"notification\">"+data.length+"</div>");
+                }
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+    function getCartNum() {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8080/getCartInfos",
+            //请求成功
+            success: function (data) {
+                if(typeof data == "string"){
+                    $("#superscript").empty();
+                    $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
+                        "                                            <div class=\"notification\">0</div>");
+                }else {
+                    $("#superscript").empty();
+                    $("#superscript").append("<i class=\"lnr lnr-cart\"></i>\n" +
+                        "                                            <div class=\"notification\">"+data.length+"</div>");
+                }
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+    function getCartInfos(){
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址
+            url: "http://localhost:8080/getCartInfos",
+            //请求成功
+            success: function (msg) {
+                if(typeof msg == "string"){
+                    $("#CartInfos").empty();
+                    $("#CartInfos").append("<h4>请先登录！</h4>");
+                }else {
+                    var total = 0;
+                    $("#CartInfos").empty();
+                    $("#total").empty();
+                    for (var i = 0; i < msg.length; i++){
+                        $("#CartInfos").append("<li class=\"minicart-item\">\n" +
+                            "                            <div class=\"minicart-thumb\">\n" +
+                            "                                <a href='productDetail?id="+msg[i].pro_id+"'>\n" +
+                            "                                    <img src="+msg[i].url+" alt=\"product\">\n" +
+                            "                                </a>\n" +
+                            "                            </div>\n" +
+                            "                            <div class=\"minicart-content\">\n" +
+                            "                                <h3 class=\"product-name\">\n" +
+                            "                                    <a href='productDetail?id="+msg[i].pro_id+"'>"+msg[i].pro_name+"</a>\n" +
+                            "                                </h3>\n" +
+                            "                                <p>\n" +
+                            "                                    <span class=\"cart-quantity\">"+msg[i].pro_number+"<strong>&times;</strong></span>\n" +
+                            "                                    <span class=\"cart-price\">￥"+msg[i].pro_price+"</span>\n" +
+                            "                                </p>\n" +
+                            "                            </div>\n" +
+                            "                            <button class=\"minicart-remove\"><i class=\"lnr lnr-cross\" onclick='delCart("+msg[i].cart_id+")'></i></button>\n" +
+                            "                        </li>");
+                        total += msg[i].cart_price;
+                    }
+                    $("#total").append("<li>\n" +
+                        "                            <span>总金额</span>\n" +
+                        "                            <span><strong>￥"+total+"</strong></span>\n" +
+                        "                        </li>");
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+    function delCart(cart_id) {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            datatype: "json",
+            //请求地址+请求参数
+            url: "http://localhost:8080/delCart?cart_id="+cart_id,
+            //请求成功
+            success: function (data) {
+                if(data.status == 200){
+                    alert("删除成功！")
+                    location.href = "index.jsp";
+                }else {
+                    alert("删除失败！")
+                }
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
         })
     }
 </script>
