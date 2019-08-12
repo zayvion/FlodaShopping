@@ -313,7 +313,7 @@
                                                             </div>
                                                             <div class="col-lg-6">
                                                                 <img id="show"  class="img-thumbnail" style="margin:30px 0 0 120px;width: 230px;height: 250px">
-                                                                <input type="file" id="file" name="img" accept="image/png, image/jpeg, image/gif, image/jpg" onchange="changepic(this)">
+                                                                <input type="file" id="file" name="imgFile" accept="image/png, image/jpeg, image/gif, image/jpg" onchange="changepic(this)">
                                                                 <div id="clone">图片上传</div>
                                                             </div>
                                                         </div>

@@ -48,8 +48,6 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     private JedisClient jedisClient;
     @Resource
     private FUserService userService;
-    @Autowired
-    private JedisClient jedisClient;
     private User user = new User();
     private String repeat_pwd;
     private int parent_id;
@@ -67,6 +65,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 
     /**
      * 添加用户地址
+     *
      * @return
      */
     public String addAddress() {
@@ -102,6 +101,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 
     /**
      * 删除用户地址
+     *
      * @return
      */
     public String removeAddr() {
@@ -117,6 +117,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 
     /**
      * 根据地址id获取地址
+     *
      * @return
      */
     public String getAddrById() {
@@ -144,10 +145,10 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
             return ERROR;
         }
         try {
-            request.setAttribute("newUser",user);
+            request.setAttribute("newUser", user);
             userService.register(user);
             jedisClient.del(KEY_USERLIST);
-            request.setAttribute("hint","注册成功");
+            request.setAttribute("hint", "注册成功");
             return "login";
         } catch (Exception e) {
             e.printStackTrace();
@@ -157,31 +158,34 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 
     /**
      * 用户登录
+     *
      * @return
      * @throws Exception
      */
     public String login() throws Exception {
-        if(userService.login(user) != null){
-            if(userService.login(user).getPassword().equals(MD5Util.getMD5(user.getPassword()))){
-                ServletActionContext.getRequest().getSession().setAttribute("onliner",userService.login(user));
+        if (userService.login(user) != null) {
+            if (userService.login(user).getPassword().equals(MD5Util.getMD5(user.getPassword()))) {
+                ServletActionContext.getRequest().getSession().setAttribute("onliner", userService.login(user));
                 return "index";
             }
         }
-        request.setAttribute("hints","用户名或密码错误!");
+        request.setAttribute("hints", "用户名或密码错误!");
         return "login";
     }
 
     /**
      * 用户退出
+     *
      * @return
      */
-    public String exit(){
+    public String exit() {
         session.remove("onliner");
         return "login";
     }
 
     /**
      * 根据用户id查询详细信息
+     *
      * @return
      */
     public String getUserInfo() {
@@ -204,15 +208,16 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
     public String updateUserInfo() {
         User onliner = (User) session.get("onliner");
         info.setUser_id(onliner.getUser_id());
-//        String oldFileName = imgFileFileName;
-//        String extension = oldFileName.substring(oldFileName.indexOf("."));
-//        String newName = oldFileName.substring(0,oldFileName.indexOf("."))+ UUID.randomUUID().toString().substring(0,5)+extension;
-//        String imgPath = getDate();
-//        try {
-//            FtpUtil.uploadFile(FTP_ADDRESS, FTP_PORT, FTP_USERNAME, FTP_PASSWORD, FTP_BASE_PATH, imgPath, newName, new FileInputStream(imgFile.getAbsoluteFile()));
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
+        System.out.println("filename=" + imgFileFileName);
+        String oldFileName = imgFileFileName;
+        String extension = oldFileName.substring(oldFileName.indexOf("."));
+        String newName = oldFileName.substring(0, oldFileName.indexOf(".")) + UUID.randomUUID().toString().substring(0, 5) + extension;
+        String imgPath = getDate();
+        try {
+            FtpUtil.uploadFile(FTP_ADDRESS, FTP_PORT, FTP_USERNAME, FTP_PASSWORD, FTP_BASE_PATH, imgPath, newName, new FileInputStream(imgFile.getAbsoluteFile()));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         try {
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(userService.updateUserInfo(info));
@@ -222,7 +227,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         return NONE;
     }
 
-    public String getDate(){
+    public String getDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String format = sdf.format(new Date());
         return format;
@@ -230,9 +235,10 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 
     /**
      * 查询当前用户的所有地址
+     *
      * @return
      */
-    public String getAddress(){
+    public String getAddress() {
         try {
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(userService.getAddress(user.getUser_id()));
@@ -244,9 +250,10 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
 
     /**
      * 省市区联动
+     *
      * @return
      */
-    public String getArea(){
+    public String getArea() {
         try {
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(userService.getArea(parent_id));
@@ -317,7 +324,6 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         this.info = info;
     }
 
-
     public String getCurrent_pwd() {
         return current_pwd;
     }
@@ -326,5 +332,28 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         this.current_pwd = current_pwd;
     }
 
+    public File getImgFile() {
+        return imgFile;
+    }
+
+    public void setImgFile(File imgFile) {
+        this.imgFile = imgFile;
+    }
+
+    public String getImgFileContentType() {
+        return imgFileContentType;
+    }
+
+    public void setImgFileContentType(String imgFileContentType) {
+        this.imgFileContentType = imgFileContentType;
+    }
+
+    public String getImgFileFileName() {
+        return imgFileFileName;
+    }
+
+    public void setImgFileFileName(String imgFileFileName) {
+        this.imgFileFileName = imgFileFileName;
+    }
 }
 
