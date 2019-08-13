@@ -20,9 +20,10 @@
     <meta name="description" content="meta description">
     <title>Floda</title>
     <!--=== Favicon ===-->
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon"/>
     <!-- Google fonts include -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,900%7CYesteryear" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,900%7CYesteryear"
+          rel="stylesheet">
     <!-- All Vendor & plugins CSS include -->
     <link href="assets/css/vendor.css" rel="stylesheet">
     <!-- Main Style CSS -->
@@ -34,7 +35,7 @@
 
     <![endif]-->
     <style>
-        .address_card{
+        .address_card {
             width: 250PX;
             border: 1px solid #b3b3b3;
             padding: 10px;
@@ -42,10 +43,12 @@
             position: relative;
             display: inline-block;
         }
-        .address_card p:nth-child(2){
+
+        .address_card p:nth-child(2) {
             height: 75px;
         }
-        .save,.exit{
+
+        .save, .exit {
             display: inline-block;
             width: 100px;
             height: 36px;
@@ -54,32 +57,40 @@
             background: #fff;
             border: 1px solid #e6e6e6;
         }
-        .save{
+
+        .save {
             background: #A10000;
             color: #FFFFFF;
         }
-        .nice-select{
+
+        .nice-select {
             width: 150px;
         }
+
         /*修改*/
-        #file{
+        #file {
             opacity: 0;
             width: 75px;
             height: 25px;
             border: 1px solid #9f191f;
-            margin:20px 0 0 185px;
+            margin: 20px 0 0 185px;
             z-index: 999;
         }
-        #clone{
+
+        #clone {
             width: 75px;
             height: 25px;
-            margin:-25px 0 0 195px;
+            margin: -25px 0 0 195px;
             z-index: 1;
             background: #d9534f;
             text-align: center;
             line-height: 25px;
             color: #fff;
             border-radius: 5px;
+        }
+
+        #btn_emailCode {
+            margin-top: 40px;
         }
     </style>
 </head>
@@ -109,7 +120,7 @@
                         <div class="main-menu-area">
                             <div class="main-menu">
                                 <!-- main menu navbar start -->
-                                <nav class="desktop-menu"  style="height: 100px">
+                                <nav class="desktop-menu" style="height: 100px">
 
                                 </nav>
                                 <!-- main menu navbar end -->
@@ -134,7 +145,8 @@
                                                     <li><a href="register.jsp">注册</a></li>
                                                 </c:when>
                                                 <c:when test="${sessionScope.onliner.username != null}">
-                                                    <li><a href="my-account.jsp">${sessionScope.onliner.username}</a></li>
+                                                    <li><a href="my-account.jsp">${sessionScope.onliner.username}</a>
+                                                    </li>
                                                     <li><a href="user_exit.action">退出</a></li>
                                                 </c:when>
                                             </c:choose>
@@ -200,13 +212,19 @@
                             <div class="row">
                                 <div class="col-lg-3 col-md-4">
                                     <div class="myaccount-tab-menu nav" role="tablist">
-                                        <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>
+                                        <a href="#dashboad" class="active" data-toggle="tab"><i
+                                                class="fa fa-dashboard"></i>
                                             我的中心</a>
-                                        <a href="#orders" data-toggle="tab" onclick="getOrderes(${sessionScope.onliner.user_id})"><i class="fa fa-cart-arrow-down"></i>
+                                        <a href="#orders" data-toggle="tab"
+                                           onclick="getOrderes(${sessionScope.onliner.user_id})"><i
+                                                class="fa fa-cart-arrow-down"></i>
                                             我的订单</a>
-                                        <a href="#address-edit" data-toggle="tab" onclick="getAddress(${sessionScope.onliner.user_id})"><i class="fa fa-map-marker"></i>
+                                        <a href="#address-edit" data-toggle="tab"
+                                           onclick="getAddress(${sessionScope.onliner.user_id})"><i
+                                                class="fa fa-map-marker"></i>
                                             地址管理</a>
-                                        <a href="#account-info" data-toggle="tab" onclick="getUserInfo()"><i class="fa fa-user"></i> 个人信息</a>
+                                        <a href="#account-info" data-toggle="tab" onclick="getUserInfo()"><i
+                                                class="fa fa-user"></i> 个人信息</a>
                                         <a href="login-register.jsp"><i class="fa fa-sign-out"></i> 退出登录</a>
                                     </div>
                                 </div>
@@ -221,7 +239,8 @@
                                                 <h3>Dashboard</h3>
                                                 <div class="welcome">
                                                     <p>Hello, <strong>Erik Jhonson</strong> (If Not <strong>Jhonson
-                                                        !</strong><a href="login-register.jsp" class="logout"> Logout</a>)</p>
+                                                        !</strong><a href="login-register.jsp" class="logout">
+                                                        Logout</a>)</p>
                                                 </div>
                                                 <p class="mb-0">From your account dashboard. you can easily check &
                                                     view your recent orders, manage your shipping and billing addresses
@@ -278,19 +297,25 @@
                                             <div class="myaccount-content">
                                                 <h3>个人信息</h3>
                                                 <div class="account-details-form">
-                                                    <form action="#" onsubmit="return false" method="post" id="updateUserInfoForm">
+                                                    <form action="#" onsubmit="return false" method="post"
+                                                          id="updateUserInfoForm">
                                                         <div class="row">
                                                             <div class="col-lg-6">
                                                                 <div class="single-input-item">
                                                                     <label for="name" class="required">姓名</label>
-                                                                    <input type="text" id="name" name="info.name" placeholder="姓名" />
-                                                                    <input type="hidden" id="userInfo_id" name="info.userInfo_id">
+                                                                    <input type="text" id="name" name="info.name"
+                                                                           placeholder="姓名"/>
+                                                                    <input type="hidden" id="userInfo_id"
+                                                                           name="info.userInfo_id">
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                <img id="show"  class="img-thumbnail" style="margin:30px 0 0 120px;width: 230px;height: 250px">
+                                                                <img id="show" class="img-thumbnail"
+                                                                     style="margin:30px 0 0 120px;width: 230px;height: 250px">
                                                                 <input id="head" type="hidden" name="info.head">
-                                                                <input type="file" id="file" name="imgFile" accept="image/png, image/jpeg, image/gif, image/jpg" onchange="changepic(this)">
+                                                                <input type="file" id="file" name="imgFile"
+                                                                       accept="image/png, image/jpeg, image/gif, image/jpg"
+                                                                       onchange="changepic(this)">
                                                                 <div id="clone">图片上传</div>
                                                             </div>
                                                         </div>
@@ -299,7 +324,8 @@
                                                             <div class="col-lg-6">
                                                                 <div class="single-input-item">
                                                                     <label for="email" class="required">邮箱</label>
-                                                                    <input type="email" id="email" name="info.email" placeholder="邮箱" />
+                                                                    <input type="email" id="email" name="info.email"
+                                                                           placeholder="邮箱"/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -307,7 +333,8 @@
                                                             <div class="col-lg-6">
                                                                 <div class="single-input-item">
                                                                     <label class="required">性别</label>
-                                                                    <select class="form-control" id="sex" name="info.sex">
+                                                                    <select class="form-control" id="sex"
+                                                                            name="info.sex">
                                                                         <option value="0">男</option>
                                                                         <option value="1">女</option>
                                                                     </select>
@@ -315,40 +342,61 @@
                                                             </div>
                                                         </div>
                                                         <div class="single-input-item">
-                                                            <button class="btn btn__bg" onclick="updateUserInfo()">保存修改</button>
+                                                            <button class="btn btn__bg" onclick="updateUserInfo()">
+                                                                保存修改
+                                                            </button>
                                                         </div>
                                                     </form>
-                                                        <fieldset>
-                                                            <legend>修改密码</legend>
-                                                            <div class="row">
-                                                                <div class="col-lg-6">
-                                                                    <div class="single-input-item">
-                                                                        <label for="current-pwd" class="required">原始密码</label>
-                                                                        <input type="password" id="current-pwd" name="current_pwd" placeholder="原始密码" />
-                                                                    </div>
+                                                    <fieldset>
+                                                        <legend>修改密码</legend>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="single-input-item">
+                                                                    <label for="current-pwd"
+                                                                           class="required">原始密码</label>
+                                                                    <input type="password" id="current-pwd"
+                                                                           name="current_pwd" placeholder="原始密码"/>
                                                                 </div>
-                                                                <div class="col-lg-6">
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-8">
                                                                     <div class="single-input-item">
                                                                         <label for="code" class="required">邮箱验证码</label>
-                                                                        <input type="text" id="code" name="code" placeholder="邮箱验证码" />
+                                                                        <input type="text" id="code" name="code"
+                                                                               placeholder="邮箱验证码"/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-4">
+                                                                    <div class="single-input-item">
+                                                                        <button class="btn btn__bg" id="btn_emailCode">获取验证码
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-lg-6">
-                                                                    <div class="single-input-item">
-                                                                        <label for="new-pwd" class="required">新密码</label>
-                                                                        <input type="password" id="new-pwd" name="new_pwd" placeholder="新密码" />
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="single-input-item">
-                                                                        <label for="confirm-pwd" class="required">重复密码</label>
-                                                                        <input type="password" id="confirm-pwd" placeholder="重复密码" />
-                                                                    </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="single-input-item">
+                                                                    <label for="new-pwd" class="required">新密码</label>
+                                                                    <input type="password" id="new-pwd" name="new_pwd"
+                                                                           placeholder="新密码"/>
                                                                 </div>
                                                             </div>
-                                                        </fieldset>
+                                                            <div class="col-lg-6">
+                                                                <div class="single-input-item">
+                                                                    <label for="confirm-pwd"
+                                                                           class="required">重复密码</label>
+                                                                    <input type="password" id="confirm-pwd"
+                                                                           placeholder="重复密码"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="single-input-item">
+                                                            <button class="btn btn__bg" id="btn_updatePsw">
+                                                                修改密码
+                                                            </button>
+                                                        </div>
+                                                    </fieldset>
 
                                                 </div>
                                             </div>
@@ -476,25 +524,31 @@
 <!-- Scroll to Top End -->
 
 <!--添加地址的模态框-->
-<div class="modal fade" style="width: 500px;margin: 100px 0 0 500px" id="addAddr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+<div class="modal fade" style="width: 500px;margin: 100px 0 0 500px" id="addAddr" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <form action="user_addAddress.action" onsubmit="return false" method="post" id="addrForm">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="receiver_name" name="userAddr.receiver_name" placeholder="收件人">
+                        <input type="text" class="form-control" id="receiver_name" name="userAddr.receiver_name"
+                               placeholder="收件人">
                     </div>
                     <div class="form-group">
-                        <input type="tel" class="form-control" id="receiver_tel" name="userAddr.receiver_tel" placeholder="电话号码">
+                        <input type="tel" class="form-control" id="receiver_tel" name="userAddr.receiver_tel"
+                               placeholder="电话号码">
                     </div>
                     <div id="selects" class="form-group" style="display: flex">
-                        <select class="form-control" style="width: 120px" id="pro" name="userAddr.pro" onchange="getChilren(this)">
+                        <select class="form-control" style="width: 120px" id="pro" name="userAddr.pro"
+                                onchange="getChilren(this)">
                             <option disabled selected>省份/自治区</option>
                         </select>
-                        <select class="form-control" style="width: 120px" id="city" name="userAddr.city" onchange="getChilren(this)">
+                        <select class="form-control" style="width: 120px" id="city" name="userAddr.city"
+                                onchange="getChilren(this)">
                             <option disabled selected>城市/地区</option>
                         </select>
-                        <select class="form-control" style="width: 120px" id="area" name="userAddr.area" onchange="getChilren(this)">
+                        <select class="form-control" style="width: 120px" id="area" name="userAddr.area"
+                                onchange="getChilren(this)">
                             <option disabled selected>区/县</option>
                         </select>
                         <select class="form-control" style="width: 120px" id="street" name="userAddr.street">
@@ -503,14 +557,17 @@
                     </div>
 
                     <div class="form-group">
-                        <textarea class="form-control" rows="3" id="receiver_addr" name="userAddr.receiver_addr" placeholder="详细地址"></textarea>
+                        <textarea class="form-control" rows="3" id="receiver_addr" name="userAddr.receiver_addr"
+                                  placeholder="详细地址"></textarea>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="zip" name="userAddr.zip" placeholder="邮政编码">
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="exit">取消</button>
-                        <button type="button" data-dismiss="modal" class="save" onclick="subAddress(${sessionScope.onliner.user_id})">保存</button>
+                        <button type="button" data-dismiss="modal" class="save"
+                                onclick="subAddress(${sessionScope.onliner.user_id})">保存
+                        </button>
                     </div>
                 </form>
             </div>
@@ -519,26 +576,32 @@
 </div>
 
 <%--修改地址模态框--%>
-<div class="modal fade" style="width: 500px;margin: 100px 0 0 500px" id="updaterAddr" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+<div class="modal fade" style="width: 500px;margin: 100px 0 0 500px" id="updaterAddr" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <form action="user_addAddress.action" onsubmit="return false" method="post" id="updateForm">
                     <div class="form-group">
                         <input type="hidden" id="up_user_addr_id" name="userAddr.user_addr_id" value="">
-                        <input type="text" class="form-control" id="up_receiver_name" name="userAddr.receiver_name" placeholder="收件人">
+                        <input type="text" class="form-control" id="up_receiver_name" name="userAddr.receiver_name"
+                               placeholder="收件人">
                     </div>
                     <div class="form-group">
-                        <input type="tel" class="form-control" id="up_receiver_tel" name="userAddr.receiver_tel" placeholder="电话号码">
+                        <input type="tel" class="form-control" id="up_receiver_tel" name="userAddr.receiver_tel"
+                               placeholder="电话号码">
                     </div>
                     <div id="up_selects" class="form-group" style="display: flex">
-                        <select class="form-control" style="width: 120px" id="up_pro" name="userAddr.pro" onchange="getChilren(this)">
+                        <select class="form-control" style="width: 120px" id="up_pro" name="userAddr.pro"
+                                onchange="getChilren(this)">
                             <option disabled selected>省份/自治区</option>
                         </select>
-                        <select class="form-control" style="width: 120px"  name="userAddr.city" onchange="getChilren(this)">
+                        <select class="form-control" style="width: 120px" name="userAddr.city"
+                                onchange="getChilren(this)">
                             <option disabled selected>城市/地区</option>
                         </select>
-                        <select class="form-control" style="width: 120px" name="userAddr.area" onchange="getChilren(this)">
+                        <select class="form-control" style="width: 120px" name="userAddr.area"
+                                onchange="getChilren(this)">
                             <option disabled selected>区/县</option>
                         </select>
                         <select class="form-control" style="width: 120px" name="userAddr.street">
@@ -547,14 +610,17 @@
                     </div>
 
                     <div class="form-group">
-                        <textarea class="form-control" rows="3" id="up_receiver_addr" name="userAddr.receiver_addr" placeholder="详细地址"></textarea>
+                        <textarea class="form-control" rows="3" id="up_receiver_addr" name="userAddr.receiver_addr"
+                                  placeholder="详细地址"></textarea>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="up_zip" name="userAddr.zip" placeholder="邮政编码">
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="exit">取消</button>
-                        <button type="button" data-dismiss="modal" class="save" onclick="editAddress(${sessionScope.onliner.user_id})">保存</button>
+                        <button type="button" data-dismiss="modal" class="save"
+                                onclick="editAddress(${sessionScope.onliner.user_id})">保存
+                        </button>
                     </div>
                 </form>
             </div>
@@ -572,16 +638,87 @@
 <script src="assets/js/jquery.form.min.js"></script>
 <script>
     var userId = <%=onliner.getUser_id()%>;
+    $(function () {
+        $("#btn_emailCode").click(function () {
+            let mail = $("#email").val();
+            $.post('sendMail?mailBox='+mail, function () {
+                console.log('验证码发送成功');
+            })
+            let count = 60;
+            const countDown = setInterval(() => {
+                if (count === 0) {
+                    $('#btn_emailCode').text('重新发送').removeAttr('disabled');
+                    $('#btn_emailCode').css({
+                        background: '#CC2121',
+                        color: '#fff',
+                        cursor: 'pointer'
+                    });
+                    clearInterval(countDown);
+                } else {
+                    $('#btn_emailCode').attr('disabled', true);
+                    $('#btn_emailCode').css({
+                        background: '#c7c7c7',
+                        color: '#6a6a6a',
+                        cursor: 'default'
+                    });
+                    $('#btn_emailCode').text(count + '秒后可重新获取');
+                    count--;
+
+                }
+            }, 1000);
+        })
+
+        //修改密码按钮的点事件
+        $("#btn_updatePsw").click(function () {
+            var $current_pwd = $("#current-pwd").val();
+            if ($current_pwd != "") {
+                if ($("#new-pwd").val().trim() == "" || $("#confirm-pwd").val().trim() == "") {
+                    alert("新密码不能为空！");
+                    return;
+                }
+                if ($("#new-pwd").val().trim() != $("#confirm-pwd").val().trim()) {
+                    alert("两次输入的密码不一致,请重新输入!");
+                    return;
+                }
+                if ($("#email").val().trim() == "") {
+                    alert("请补全邮箱后再试！");
+                    return;
+                }
+                if ($("#code").val().trim() == "") {
+                    alert("请输入验证码！");
+                    return;
+                }
+                let code = $("#code").val();
+                let current_pwd = $("#current-pwd").val();
+                let new_pwd = $("#new-pwd").val();
+                $.ajax({
+                    url:"changePsw",
+                    type:"post",
+                    dataType: "json",
+                    data:{"current_pwd":current_pwd,"code":code,"new_pwd":new_pwd},
+                    success:function (result) {
+                        if (result.status == "501"){
+                            alert("原密码不正确！");
+                        }else if(result.status == "200"){
+                            alert("修改成功！");
+                        }else{
+                            alert("发生错误,请重试!");
+                        }
+                    }
+                })
+            }
+        })
+    })
 
     //查询所有订单
     function getOrderes(user_id) {
-        $.post("getOrders.action",{user_id:user_id},function (data,status) {
-            $.each(data,function (index,item) {
+        $.post("getOrders.action", {user_id: user_id}, function (data, status) {
+            $.each(data, function (index, item) {
                 var _tr = "<tr>\n" +
-                    "<td>"+item.order_id+"</td>\n" +
-                    "<td>"+item.creattime+"</td>\n" +
-                    "<td>"+item.type+"</td>\n" +
-                    "<td>￥"+item.order_money+".00</td>\n" +
+                    "<td>" + item.order_id + "</td>\n" +
+                    "<td>" + item.creattime + "</td>\n" +
+                    "<td>" + item.type + "</td>\n" +
+                    "<td>￥" + item.order_money + ".00</td>\n" +
                     "<td><a href=\"javascript:void(0)\" class=\"btn btn__bg\">View</a>\n" +
                     "</td>\n" +
                     "</tr>";
@@ -591,23 +728,23 @@
     }
 
     //查询当前登录用户的个人详细信息
-    function getUserInfo(){
-        $.get("user_getUserInfo.action",function (data,status) {
+    function getUserInfo() {
+        $.get("user_getUserInfo.action", function (data, status) {
             $("#name").val(data.name);
             $("#userInfo_id").val(data.userInfo_id);
-            $("#show").attr("src",data.headAddr);
+            $("#show").attr("src", data.headAddr);
             $("#email").val(data.email);
-            $("#sex").find("option[value="+data.sex+"]").attr("selected","selected");
+            $("#sex").find("option[value=" + data.sex + "]").attr("selected", "selected");
             $("#head").val(data.head);
         });
     }
 
     //添加地址表单提交
     function subAddress(user_id) {
-        $.post("user_addAddress.action",$("#addrForm").serialize(),function (data,status) {
-            if (data.status == 200){
+        $.post("user_addAddress.action", $("#addrForm").serialize(), function (data, status) {
+            if (data.status == 200) {
                 getAddress(user_id);
-            }else {
+            } else {
                 alert(data.msg);
             }
         });
@@ -615,7 +752,7 @@
 
     //修改用户个人信息
     function updateUserInfo() {
-        var $current_pwd = $("#current-pwd").val();
+
 
         var options = {
             url: "user_updateUserInfo.action", //提交地址：默认是form的action,如果申明,则会覆盖
@@ -624,27 +761,16 @@
             dataType: "json" //html(默认), xml, script, json...接受服务端返回的类型
         };
 
-        if ($current_pwd != ""){
-            if ($("#new-pwd").val().trim() == "" || $("#confirm-pwd").val().trim() == ""){
-                alert("新密码不能为空！");
-                return;
-            }
-            if ($("#new-pwd").val().trim() != $("#confirm-pwd").val().trim()){
-                alert("两次输入的密码不一致,请重新输入!");
-                return;
-            }
-        }
-
         $("#updateUserInfoForm").ajaxSubmit(options);
 
     }
 
     //删除地址
     function removeAddr(user_addr_id) {
-        $.post("user_removeAddr.action",{user_addr_id:user_addr_id},function (data,status) {
-            if (data.status == 200){
+        $.post("user_removeAddr.action", {user_addr_id: user_addr_id}, function (data, status) {
+            if (data.status == 200) {
                 getAddress(userId);
-            }else {
+            } else {
                 alert(data.msg);
             }
         })
@@ -652,63 +778,64 @@
 
     //编辑地址
     function getAddrById(user_addr_id) {
-        $.get("user_getAddrById.action",{user_addr_id:user_addr_id},function (data,status) {
+        $.get("user_getAddrById.action", {user_addr_id: user_addr_id}, function (data, status) {
             $("#up_user_addr_id").val(data.user_addr_id);
             $("#up_receiver_name").val(data.receiver_name);
             $("#up_receiver_tel").val(data.receiver_tel);
             var addrs = data.receiver_addr.split(",");
-            $("#up_receiver_addr").val(addrs[addrs.length-1]);
+            $("#up_receiver_addr").val(addrs[addrs.length - 1]);
             $("#up_zip").val(data.zip);
         })
     }
 
     //修改地址表单提交
     function editAddress(user_id) {
-        $.post("user_updateAddress.action",$("#updateForm").serialize(),function (data,status) {
-            if (data.status == 200){
+        $.post("user_updateAddress.action", $("#updateForm").serialize(), function (data, status) {
+            if (data.status == 200) {
                 getAddress(user_id);
-            }else {
+            } else {
                 alert(data.msg);
             }
         });
     };
 
     //js上传图片预览
-    function changepic(obj){
+    function changepic(obj) {
         //console.log(obj.files[0]);//这里可以获取上传文件的name
         var newsrc = getObjectURL(obj.files[0]);
-        document.getElementById('show').src=newsrc;
+        document.getElementById('show').src = newsrc;
     }
+
     //建立一個可存取到該file的url
     function getObjectURL(file) {
-        var url = null ;
+        var url = null;
         // 下面函数执行的效果是一样的，只是需要针对不同的浏览器执行不同的 js 函数而已
         if (window.createObjectURL != undefined) { // basic
             url = window.createObjectURL(file);
         } else if (window.URL != undefined) { // mozilla(firefox)
-            url = window.URL.createObjectURL(file) ;
+            url = window.URL.createObjectURL(file);
         } else if (window.webkitURL != undefined) { // webkit or chrome
-            url = window.webkitURL.createObjectURL(file) ;
+            url = window.webkitURL.createObjectURL(file);
         }
-        return url ;
+        return url;
     }
 
     /**
      * 查询地址
      */
-    function getAddress(user_id){
-        $.post("user_getAddress.action",{user_id:user_id},function (data,status) {
+    function getAddress(user_id) {
+        $.post("user_getAddress.action", {user_id: user_id}, function (data, status) {
             $("#addr-container").empty();
-            $.each(data,function (index,item) {
+            $.each(data, function (index, item) {
                 var addr = "<div class=\"address_card\">\n" +
                     "<address>\n" +
-                    "<p><strong>"+item.receiver_name+"</strong></p>\n" +
-                    "<p>"+item.receiver_addr+"</p>\n" +
-                    "<p>电话: "+item.receiver_tel+"</p>\n" +
+                    "<p><strong>" + item.receiver_name + "</strong></p>\n" +
+                    "<p>" + item.receiver_addr + "</p>\n" +
+                    "<p>电话: " + item.receiver_tel + "</p>\n" +
                     "</address>\n" +
-                    "<a href='javascript:void(0)' data-toggle='modal' data-target='#updaterAddr' onclick='getAddrById("+item.user_addr_id+")' class=\"btn btn__bg\"><i class=\"fa fa-edit\"></i>\n" +
+                    "<a href='javascript:void(0)' data-toggle='modal' data-target='#updaterAddr' onclick='getAddrById(" + item.user_addr_id + ")' class=\"btn btn__bg\"><i class=\"fa fa-edit\"></i>\n" +
                     "修改地址</a>\n" +
-                    "<a href='javascript:void(0)' onclick='removeAddr("+item.user_addr_id+")' class=\"btn btn__bg\"><i class=\"fa fa-trash\"></i>\n" +
+                    "<a href='javascript:void(0)' onclick='removeAddr(" + item.user_addr_id + ")' class=\"btn btn__bg\"><i class=\"fa fa-trash\"></i>\n" +
                     "移除地址</a>\n" +
                     "</div>";
                 $("#addr-container").append(addr);
@@ -720,10 +847,10 @@
      * ajax加载省市联动
      */
     $(function () {
-        $.get("user_getArea.action",{parent_id:0},function (data,status) {
-            $.each(data,function (index,item) {
-                $('#pro').append("<option value='"+item.address_id+"'>"+item.area_name+"</option>");
-                $('#up_pro').append("<option value='"+item.address_id+"'>"+item.area_name+"</option>");
+        $.get("user_getArea.action", {parent_id: 0}, function (data, status) {
+            $.each(data, function (index, item) {
+                $('#pro').append("<option value='" + item.address_id + "'>" + item.area_name + "</option>");
+                $('#up_pro').append("<option value='" + item.address_id + "'>" + item.area_name + "</option>");
             })
         });
     });
@@ -731,11 +858,11 @@
     //获取下一级区域菜单
     function getChilren(obj) {
         var vs = $(obj).children("option:selected").val();
-        $.post("user_getArea.action",{parent_id:vs},function (data,status) {
+        $.post("user_getArea.action", {parent_id: vs}, function (data, status) {
             console.log(data);
             $(obj).nextAll().empty();
-            $.each(data,function (index,item) {
-                $(obj).next().append("<option value='"+item.address_id+"'>"+item.area_name+"</option>");
+            $.each(data, function (index, item) {
+                $(obj).next().append("<option value='" + item.address_id + "'>" + item.area_name + "</option>");
             })
         })
     }

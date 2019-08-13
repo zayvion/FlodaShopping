@@ -885,7 +885,6 @@
                 console.log(data);
                 if(data.status == 200){
                     alert("添加成功！");
-                    //location.href = "index.jsp";
                     getWishNum();
                 }else {
                     alert("添加失败！");

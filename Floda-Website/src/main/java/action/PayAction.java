@@ -60,6 +60,7 @@ public class PayAction extends BaseAction {
         order.setType(1);
         order.setUser_id(user.getUser_id());
         order.setAddr_id(addr_id);
+        order.setOrder_money(total);
         int orderId = orderDao.addOrder(order);
         List<CartInfo> cartInfos = cartDao.getCartInfos(user.getUser_id());
         for (CartInfo c : cartInfos) {

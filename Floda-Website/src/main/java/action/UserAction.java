@@ -303,6 +303,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         User user = (User) session.get("onliner");
         if (user.getPassword().equals(MD5Util.getMD5(current_pwd)) && code.equals(session.get("mailcode"))){
             String result = userService.changePwd(new_pwd, user.getUser_id());
+            session.remove("mailcode");
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(result);
             return NONE;
