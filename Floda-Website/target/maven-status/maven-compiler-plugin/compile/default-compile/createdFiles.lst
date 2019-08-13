@@ -1,2 +1,2 @@
-action/CheckoutAction.class
-action/OrderAction.class
+action\OrderAction.class
+action\MailAction.class

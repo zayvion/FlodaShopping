@@ -1,4 +1,5 @@
-<%@ page import="pojo.User" %><%--
+<%@ page import="pojo.User" %>
+<%--
   User: dc
   Date: 2019/8/9
   Time: 12:48
@@ -92,6 +93,23 @@
         #btn_emailCode {
             margin-top: 40px;
         }
+        .hei span {
+            color: #A10000;
+        }
+        .orderList .orderList1{
+            border-bottom: 1px solid #E0E0E0;
+            padding: 15px 0;
+            cursor: pointer;
+        }
+        .orderList .orderList1:last-child{
+            border-bottom: none;
+        }
+        .orderList1:nth-child(1) div p a:nth-child(2) {
+            margin-left: 50px;
+        }
+        .orderList1:nth-child(1) div p a {
+            color: #757575;
+        }
     </style>
 </head>
 <body>
@@ -153,7 +171,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="wishlist.jsp">
+                                        <a href="wishlist.jsp">`
                                             <i class="lnr lnr-heart"></i>
                                             <div class="notification">0</div>
                                         </a>
@@ -225,7 +243,7 @@
                                             地址管理</a>
                                         <a href="#account-info" data-toggle="tab" onclick="getUserInfo()"><i
                                                 class="fa fa-user"></i> 个人信息</a>
-                                        <a href="login-register.jsp"><i class="fa fa-sign-out"></i> 退出登录</a>
+                                        <a href="user_exit.action"><i class="fa fa-sign-out"></i> 退出登录</a>
                                     </div>
                                 </div>
                                 <!-- My Account Tab Menu End -->
@@ -265,14 +283,6 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody id="order_body">
-                                                            <tr>
-                                                                <td>1</td>
-                                                                <td>Aug 22, 2019</td>
-                                                                <td>Pending</td>
-                                                                <td>$3000</td>
-                                                                <td><a href="cart.html" class="btn btn__bg">View</a>
-                                                                </td>
-                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -407,7 +417,41 @@
                                                     </fieldset>
                                                 </div>
                                             </div>
-                                        </div> <!-- Single Tab Content End -->
+                                        </div>
+                                        <!-- Single Tab Content End -->
+
+                                        <!-- Single Tab Content Start -->
+                                        <div class="tab-pane fade" id="product-detail" role="tabpanel">
+                                            <div class="myaccount-content">
+                                                <h3 style="margin-bottom: 10px">订单号</h3>
+                                                <div class="orderList">
+                                                    <div class="orderList1">
+                                                        <div class="clearfix">
+                                                            <a href="#" class="fl" style="float: left"><img style="width: 80px;height: 80px" src="http://image.lzllzl.cn/img/2019-08-13/537279cdf91ce313f903f3670c147c036f0c9.jpg"></a>
+                                                            <p class="fl"><a href="#">家用创意菜盘子圆盘 釉下彩复古</a><a href="#">¥99.00×1</a></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="orderList1">
+                                                        <h4>收货信息</h4>
+                                                        <p>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<span>杨小黄</span></p>
+                                                        <p>联系电话：<span>157*****121</span></p>
+                                                        <p>收货地址：<span>河北 唐山市 路北区 高新软件园</span></p>
+                                                    </div>
+                                                    <div class="orderList1">
+                                                        <h4>支付方式及送货时间</h4>
+                                                        <p>支付方式：<span>在线支付</span></p>
+                                                        <p>送货时间：<span>不限送货时间</span></p>
+                                                    </div>
+                                                    <div class="orderList1 hei">
+                                                        <h4><strong>商品总价：</strong><span>¥99</span></h4>
+                                                        <p><strong>订单金额：</strong><span>¥99</span></p>
+                                                        <p><strong>实付金额：</strong><span>¥99</span></p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Single Tab Content End -->
                                     </div>
                                 </div> <!-- My Account Tab Content End -->
                             </div>
@@ -720,13 +764,14 @@
     //查询所有订单
     function getOrderes(user_id) {
         $.post("getOrders.action", {user_id: user_id}, function (data, status) {
+            $("#order_body").empty();
             $.each(data, function (index, item) {
                 var typeName;
                 var operation;
                 switch (item.type) {
                     case 1:
                         typeName = "未支付";
-                        operation = "<a href='javascript:void(0)' class='btn btn__bg'>去支付</a>";
+                        operation = "<a class='btn btn__bg' href='http://localhost:8080/finishPay.action?orderId="+item.order_id+"'>去支付</a>";
                         break;
                     case 2:
                         typeName = "未评价";
@@ -734,11 +779,11 @@
                         break;
                     case 3:
                         typeName = "已完成";
-                        operation = "<a href='javascript:void(0)' class='btn btn__bg'>查看详情</a>";
                         break;
                 }
+                //getOrderDetail.action?orderid="+item.order_id+"
                 var _tr = "<tr>\n" +
-                    "<td>" + item.order_id + "</td>\n" +
+                    "<td><a href='#product-detail' data-toggle='tab' onclick='getOrderDetail("+item.order_id+")'>"+item.order_id+"</a></td>\n" +
                     "<td>" + item.creattime + "</td>\n" +
                     "<td>" + typeName + "</td>\n" +
                     "<td>￥" + item.order_money + ".00</td>\n" +
@@ -746,6 +791,13 @@
                     "</tr>";
                 $("#order_body").append(_tr);
             })
+        })
+    }
+
+    //查询详细订单
+    function getOrderDetail(order_id) {
+        $.get("getOrderDetail.action",{orderId:order_id},function (data,status) {
+            console.log(data);
         })
     }
 
@@ -774,8 +826,6 @@
 
     //修改用户个人信息
     function updateUserInfo() {
-
-
         var options = {
             url: "user_updateUserInfo.action", //提交地址：默认是form的action,如果申明,则会覆盖
             type: "post",   //默认是form的method（get or post），如果申明，则会覆盖

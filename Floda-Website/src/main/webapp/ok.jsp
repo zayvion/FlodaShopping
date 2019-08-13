@@ -237,7 +237,7 @@
                         <nav aria-label="breadcrumb">
                             <h1><i class="fa fa-check-circle" style="color: #00B83F"></i>支付已完成</h1>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item active">< 查看订单</li>
+                                <a class="breadcrumb-item active" href="my-account.jsp">< 查看订单</a>
                             </ul>
                         </nav>
                     </div>
