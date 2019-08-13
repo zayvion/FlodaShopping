@@ -110,6 +110,11 @@
         .orderList1:nth-child(1) div p a {
             color: #757575;
         }
+        p.fl {
+            width: 600px;
+            float: right;
+            margin: 20px 60px 0 0;
+        }
     </style>
 </head>
 <body>
@@ -411,29 +416,21 @@
                                         <!-- Single Tab Content Start -->
                                         <div class="tab-pane fade" id="product-detail" role="tabpanel">
                                             <div class="myaccount-content">
-                                                <h3 style="margin-bottom: 10px">订单号</h3>
+                                                <h3 style="margin-bottom: 10px" id="order_id">订单号</h3>
                                                 <div class="orderList">
-                                                    <div class="orderList1">
-                                                        <div class="clearfix">
-                                                            <a href="#" class="fl" style="float: left"><img style="width: 80px;height: 80px" src="http://image.lzllzl.cn/img/2019-08-13/537279cdf91ce313f903f3670c147c036f0c9.jpg"></a>
-                                                            <p class="fl"><a href="#">家用创意菜盘子圆盘 釉下彩复古</a><a href="#">¥99.00×1</a></p>
-                                                        </div>
+                                                    <div class="orderList1" id="order_pro">
+
                                                     </div>
-                                                    <div class="orderList1">
+                                                    <div class="orderList1" id="order_addr">
                                                         <h4>收货信息</h4>
-                                                        <p>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<span>杨小黄</span></p>
-                                                        <p>联系电话：<span>157*****121</span></p>
-                                                        <p>收货地址：<span>河北 唐山市 路北区 高新软件园</span></p>
                                                     </div>
                                                     <div class="orderList1">
                                                         <h4>支付方式及送货时间</h4>
                                                         <p>支付方式：<span>在线支付</span></p>
                                                         <p>送货时间：<span>不限送货时间</span></p>
                                                     </div>
-                                                    <div class="orderList1 hei">
-                                                        <h4><strong>商品总价：</strong><span>¥99</span></h4>
-                                                        <p><strong>订单金额：</strong><span>¥99</span></p>
-                                                        <p><strong>实付金额：</strong><span>¥99</span></p>
+                                                    <div class="orderList1 hei" id="order_money">
+
                                                     </div>
 
                                                 </div>
@@ -769,7 +766,6 @@
                         typeName = "已完成";
                         break;
                 }
-                //getOrderDetail.action?orderid="+item.order_id+"
                 var _tr = "<tr>\n" +
                     "<td><a href='#product-detail' data-toggle='tab' onclick='getOrderDetail("+item.order_id+")'>"+item.order_id+"</a></td>\n" +
                     "<td>" + item.creattime + "</td>\n" +
@@ -786,7 +782,34 @@
     function getOrderDetail(order_id) {
         $.get("getOrderDetail.action",{orderId:order_id},function (data,status) {
             console.log(data);
-        })
+            //订单编号展示
+            $("#order_id").text("订单编号："+data.order_id);
+            //订单详情模块---商品展示
+            $("#order_pro").empty();
+            $.each(data.details,function (index,item) {
+                var _pro = "<div class=\"clearfix\">\n" +
+                    "<a href=\"#\" class=\"fl\" style=\"float: left\"><img style=\"width: 80px;height: 80px\"></a>\n" +
+                    "<p class=\"fl\"><a href=\"#\">"+item.pro_name+"</a><a href=\"#\">¥"+item.pro_price+".00×"+item.pro_number+"</a></p>\n" +
+                    "</div>";
+                $("#order_pro").append(_pro);
+                $("#order_pro").find("img").eq(0).attr("src",item.imgAddr);
+            });
+
+            //订单详情模块---收件地址展示
+            $("#order_addr").find("h4").siblings().empty();
+            var address = JSON.parse(data.address);
+            var _proAddr = "<p>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：<span>"+address.receiver_name+"</span></p>\n" +
+                "<p>联系电话：<span>"+address.receiver_tel+"</span></p>\n" +
+                "<p>收货地址：<span>"+address.receiver_addr+"</span></p>";
+            $("#order_addr").append(_proAddr);
+
+            //订单详情模块---商品总价展示
+            $("#order_money").empty();
+            var _proMoney = "<h4><strong>商品总价：</strong><span>¥"+data.order_money+"</span></h4>\n" +
+                "<p><strong>订单金额：</strong><span>¥"+data.order_money+"</span></p>\n" +
+                "<p><strong>实付金额：</strong><span>¥"+data.order_money+"</span></p>";
+            $("#order_money").append(_proMoney);
+        });
     }
 
     //查询当前登录用户的个人详细信息
@@ -834,7 +857,7 @@
                 alert(data.msg);
             }
         })
-    };
+    }
 
     //编辑地址
     function getAddrById(user_addr_id) {

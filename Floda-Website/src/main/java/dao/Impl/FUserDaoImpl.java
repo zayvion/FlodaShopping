@@ -87,6 +87,16 @@ public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
     @Override
     public UserAddr getAddrById(int user_addr_id) {
         UserAddr userAddr = this.getHibernateTemplate().get(UserAddr.class, user_addr_id);
+        String[] addr = userAddr.getReceiver_addr().split(",");
+        StringBuffer buffer = new StringBuffer();
+        for (int i = 0; i < addr.length - 1; i++) {
+            if (!addr[i].equals("")||!addr[i].equals("null")) {
+                System.out.println(addr[i]);
+                Address address = this.getHibernateTemplate().get(Address.class, Integer.parseInt(addr[i]));
+                buffer.append(address.getArea_name());
+            }
+        }
+        userAddr.setReceiver_addr(buffer.append(addr[addr.length - 1]).toString());
         return userAddr;
     }
 
@@ -117,7 +127,6 @@ public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
             System.out.println("添加个人信息");
             this.getHibernateTemplate().save(userInfo);
         }else {
-//            this.getHibernateTemplate().update(userInfo);
             info.setUser_id(userInfo.getUser_id());
             info.setName(userInfo.getName());
             info.setEmail(userInfo.getEmail());
