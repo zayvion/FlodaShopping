@@ -14,4 +14,10 @@ public interface OrderService {
      * @return
      */
     Order getOrder(int id);
+
+    /**
+     * 根据订单编号查询订单
+     * @return
+     */
+    String getProByOrderId(int orderId);
 }

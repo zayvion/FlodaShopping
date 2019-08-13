@@ -16,6 +16,7 @@ public class OrderDetail {
     private String pro_name;
     private int pro_number;
     private double pro_price;
+    private int isEvaluate;
     private String imgAddr;
 
     public int getDetail_id() {
@@ -72,5 +73,27 @@ public class OrderDetail {
 
     public void setImgAddr(String imgAddr) {
         this.imgAddr = imgAddr;
+    }
+
+    public int getIsEvaluate() {
+        return isEvaluate;
+    }
+
+    public void setIsEvaluate(int isEvaluate) {
+        this.isEvaluate = isEvaluate;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "detail_id=" + detail_id +
+                ", order_id=" + order_id +
+                ", pro_order_id=" + pro_order_id +
+                ", pro_name='" + pro_name + '\'' +
+                ", pro_number=" + pro_number +
+                ", pro_price=" + pro_price +
+                ", isEvaluate=" + isEvaluate +
+                ", imgAddr='" + imgAddr + '\'' +
+                '}';
     }
 }

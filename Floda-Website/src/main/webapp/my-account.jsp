@@ -115,6 +115,35 @@
             float: right;
             margin: 20px 60px 0 0;
         }
+        dl {
+            text-align: center;
+            width: 20%;
+            margin-right: 3.3%;
+            border-bottom: 1px solid #E6E6E6;
+            display: inline-block;
+        }
+        dl dd:nth-child(2) a {
+            cursor: pointer;
+            color: #A10000;
+        }
+        dl dd {
+            margin-bottom: 6px;
+        }
+        dl dd:last-child a {
+            cursor: pointer;
+            display: inline-block;
+            width: 110px;
+            height: 30px;
+            line-height: 30px;
+            background: #F4F4F4;
+            color: #666;
+            transition: all .5s;
+        }
+        dl dd:last-child a:hover {
+            background: #A10000;
+            color: #fff;
+            transform: translate(0.5);
+        }
     </style>
 </head>
 <body>
@@ -437,6 +466,18 @@
                                             </div>
                                         </div>
                                         <!-- Single Tab Content End -->
+
+                                        <div class="tab-pane fade" id="order_el" role="tabpanel">
+                                            <div class="myaccount-content">
+                                                <h3>评论</h3>
+                                                <dl class="fl">
+                                                    <dt><a href="#"><img src="http://image.lzllzl.cn/img/2019-08-13/pms_1559013725d724f.88313357.png"></a></dt>
+                                                    <dd><a href="#">家用创意壁挂  釉下彩复古</a></dd>
+                                                    <dd>¥199.00</dd>
+                                                    <dd><a href="#2">评价</a></dd>
+                                                </dl>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div> <!-- My Account Tab Content End -->
                             </div>
@@ -760,7 +801,7 @@
                         break;
                     case 2:
                         typeName = "未评价";
-                        operation = "<a href='javascript:void(0)' class='btn btn__bg'>去评价</a>";
+                        operation = "<a href='#order_el' class='btn btn__bg' data-toggle='tab' onclick='toEvaluate("+item.order_id+")'>去评价</a>";
                         break;
                     case 3:
                         typeName = "已完成";
@@ -775,6 +816,14 @@
                     "</tr>";
                 $("#order_body").append(_tr);
             })
+        })
+    }
+
+    //根据订单id查询订单中的商品
+    function toEvaluate(orderId) {
+        $.post("getProByOrderId.action",{orderId:orderId},function (data,status) {
+            console.log(data);
+
         })
     }
 

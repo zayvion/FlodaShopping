@@ -1,5 +1,6 @@
 package service.Impl;
 
+import com.google.gson.Gson;
 import dao.FUserDao;
 import dao.OrderDao;
 import dao.OrderDetailDao;
@@ -32,5 +33,10 @@ public class OrderServiceImpl implements OrderService {
         String addr = userService.getAddrById(order.getAddr_id());
         order.setAddress(addr);
         return order;
+    }
+
+    @Override
+    public String getProByOrderId(int orderId) {
+        return new Gson().toJson(orderDao.getProByOrderId(orderId));
     }
 }

@@ -1,6 +1,7 @@
 package dao;
 
 import pojo.Order;
+import pojo.OrderDetail;
 
 import java.util.List;
 
@@ -43,4 +44,10 @@ public interface OrderDao {
      * @return
      */
     List<Order> getOrders(int user_id);
+
+    /**
+     * 根据订单编号查询订单
+     * @return
+     */
+    List<OrderDetail> getProByOrderId(int orderId);
 }

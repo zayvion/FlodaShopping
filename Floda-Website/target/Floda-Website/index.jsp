@@ -730,12 +730,12 @@
                         "                        <div class='product-item mt-40'\">\n" +
                         "                            <figure class='product-thumb'>\n" +
                         "                                <a target='_blank' href='productDetail?id="+item.pro_id+"'>\n" +
-                        "                                    <img height='270px' width='270px' class='pri-img' src='"+item.pro_imgUrl+"'>\<n></n>" +
-                        "                                     <img class='sec-img'height='270px' width='270px'  src='"+item.pro_imgUrl+"' alt='product'>"+
+                        "                                    <img height='270px' width='270px' class='pri-img' src='"+item.pro_imgAddr+"'>\<n></n>" +
+                        "                                     <img class='sec-img'height='270px' width='270px'  src='"+item.pro_imgAddr+"' alt='product'>"+
                         "                                </a>\n" +
                         "                                <div class='product-badge'>\n" +
                         "                                    <div class='product-label new'>\n" +
-                        "                                        <span>新品</span>\n" +
+                        "                                        <span>热卖</span>\n" +
                         "                                    </div>\n" +
                         "                                </div>\n" +
                         "                                <div class='button-group'>\n" +

@@ -38,6 +38,16 @@ public class OrderAction extends BaseAction {
         return NONE;
     }
 
+    public String getProByOrderId(){
+        try {
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(orderService.getProByOrderId(orderId));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return NONE;
+    }
+
     public int getOrderId() {
         return orderId;
     }

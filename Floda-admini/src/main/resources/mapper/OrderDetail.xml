@@ -12,5 +12,6 @@
         <property name="pro_name" column="pro_name"/>
         <property name="pro_number" column="pro_number"/>
         <property name="pro_price" column="pro_price"/>
+        <property name="isEvaluate" column="isevaluate"/>
     </class>
 </hibernate-mapping>

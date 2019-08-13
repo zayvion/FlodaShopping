@@ -62,6 +62,7 @@
         <action name="getOrders" class="payAction" method="getOrders"/>
         <action name="finishPay" class="payAction" method="finishPay"/>
         <action name="getOrderDetail" class="orderAction" method="getOrderDetail"/>
+        <action name="getProByOrderId" class="orderAction" method="getProByOrderId"/>
     </package>
     <package name="checkout" extends="struts-default" namespace="/" strict-method-invocation="false">
         <global-results>
