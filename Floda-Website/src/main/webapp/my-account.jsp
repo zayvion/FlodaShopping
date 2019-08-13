@@ -170,18 +170,6 @@
                                             </c:choose>
                                         </ul>
                                     </li>
-                                    <li>
-                                        <a href="wishlist.jsp">`
-                                            <i class="lnr lnr-heart"></i>
-                                            <div class="notification">0</div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="minicart-btn">
-                                            <i class="lnr lnr-cart"></i>
-                                            <div class="notification">2</div>
-                                        </a>
-                                    </li>
                                 </ul>
                             </div>
                         </div>

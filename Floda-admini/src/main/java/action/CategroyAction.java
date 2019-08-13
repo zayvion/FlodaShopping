@@ -1,6 +1,5 @@
 package action;
 
-import com.opensymphony.xwork2.ModelDriven;
 import dao.JedisClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;

@@ -237,8 +237,8 @@
                     <a href="#" class="dropdown-toggle"><i class="icon-shopping-cart"></i><span class="menu-text">
 								订单管理 </span><b class="arrow icon-angle-down"></b></a>
                     <ul class="submenu">
-                        <li class="home"><a href="javascript:void(0)" name="Orderform.jsp" title="订单类型分类"
-                                            class="iframeurl"><i class="icon-double-angle-right"></i>订单类型分类</a></li>
+                        <li class="home"><a href="javascript:void(0)" name="order.jsp" title="查看订单"
+                                            class="iframeurl"><i class="icon-double-angle-right"></i>订单详情</a></li>
                     </ul>
                 </li>
                 <li><a href="#" class="dropdown-toggle"><i class="icon-comment"></i><span class="menu-text"> 评价管理

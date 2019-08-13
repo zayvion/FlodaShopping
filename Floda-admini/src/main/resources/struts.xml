@@ -80,4 +80,7 @@
     <package name="clean" extends="struts-default" namespace="/" strict-method-invocation="false">
         <action name="cleanCache" class="cleanCacheAction" method="cleanCache"/>
     </package>
+    <package name="orderInfo" extends="struts-default" namespace="/" strict-method-invocation="false">
+        <action name="getOrderInfos" class="orderInfoAction" method="getOrderInfos"/>
+    </package>
 </struts>
