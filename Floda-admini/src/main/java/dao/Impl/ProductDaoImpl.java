@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.Img;
 import pojo.Product;
 
@@ -22,15 +23,18 @@ import java.util.List;
 @Repository
 public class ProductDaoImpl extends HibernateDaoSupport implements ProductDao {
     @Autowired
-    public void setSF(SessionFactory sessionFactory){
+    public void setSF(SessionFactory sessionFactory) {
         super.setSessionFactory(sessionFactory);
     }
+
     @Override
     public void addProduct(Product product) {
         this.getHibernateTemplate().save(product);
     }
 
+
     @Override
+    @Transactional
     public void updateProduct(Product product) {
         Product p = this.getHibernateTemplate().get(Product.class, product.getPro_id());
         p.setPro_desc(product.getPro_desc());
@@ -56,9 +60,9 @@ public class ProductDaoImpl extends HibernateDaoSupport implements ProductDao {
     @Override
     public List<Product> getSearchResult(String keyword) {
         DetachedCriteria criteria = DetachedCriteria.forClass(Product.class);
-        criteria.add(Restrictions.like("pro_name","%"+keyword+"%"));
+        criteria.add(Restrictions.like("pro_name", "%" + keyword + "%"));
         List<Product> products = (List<Product>) this.getHibernateTemplate().findByCriteria(criteria);
-        for (Product p:products
+        for (Product p : products
         ) {
             Img img = this.getHibernateTemplate().get(Img.class, p.getPro_imgId());
             p.setPro_imgAddr(img.getImg_addr());
@@ -80,18 +84,18 @@ public class ProductDaoImpl extends HibernateDaoSupport implements ProductDao {
 
     @Override
     public void updateProductImg(Img img) {
-      this.getHibernateTemplate().update(img);
+        this.getHibernateTemplate().update(img);
     }
 
     @Override
     public List<Product> getProByCate(int cate_id) {
         DetachedCriteria criteria = DetachedCriteria.forClass(Product.class);
-        criteria.add(Restrictions.eq("pro_cateId",cate_id));
-        criteria.add((Restrictions.eq("pro_status",0)));
+        criteria.add(Restrictions.eq("pro_cateId", cate_id));
+        criteria.add((Restrictions.eq("pro_status", 0)));
         criteria.addOrder(Order.desc("pro_id"));
-        List<Product> list = (List<Product>)this.getHibernateTemplate().findByCriteria(criteria);
-        for (Product p:list
-             ) {
+        List<Product> list = (List<Product>) this.getHibernateTemplate().findByCriteria(criteria);
+        for (Product p : list
+        ) {
             Img img = this.getHibernateTemplate().get(Img.class, p.getPro_imgId());
             p.setPro_imgAddr(img.getImg_addr());
         }

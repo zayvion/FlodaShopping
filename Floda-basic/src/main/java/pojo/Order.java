@@ -3,6 +3,8 @@ package pojo;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Auther: zayvion
@@ -18,6 +20,7 @@ public class Order {
     private double order_money;
     private Timestamp creattime;
     private int type;
+    private List<OrderDetail> details = new ArrayList<>();
 
     public int getOrder_id() {
         return order_id;
@@ -65,5 +68,13 @@ public class Order {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public List<OrderDetail> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<OrderDetail> details) {
+        this.details = details;
     }
 }

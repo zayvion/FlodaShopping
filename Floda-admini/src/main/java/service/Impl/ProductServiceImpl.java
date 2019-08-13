@@ -29,6 +29,7 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
     private static String KEY_GETPROBYCATE = "getProByCate";
+    private static String KEY_GETPRODUCTS = "getProducts";
     @Autowired
     private ProductDao productDao;
     @Autowired
@@ -136,6 +137,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public String updateProduct(Product product) {
         productDao.updateProduct(product);
+        jedisClient.del(KEY_GETPRODUCTS);
         return ResponseResult.ok();
     }
 

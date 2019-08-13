@@ -14,6 +14,7 @@ import pojo.*;
 import service.AlipayConfig;
 import service.AlipayTrade;
 import service.CartService;
+import service.ProductService;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -40,6 +41,8 @@ public class PayAction extends BaseAction {
     private OrderDao orderDao;
     @Autowired
     private OrderDetailDao orderDetailDao;
+    @Autowired
+    private ProductService productService;
     private String out_trade_no;
     private String total_amount;
     private int addr_id;
@@ -84,7 +87,7 @@ public class PayAction extends BaseAction {
             if (product.getPro_numbers() <= 0){
                 product.setPro_status(1);
             }
-            productDao.updateProduct(product);
+            productService.updateProduct(product);
         }
         String pagepay = alipayTrade.Pagepay(super.request,total,orderId);
         request.setAttribute("result", pagepay);

@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Controller
 @Scope("prototype")
-public class CheckoutrAction extends BaseAction {
+public class CheckoutAction extends BaseAction {
 
     @Autowired
     private FUserDao userDao;
