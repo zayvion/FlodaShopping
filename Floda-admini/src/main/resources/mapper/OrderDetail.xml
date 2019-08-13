@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="pojo.OrderDetail" table="tb_order_detail">
-        <id name="detail_id" column="cart_id">
+        <id name="detail_id" column="detail_id">
             <generator class="native"></generator>
         </id>
         <property name="order_id" column="order_id"/>

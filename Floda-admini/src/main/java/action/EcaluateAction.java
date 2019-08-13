@@ -1,10 +1,12 @@
 package action;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import pojo.Ecaluate;
 import service.EcaluateService;
+import utils.ResponseResult;
 
 import java.io.IOException;
 
@@ -35,6 +37,15 @@ public class EcaluateAction extends BaseAction {
     }
 
     public String addEcaluate() throws IOException {
+        try {
+            ecaluateService.addEcaluate(ecaluate);
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(new Gson().toJson(new ResponseResult().ok()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().write(new Gson().toJson(new ResponseResult().build(500,"添加失败")));
         return NONE;
     }
 

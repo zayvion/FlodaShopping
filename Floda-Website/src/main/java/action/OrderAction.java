@@ -23,9 +23,10 @@ public class OrderAction extends BaseAction {
     private int orderId;
 
     public String getOrderDetail() throws IOException {
+        System.out.println("orderId::"+orderId);
         List details = orderDetailDao.getOrderDetail(orderId);
         response.setContentType("application/json;charset=utf-8");
-        response.getWriter().write(new Gson().toJson(new Gson().toJson(details)));
+        response.getWriter().write(new Gson().toJson(details));
         return NONE;
     }
 

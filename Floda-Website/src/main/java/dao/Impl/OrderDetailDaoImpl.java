@@ -37,7 +37,7 @@ public class OrderDetailDaoImpl extends HibernateDaoSupport implements OrderDeta
     public List getOrderDetail(int orderId) {
         DetachedCriteria criteria = DetachedCriteria.forClass(OrderDetail.class);
         criteria.add(Restrictions.eq("order_id",orderId));
-        List<?> result = this.getHibernateTemplate().findByCriteria(criteria);
+        List<OrderDetail> result = (List<OrderDetail>) this.getHibernateTemplate().findByCriteria(criteria);
         return result;
     }
 }
