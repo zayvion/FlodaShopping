@@ -15,6 +15,7 @@ public class Ecaluate {
     private int user_id;
     private String ecal_content;
     private Timestamp ecal_time;
+    private String username;
 
     public int getEcal_id() {
         return ecal_id;
@@ -62,6 +63,14 @@ public class Ecaluate {
 
     public void setEcal_time(Timestamp ecal_time) {
         this.ecal_time = ecal_time;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override

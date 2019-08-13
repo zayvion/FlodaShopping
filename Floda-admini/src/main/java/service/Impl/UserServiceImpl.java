@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 查询用户列表
+     *
      * @return
      */
     @Override
@@ -35,8 +36,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public String info(int user_id) {
         UserInfo userInfo = userDao.info(user_id);
-        if (userInfo !=  null){
-            userInfo.setHeadAddr(this.IMG_BASE_PATH+userInfo.getHead());
+        if (userInfo != null) {
+            userInfo.setHeadAddr(this.IMG_BASE_PATH + userInfo.getHead());
             return new Gson().toJson(userInfo);
         }
         return null;
@@ -47,11 +48,11 @@ public class UserServiceImpl implements UserService {
     public String stopUser(int user_id) {
         try {
             userDao.stopUser(user_id);
-            return ResponseResult.build(200,"封号成功");
+            return ResponseResult.build(200, "封号成功");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ResponseResult.build(500,"封号失败");
+        return ResponseResult.build(500, "封号失败");
     }
 
     @Transactional
@@ -59,21 +60,23 @@ public class UserServiceImpl implements UserService {
     public String startUser(int user_id) {
         try {
             userDao.startUser(user_id);
-            return ResponseResult.build(200,"解封成功");
+            return ResponseResult.build(200, "解封成功");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ResponseResult.build(500,"解封失败");
+        return ResponseResult.build(500, "解封失败");
     }
 
     @Override
     public Boolean LoginUser(String username, String password) {
         User user = userDao.LoginUser("super");
         String MD5psw = MD5Util.getMD5(password);
-        if(username.equals("super")) {
+        if (username.equals("super")) {
             if (user.getPassword().equals(MD5psw)) {
                 return true;
             }
 
-  }
-        return false;}}
+        }
+        return false;
+    }
+}

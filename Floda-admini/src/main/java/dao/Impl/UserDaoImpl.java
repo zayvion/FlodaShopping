@@ -8,6 +8,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
+import pojo.Img;
 import pojo.User;
 import pojo.UserInfo;
 
@@ -68,5 +69,19 @@ public class UserDaoImpl extends HibernateDaoSupport implements UserDao {
         criteria.add(Restrictions.eq("username",username));
         List<User> list = (List<User>)this.getHibernateTemplate().findByCriteria(criteria);
         return list.get(0);
+    }
+
+    @Override
+    public User getUser(int id) {
+        User user = this.getHibernateTemplate().get(User.class, id);
+        return user;
+    }
+
+    @Override
+    public String getUserImg(int id) {
+        User user = this.getHibernateTemplate().get(User.class, id);
+        UserInfo u = (UserInfo) this.getHibernateTemplate().find("from UserInfo where user_id =?", user.getUser_id()).get(0);
+        Img img = this.getHibernateTemplate().get(Img.class, u.getHead());
+        return img.getImg_addr();
     }
 }

@@ -15,4 +15,18 @@ public interface UserDao {
     void startUser(int user_id);
 
     User LoginUser(String username);
+
+    /**
+     * 获取用户
+     * @param id
+     * @return
+     */
+    User getUser(int id);
+
+    /**
+     * 获取用户头像地址
+     * @param id
+     * @return
+     */
+    String getUserImg(int id);
 }

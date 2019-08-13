@@ -12,11 +12,9 @@ import dao.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import pojo.Categroy;
-import pojo.PageHelper;
-import pojo.Product;
-import pojo.ProductShow;
+import pojo.*;
 import service.CategroyService;
+import service.EcaluateService;
 import service.ProductService;
 
 import javax.annotation.Resource;
@@ -41,6 +39,8 @@ public class FProductAction extends BaseAction {
     private ProductDao productDao;
     @Autowired
     private ImgDao imgDao;
+    @Autowired
+    private EcaluateService ecaluateService;
     @Autowired
     private JedisClient jedisClient;
     private static String KEY_GETNEWPRODUCTS = "getNewProducts";
@@ -80,6 +80,8 @@ public class FProductAction extends BaseAction {
                         continue;
                     }
                 }
+                List<Ecaluate> productEcaluate = ecaluateService.getProductEcaluate(redisProduct.getPro_id());
+                request.setAttribute("productEcaluate", productEcaluate);
                 request.setAttribute("relatedPro", reusultList);
                 return DETAIL;
             }
@@ -98,6 +100,8 @@ public class FProductAction extends BaseAction {
         valueStack.set("pro_desc", product.getPro_desc());
         valueStack.set("pro_id", product.getPro_id());
         valueStack.set("proImgUrl", imgDao.getImgUrl(product.getPro_imgId()));
+        List<Ecaluate> productEcaluate = ecaluateService.getProductEcaluate(product.getPro_id());
+        request.setAttribute("productEcaluate", productEcaluate);
         /*
             相关产品
          */
@@ -116,6 +120,8 @@ public class FProductAction extends BaseAction {
                 continue;
             }
         }
+        request.setAttribute("ecaluateNum", productEcaluate.size());
+        System.out.println("size++++"+productEcaluate.size());
         request.setAttribute("relatedPro", reusultList);
         return DETAIL;
     }

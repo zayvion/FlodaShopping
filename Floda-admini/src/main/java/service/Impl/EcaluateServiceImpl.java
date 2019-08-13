@@ -2,9 +2,11 @@ package service.Impl;
 
 import com.google.gson.Gson;
 import dao.EcaluateDao;
+import dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pojo.Ecaluate;
+import pojo.User;
 import service.EcaluateService;
 import utils.ResponseResult;
 
@@ -22,6 +24,8 @@ public class EcaluateServiceImpl implements EcaluateService {
 
     @Autowired
     private EcaluateDao ecaluateDao;
+    @Autowired
+    private UserDao userDao;
 
     @Override
     public String getEcaluates() {
@@ -41,5 +45,16 @@ public class EcaluateServiceImpl implements EcaluateService {
         }
         return ResponseResult.build(500,"添加失败");
 }
+
+    @Override
+    public List<Ecaluate> getProductEcaluate(int productId) {
+        List<Ecaluate> ecaluates = ecaluateDao.getProductEcaluate(productId);
+        for(Ecaluate e:ecaluates){
+            User user = userDao.getUser(e.getUser_id());
+            e.setUsername(user.getUsername());
+        }
+
+        return ecaluates;
+    }
 
 }

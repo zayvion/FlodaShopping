@@ -242,32 +242,26 @@
                                 <div class="product-review-info">
                                     <ul class="nav review-tab">
                                         <li>
-                                            <a data-toggle="tab" href="#tab_two">评价 (11)</a>
+                                            <a data-toggle="tab" href="#tab_two">评价 (<s:property value="#request.productEcaluate.size()"/> )</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content reviews-tab">
-                                        <div class="tab-pane fade" id="tab_two">
-                                            <form action="#" class="review-form">
-                                                <h5>1 review for <span>Chaz Kangeroo</span></h5>
+                                        <div class="" id="tab_two">
+                                            <s:iterator value="#request.productEcaluate" var="item">
+                                                <h5>来自<span><s:property value="#item.username"/></span>的评价</h5>
                                                 <div class="total-reviews">
                                                     <div class="rev-avatar">
                                                         <img src="assets/img/about/avatar.jpg" alt="">
                                                     </div>
                                                     <div class="review-box">
-                                                        <div class="ratings">
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span class="good"><i class="fa fa-star"></i></span>
-                                                            <span><i class="fa fa-star"></i></span>
-                                                        </div>
                                                         <div class="post-author">
-                                                            <p><span>评价发布者 -</span> 30 Mar, 2019</p>
+                                                            <p><s:property value="#item.ecal_time"/></p>
                                                         </div>
-                                                        <p>评价内容</p>
+                                                        <p><s:property value="#item.ecal_content"/></p>
                                                     </div>
                                                 </div>
-                                            </form> <!-- end of review-form -->
+                                            </s:iterator>
+
                                         </div>
                                     </div>
                                 </div>

@@ -2,6 +2,8 @@ package service;
 
 import pojo.Ecaluate;
 
+import java.util.List;
+
 /**
  * @Auther: zwf
  * @Date: 2019-08-06 14:26
@@ -20,4 +22,11 @@ public interface EcaluateService {
      * @return json
      */
     String addEcaluate(Ecaluate ecaluate);
+
+    /**
+     * 取一个商品的评论
+     * @param productId
+     * @return
+     */
+    List<Ecaluate> getProductEcaluate(int productId);
 }

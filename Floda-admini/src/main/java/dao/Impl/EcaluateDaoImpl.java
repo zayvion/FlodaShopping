@@ -3,6 +3,7 @@ package dao.Impl;
 import dao.EcaluateDao;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -34,5 +35,13 @@ public class EcaluateDaoImpl extends HibernateDaoSupport implements EcaluateDao 
     @Override
     public void addEcaluate(Ecaluate ecaluate) {
         this.getHibernateTemplate().save(ecaluate);
+    }
+
+    @Override
+    public List getProductEcaluate(int productId) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(Ecaluate.class);
+        criteria.add(Restrictions.eq("product_id", productId));
+        List<Ecaluate> result = (List<Ecaluate>) this.getHibernateTemplate().findByCriteria(criteria);
+        return result;
     }
 }

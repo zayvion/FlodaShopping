@@ -22,4 +22,11 @@ public interface EcaluateDao {
      * @param ecaluate
      */
     void addEcaluate(Ecaluate ecaluate);
+
+    /**
+     * 取一个商品的评论
+     * @param productId
+     * @return list
+     */
+    List<Ecaluate> getProductEcaluate(int productId);
 }

@@ -402,6 +402,7 @@
             success: function (data) {
                 if(data.status == 200){
                     alert("删除成功！");
+                    location.href = "cart.jsp";
                 }else {
                     alert("删除失败！")
                 }
