@@ -45,6 +45,7 @@ public class PayAction extends BaseAction {
     private int addr_id;
     private float total;
     private int user_id;
+    private int orderId;
 
     /**
      * 创建订单
@@ -55,8 +56,10 @@ public class PayAction extends BaseAction {
      */
     public String createOrder() throws IOException, AlipayApiException {
         User user = (User) session.get("onliner");
+        //新建一个订单
         Order order = new Order();
         order.setCreattime(new Timestamp(new Date().getTime()));
+        //设置为未付款状态
         order.setType(1);
         order.setUser_id(user.getUser_id());
         order.setAddr_id(addr_id);
@@ -64,6 +67,7 @@ public class PayAction extends BaseAction {
         int orderId = orderDao.addOrder(order);
         List<CartInfo> cartInfos = cartDao.getCartInfos(user.getUser_id());
         for (CartInfo c : cartInfos) {
+            //订单详情信息
             OrderDetail orderDetail = new OrderDetail();
             Product product = productDao.getProduct(c.getPro_id());
             orderDetail.setPro_name(product.getPro_name());
@@ -72,11 +76,31 @@ public class PayAction extends BaseAction {
             orderDetail.setOrder_id(orderId);
             orderDetail.setPro_order_id(product.getPro_id());
             orderDetailDao.addOrderDetail(orderDetail);
+            //放入订单就删除购物车
             cartDao.delCart(c.getCart_id());
+            //放入订单后商品库存减少1
+            product.setPro_numbers(product.getPro_numbers()-1);
+            //如果商品库存小于0，商品下架
+            if (product.getPro_numbers() <= 0){
+                product.setPro_status(1);
+            }
+            productDao.updateProduct(product);
         }
         String pagepay = alipayTrade.Pagepay(super.request,total,orderId);
         request.setAttribute("result", pagepay);
+        return PAY;
+    }
 
+    /**
+     * 如果用户之前取消了订单的支付，在个人中心里继续支付将调用这个方法
+     * @return
+     * @throws IOException
+     * @throws AlipayApiException
+     */
+    public String finishPay() throws IOException, AlipayApiException {
+        Order order = orderDao.getOrder(orderId);
+        String pagepay = alipayTrade.Pagepay(super.request, (float) order.getOrder_money(),order.getOrder_id());
+        request.setAttribute("result", pagepay);
         return PAY;
     }
 
@@ -129,6 +153,7 @@ public class PayAction extends BaseAction {
 
         }
         Order order = orderDao.getOrder(Integer.parseInt(out_trade_no));
+        //付款完成后设置为已付款账号
         order.setType(2);
         orderDao.updateOrder(order);
         return PAYSUCCESS;
@@ -184,5 +209,13 @@ public class PayAction extends BaseAction {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 }

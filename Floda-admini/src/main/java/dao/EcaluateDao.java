@@ -1,11 +1,13 @@
 package dao;
 
+import pojo.Ecaluate;
+
 import java.util.List;
 
 /**
  * @Auther: zwf
  * @Date: 2019-08-06 14:25
- * @Description:查看评论Dao
+ * @Description:评论Dao
  */
 public interface EcaluateDao {
     /**
@@ -13,4 +15,11 @@ public interface EcaluateDao {
      * @return list
      */
     List getEcaluates();
+
+
+    /**
+     * 增加评论
+     * @param ecaluate
+     */
+    void addEcaluate(Ecaluate ecaluate);
 }

@@ -1,5 +1,6 @@
 package pojo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ public class Ecaluate {
     private int order_id;
     private int user_id;
     private String ecal_content;
-    private Date ecal_time;
+    private Timestamp ecal_time;
 
     public int getEcal_id() {
         return ecal_id;
@@ -55,11 +56,11 @@ public class Ecaluate {
         this.ecal_content = ecal_content;
     }
 
-    public Date getEcal_time() {
+    public Timestamp getEcal_time() {
         return ecal_time;
     }
 
-    public void setEcal_time(Date ecal_time) {
+    public void setEcal_time(Timestamp ecal_time) {
         this.ecal_time = ecal_time;
     }
 

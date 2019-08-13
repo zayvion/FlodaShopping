@@ -1,5 +1,7 @@
 package service;
 
+import pojo.Ecaluate;
+
 /**
  * @Auther: zwf
  * @Date: 2019-08-06 14:26
@@ -11,4 +13,11 @@ public interface EcaluateService {
      * @return json
      */
     String getEcaluates();
+
+    /**
+     * 增加评论
+     * @param ecaluate
+     * @return json
+     */
+    String addEcaluate(Ecaluate ecaluate);
 }

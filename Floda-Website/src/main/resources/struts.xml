@@ -51,7 +51,7 @@
         <action name="delWishlist" class="wishlistAction" method="delWishlist"/>
     </package>
 
-    <package name="pay" extends="struts-default" namespace="/" strict-method-invocation="false">
+    <package name="order" extends="struts-default" namespace="/" strict-method-invocation="false">
         <global-results>
             <result name="pay">pay.jsp</result>
             <result name="paysuccess">Paysuccess.jsp</result>
@@ -59,6 +59,8 @@
         <action name="createOrder" class="payAction" method="createOrder"/>
         <action name="successPay" class="payAction" method="successPay"/>
         <action name="getOrders" class="payAction" method="getOrders"/>
+        <action name="finishPay" class="payAction" method="finishPay"/>
+        <action name="getOrderDetail" class="orderAction" method="getOrderDetail"/>
     </package>
     <package name="checkout" extends="struts-default" namespace="/" strict-method-invocation="false">
         <global-results>

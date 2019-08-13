@@ -3,6 +3,7 @@ package dao.Impl;
 import dao.ProductDao;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
@@ -87,6 +88,7 @@ public class ProductDaoImpl extends HibernateDaoSupport implements ProductDao {
         DetachedCriteria criteria = DetachedCriteria.forClass(Product.class);
         criteria.add(Restrictions.eq("pro_cateId",cate_id));
         criteria.add((Restrictions.eq("pro_status",0)));
+        criteria.addOrder(Order.desc("pro_id"));
         List<Product> list = (List<Product>)this.getHibernateTemplate().findByCriteria(criteria);
         for (Product p:list
              ) {

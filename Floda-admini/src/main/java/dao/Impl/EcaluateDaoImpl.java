@@ -30,4 +30,9 @@ public class EcaluateDaoImpl extends HibernateDaoSupport implements EcaluateDao 
         List<Ecaluate> ecaluates = (List<Ecaluate>)this.getHibernateTemplate().findByCriteria(criteria);
         return ecaluates;
     }
+
+    @Override
+    public void addEcaluate(Ecaluate ecaluate) {
+        this.getHibernateTemplate().save(ecaluate);
+    }
 }

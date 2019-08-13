@@ -4,8 +4,12 @@ import com.google.gson.Gson;
 import dao.EcaluateDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pojo.Ecaluate;
 import service.EcaluateService;
+import utils.ResponseResult;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,5 +29,17 @@ public class EcaluateServiceImpl implements EcaluateService {
         String json = new Gson().toJson(ecaluates);
         return json;
     }
+
+    @Override
+    public String addEcaluate(Ecaluate ecaluate) {
+        try {
+            ecaluate.setEcal_time(new Timestamp(new Date().getTime()));
+            ecaluateDao.addEcaluate(ecaluate);
+            return ResponseResult.ok();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseResult.build(500,"添加失败");
+}
 
 }
