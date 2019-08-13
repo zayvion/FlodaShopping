@@ -33,6 +33,7 @@
            <action name="getNewProducts" class="FProductAction" method="getNewProducts"/>
            <action name="getProByCate" class="FProductAction" method="getProByCate"/>
            <action name="searchProduct" class="FProductAction" method="searchProduct"/>
+           <action name="getHotProducts" class="FProductAction" method="getHotProducts"/>
     </package>
     <package name="Cart" extends="struts-default" namespace="/" strict-method-invocation="false">
         <global-results>

@@ -238,7 +238,7 @@
                             <h1><i class="fa fa-check-circle" style="color: #00B83F"></i>支付已完成</h1>
                             <h5>付款金额：<font style="color: #CC2121">¥${requestScope.total_amount}</font></h5>
                             <ul class="breadcrumb">
-                                <li class="breadcrumb-item active"> 查看订单></li>
+                                <a href="http://localhost:8080/my-account.jsp"><li class="breadcrumb-item active"> 查看订单></li></a>
                             </ul>
                         </nav>
                     </div>

@@ -1,18 +1,21 @@
 package dao.Impl;
 
 import dao.ProductDao;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.*;
+import org.hibernate.engine.query.spi.sql.NativeSQLQueryReturn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import pojo.Img;
+import pojo.OrderDetail;
 import pojo.Product;
 
 import java.beans.Expression;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -67,6 +70,25 @@ public class ProductDaoImpl extends HibernateDaoSupport implements ProductDao {
             Img img = this.getHibernateTemplate().get(Img.class, p.getPro_imgId());
             p.setPro_imgAddr(img.getImg_addr());
         }
+        return products;
+    }
+
+    @Override
+    public List<Product> getHotProducts() {
+        List<Product> products = new ArrayList<>();
+        List<Object[]> list = (List<Object[]>) this.getHibernateTemplate().find("select pro_order_id as id,count(pro_order_id) as num from OrderDetail group by pro_order_id order by num desc ");
+        for(int i = 0 ;i <4 ;i++){
+            if (i< list.size()-1){
+                Object[] o = list.get(i);
+                Product product = this.getHibernateTemplate().get(Product.class, (int) o[0]);
+                Img img = this.getHibernateTemplate().get(Img.class, product.getPro_imgId());
+                product.setPro_imgAddr(img.getImg_addr());
+                products.add(product);
+            }else {
+                continue;
+            }
+        }
+        System.out.println(products);
         return products;
     }
 

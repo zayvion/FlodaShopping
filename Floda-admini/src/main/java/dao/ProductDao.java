@@ -75,4 +75,10 @@ public interface ProductDao {
      */
     List<Product> getSearchResult(String keyword);
 
+    /**
+     * 热门商品
+     * @return
+     */
+    List<Product> getHotProducts();
+
 }

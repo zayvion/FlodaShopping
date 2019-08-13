@@ -127,6 +127,17 @@ public class FProductAction extends BaseAction {
     }
 
     /**
+     * 热门商品
+     * @return
+     */
+    public String getHotProducts() throws IOException {
+        String hotProducts = productService.getHotProducts();
+        response.setContentType("application/json;charset=utf-8");
+        response.getWriter().write(hotProducts);
+        return NONE;
+    }
+
+    /**
      * 更多商品：分类展示包括分类名称、该分类下的商品数
      *
      * @return

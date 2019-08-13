@@ -1,7 +1,0 @@
-service\OrderDetailService.class
-service\OrderService.class
-action\CheckoutAction.class
-service\Impl\OrderServiceImpl.class
-action\OrderAction.class
-service\Impl\OrderDetailServiceImpl.class
-action\MailAction.class

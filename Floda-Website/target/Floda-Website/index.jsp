@@ -269,35 +269,34 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="product-carousel--4 slick-row-15 slick-sm-row-10 slick-arrow-style">
-                        <!-- product single item start -->
-                        <div class="product-item">
-                            <figure class="product-thumb">
-                                <a href="product-details.jsp">
-                                    <img class="pri-img" src="assets/img/product/product-9.jpg" alt="product">
-                                    <img class="sec-img" src="assets/img/product/product-6.jpg" alt="product">
+                <div class="row mtn-40" id="hot_proudct" >
+                    <div class=" row product-carousel--4 slick-row-15 slick-sm-row-10 slick-arrow-style"  >
+            <%--            <!-- product single item start -->
+                        <div class='product-item'>
+                            <figure class='product-thumb'>
+                                <a href='product-details.jsp'>
+                                    <img class='pri-img' src='assets/img/product/product-9.jpg' alt='product'>
+                                    <img class='sec-img' src='assets/img/product/product-6.jpg' alt='product'>
                                 </a>
-                                <div class="product-badge">
-                                    <div class="product-label new">
+                                <div class='product-badge'>
+                                    <div class='product-label new'>
                                         <span>新品</span>
                                     </div>
                                 </div>
-                                <div class="button-group">
-                                    <a href="wishlist.jsp" data-toggle="tooltip" data-placement="left" title="添加收藏"><i class="lnr lnr-heart"></i></a>
-                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#quick_view"><span data-toggle="tooltip" data-placement="left" title="快速预览"><i class="lnr lnr-magnifier"></i></span></a>
-                                    <a href="cart.jsp" data-toggle="tooltip" data-placement="left" title="添加购物车"><i class="lnr lnr-cart"></i></a>
+                                <div class='button-group'>
+                                    <a href='wishlist.jsp' data-toggle='tooltip' data-placement='left" title='添加收藏'><i class='lnr lnr-heart'></i></a>
+                                    <a href='javascript:void(0)' data-toggle='modal' data-target='#quick_view'><span data-toggle='tooltip'tooltip' data-placement='left' title='快速预览'><i class='lnr lnr-magnifier'></i></span></a>
+                                    <a href='cart.jsp' data-toggle='tooltip' data-placement='left' title='添加购物车'><i class='lnr lnr-cart'></i></a>
                                 </div>
                             </figure>
-                            <div class="product-caption">
-                                <p class="product-name">
-                                    <a href="product-details.jsp">商品名称</a>
+                            <div class='product-caption'>
+                                <p class='product-name'>
+                                    <a href='product-details.jsp'>商品名称</a>
                                 </p>
-                                <div class="price-box">
-                                    <span class="price-regular">￥60.00</span>
-                                    <span class="price-old"><del>￥70.00</del></span>
+                                <div class='price-box'>
+                                    <span class='price-regular'>￥60.00</span>
+                                    <span class='price-old'><del>￥70.00</del></span>
                                 </div>
-                            </div>
                         </div>
                         <!-- product single item end -->
 
@@ -398,7 +397,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- product single item end -->
+                        <!-- product single item end ----%>>
 
                     </div>
                 </div>
@@ -687,6 +686,47 @@
                 console.log(result)
                 $.each(result.data,function (index,item) {
                     $("#new_Produt").append(" <div class='col-lg-3 col-md-4 col-sm-6'>\n" +
+                        "                        <div class='product-item mt-40'\">\n" +
+                        "                            <figure class='product-thumb'>\n" +
+                        "                                <a target='_blank' href='productDetail?id="+item.pro_id+"'>\n" +
+                        "                                    <img height='270px' width='270px' class='pri-img' src='"+item.pro_imgUrl+"'>\<n></n>" +
+                        "                                     <img class='sec-img'height='270px' width='270px'  src='"+item.pro_imgUrl+"' alt='product'>"+
+                        "                                </a>\n" +
+                        "                                <div class='product-badge'>\n" +
+                        "                                    <div class='product-label new'>\n" +
+                        "                                        <span>新品</span>\n" +
+                        "                                    </div>\n" +
+                        "                                </div>\n" +
+                        "                                <div class='button-group'>\n" +
+                        "                                    <a href='javascript:void(0)' onclick='addWishlist("+item.pro_id+")' data-toggle='tooltip' data-placement='left' title='添加收藏'><i class='lnr lnr-heart' ></i></a>\n" +
+                        "                                    <a href='javascript:void(0)' onclick='getProduct("+item.pro_id+")' data-toggle='modal' data-target='#quick_view'><span data-toggle='\"tooltip' data-placement='left' title='快速预览'><i class='lnr lnr-magnifier'></i></span></a>\n" +
+                        "                                    <a href='javascript:void(0)' onclick='addCart("+item.pro_id+")' data-toggle='tooltip' data-placement='left' title='添加购物车'><i class='lnr lnr-cart'></i></a>\n" +
+                        "                                </div>\n" +
+                        "                            </figure>\n" +
+                        "                            <div class='product-caption'>\n" +
+                        "                                <p class='product-name'>\n" +
+                        "                                    <a target='_blank' href='productDetail?id="+item.pro_id+"'"+item.pro_name+"</a>\n" +
+                        "                                </p>\n" +
+                        "                                <div class='price-box'>\n" +
+                        "                                    <span class='pro-title'>"+item.pro_name+"</span><br>\n" +
+                        "                                    <span class='price-regular'>￥"+item.pro_price+"</span>\n" +
+                        "                                </div>\n" +
+                        "                            </div>\n" +
+                        "                        </div>\n" +
+                        "                    </div>")
+                })
+            },
+            error:function (e) {
+
+            }
+        })
+        $.ajax({
+            url:" http://localhost:8080/getHotProducts",
+            type:"post",
+            success:function (result) {
+                console.log(result)
+                $.each(result,function (index,item) {
+                    $("#hot_proudct").append("<div class='col-lg-3 col-md-4 col-sm-6'>\n" +
                         "                        <div class='product-item mt-40'\">\n" +
                         "                            <figure class='product-thumb'>\n" +
                         "                                <a target='_blank' href='productDetail?id="+item.pro_id+"'>\n" +

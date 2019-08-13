@@ -79,4 +79,11 @@ public interface ProductService {
      */
     PageHelper getProByKeyword(String keyword ,int startPage);
 
+
+    /**
+     * 热门商品
+     * @return
+     */
+   String getHotProducts();
+
 }

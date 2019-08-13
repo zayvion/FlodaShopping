@@ -162,4 +162,11 @@ public class ProductServiceImpl implements ProductService {
         return data;
     }
 
+    @Override
+    public String getHotProducts() {
+        List<Product> hotProducts = productDao.getHotProducts();
+
+        return new Gson().toJson(hotProducts);
+    }
+
 }
