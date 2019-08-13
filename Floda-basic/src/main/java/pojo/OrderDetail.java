@@ -15,7 +15,8 @@ public class OrderDetail {
     private int pro_order_id;
     private String pro_name;
     private int pro_number;
-    private  double pro_price;
+    private double pro_price;
+    private String imgAddr;
 
     public int getDetail_id() {
         return detail_id;
@@ -63,5 +64,13 @@ public class OrderDetail {
 
     public void setPro_price(double pro_price) {
         this.pro_price = pro_price;
+    }
+
+    public String getImgAddr() {
+        return imgAddr;
+    }
+
+    public void setImgAddr(String imgAddr) {
+        this.imgAddr = imgAddr;
     }
 }

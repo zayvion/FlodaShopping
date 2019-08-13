@@ -33,6 +33,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
         Boolean isLogin = userService.LoginUser(user.getUsername(), user.getPassword());
         if (isLogin){
             session.put("userFlag",user.getUsername());
+            session.put("onliner",user.getUsername());
             return  MAIN;
         }
         request.setAttribute("msg","用户名和密码错误，请重试!");

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import pojo.Order;
+import service.OrderDetailService;
+import service.OrderService;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,15 +23,15 @@ import java.util.List;
 public class OrderAction extends BaseAction {
 
     @Autowired
-    private OrderDetailDao orderDetailDao;
+    private OrderDetailService orderDetailService;
     @Autowired
-    private OrderDao orderDao;
+    private OrderService orderService;
     private int orderId;
 
     public String getOrderDetail() throws IOException {
         System.out.println("orderId::"+orderId);
-        Order order = orderDao.getOrder(orderId);
-        List details = orderDetailDao.getOrderDetail(orderId);
+        Order order = orderService.getOrder(orderId);
+        List details = orderDetailService.getOrderDetail(orderId);
         order.setDetails(details);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(new Gson().toJson(order));

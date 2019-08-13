@@ -36,5 +36,11 @@ public interface OrderDao {
      * @param order
      */
     void updateOrder(Order order);
+
+    /**
+     * 获取用户的订单
+     * @param user_id
+     * @return
+     */
     List<Order> getOrders(int user_id);
 }

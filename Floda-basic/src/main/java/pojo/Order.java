@@ -21,6 +21,7 @@ public class Order {
     private Timestamp creattime;
     private int type;
     private List<OrderDetail> details = new ArrayList<>();
+    private String address;
 
     public int getOrder_id() {
         return order_id;
@@ -76,5 +77,13 @@ public class Order {
 
     public void setDetails(List<OrderDetail> details) {
         this.details = details;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

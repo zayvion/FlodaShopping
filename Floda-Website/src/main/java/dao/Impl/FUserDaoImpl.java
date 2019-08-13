@@ -54,7 +54,7 @@ public class FUserDaoImpl extends HibernateDaoSupport implements FUserDao {
             String[] addr = u.getReceiver_addr().split(",");
             StringBuffer buffer = new StringBuffer();
             for (int i = 0; i < addr.length - 1; i++) {
-                if (!addr[i].equals("")) {
+                if (!addr[i].equals("")||!addr[i].equals("null")) {
                     System.out.println(addr[i]);
                     Address address = this.getHibernateTemplate().get(Address.class, Integer.parseInt(addr[i]));
                     buffer.append(address.getArea_name());
