@@ -70,6 +70,7 @@ public class PayAction extends BaseAction {
             orderDetail.setPro_number(c.getPro_number());
             orderDetail.setPro_price(product.getPro_price());
             orderDetail.setOrder_id(orderId);
+            orderDetail.setPro_order_id(product.getPro_id());
             orderDetailDao.addOrderDetail(orderDetail);
             cartDao.delCart(c.getCart_id());
         }
