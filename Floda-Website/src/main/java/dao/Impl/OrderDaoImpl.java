@@ -35,7 +35,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
 
     }
 
-    @Override
+    @Override 
     public Order getOrder(int id) {
         Order order = this.getHibernateTemplate().get(Order.class, id);
         return order;

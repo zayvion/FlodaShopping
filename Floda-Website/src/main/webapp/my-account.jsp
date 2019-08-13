@@ -265,6 +265,14 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody id="order_body">
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Aug 22, 2019</td>
+                                                                <td>Pending</td>
+                                                                <td>$3000</td>
+                                                                <td><a href="cart.html" class="btn btn__bg">View</a>
+                                                                </td>
+                                                            </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -397,7 +405,6 @@
                                                             </button>
                                                         </div>
                                                     </fieldset>
-
                                                 </div>
                                             </div>
                                         </div> <!-- Single Tab Content End -->
@@ -644,7 +651,7 @@
             $.post('sendMail?mailBox='+mail, function () {
                 console.log('验证码发送成功');
             })
-            let count = 60;
+            var count = 60;
             const countDown = setInterval(() => {
                 if (count === 0) {
                     $('#btn_emailCode').text('重新发送').removeAttr('disabled');
@@ -714,13 +721,28 @@
     function getOrderes(user_id) {
         $.post("getOrders.action", {user_id: user_id}, function (data, status) {
             $.each(data, function (index, item) {
+                var typeName;
+                var operation;
+                switch (item.type) {
+                    case 1:
+                        typeName = "未支付";
+                        operation = "<a href='javascript:void(0)' class='btn btn__bg'>去支付</a>";
+                        break;
+                    case 2:
+                        typeName = "未评价";
+                        operation = "<a href='javascript:void(0)' class='btn btn__bg'>去评价</a>";
+                        break;
+                    case 3:
+                        typeName = "已完成";
+                        operation = "<a href='javascript:void(0)' class='btn btn__bg'>查看详情</a>";
+                        break;
+                }
                 var _tr = "<tr>\n" +
                     "<td>" + item.order_id + "</td>\n" +
                     "<td>" + item.creattime + "</td>\n" +
-                    "<td>" + item.type + "</td>\n" +
+                    "<td>" + typeName + "</td>\n" +
                     "<td>￥" + item.order_money + ".00</td>\n" +
-                    "<td><a href=\"javascript:void(0)\" class=\"btn btn__bg\">View</a>\n" +
-                    "</td>\n" +
+                    "<td>"+ operation +"</td>\n" +
                     "</tr>";
                 $("#order_body").append(_tr);
             })
