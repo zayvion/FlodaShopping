@@ -21,6 +21,8 @@
         <action name="sendRegSMS" class="smsAction" method="sendRegSMS"/>
         <action name="sendMail" class="mailAction" method="sendMail"/>
         <action name="changePsw" class="userAction" method="changePsw"/>
+        <action name="getEcaluate" class="ecaluateAction" method="getEcaluate"/>
+        <action name="addEcaluate" class="ecaluateAction" method="addEcaluate"/>
     </package>
        <package name="product" extends="struts-default" namespace="/" strict-method-invocation="false">
            <global-results>

@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import pojo.Ecaluate;
+import pojo.Order;
+import pojo.OrderDetail;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -34,7 +37,30 @@ public class EcaluateDaoImpl extends HibernateDaoSupport implements EcaluateDao 
 
     @Override
     public void addEcaluate(Ecaluate ecaluate) {
-        this.getHibernateTemplate().save(ecaluate);
+        int id = (int)this.getHibernateTemplate().save(ecaluate);
+        if (id > 0){
+            DetachedCriteria criteria = DetachedCriteria.forClass(OrderDetail.class);
+            criteria.add(Restrictions.eq("order_id",ecaluate.getOrder_id()));
+            List<OrderDetail> list = (List<OrderDetail>)this.getHibernateTemplate().findByCriteria(criteria);
+            //记录当前订单所有商品是否都被评论,如果都被评论，那么就把当前订单的状态修改为已评价
+            boolean allIsEcal = true;
+            for (OrderDetail o:list) {
+                //修改订单详情表里面的状态
+                if (o.getPro_order_id() == ecaluate.getProduct_id()){
+                    o.setIsEvaluate(1);
+                }
+                //当前订单所有的商品都被评价了以后把订单状态改为已评价
+                if (o.getIsEvaluate() == 0){
+                    allIsEcal = false;
+                }
+            }
+            if (allIsEcal){
+                Order order = this.getHibernateTemplate().get(Order.class, ecaluate.getOrder_id());
+                order.setType(3);
+                System.err.println(order+"----");
+            }
+
+        }
     }
 
     @Override
@@ -46,11 +72,12 @@ public class EcaluateDaoImpl extends HibernateDaoSupport implements EcaluateDao 
     }
 
     @Override
-    public Ecaluate getEcaluateWithOrderAndUser(int OrderId, int productId) {
+    public Ecaluate getEcaluateWithOrderAndUser(int orderId, int productId) {
         DetachedCriteria criteria = DetachedCriteria.forClass(Ecaluate.class);
         criteria.add(Restrictions.eq("product_id", productId));
-        criteria.add(Restrictions.eq("order_id", OrderId));
+        criteria.add(Restrictions.eq("order_id", orderId));
         List<Ecaluate> list = (List<Ecaluate>) this.getHibernateTemplate().findByCriteria(criteria);
         return list.get(0);
+
     }
 }

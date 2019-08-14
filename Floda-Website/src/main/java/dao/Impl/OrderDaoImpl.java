@@ -35,7 +35,6 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
     public int addOrder(Order order) {
         Serializable id = this.getHibernateTemplate().save(order);
         return (int) id;
-
     }
 
     @Override

@@ -6,6 +6,7 @@ package action;
  * @Description:评论action
  */
 
+import com.opensymphony.xwork2.ModelDriven;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -18,13 +19,13 @@ import java.io.IOException;
 
 @Controller
 @Scope("prototype")
-public class EcaluateAction extends BaseAction {
+public class EcaluateAction extends BaseAction implements ModelDriven<Ecaluate> {
 
     @Autowired
     private EcaluateService ecaluateService;
     private int orderId;
     private int productId;
-    private Ecaluate ecaluate;
+    private Ecaluate ecaluate = new Ecaluate();
 
     public String getEcaluate() throws IOException {
         String ecaluate = ecaluateService.getEcaluateWithOrderAndUser(orderId, productId);
@@ -63,7 +64,8 @@ public class EcaluateAction extends BaseAction {
         this.productId = productId;
     }
 
-    public void setEcaluate(Ecaluate ecaluate) {
-        this.ecaluate = ecaluate;
+    @Override
+    public Ecaluate getModel() {
+        return ecaluate;
     }
 }

@@ -706,15 +706,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body" style="height: 190px;">
-                <form action="user_addAddress.action" onsubmit="return false" method="post" id="EvaForm">
+                <form action="#" onsubmit="return false" method="post" id="EvaForm">
                     <div class="form-group">
-                        <textarea class="form-control" rows="3" id="" name=""
+                        <input id="eva_order_id" type="hidden" name="order_id">
+                        <input id="product_id" type="hidden" name="product_id">
+                        <textarea class="form-control" rows="3" id="ecaContent" name="ecal_content"
                                   placeholder="详细评价"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="exit">取消</button>
                         <button type="button" data-dismiss="modal" class="save"
-                                onclick="subEva(${sessionScope.onliner.user_id})">评价
+                                onclick="subEva()">评价
                         </button>
                     </div>
                 </form>
@@ -802,7 +804,7 @@
                 })
             }
         })
-    })
+    });
 
     //查询所有订单
     function getOrderes(user_id) {
@@ -822,6 +824,7 @@
                         break;
                     case 3:
                         typeName = "已完成";
+                        operation= "已完成";
                         break;
                 }
                 var _tr = "<tr>\n" +
@@ -839,19 +842,50 @@
     //根据订单id查询订单中的商品
     function toEvaluate(orderId) {
         $.post("getProByOrderId.action",{orderId:orderId},function (data,status) {
-            console.log(data);
             $("#myaccount-content").find("h3").siblings().remove();
             $.each(data,function (index,item) {
+                var eval = "<a href='javascript:void(0)' data-toggle=\"modal\" data-target=\"#addEva\" onclick='getEvaluate("+item.order_id+","+item.pro_order_id+")'>已评价</a>";
+                if (item.isEvaluate == 0){
+                    eval = "<a href='javascript:void(0)' data-toggle=\"modal\" data-target=\"#addEva\" onclick='initEvaForm("+item.order_id+","+item.pro_order_id+")'>去评价</a>";
+                }
                 var _dl = "<dl class=\"fl\">\n" +
                     "<dt><a href='javascript:void(0)'><img src='"+item.imgAddr+"'></a></dt>\n" +
                     "<dd><a href='javascript:void(0)' style='display: inline-block;\n" +
                     "    height: 50px;'>"+item.pro_name+"</a></dd>\n" +
                     "<dd>¥"+item.pro_price+".00</dd>\n" +
-                    "<dd><a href='javascript:void(0)' data-toggle=\"modal\" data-target=\"#addEva\">评价</a></dd>\n" +
+                    "<dd>"+eval+"</dd>\n" +
                     "</dl>";
                 $("#myaccount-content").append(_dl);
             })
         })
+    }
+
+    //根据商品id和订单id查询商品评论
+    function getEvaluate(order_id,pro_order_id){
+        $.get("getEcaluate.action",{orderId:order_id,productId:pro_order_id},function (data,status) {
+            $("#EvaForm").resetForm();
+            $("#ecaContent").val(data.ecal_content);
+            $("#EvaForm button[class='save']").attr("disabled","disabled");
+        })
+    }
+
+    //添加评论
+    function subEva(){
+        if ($("#ecaContent").val().trim() == ""){
+            alert("评论内容不能为空")
+        }else {
+            $.post("addEcaluate.action",$("#EvaForm").serialize(),function (data,status) {
+                toEvaluate($("#eva_order_id").val())
+            })
+        }
+    }
+
+    //添加评论
+    function initEvaForm(order_id,pro_order_id){
+        $("#EvaForm").resetForm();
+        $("#EvaForm button[class='save']").removeAttr("disabled")
+        $("#addEva input[type='hidden']").eq(0).val(order_id);
+        $("#addEva input[type='hidden']").eq(1).val(pro_order_id);
     }
 
     //查询详细订单

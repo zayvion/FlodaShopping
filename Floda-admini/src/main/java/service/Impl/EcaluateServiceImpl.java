@@ -5,6 +5,7 @@ import dao.EcaluateDao;
 import dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pojo.Ecaluate;
 import pojo.User;
 import service.EcaluateService;
@@ -39,6 +40,7 @@ public class EcaluateServiceImpl implements EcaluateService {
     }
 
     @Override
+    @Transactional
     public String addEcaluate(Ecaluate ecaluate) {
         try {
             ecaluate.setEcal_time(new Timestamp(new Date().getTime()));
