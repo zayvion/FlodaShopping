@@ -700,6 +700,28 @@
     </div>
 </div>
 
+<!--添加评论的模态框-->
+<div class="modal fade" style="width: 500px;margin: 100px 0 0 500px" id="addEva" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body" style="height: 190px;">
+                <form action="user_addAddress.action" onsubmit="return false" method="post" id="EvaForm">
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3" id="" name=""
+                                  placeholder="详细评价"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="exit">取消</button>
+                        <button type="button" data-dismiss="modal" class="save"
+                                onclick="subEva(${sessionScope.onliner.user_id})">评价
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- All vendor & plugins & active js include here -->
 <!--All Vendor Js -->
 <script src="assets/js/vendor.js"></script>
@@ -822,9 +844,10 @@
             $.each(data,function (index,item) {
                 var _dl = "<dl class=\"fl\">\n" +
                     "<dt><a href='javascript:void(0)'><img src='"+item.imgAddr+"'></a></dt>\n" +
-                    "<dd><a href='javascript:void(0)'>"+item.pro_name+"</a></dd>\n" +
+                    "<dd><a href='javascript:void(0)' style='display: inline-block;\n" +
+                    "    height: 50px;'>"+item.pro_name+"</a></dd>\n" +
                     "<dd>¥"+item.pro_price+".00</dd>\n" +
-                    "<dd><a href='javascript:void(0)'>评价</a></dd>\n" +
+                    "<dd><a href='javascript:void(0)' data-toggle=\"modal\" data-target=\"#addEva\">评价</a></dd>\n" +
                     "</dl>";
                 $("#myaccount-content").append(_dl);
             })
