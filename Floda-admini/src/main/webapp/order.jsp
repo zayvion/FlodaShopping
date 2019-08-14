@@ -57,7 +57,7 @@
                         "        <td>"+result[i].order_id+"</td>\n" +
                         "        <td>"+result[i].user_name+"</td>\n" +
                         "        <td>"+result[i].type+"</td>\n" +
-                        "        <td>"+result[i].order_money+"</td>\n" +
+                        "        <td>¥"+result[i].order_money+"</td>\n" +
                         "        <td>"+result[i].creattime+"</td>\n" +
                         "    </tr>");
                 }

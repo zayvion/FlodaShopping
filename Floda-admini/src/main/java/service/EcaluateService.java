@@ -29,4 +29,12 @@ public interface EcaluateService {
      * @return
      */
     List<Ecaluate> getProductEcaluate(int productId);
+
+    /**
+     * 通过订单ID和商品ID查评论
+     * @param OrderId
+     * @param productId
+     * @return json
+     */
+    String getEcaluateWithOrderAndUser(int OrderId, int productId);
 }

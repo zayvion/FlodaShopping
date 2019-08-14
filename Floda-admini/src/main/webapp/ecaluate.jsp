@@ -28,7 +28,6 @@
 </head>
 <body>
 <br><br><h1 style="text-align: center;">查看评论</h1><br><br>
-
 <table class="table table-border table-bordered table-striped table-hover"
        style="width: 80%;text-align:center;margin: 0 auto;" id="tableData">
 </table>
@@ -49,15 +48,17 @@
                     "        <td><b>商品ID</b></td>\n" +
                     "        <td><b>订单ID</b></td>\n" +
                     "        <td><b>用户ID</b></td>\n" +
+                    "        <td><b>用户名</b></td>\n" +
                     "        <td><b>评论内容</b></td>\n" +
                     "        <td><b>评论时间</b></td>\n" +
                     "    </tr>");
                 for (var i = 0; i < result.length; i++){
                     $("#tableData").append("<tr>\n" +
                         "        <td>"+result[i].ecal_id+"</td>\n" +
-                        "        <td>"+result[i].product_id+"</td>\n" +
+                        "        <td><a href='http://localhost:8080/productDetail?id="+result[i].product_id+"' target='_blank'>"+result[i].product_id+"</a></td>\n" +
                         "        <td>"+result[i].order_id+"</td>\n" +
                         "        <td>"+result[i].user_id+"</td>\n" +
+                        "        <td>"+result[i].username+"</td>\n" +
                         "        <td>"+result[i].ecal_content+"</td>\n" +
                         "        <td>"+result[i].ecal_time+"</td>\n" +
                         "    </tr>");

@@ -44,4 +44,13 @@ public class EcaluateDaoImpl extends HibernateDaoSupport implements EcaluateDao 
         List<Ecaluate> result = (List<Ecaluate>) this.getHibernateTemplate().findByCriteria(criteria);
         return result;
     }
+
+    @Override
+    public Ecaluate getEcaluateWithOrderAndUser(int OrderId, int productId) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(Ecaluate.class);
+        criteria.add(Restrictions.eq("product_id", productId));
+        criteria.add(Restrictions.eq("order_id", OrderId));
+        List<Ecaluate> list = (List<Ecaluate>) this.getHibernateTemplate().findByCriteria(criteria);
+        return list.get(0);
+    }
 }

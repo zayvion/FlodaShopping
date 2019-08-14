@@ -29,7 +29,11 @@ public class EcaluateServiceImpl implements EcaluateService {
 
     @Override
     public String getEcaluates() {
-        List ecaluates = ecaluateDao.getEcaluates();
+        List<Ecaluate> ecaluates = ecaluateDao.getEcaluates();
+        for (Ecaluate e:ecaluates) {
+            User user = userDao.getUser(e.getUser_id());
+            e.setUsername(user.getUsername());
+        }
         String json = new Gson().toJson(ecaluates);
         return json;
     }
@@ -55,6 +59,12 @@ public class EcaluateServiceImpl implements EcaluateService {
         }
 
         return ecaluates;
+    }
+
+    @Override
+    public String  getEcaluateWithOrderAndUser(int OrderId, int productId) {
+        Ecaluate ecaluate = ecaluateDao.getEcaluateWithOrderAndUser(OrderId, productId);
+        return new Gson().toJson(ecaluate);
     }
 
 }

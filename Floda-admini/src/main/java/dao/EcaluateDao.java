@@ -29,4 +29,12 @@ public interface EcaluateDao {
      * @return list
      */
     List<Ecaluate> getProductEcaluate(int productId);
+
+    /**
+     * 通过订单ID和商品ID查评论
+     * @param OrderId
+     * @param productId
+     * @return
+     */
+    Ecaluate getEcaluateWithOrderAndUser(int OrderId,int productId);
 }
