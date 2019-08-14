@@ -147,7 +147,7 @@
                 <div class="col-12">
                     <div class="breadcrumb-wrap">
                         <nav aria-label="breadcrumb">
-                            <h1>wishlist</h1>
+                            <h1>我的收藏</h1>
                             <ul class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.jsp"><i class="fa fa-home"></i></a></li>
                                 <li class="breadcrumb-item active" aria-current="page">收藏</li>

@@ -29,11 +29,11 @@ public class AdminFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest)request;
         HttpServletResponse httpResponse = (HttpServletResponse)response;
-        Object flag = httpRequest.getSession().getAttribute("onliner");
+        Object flag = httpRequest.getSession().getAttribute("userFlag");
         if (flag != null){
             chain.doFilter(request,response);
         }else {
-            httpResponse.sendRedirect("http://localhost:8080/login.jsp");
+            httpResponse.sendRedirect("http://localhost:8081/index.jsp");
         }
 
     }

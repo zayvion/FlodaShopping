@@ -23,7 +23,7 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest)request;
         HttpServletResponse httpResponse = (HttpServletResponse)response;
-        Object flag = httpRequest.getSession().getAttribute("userFlag");
+        Object flag = httpRequest.getSession().getAttribute("onliner");
         if (flag != null){
             chain.doFilter(request,response);
         }else {
