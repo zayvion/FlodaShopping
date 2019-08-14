@@ -611,8 +611,13 @@
             data: {"pro_id":pro_id,"pro_number":1},
             //请求成功
             success: function (result) {
-                alert("添加成功！");
-                getCartNum();
+                if(result.status == 200){
+                    alert("添加成功！");
+                    getCartNum();
+                }else{
+                    alert("添加失败，请登录！");
+                }
+
             },
             //请求失败，包含具体的错误信息
             error: function (e) {

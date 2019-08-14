@@ -190,7 +190,7 @@ public class UserAction extends BaseAction implements ModelDriven<User> {
      */
     public String exit() {
         session.remove("onliner");
-        return "login";
+        return "index";
     }
 
     /**

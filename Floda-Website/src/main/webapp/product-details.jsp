@@ -608,7 +608,7 @@
                     alert("添加成功！");
                     getCartNum();
                 }else {
-                    alert("添加失败！");
+                    alert("添加失败，请登录！");
                 }
 
             },
