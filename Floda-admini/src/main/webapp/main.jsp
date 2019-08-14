@@ -179,7 +179,7 @@
     <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
             <a href="#" class="navbar-brand">
-                <img src="./images/logo.png" alt="" style="padding-top: 20px;width: 100px;">
+                <img src="./images/logo.jpg" alt="" style="padding-top: 20px;width: 100px;">
             </a><!-- /.brand -->
         </div><!-- /.navbar-header -->
         <div class="navbar-header pull-right" role="navigation">
