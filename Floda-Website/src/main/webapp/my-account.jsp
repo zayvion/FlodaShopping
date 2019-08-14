@@ -276,15 +276,15 @@
                                         <!-- Single Tab Content Start -->
                                         <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
                                             <div class="myaccount-content">
-                                                <h3>Dashboard</h3>
-                                                <div class="welcome">
-                                                    <p>Hello, <strong>Erik Jhonson</strong> (If Not <strong>Jhonson
-                                                        !</strong><a href="login-register.jsp" class="logout">
-                                                        Logout</a>)</p>
-                                                </div>
-                                                <p class="mb-0">From your account dashboard. you can easily check &
-                                                    view your recent orders, manage your shipping and billing addresses
-                                                    and edit your password and account details.</p>
+                                                <h3>欢迎，${sessionScope.onliner.username}：</h3>
+                                                <div style="padding-bottom: 5px"><a style="font-size: 16px;" href="#orders" data-toggle="tab"
+                                                        onclick="getOrderes(${sessionScope.onliner.user_id})">
+                                                    我的订单</a>：可以查询我的所有订单，以及评价订单内详细商品</div>
+                                                <div style="padding-bottom: 5px"><a style="font-size: 16px" href="#address-edit" data-toggle="tab"
+                                                        onclick="getAddress(${sessionScope.onliner.user_id})">
+                                                    地址管理</a>：查询、修改和移除我的收获地址</div>
+                                                <div><a style="font-size: 16px" href="#account-info" data-toggle="tab" onclick="getUserInfo()">
+                                                    个人信息</a>：管理我的个人信息和修改密码功能</div>
                                             </div>
                                         </div>
                                         <!-- Single Tab Content End -->
