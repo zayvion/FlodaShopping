@@ -468,14 +468,9 @@
                                         <!-- Single Tab Content End -->
 
                                         <div class="tab-pane fade" id="order_el" role="tabpanel">
-                                            <div class="myaccount-content">
+                                            <div class="myaccount-content" id="myaccount-content">
                                                 <h3>评论</h3>
-                                                <dl class="fl">
-                                                    <dt><a href="#"><img src="http://image.lzllzl.cn/img/2019-08-13/pms_1559013725d724f.88313357.png"></a></dt>
-                                                    <dd><a href="#">家用创意壁挂  釉下彩复古</a></dd>
-                                                    <dd>¥199.00</dd>
-                                                    <dd><a href="#2">评价</a></dd>
-                                                </dl>
+
                                             </div>
                                         </div>
                                     </div>
@@ -823,7 +818,16 @@
     function toEvaluate(orderId) {
         $.post("getProByOrderId.action",{orderId:orderId},function (data,status) {
             console.log(data);
-
+            $("#myaccount-content").find("h3").siblings().remove();
+            $.each(data,function (index,item) {
+                var _dl = "<dl class=\"fl\">\n" +
+                    "<dt><a href='javascript:void(0)'><img src='"+item.imgAddr+"'></a></dt>\n" +
+                    "<dd><a href='javascript:void(0)'>"+item.pro_name+"</a></dd>\n" +
+                    "<dd>¥"+item.pro_price+".00</dd>\n" +
+                    "<dd><a href='javascript:void(0)'>评价</a></dd>\n" +
+                    "</dl>";
+                $("#myaccount-content").append(_dl);
+            })
         })
     }
 
@@ -837,11 +841,11 @@
             $("#order_pro").empty();
             $.each(data.details,function (index,item) {
                 var _pro = "<div class=\"clearfix\">\n" +
-                    "<a href=\"#\" class=\"fl\" style=\"float: left\"><img style=\"width: 80px;height: 80px\"></a>\n" +
+                    "<a href=\"#\" class=\"fl\" style=\"float: left\"><img style=\"width: 80px;height: 80px;margin-bottom: 10px\"></a>\n" +
                     "<p class=\"fl\"><a href=\"#\">"+item.pro_name+"</a><a href=\"#\">¥"+item.pro_price+".00×"+item.pro_number+"</a></p>\n" +
                     "</div>";
                 $("#order_pro").append(_pro);
-                $("#order_pro").find("img").eq(0).attr("src",item.imgAddr);
+                $("#order_pro").find("img").eq(index).attr("src",item.imgAddr);
             });
 
             //订单详情模块---收件地址展示

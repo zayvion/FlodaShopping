@@ -67,10 +67,7 @@ public class OrderDaoImpl extends HibernateDaoSupport implements OrderDao {
             Product product = this.getHibernateTemplate().get(Product.class, o.getPro_order_id());
             Img img = this.getHibernateTemplate().get(Img.class, product.getPro_imgId());
             o.setImgAddr(img.getImg_addr());
-            //还要判断当前商品是否已经投过票，如果投过票就不显示
-
         }
-        System.err.println(list);
         return list;
     }
 
