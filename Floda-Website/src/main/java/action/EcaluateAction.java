@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import pojo.Ecaluate;
+import pojo.User;
 import service.EcaluateService;
+import utils.ResponseResult;
 
 import java.io.IOException;
 
@@ -32,6 +34,13 @@ public class EcaluateAction extends BaseAction {
     }
 
     public String addEcaluate() throws IOException {
+        User user = (User) session.get("onliner");
+        if (user == null){
+            response.setContentType("application/json;charset=utf-8");
+            response.getWriter().write(ResponseResult.build(500, "拿不到用户"));
+            return NONE;
+        }
+        ecaluate.setUser_id(user.getUser_id());
         String result = ecaluateService.addEcaluate(ecaluate);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);
