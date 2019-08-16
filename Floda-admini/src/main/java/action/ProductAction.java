@@ -28,11 +28,11 @@ import java.util.UUID;
 /**
  * @Auther: zayvion
  * @Date: 2019-08-05 15:22
- * @Description:
+ * @Description:商品后台相关action
  */
 @Controller
 @Scope("prototype")
-public class ProductAction extends BaseAction{
+public class ProductAction extends BaseAction {
     @Value("${FTP_ADDRESS}")
     private String FTP_ADDRESS;
     @Value("${FTP_PORT}")
@@ -45,6 +45,10 @@ public class ProductAction extends BaseAction{
     private String FTP_BASE_PATH;
     @Value("${IMG_BASE_PATH}")
     private String IMG_BASE_PATH;
+    private static String KEY_GETPRODUCTS = "getProducts";
+    private static String KEY_GETNEWPRODUCTS = "getNewProducts";
+    private static String KEY_GETPRODUCTINFO = "getProductInfo";
+    private static String KEY_GETPROBYCATE = "getProByCate";
     @Autowired
     private ProductService productService;
     @Autowired
@@ -61,15 +65,11 @@ public class ProductAction extends BaseAction{
     private int startPage;
     private int item;
     private int id;
-    private static String KEY_GETPRODUCTS = "getProducts";
-    private static String KEY_GETNEWPRODUCTS = "getNewProducts";
-    private static String KEY_GETPRODUCTINFO = "getProductInfo";
-    private static String KEY_GETPROBYCATE = "getProByCate";
 
-    public String  getProducts() throws IOException {
+    public String getProducts() throws IOException {
         try {
-            String redisResult = jedisClient.hget(KEY_GETPRODUCTS,"startPage="+startPage+"&item="+item);
-            if (redisResult != null){
+            String redisResult = jedisClient.hget(KEY_GETPRODUCTS, "startPage=" + startPage + "&item=" + item);
+            if (redisResult != null) {
                 response.setContentType("application/json;charset=utf-8");
                 response.getWriter().write(redisResult);
                 return NONE;
@@ -77,8 +77,8 @@ public class ProductAction extends BaseAction{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String result = productService.showProducts(startPage , item);
-        jedisClient.hset(KEY_GETPRODUCTS,"startPage="+startPage+"&item="+item,result);
+        String result = productService.showProducts(startPage, item);
+        jedisClient.hset(KEY_GETPRODUCTS, "startPage=" + startPage + "&item=" + item, result);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);
         return NONE;
@@ -87,18 +87,19 @@ public class ProductAction extends BaseAction{
     public String addProduct() throws FileNotFoundException {
         String oldFileName = imgFileFileName;
         String extension = oldFileName.substring(oldFileName.indexOf("."));
-        String newName = oldFileName.substring(0,oldFileName.indexOf("."))+UUID.randomUUID().toString().substring(0,5)+extension;
+        String newName = oldFileName.substring(0, oldFileName.indexOf(".")) + UUID.randomUUID().toString().substring(0, 5) + extension;
         String imgPath = getDate();
         FtpUtil.uploadFile(FTP_ADDRESS, FTP_PORT, FTP_USERNAME, FTP_PASSWORD, FTP_BASE_PATH, imgPath, newName, new FileInputStream(imgFile.getAbsoluteFile()));
-        img.setImg_addr(IMG_BASE_PATH+imgPath+"/"+newName);
-        productService.addProduct(product,img);
+        img.setImg_addr(IMG_BASE_PATH + imgPath + "/" + newName);
+        productService.addProduct(product, img);
         jedisClient.del(KEY_GETPRODUCTS);
         jedisClient.del(KEY_GETNEWPRODUCTS);
         jedisClient.del(KEY_GETPROBYCATE);
         return PRODUCT;
     }
-    public String updateProduct() throws FileNotFoundException,IOException{
-        if (imgFile == null){
+
+    public String updateProduct() throws FileNotFoundException, IOException {
+        if (imgFile == null) {
             System.out.println("没有图片更新");
             System.out.println(product);
             try {
@@ -107,42 +108,42 @@ public class ProductAction extends BaseAction{
                 response.getWriter().write(result);
                 jedisClient.del(KEY_GETPRODUCTS);
                 jedisClient.del(KEY_GETNEWPRODUCTS);
-                jedisClient.hdel(KEY_GETPRODUCTINFO,"pro_id="+id);
+                jedisClient.hdel(KEY_GETPRODUCTINFO, "pro_id=" + id);
                 jedisClient.del(KEY_GETPROBYCATE);
                 return PRODUCT;
             } catch (Exception e) {
                 e.printStackTrace();
             }
             response.setContentType("application/json;charset=utf-8");
-            response.getWriter().write(new Gson().toJson(ResponseResult.build(500,"修改发生错误")));
+            response.getWriter().write(new Gson().toJson(ResponseResult.build(500, "修改发生错误")));
             return NONE;
-        }else {
+        } else {
             String oldFileName = imgFileFileName;
             String extension = oldFileName.substring(oldFileName.indexOf("."));
-            String newName = oldFileName.substring(0,oldFileName.indexOf("."))+UUID.randomUUID().toString().substring(0,5)+extension;
+            String newName = oldFileName.substring(0, oldFileName.indexOf(".")) + UUID.randomUUID().toString().substring(0, 5) + extension;
             String imgPath = getDate();
             FtpUtil.uploadFile(FTP_ADDRESS, FTP_PORT, FTP_USERNAME, FTP_PASSWORD, FTP_BASE_PATH, imgPath, newName, new FileInputStream(imgFile.getAbsoluteFile()));
-            img.setImg_addr(IMG_BASE_PATH+imgPath+"/"+newName);
+            img.setImg_addr(IMG_BASE_PATH + imgPath + "/" + newName);
             productService.updateProduct(product);
             Product p = productDao.getProduct(this.product.getPro_id());
             Img img = imgDao.getImg(p.getPro_imgId());
-            img.setImg_addr(IMG_BASE_PATH+imgPath+"/"+newName);
+            img.setImg_addr(IMG_BASE_PATH + imgPath + "/" + newName);
             imgDao.updateImg(img);
             jedisClient.del(KEY_GETPRODUCTS);
             jedisClient.del(KEY_GETNEWPRODUCTS);
-            jedisClient.hdel(KEY_GETPRODUCTINFO,"pro_id="+id);
+            jedisClient.hdel(KEY_GETPRODUCTINFO, "pro_id=" + id);
             jedisClient.del(KEY_GETPROBYCATE);
             return PRODUCT;
         }
     }
 
-    public String getProductInfo() throws IOException{
-        if (id == 0){
+    public String getProductInfo() throws IOException {
+        if (id == 0) {
             return NONE;
         }
         try {
-            String redisResult = jedisClient.hget(KEY_GETPRODUCTINFO,"pro_id="+id);
-            if (redisResult != null){
+            String redisResult = jedisClient.hget(KEY_GETPRODUCTINFO, "pro_id=" + id);
+            if (redisResult != null) {
                 response.setContentType("application/json;charset=utf-8");
                 response.getWriter().write(redisResult);
                 return NONE;
@@ -151,18 +152,18 @@ public class ProductAction extends BaseAction{
             e.printStackTrace();
         }
         String result = productService.getProduct(id);
-        jedisClient.hset(KEY_GETPRODUCTINFO,"pro_id="+id,result);
+        jedisClient.hset(KEY_GETPRODUCTINFO, "pro_id=" + id, result);
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(result);
         return NONE;
     }
 
-    public String delProduct(){
+    public String delProduct() {
 
         return PRODUCT;
     }
 
-    public String getDate(){
+    public String getDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String format = sdf.format(new Date());
         return format;
