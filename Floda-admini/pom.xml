@@ -16,7 +16,7 @@
 
     <properties>
         <!-- 统一各个依赖版本 -->
-        <struts.version>2.5.10</struts.version>
+        <struts.version>2.5.22</struts.version>
         <spring.version>5.1.5.RELEASE</spring.version>
         <hibernate.version>5.1.7.Final</hibernate.version>
         <mysql.version>5.1.40</mysql.version>
